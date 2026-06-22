@@ -1,0 +1,57 @@
+{
+  "spline_index": 0,
+  "tree_type": [
+    "RCA"
+  ],
+  "num_centerline_points": 200,
+  "theta_array": [],
+  "phi_array": [],
+  "main_vessel": {
+    "num_stenoses": 1,
+    "stenosis_severity": [
+      0.43687942147913017
+    ],
+    "stenosis_position": [
+      157
+    ],
+    "num_stenosis_points": [
+      36
+    ],
+    "max_radius": 2.302412868607264,
+    "min_radius": 0.8872034903849412,
+    "branch_point": null
+  },
+  "branch1": {
+    "num_stenoses": 0,
+    "stenosis_severity": [],
+    "stenosis_position": [],
+    "num_stenosis_points": [],
+    "max_radius": 1.0793191160103124,
+    "min_radius": 0.520183479149902,
+    "branch_point": 17
+  },
+  "branch2": {
+    "num_stenoses": 1,
+    "stenosis_severity": [
+      0.6411993177063481
+    ],
+    "stenosis_position": [
+      90
+    ],
+    "num_stenosis_points": [
+      34
+    ],
+    "max_radius": 1.026179035183605,
+    "min_radius": 0.6964773294721384,
+    "branch_point": 66
+  },
+  "branch3": {
+    "num_stenoses": 0,
+    "stenosis_severity": [],
+    "stenosis_position": [],
+    "num_stenosis_points": [],
+    "max_radius": 1.1199471489430566,
+    "min_radius": 0.5643214802909636,
+    "branch_point": 110
+  }
+}

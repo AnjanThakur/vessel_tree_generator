@@ -1,0 +1,76 @@
+{
+  "spline_index": 0,
+  "tree_type": [
+    "RCA"
+  ],
+  "num_centerline_points": 200,
+  "theta_array": [
+    -130.0,
+    -15.704369244179492,
+    -88.725158274474
+  ],
+  "phi_array": [
+    -100.0,
+    -104.12552250633982,
+    -123.08565218476488
+  ],
+  "main_vessel": {
+    "num_stenoses": 2,
+    "stenosis_severity": [
+      0.43687942147913017,
+      0.7448166370617264
+    ],
+    "stenosis_position": [
+      164,
+      39
+    ],
+    "num_stenosis_points": [
+      36,
+      32
+    ],
+    "max_radius": 2.302412868607264,
+    "min_radius": 0.8872034903849412,
+    "branch_point": null
+  },
+  "branch1": {
+    "num_stenoses": 0,
+    "stenosis_severity": [],
+    "stenosis_position": [],
+    "num_stenosis_points": [],
+    "max_radius": 1.0019171671778708,
+    "min_radius": 0.5990283777322221,
+    "branch_point": 17
+  },
+  "branch2": {
+    "num_stenoses": 1,
+    "stenosis_severity": [
+      0.3446922316858832
+    ],
+    "stenosis_position": [
+      157
+    ],
+    "num_stenosis_points": [
+      32
+    ],
+    "max_radius": 1.109227191193065,
+    "min_radius": 0.5929302871967597,
+    "branch_point": 66
+  },
+  "branch3": {
+    "num_stenoses": 1,
+    "stenosis_severity": [
+      0.7177663514437626
+    ],
+    "stenosis_position": [
+      172
+    ],
+    "num_stenosis_points": [
+      48
+    ],
+    "max_radius": 1.0423210397600264,
+    "min_radius": 0.6612398419920628,
+    "branch_point": 110
+  },
+  "ImagerPixelSpacing": 0.35,
+  "SID": 1.2
+}
