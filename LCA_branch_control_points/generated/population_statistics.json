@@ -1,0 +1,66 @@
+{
+  "coordinate_unit": "mm",
+  "branch_count": 3,
+  "branches": [
+    {
+      "branch_name": "LMCA",
+      "original_matrix_shape": [
+        50,
+        20,
+        3
+      ],
+      "mean_shape": [
+        20,
+        3
+      ],
+      "std_shape": [
+        20,
+        3
+      ],
+      "coordinate_unit": "mm",
+      "K_count": 50,
+      "P_count": 20,
+      "summary": "LMCA mean/std are computed coordinate-wise across 50 validated templates."
+    },
+    {
+      "branch_name": "LAD",
+      "original_matrix_shape": [
+        50,
+        20,
+        3
+      ],
+      "mean_shape": [
+        20,
+        3
+      ],
+      "std_shape": [
+        20,
+        3
+      ],
+      "coordinate_unit": "mm",
+      "K_count": 50,
+      "P_count": 20,
+      "summary": "LAD mean/std are computed coordinate-wise across 50 validated templates."
+    },
+    {
+      "branch_name": "LCX",
+      "original_matrix_shape": [
+        50,
+        20,
+        3
+      ],
+      "mean_shape": [
+        20,
+        3
+      ],
+      "std_shape": [
+        20,
+        3
+      ],
+      "coordinate_unit": "mm",
+      "K_count": 50,
+      "P_count": 20,
+      "summary": "LCX mean/std are computed coordinate-wise across 50 validated templates."
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import numpy as np
 from .parameters import (
     BRANCH_STATS,
     CONTROL_POINTS_PER_BRANCH,
+    ENGINEERING_SHAPE_PARAMETERS,
     sample_truncated_normal,
 )
 
@@ -87,6 +88,15 @@ def vector_at_angle(base_dir: np.ndarray, angle_deg: float, preferred_side: np.n
     return normalize(new_dir)
 
 
+def smoothstep_after(t: float, start: float) -> float:
+    if t <= start:
+        return 0.0
+
+    value = (t - start) / max(1.0 - start, 1e-12)
+    value = float(np.clip(value, 0.0, 1.0))
+    return value * value * (3.0 - 2.0 * value)
+
+
 def generate_lmca_control_points(
     rng: np.random.Generator,
     origin: np.ndarray,
@@ -95,14 +105,16 @@ def generate_lmca_control_points(
     """
     LMCA is short, so it should remain mostly straight with only mild curvature.
     """
-    slight_y = rng.normal(0.0, 0.35)
-    slight_z = rng.normal(0.0, 0.20)
+    shape = ENGINEERING_SHAPE_PARAMETERS["LMCA"]
+
+    slight_y = rng.normal(0.0, shape["bifurcation_y_std_mm"])
+    slight_z = rng.normal(0.0, shape["bifurcation_z_std_mm"])
 
     bifurcation = np.array([length_mm, slight_y, slight_z], dtype=float)
 
     direction = normalize(bifurcation - origin)
-    side_vector = np.array([0.0, 1.0, 0.0])
-    vertical_vector = np.array([0.0, 0.0, -1.0])
+    side_vector = np.array(shape["side_vector"], dtype=float)
+    vertical_vector = np.array(shape["vertical_vector"], dtype=float)
 
     anchors = curved_path_from_formula(
         start=origin,
@@ -110,9 +122,9 @@ def generate_lmca_control_points(
         length_mm=length_mm,
         side_vector=side_vector,
         vertical_curve_vector=vertical_vector,
-        side_strength=rng.uniform(0.005, 0.015),
-        vertical_strength=rng.uniform(-0.005, 0.005),
-        n_anchors=50,
+        side_strength=rng.uniform(*shape["side_strength_range"]),
+        vertical_strength=rng.uniform(*shape["vertical_strength_range"]),
+        n_anchors=shape["anchor_count"],
     )
 
     # Scale endpoint exactly to bifurcation direction
@@ -136,23 +148,22 @@ def generate_lad_control_points(
     LAD starts from LMCA bifurcation and descends toward apex.
     It should not be a straight vertical line; it should have mild anatomical curvature.
     """
-    lad_dir = normalize(np.array([
-        0.30 + rng.normal(0, 0.04),     # forward
-        -0.12 + rng.normal(0, 0.05),    # slight medial/lateral shift
-        -0.94 + rng.normal(0, 0.04),    # strong downward direction
-    ]))
+    shape = ENGINEERING_SHAPE_PARAMETERS["LAD"]
+
+    direction_mean = np.array(shape["direction_mean"], dtype=float)
+    direction_std = np.array(shape["direction_std"], dtype=float)
+    lad_dir = normalize(direction_mean + rng.normal(0.0, direction_std))
 
     side_vector = normalize(np.array([
-        rng.normal(0.10, 0.05),
-        -1.0,
-        rng.normal(0.05, 0.03),
-    ]))
+        rng.normal(shape["side_vector_x_mean"], shape["side_vector_x_std"]),
+        shape["side_vector_y"],
+        rng.normal(shape["side_vector_z_mean"], shape["side_vector_z_std"]),
+    ], dtype=float))
 
-    vertical_curve_vector = normalize(np.array([
-        0.25,
-        0.05,
-        -1.0,
-    ]))
+    vertical_curve_vector = normalize(np.array(
+        shape["vertical_curve_vector"],
+        dtype=float,
+    ))
 
     anchors = curved_path_from_formula(
         start=bifurcation,
@@ -160,24 +171,29 @@ def generate_lad_control_points(
         length_mm=length_mm,
         side_vector=side_vector,
         vertical_curve_vector=vertical_curve_vector,
-        side_strength=rng.uniform(0.015, 0.045),
-        vertical_strength=rng.uniform(0.015, 0.035),
-        n_anchors=100,
+        side_strength=rng.uniform(*shape["side_strength_range"]),
+        vertical_strength=rng.uniform(*shape["vertical_strength_range"]),
+        n_anchors=shape["anchor_count"],
     )
 
     if wraparound:
         # Distal wrap-around effect near the apex
         t_values = np.linspace(0.0, 1.0, len(anchors))
         wrap_vector = normalize(np.array([
-            rng.uniform(0.20, 0.45),
-            rng.uniform(0.15, 0.35),
-            rng.uniform(-0.20, 0.05),
+            rng.uniform(*shape["wraparound_vector_x_range"]),
+            rng.uniform(*shape["wraparound_vector_y_range"]),
+            rng.uniform(*shape["wraparound_vector_z_range"]),
         ]))
 
         for i, t in enumerate(t_values):
-            if t > 0.70:
-                strength = ((t - 0.70) / 0.30) ** 2
-                anchors[i] += strength * rng.uniform(4.0, 8.0) * wrap_vector
+            if t > shape["wraparound_start_s"]:
+                distal_span = 1.0 - shape["wraparound_start_s"]
+                strength = ((t - shape["wraparound_start_s"]) / distal_span) ** 2
+                anchors[i] += (
+                    strength
+                    * rng.uniform(*shape["wraparound_strength_range_mm"])
+                    * wrap_vector
+                )
 
     control_points = resample_polyline(anchors, CONTROL_POINTS_PER_BRANCH)
     control_points[0] = bifurcation
@@ -193,46 +209,70 @@ def generate_lcx_control_points(
     target_angle_deg: float,
 ) -> np.ndarray:
     """
-    LCX starts from the same LMCA bifurcation and sweeps laterally.
-    It must curve more than LAD because circumflex means it curves around.
+    LCX starts from the same LMCA bifurcation and follows a circumflex-like course.
+    It should move laterally, but not shoot too far outward.
     """
+    shape = ENGINEERING_SHAPE_PARAMETERS["LCX"]
+
     lad_initial_dir = normalize(lad_control_points[3] - lad_control_points[0])
 
-    preferred_lateral_side = np.array([0.0, 1.0, 0.0])
+    preferred_lateral_side = np.array(shape["preferred_lateral_side"], dtype=float)
     lcx_initial_dir = vector_at_angle(
         lad_initial_dir,
         target_angle_deg,
         preferred_lateral_side,
     )
 
-    lateral_vector = normalize(np.array([
-        rng.uniform(-0.10, 0.15),
-        1.0,
-        rng.uniform(-0.15, 0.05),
-    ]))
+    lateral_vector = normalize(np.array(shape["lateral_vector"], dtype=float))
+    posterior_curve_vector = normalize(np.array(
+        shape["posterior_curve_vector"],
+        dtype=float,
+    ))
 
-    posterior_curve_vector = normalize(np.array([
-        rng.uniform(-0.35, -0.10),
-        rng.uniform(0.50, 0.90),
-        rng.uniform(-0.25, -0.05),
-    ]))
-
-    t_values = np.linspace(0.0, 1.0, 120)
+    t_values = np.linspace(0.0, 1.0, shape["anchor_count"])
     anchors = []
+
+    lateral_strength = rng.uniform(*shape["lateral_strength_range"])
+    posterior_strength = rng.uniform(*shape["posterior_strength_range"])
+    downward_strength = rng.uniform(*shape["downward_strength_range"])
 
     for t in t_values:
         base = bifurcation + length_mm * t * lcx_initial_dir
+        sweep_s = smoothstep_after(t, shape["sweep_start_s"])
 
-        # Use t^2 so initial tangent remains close to target angle
-        lateral_sweep = rng.uniform(0.18, 0.32) * length_mm * (t ** 2) * lateral_vector
+        # Delay circumflex shaping so the proximal tangent preserves target angle.
+        lateral_sweep = (
+            lateral_strength
+            * length_mm
+            * (sweep_s ** shape["lateral_exponent"])
+            * lateral_vector
+        )
 
-        # Curve around distally
-        posterior_sweep = rng.uniform(0.08, 0.18) * length_mm * (t ** 2.2) * posterior_curve_vector
+        # Distal curve to make it circumflex-like
+        posterior_sweep = (
+            posterior_strength
+            * length_mm
+            * (sweep_s ** shape["posterior_exponent"])
+            * posterior_curve_vector
+        )
 
-        # Mild smooth wave, but small enough not to break angle
-        wave = rng.uniform(0.005, 0.015) * length_mm * np.sin(np.pi * t) * lateral_vector
+        # Slight downward course
+        downward_sweep = (
+            downward_strength
+            * length_mm
+            * (sweep_s ** shape["downward_exponent"])
+            * np.array([0.0, 0.0, -1.0])
+        )
 
-        anchors.append(base + lateral_sweep + posterior_sweep + wave)
+        # Small natural wave, also delayed to avoid biasing the measured angle.
+        wave = (
+            rng.uniform(*shape["wave_strength_range"])
+            * length_mm
+            * np.sin(np.pi * sweep_s)
+            * lateral_vector
+        )
+
+        anchors.append(base + lateral_sweep + posterior_sweep + downward_sweep + wave)
 
     anchors = np.array(anchors)
 
@@ -259,7 +299,9 @@ def generate_one_lca_candidate(
     lad_diameter = sample_truncated_normal(rng, BRANCH_STATS["LAD_DIAMETER"])
     lcx_diameter = sample_truncated_normal(rng, BRANCH_STATS["LCX_DIAMETER"])
 
-    wraparound_lad = bool(rng.random() < 0.86)
+    wraparound_lad = bool(
+        rng.random() < ENGINEERING_SHAPE_PARAMETERS["LAD"]["wraparound_probability"]
+    )
 
     origin = np.array([0.0, 0.0, 0.0], dtype=float)
 

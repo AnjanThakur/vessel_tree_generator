@@ -5,6 +5,7 @@ from typing import Dict, List, Any
 import json
 import numpy as np
 
+from .parameters import SIDE_BRANCH_PARAMETRIC_POSITIONS
 from .topology import LCA_TOPOLOGY
 
 
@@ -32,3 +33,12 @@ def export_lca_population(
     save_json(out / "topology.json", LCA_TOPOLOGY)
     save_json(out / "parameter_log.json", selected_metadata)
     save_json(out / "validation_report.json", validation_reports)
+
+
+def export_side_branch_parametric_positions(output_dir: str) -> None:
+    out = Path(output_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    save_json(
+        out / "side_branch_parametric_positions.json",
+        SIDE_BRANCH_PARAMETRIC_POSITIONS,
+    )

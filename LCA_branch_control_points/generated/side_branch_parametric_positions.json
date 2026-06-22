@@ -1,0 +1,80 @@
+{
+  "RI": {
+    "parent": "LMCA",
+    "attach": "bifurcation",
+    "status": "future_optional",
+    "reason": "trifurcation branch"
+  },
+  "D1": {
+    "parent": "LAD",
+    "s_range": [
+      0.25,
+      0.45
+    ],
+    "status": "future_optional"
+  },
+  "D2": {
+    "parent": "LAD",
+    "s_range": [
+      0.45,
+      0.7
+    ],
+    "status": "future_optional"
+  },
+  "D3": {
+    "parent": "LAD",
+    "s_range": [
+      0.65,
+      0.85
+    ],
+    "status": "optional_if_multiple_diagonals"
+  },
+  "Septal": {
+    "parent": "LAD",
+    "s_range": [
+      0.15,
+      0.75
+    ],
+    "status": "future_optional"
+  },
+  "OM1": {
+    "parent": "LCX",
+    "s_range": [
+      0.25,
+      0.5
+    ],
+    "status": "future_optional"
+  },
+  "OM2": {
+    "parent": "LCX",
+    "s_range": [
+      0.5,
+      0.75
+    ],
+    "status": "future_optional"
+  },
+  "OM3": {
+    "parent": "LCX",
+    "s_range": [
+      0.7,
+      0.9
+    ],
+    "status": "optional_if_multiple_marginals"
+  },
+  "Left_PLV": {
+    "parent": "LCX",
+    "s_range": [
+      0.75,
+      0.95
+    ],
+    "status": "dominance_based_future_optional"
+  },
+  "Left_PDA": {
+    "parent": "LCX",
+    "s_range": [
+      0.85,
+      1.0
+    ],
+    "status": "left_dominance_future_optional"
+  }
+}
