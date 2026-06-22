@@ -2,16 +2,18 @@
   {
     "tree_id": 0,
     "passed": true,
-    "errors": [],
+    "errors": [
+      "Warning: LAD is not longer than LCX in this candidate."
+    ],
     "metrics": {
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 10.119798996935248,
-        "LAD": 97.42440804359103,
-        "LCX": 74.02874586403146
+        "LMCA": 10.119087602999219,
+        "LAD": 99.48946609820597,
+        "LCX": 111.388374923811
       },
-      "lad_lcx_angle_actual_deg": 96.62906081856126,
+      "lad_lcx_angle_actual_deg": 96.0493539458131,
       "lad_lcx_angle_target_deg": 96.53139832603776
     }
   },
@@ -23,12 +25,12 @@
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 13.096313426138321,
-        "LAD": 110.19066400124368,
-        "LCX": 61.82080266618926
+        "LMCA": 9.786557104682995,
+        "LAD": 125.28778182130456,
+        "LCX": 89.83557321809771
       },
-      "lad_lcx_angle_actual_deg": 74.72423442099804,
-      "lad_lcx_angle_target_deg": 70.8971916938184
+      "lad_lcx_angle_actual_deg": 89.0190193302225,
+      "lad_lcx_angle_target_deg": 88.21474668116778
     }
   },
   {
@@ -39,12 +41,12 @@
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 9.521051991292401,
-        "LAD": 115.41175972116324,
-        "LCX": 77.54273684429306
+        "LMCA": 13.291578335409426,
+        "LAD": 132.18049509308858,
+        "LCX": 96.4756130963085
       },
-      "lad_lcx_angle_actual_deg": 83.42234530072979,
-      "lad_lcx_angle_target_deg": 82.31389973220195
+      "lad_lcx_angle_actual_deg": 57.95388113642946,
+      "lad_lcx_angle_target_deg": 53.20739742218896
     }
   },
   {
@@ -55,12 +57,12 @@
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 8.008677086619233,
-        "LAD": 105.67301655816513,
-        "LCX": 76.34042614616108
+        "LMCA": 4.692372022687951,
+        "LAD": 86.2426670880219,
+        "LCX": 78.30264751133798
       },
-      "lad_lcx_angle_actual_deg": 76.84869113722327,
-      "lad_lcx_angle_target_deg": 74.08643523759757
+      "lad_lcx_angle_actual_deg": 102.78444568906082,
+      "lad_lcx_angle_target_deg": 104.15387112213773
     }
   },
   {
@@ -71,12 +73,12 @@
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 10.69635738628028,
-        "LAD": 119.68452076463441,
-        "LCX": 71.65497885056269
+        "LMCA": 10.172852260483877,
+        "LAD": 118.49082381400135,
+        "LCX": 117.66731210474752
       },
-      "lad_lcx_angle_actual_deg": 77.96945410091037,
-      "lad_lcx_angle_target_deg": 75.92703284217812
+      "lad_lcx_angle_actual_deg": 61.69266570861379,
+      "lad_lcx_angle_target_deg": 56.709615559839904
     }
   },
   {
@@ -87,28 +89,12 @@
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 10.54845285244032,
-        "LAD": 116.88888697543408,
-        "LCX": 58.67901397308408
+        "LMCA": 12.975156512023974,
+        "LAD": 124.4407627675936,
+        "LCX": 72.957451440847
       },
-      "lad_lcx_angle_actual_deg": 55.75366653428295,
-      "lad_lcx_angle_target_deg": 49.20467274747695
-    }
-  },
-  {
-    "tree_id": 6,
-    "passed": true,
-    "errors": [],
-    "metrics": {
-      "lad_start_gap_mm": 0.0,
-      "lcx_start_gap_mm": 0.0,
-      "lengths_mm": {
-        "LMCA": 11.196844834565203,
-        "LAD": 110.76476224010001,
-        "LCX": 49.20935284416726
-      },
-      "lad_lcx_angle_actual_deg": 64.33614667008713,
-      "lad_lcx_angle_target_deg": 57.74106681965445
+      "lad_lcx_angle_actual_deg": 111.75579343786,
+      "lad_lcx_angle_target_deg": 113.12153572231067
     }
   },
   {
@@ -119,12 +105,28 @@
       "lad_start_gap_mm": 0.0,
       "lcx_start_gap_mm": 0.0,
       "lengths_mm": {
-        "LMCA": 8.979193751727236,
-        "LAD": 139.82421710857471,
-        "LCX": 68.08071098596756
+        "LMCA": 11.31965801271113,
+        "LAD": 123.95148622216045,
+        "LCX": 91.75860756189387
       },
-      "lad_lcx_angle_actual_deg": 96.80814628871957,
-      "lad_lcx_angle_target_deg": 97.36772450358723
+      "lad_lcx_angle_actual_deg": 90.05920499186719,
+      "lad_lcx_angle_target_deg": 89.2497777835295
+    }
+  },
+  {
+    "tree_id": 8,
+    "passed": true,
+    "errors": [],
+    "metrics": {
+      "lad_start_gap_mm": 0.0,
+      "lcx_start_gap_mm": 0.0,
+      "lengths_mm": {
+        "LMCA": 8.143819460929542,
+        "LAD": 133.10199462955123,
+        "LCX": 109.2224640085397
+      },
+      "lad_lcx_angle_actual_deg": 74.76981941994397,
+      "lad_lcx_angle_target_deg": 71.08139053279794
     }
   }
 ]
