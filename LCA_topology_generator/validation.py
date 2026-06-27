@@ -7,6 +7,10 @@ from .parameters import (
     BRANCH_STATS,
     CONNECTION_TOLERANCE_MM,
     ANGLE_TOLERANCE_DEG,
+    CONTROL_POINTS_PER_BRANCH,
+    CONTROL_POINTS_LMCA,
+    CONTROL_POINTS_LAD,
+    CONTROL_POINTS_LCX,
 )
 
 
@@ -36,11 +40,19 @@ def validate_lca_tree(
     lad = branches["LAD"]
     lcx = branches["LCX"]
 
+    use_prior = metadata.get("use_patient_prior", False)
+    expected_lengths = {
+        "LMCA": CONTROL_POINTS_LMCA if use_prior else CONTROL_POINTS_PER_BRANCH,
+        "LAD": CONTROL_POINTS_LAD if use_prior else CONTROL_POINTS_PER_BRANCH,
+        "LCX": CONTROL_POINTS_LCX if use_prior else CONTROL_POINTS_PER_BRANCH,
+    }
+
     # Shape validation
     for name, cp in branches.items():
-        if cp.shape != (20, 3):
+        expected_len = expected_lengths.get(name, CONTROL_POINTS_PER_BRANCH)
+        if cp.shape != (expected_len, 3):
             report["passed"] = False
-            report["errors"].append(f"{name} shape invalid: {cp.shape}, expected (20, 3)")
+            report["errors"].append(f"{name} shape invalid: {cp.shape}, expected ({expected_len}, 3)")
 
     # Connectivity validation
     bif = lmca[-1]

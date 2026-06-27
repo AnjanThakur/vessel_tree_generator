@@ -5,62 +5,62 @@
     {
       "branch_name": "LMCA",
       "original_matrix_shape": [
-        50,
-        20,
+        5,
+        5,
         3
       ],
       "mean_shape": [
-        20,
+        5,
         3
       ],
       "std_shape": [
-        20,
+        5,
         3
       ],
       "coordinate_unit": "mm",
-      "K_count": 50,
-      "P_count": 20,
-      "summary": "LMCA mean/std are computed coordinate-wise across 50 validated templates."
+      "K_count": 5,
+      "P_count": 5,
+      "summary": "LMCA mean/std are computed coordinate-wise across 5 validated templates."
     },
     {
       "branch_name": "LAD",
       "original_matrix_shape": [
-        50,
-        20,
+        5,
+        12,
         3
       ],
       "mean_shape": [
-        20,
+        12,
         3
       ],
       "std_shape": [
-        20,
+        12,
         3
       ],
       "coordinate_unit": "mm",
-      "K_count": 50,
-      "P_count": 20,
-      "summary": "LAD mean/std are computed coordinate-wise across 50 validated templates."
+      "K_count": 5,
+      "P_count": 12,
+      "summary": "LAD mean/std are computed coordinate-wise across 5 validated templates."
     },
     {
       "branch_name": "LCX",
       "original_matrix_shape": [
-        50,
-        20,
+        5,
+        10,
         3
       ],
       "mean_shape": [
-        20,
+        10,
         3
       ],
       "std_shape": [
-        20,
+        10,
         3
       ],
       "coordinate_unit": "mm",
-      "K_count": 50,
-      "P_count": 20,
-      "summary": "LCX mean/std are computed coordinate-wise across 50 validated templates."
+      "K_count": 5,
+      "P_count": 10,
+      "summary": "LCX mean/std are computed coordinate-wise across 5 validated templates."
     }
   ]
 }

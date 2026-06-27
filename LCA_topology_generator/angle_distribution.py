@@ -81,14 +81,20 @@ def compute_angle_distribution(
     validation_reports: Optional[List[Dict[str, Any]]] = None,
     tolerance_deg: float = ANGLE_TOLERANCE_DEG,
 ) -> Dict[str, Any]:
-    if lad_matrix.shape != lcx_matrix.shape:
+    if lad_matrix.shape[0] != lcx_matrix.shape[0]:
         raise ValueError(
-            "LAD and LCX matrices must have matching shapes; "
-            f"got {lad_matrix.shape} and {lcx_matrix.shape}"
+            "LAD and LCX matrices must have matching population count (K); "
+            f"got {lad_matrix.shape[0]} and {lcx_matrix.shape[0]}"
         )
-    if lad_matrix.ndim != 3 or lad_matrix.shape[2] != 3:
+    if (
+        lad_matrix.ndim != 3
+        or lad_matrix.shape[2] != 3
+        or lcx_matrix.ndim != 3
+        or lcx_matrix.shape[2] != 3
+    ):
         raise ValueError(
-            f"Expected LAD/LCX matrices with shape (K, P, 3); got {lad_matrix.shape}"
+            "Expected LAD/LCX matrices with shape (K, P, 3); "
+            f"got {lad_matrix.shape} and {lcx_matrix.shape}"
         )
 
     actual_angles = [

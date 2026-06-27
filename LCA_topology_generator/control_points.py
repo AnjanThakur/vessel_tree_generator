@@ -8,6 +8,9 @@ from .parameters import (
     CONTROL_POINTS_PER_BRANCH,
     ENGINEERING_SHAPE_PARAMETERS,
     sample_truncated_normal,
+    CONTROL_POINTS_LMCA,
+    CONTROL_POINTS_LAD,
+    CONTROL_POINTS_LCX,
 )
 
 
@@ -282,14 +285,146 @@ def generate_lcx_control_points(
     return control_points
 
 
-def generate_one_lca_candidate(
+import os
+
+_SSM_MODEL_CACHE = None
+
+def load_ssm_prior() -> dict:
+    global _SSM_MODEL_CACHE
+    if _SSM_MODEL_CACHE is not None:
+        return _SSM_MODEL_CACHE
+    
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(
+        os.path.dirname(current_dir),
+        "LCA_branch_control_points",
+        "generated",
+        "lca_ssm_prior.npz"
+    )
+    
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(
+            f"SSM model file not found at {model_path}. "
+            "Please run 'python -m LCA_topology_generator.build_ssm' first."
+        )
+    
+    _SSM_MODEL_CACHE = np.load(model_path)
+    return _SSM_MODEL_CACHE
+
+
+def sample_lca_tree_ssm(
+    rng: np.random.Generator,
+    n_points: int = 27,
+) -> np.ndarray:
+    """
+    Sample a unified connected LCA tree (Case 2) from the SSM prior.
+    """
+    model = load_ssm_prior()
+    
+    mean = model["LCA_mean"]               # Shape (81,)
+    eigenvectors = model["LCA_eigenvectors"] # Shape (n_components, 81)
+    eigenvalues = model["LCA_eigenvalues"]   # Shape (n_components,)
+    std_devs = model["LCA_std_devs"]         # Shape (n_components,)
+    
+    n_components = len(eigenvalues)
+    
+    weights = rng.normal(0.0, 1.0, size=n_components)
+    variation = np.dot(weights * std_devs, eigenvectors)
+    sample_flat = mean + variation
+    
+    return sample_flat.reshape(n_points, 3)
+
+
+def generate_one_prior_lca_candidate(
     rng: np.random.Generator,
     tree_id: int,
 ) -> Tuple[Dict[str, np.ndarray], Dict[str, Any]]:
     """
-    Generate one connected LCA candidate:
-    LMCA -> LAD + LCX
+    Generate one connected LCA candidate from the patient-derived SSM prior.
+    This uses a unified tree PCA model (Case 2) to maintain branch correlations.
     """
+    # Sample the entire tree shape as a single 27-point connected path
+    tree_cp = sample_lca_tree_ssm(rng, 27)
+    
+    # Split the 27 points back into LMCA (5), LAD (12), and LCX (10)
+    lmca_cp = tree_cp[0:5].copy()
+    lad_cp = tree_cp[5:17].copy()
+    lcx_cp = tree_cp[17:27].copy()
+    
+    # Translate the entire tree so the start of LMCA is at (0, 0, 0)
+    origin_offset = lmca_cp[0].copy()
+    lmca_cp = lmca_cp - origin_offset
+    lad_cp = lad_cp - origin_offset
+    lcx_cp = lcx_cp - origin_offset
+    
+    # Snap the first point of LAD and LCX exactly to the last point of LMCA (bifurcation)
+    bifurcation = lmca_cp[-1]
+    lad_cp[0] = bifurcation
+    lcx_cp[0] = bifurcation
+    
+    # Calculate lengths of generated curves
+    lmca_length = float(np.sum(np.linalg.norm(np.diff(lmca_cp, axis=0), axis=1)))
+    lad_length = float(np.sum(np.linalg.norm(np.diff(lad_cp, axis=0), axis=1)))
+    lcx_length = float(np.sum(np.linalg.norm(np.diff(lcx_cp, axis=0), axis=1)))
+    
+    # Calculate LAD-LCX angle near bifurcation (same definition as validation)
+    lad_tangent = lad_cp[3] - lad_cp[0]
+    lcx_tangent = lcx_cp[3] - lcx_cp[0]
+    
+    v1 = lad_tangent / max(np.linalg.norm(lad_tangent), 1e-12)
+    v2 = lcx_tangent / max(np.linalg.norm(lcx_tangent), 1e-12)
+    value = np.clip(np.dot(v1, v2), -1.0, 1.0)
+    actual_angle = float(np.rad2deg(np.arccos(value)))
+    
+    lmca_diameter = sample_truncated_normal(rng, BRANCH_STATS["LMCA_DIAMETER"])
+    lad_diameter = sample_truncated_normal(rng, BRANCH_STATS["LAD_DIAMETER"])
+    lcx_diameter = sample_truncated_normal(rng, BRANCH_STATS["LCX_DIAMETER"])
+    
+    branches = {
+        "LMCA": lmca_cp,
+        "LAD": lad_cp,
+        "LCX": lcx_cp,
+    }
+    
+    metadata = {
+        "tree_id": tree_id,
+        "pattern": "bifurcation",
+        "units": "mm",
+        "lmca_length_target_mm": lmca_length,
+        "lad_length_target_mm": lad_length,
+        "lcx_length_target_mm": lcx_length,
+        "lad_lcx_angle_target_deg": actual_angle,
+        "lmca_diameter_mm": lmca_diameter,
+        "lad_diameter_mm": lad_diameter,
+        "lcx_diameter_mm": lcx_diameter,
+        "lmca_radius_mm": lmca_diameter / 2.0,
+        "lad_radius_mm": lad_diameter / 2.0,
+        "lcx_radius_mm": lcx_diameter / 2.0,
+        "wraparound_lad": False,
+        "use_patient_prior": True,
+    }
+    
+    return branches, metadata
+
+
+
+def generate_one_lca_candidate(
+    rng: np.random.Generator,
+    tree_id: int,
+    use_patient_prior: bool = None,
+) -> Tuple[Dict[str, np.ndarray], Dict[str, Any]]:
+    """
+    Generate one connected LCA candidate:
+    LMCA -> LAD + LCX.
+    Supports either the patient-derived SSM prior or the procedural fallback.
+    """
+    if use_patient_prior is None:
+        from .parameters import USE_PATIENT_PRIOR
+        use_patient_prior = USE_PATIENT_PRIOR
+        
+    if use_patient_prior:
+        return generate_one_prior_lca_candidate(rng, tree_id)
+        
     lmca_length = sample_truncated_normal(rng, BRANCH_STATS["LMCA_LENGTH"])
     lad_length = sample_truncated_normal(rng, BRANCH_STATS["LAD_LENGTH"])
     lcx_length = sample_truncated_normal(rng, BRANCH_STATS["LCX_LENGTH"])
@@ -347,6 +482,7 @@ def generate_one_lca_candidate(
         "lad_radius_mm": lad_diameter / 2.0,
         "lcx_radius_mm": lcx_diameter / 2.0,
         "wraparound_lad": wraparound_lad,
+        "use_patient_prior": False,
     }
 
     return branches, metadata

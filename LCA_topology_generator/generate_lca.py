@@ -5,7 +5,14 @@ from pathlib import Path
 
 import numpy as np
 
-from .parameters import DEFAULT_K_EXPORT, DEFAULT_CANDIDATES
+from .parameters import (
+    DEFAULT_K_EXPORT,
+    DEFAULT_CANDIDATES,
+    USE_PATIENT_PRIOR,
+    DEFAULT_LMCA_CENTERLINE_POINTS,
+    DEFAULT_LAD_CENTERLINE_POINTS,
+    DEFAULT_LCX_CENTERLINE_POINTS,
+)
 from .control_points import generate_one_lca_candidate
 from .validation import validate_lca_tree
 from .visualize import plot_lca_tree
@@ -45,6 +52,30 @@ def main() -> None:
         default=True,
         help="Export future side-branch parametric-position config.",
     )
+    parser.add_argument(
+        "--use-prior",
+        action=argparse.BooleanOptionalAction,
+        default=USE_PATIENT_PRIOR,
+        help="Use patient-derived SSM prior model instead of procedural equations.",
+    )
+    parser.add_argument(
+        "--lmca-points",
+        type=int,
+        default=DEFAULT_LMCA_CENTERLINE_POINTS,
+        help="Number of centerline points for LMCA.",
+    )
+    parser.add_argument(
+        "--lad-points",
+        type=int,
+        default=DEFAULT_LAD_CENTERLINE_POINTS,
+        help="Number of centerline points for LAD.",
+    )
+    parser.add_argument(
+        "--lcx-points",
+        type=int,
+        default=DEFAULT_LCX_CENTERLINE_POINTS,
+        help="Number of centerline points for LCX.",
+    )
 
     args = parser.parse_args()
 
@@ -62,6 +93,7 @@ def main() -> None:
         branches, metadata = generate_one_lca_candidate(
             rng=rng,
             tree_id=candidate_id,
+            use_patient_prior=args.use_prior,
         )
 
         passed, report = validate_lca_tree(branches, metadata)
@@ -87,6 +119,9 @@ def main() -> None:
         selected_metadata=selected_metadata,
         validation_reports=validation_reports,
         output_dir=str(output_dir),
+        lmca_points=args.lmca_points,
+        lad_points=args.lad_points,
+        lcx_points=args.lcx_points,
     )
 
     if args.export_stats:
