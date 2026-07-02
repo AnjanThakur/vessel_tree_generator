@@ -12,8 +12,14 @@ import numpy as np
 
 from .bspline import interpolate_lca_tree
 from .lca_validation import DEFAULT_VALIDATION_CONFIG, validate_lca_tree
+from .radius_model import (
+    DEFAULT_STATIC_RADIUS_MODEL,
+    build_lca_radius_tree,
+    validate_lca_radius_tree,
+)
 from .tortuosity import calculate_lca_tortuosity, calculate_tortuosity
 from .tortuosity_augmentation import make_target_tortuosity_variant
+from .tube_surface import build_lca_tube_surfaces, validate_lca_tube_surfaces
 from .visualize import set_axes_equal
 
 
@@ -475,9 +481,269 @@ def _save_controlled_spline_gallery(path: Path):
     plt.close(fig)
 
 
+def _radius_model_from_args(args) -> dict:
+    defaults = DEFAULT_STATIC_RADIUS_MODEL["branches"]
+    return {
+        "units": DEFAULT_STATIC_RADIUS_MODEL["units"],
+        "description": DEFAULT_STATIC_RADIUS_MODEL["description"],
+        "branches": {
+            "LMCA": {
+                "proximal_radius_mm": args.lmca_radius_proximal,
+                "distal_fraction": defaults["LMCA"]["distal_fraction"],
+                "taper_exponent": args.lmca_taper_exponent,
+            },
+            "LAD": {
+                "proximal_radius_mm": args.lad_radius_proximal,
+                "distal_fraction": defaults["LAD"]["distal_fraction"],
+                "taper_exponent": args.lad_taper_exponent,
+            },
+            "LCX": {
+                "proximal_radius_mm": args.lcx_radius_proximal,
+                "distal_fraction": defaults["LCX"]["distal_fraction"],
+                "taper_exponent": args.lcx_taper_exponent,
+            },
+        },
+    }
+
+
+def _load_patient_radius_metadata(dataset_dir: Path, tree_index: int) -> dict:
+    metadata_path = dataset_dir / f"patient_{tree_index:04d}" / "patient_info.json"
+    if not metadata_path.exists():
+        return {}
+    with open(metadata_path, "r", encoding="utf-8") as json_file:
+        metadata = json.load(json_file)
+    return {
+        "path": str(metadata_path),
+        "radius_mm": {
+            "LMCA": metadata.get("lmca_radius_mm"),
+            "LAD": metadata.get("lad_radius_mm"),
+            "LCX": metadata.get("lcx_radius_mm"),
+        },
+        "diameter_mm": {
+            "LMCA": metadata.get("lmca_diameter_mm"),
+            "LAD": metadata.get("lad_diameter_mm"),
+            "LCX": metadata.get("lcx_diameter_mm"),
+        },
+    }
+
+
+def _radius_model_for_patient(args, tree_index: int) -> dict:
+    model = _radius_model_from_args(args)
+    metadata = _load_patient_radius_metadata(Path(args.dataset_dir), tree_index)
+    model["metadata_source"] = metadata.get("path")
+    model["branch_radius_source"] = {}
+
+    for branch_name in ["LMCA", "LAD", "LCX"]:
+        metadata_radius = metadata.get("radius_mm", {}).get(branch_name)
+        metadata_diameter = metadata.get("diameter_mm", {}).get(branch_name)
+        if metadata_radius is not None:
+            model["branches"][branch_name]["proximal_radius_mm"] = float(metadata_radius)
+            model["branch_radius_source"][branch_name] = "patient_metadata_radius"
+        elif metadata_diameter is not None:
+            model["branches"][branch_name]["proximal_radius_mm"] = float(metadata_diameter) / 2.0
+            model["branch_radius_source"][branch_name] = "patient_metadata_diameter"
+        else:
+            model["branch_radius_source"][branch_name] = "mvp_default"
+
+    return model
+
+
+def _radius_axis(points_with_radius: np.ndarray) -> np.ndarray:
+    if len(points_with_radius) == 0:
+        return np.zeros(0, dtype=float)
+    if len(points_with_radius) == 1:
+        return np.zeros(1, dtype=float)
+    distances = np.zeros(len(points_with_radius), dtype=float)
+    distances[1:] = np.cumsum(np.linalg.norm(np.diff(points_with_radius[:, :3], axis=0), axis=1))
+    total = distances[-1]
+    if total <= 1e-9:
+        return np.zeros(len(points_with_radius), dtype=float)
+    return distances / total
+
+
+def _save_radius_profile_plot(path: Path, centerlines_with_radius: dict):
+    fig, ax = plt.subplots(figsize=(5.2, 3.2))
+
+    for branch_name in ["LMCA", "LAD", "LCX"]:
+        points = centerlines_with_radius[branch_name]
+        ax.plot(
+            _radius_axis(points),
+            points[:, 3],
+            color=BRANCH_COLORS[branch_name],
+            linewidth=2.0,
+            label=branch_name,
+        )
+
+    ax.set_xlabel("Normalized branch arc length")
+    ax.set_ylabel("Radius (mm)")
+    ax.set_title("Static radius taper")
+    ax.grid(True, alpha=0.25)
+    ax.legend(fontsize=8)
+    plt.tight_layout()
+    plt.savefig(path, dpi=180, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+
+def _save_static_radius_gallery(path: Path, samples: list):
+    cols = 3
+    rows = int(math.ceil(len(samples) / cols))
+    fig, axes = plt.subplots(rows, cols, figsize=(cols * 3.6, rows * 2.85), squeeze=False)
+
+    for ax in axes.flat:
+        ax.axis("off")
+
+    for ax, sample in zip(axes.flat, samples):
+        ax.axis("on")
+        for branch_name in ["LMCA", "LAD", "LCX"]:
+            points = sample["centerlines_with_radius"][branch_name]
+            ax.plot(
+                _radius_axis(points),
+                points[:, 3],
+                color=BRANCH_COLORS[branch_name],
+                linewidth=2.0,
+                label=branch_name,
+            )
+        ax.set_title(f"Patient {sample['tree_index']:03d}", fontsize=9)
+        ax.set_xlabel("Arc length", fontsize=8)
+        ax.set_ylabel("Radius (mm)", fontsize=8)
+        ax.grid(True, alpha=0.22)
+        ax.tick_params(labelsize=7)
+
+    handles, labels = axes.flat[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", ncol=3, fontsize=8)
+    plt.tight_layout(rect=(0.0, 0.0, 1.0, 0.94), pad=0.8)
+    plt.savefig(path, dpi=190, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+
+def _save_3d_radius_tree_plot(path: Path, sample: dict):
+    fig = plt.figure(figsize=(6.4, 5.0))
+    ax = fig.add_subplot(projection="3d")
+
+    for branch_name in ["LMCA", "LAD", "LCX"]:
+        points = sample["centerlines_with_radius"][branch_name]
+        radius = points[:, 3]
+        linewidth = 0.9 + float(np.mean(radius)) * 1.25
+        ax.plot(
+            points[:, 0],
+            points[:, 1],
+            points[:, 2],
+            color=BRANCH_COLORS[branch_name],
+            linewidth=linewidth,
+            alpha=0.86,
+            label=(
+                f"{branch_name} "
+                f"{radius[0]:.2f}->{radius[-1]:.2f} mm"
+            ),
+        )
+        ax.scatter(
+            [points[0, 0], points[-1, 0]],
+            [points[0, 1], points[-1, 1]],
+            [points[0, 2], points[-1, 2]],
+            color=BRANCH_COLORS[branch_name],
+            edgecolor="white",
+            linewidth=0.6,
+            s=[40, 20],
+            depthshade=False,
+        )
+
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_zlabel("Z")
+    ax.set_title(f"Patient {sample['tree_index']:03d} static radius")
+    set_axes_equal(ax)
+    ax.legend(fontsize=7, loc="upper left")
+    plt.tight_layout()
+    plt.savefig(path, dpi=190, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+
+def _save_tube_surface_plot(path: Path, sample: dict):
+    fig = plt.figure(figsize=(6.4, 5.0))
+    ax = fig.add_subplot(projection="3d")
+    surface_colors = {
+        "LMCA": "#4a4a4a",
+        "LAD": "#d62728",
+        "LCX": "#1f77b4",
+    }
+
+    for branch_name in ["LMCA", "LAD", "LCX"]:
+        surface = sample["tube_surfaces"][branch_name]
+        ax.plot_surface(
+            surface[:, :, 0],
+            surface[:, :, 1],
+            surface[:, :, 2],
+            color=surface_colors[branch_name],
+            alpha=0.72,
+            linewidth=0,
+            antialiased=True,
+            shade=True,
+        )
+        centerline = sample["centerlines_with_radius"][branch_name]
+        ax.plot(
+            centerline[:, 0],
+            centerline[:, 1],
+            centerline[:, 2],
+            color="white",
+            linewidth=0.8,
+            alpha=0.85,
+        )
+
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_zlabel("Z")
+    ax.set_title(f"Patient {sample['tree_index']:03d} simple tube surface")
+    set_axes_equal(ax)
+    plt.tight_layout()
+    plt.savefig(path, dpi=190, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+
+def _save_tube_surface_gallery(path: Path, samples: list):
+    cols = 3
+    rows = int(math.ceil(len(samples) / cols))
+    fig = plt.figure(figsize=(cols * 4.2, rows * 3.7))
+
+    for idx, sample in enumerate(samples):
+        ax = fig.add_subplot(rows, cols, idx + 1, projection="3d")
+        for branch_name, color in [("LMCA", "#4a4a4a"), ("LAD", "#d62728"), ("LCX", "#1f77b4")]:
+            surface = sample["tube_surfaces"][branch_name]
+            ax.plot_surface(
+                surface[:, :, 0],
+                surface[:, :, 1],
+                surface[:, :, 2],
+                color=color,
+                alpha=0.72,
+                linewidth=0,
+                antialiased=True,
+                shade=True,
+            )
+        ax.set_title(f"Patient {sample['tree_index']:03d}", fontsize=9)
+        ax.set_axis_off()
+        set_axes_equal(ax)
+
+    plt.tight_layout()
+    plt.savefig(path, dpi=170, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+
+def _build_control_points_with_radius(control_tree: np.ndarray, radius_model: dict) -> np.ndarray:
+    control_centerlines = {
+        branch_name: control_tree[BRANCH_SLICES[branch_name]]
+        for branch_name in ["LMCA", "LAD", "LCX"]
+    }
+    control_points_with_radius, _ = build_lca_radius_tree(control_centerlines, radius_model)
+    return np.vstack([
+        control_points_with_radius["LMCA"],
+        control_points_with_radius["LAD"],
+        control_points_with_radius["LCX"],
+    ])
+
+
 def _build_dataset_samples(tree_ctrl_points: np.ndarray, args) -> list:
     samples = []
     for tree_index, tree in enumerate(tree_ctrl_points):
+        radius_model = _radius_model_for_patient(args, tree_index)
         centerlines = interpolate_lca_tree(
             tree,
             lmca_points=args.lmca_points,
@@ -486,12 +752,30 @@ def _build_dataset_samples(tree_ctrl_points: np.ndarray, args) -> list:
         )
         metrics = calculate_lca_tortuosity(centerlines)
         validation = validate_lca_tree(tree, centerlines, metrics)
+        centerlines_with_radius, radius_metadata = build_lca_radius_tree(centerlines, radius_model)
+        radius_validation = validate_lca_radius_tree(
+            centerlines_with_radius,
+            adjacent_jump_threshold_mm=args.radius_adjacent_jump_threshold,
+        )
+        control_points_with_radius = _build_control_points_with_radius(tree, radius_model)
+        tube_surfaces, tube_metadata = build_lca_tube_surfaces(
+            centerlines_with_radius,
+            num_circle_points=args.tube_circle_points,
+        )
+        tube_validation = validate_lca_tube_surfaces(tube_surfaces, centerlines_with_radius)
         samples.append({
             "tree_index": tree_index,
             "control_tree": tree,
+            "control_tree_with_radius": control_points_with_radius,
             "centerlines": centerlines,
+            "centerlines_with_radius": centerlines_with_radius,
+            "tube_surfaces": tube_surfaces,
             "metrics": metrics,
             "validation": validation,
+            "radius_metadata": radius_metadata,
+            "radius_validation": radius_validation,
+            "tube_metadata": tube_metadata,
+            "tube_validation": tube_validation,
         })
     return samples
 
@@ -511,6 +795,14 @@ def main():
     parser.add_argument("--lmca-points", type=int, default=150)
     parser.add_argument("--lad-points", type=int, default=300)
     parser.add_argument("--lcx-points", type=int, default=250)
+    parser.add_argument("--lmca-radius-proximal", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["proximal_radius_mm"])
+    parser.add_argument("--lad-radius-proximal", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["proximal_radius_mm"])
+    parser.add_argument("--lcx-radius-proximal", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["proximal_radius_mm"])
+    parser.add_argument("--lmca-taper-exponent", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["taper_exponent"])
+    parser.add_argument("--lad-taper-exponent", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["taper_exponent"])
+    parser.add_argument("--lcx-taper-exponent", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["taper_exponent"])
+    parser.add_argument("--radius-adjacent-jump-threshold", type=float, default=0.2, help="Maximum allowed radius change between adjacent centerline points in mm")
+    parser.add_argument("--tube-circle-points", type=int, default=24, help="Number of radial samples per centerline point for simple tube surfaces")
     args = parser.parse_args()
 
     output_dir = Path(args.output)
@@ -560,8 +852,55 @@ def main():
         sample_dir = tree_dir / f"patient_{sample['tree_index']:04d}"
         sample_dir.mkdir(parents=True, exist_ok=True)
         np.save(sample_dir / "control_points_27x3.npy", sample["control_tree"])
+        np.save(sample_dir / "control_points_27x4.npy", sample["control_tree_with_radius"])
         for branch_name, points in sample["centerlines"].items():
             np.save(sample_dir / f"{branch_name.lower()}_centerline.npy", points)
+        for branch_name, points in sample["centerlines_with_radius"].items():
+            np.save(sample_dir / f"{branch_name.lower()}_centerline_radius.npy", points)
+        np.savez(
+            sample_dir / "tree_centerline_radius.npz",
+            LMCA=sample["centerlines_with_radius"]["LMCA"],
+            LAD=sample["centerlines_with_radius"]["LAD"],
+            LCX=sample["centerlines_with_radius"]["LCX"],
+        )
+        np.savez(
+            sample_dir / "tree_tube_surface.npz",
+            LMCA=sample["tube_surfaces"]["LMCA"],
+            LAD=sample["tube_surfaces"]["LAD"],
+            LCX=sample["tube_surfaces"]["LCX"],
+        )
+        _write_json(
+            sample_dir / "radius_validation.json",
+            sample["radius_validation"],
+        )
+        _write_json(
+            sample_dir / "tube_surface_validation.json",
+            sample["tube_validation"],
+        )
+        _write_json(
+            sample_dir / "radius_summary.json",
+            {
+                "units": "mm",
+                "columns": ["x", "y", "z", "radius_mm"],
+                "radius_model": sample["radius_metadata"],
+                "branch_radius_source": sample["radius_metadata"].get("branch_radius_source", {}),
+                "output_shapes": {
+                    "control_points_27x4": list(sample["control_tree_with_radius"].shape),
+                    "LMCA": list(sample["centerlines_with_radius"]["LMCA"].shape),
+                    "LAD": list(sample["centerlines_with_radius"]["LAD"].shape),
+                    "LCX": list(sample["centerlines_with_radius"]["LCX"].shape),
+                    "tube_surface_LMCA": list(sample["tube_surfaces"]["LMCA"].shape),
+                    "tube_surface_LAD": list(sample["tube_surfaces"]["LAD"].shape),
+                    "tube_surface_LCX": list(sample["tube_surfaces"]["LCX"].shape),
+                },
+                "validation": sample["radius_validation"],
+                "tube_surface": sample["tube_metadata"],
+                "tube_validation": sample["tube_validation"],
+            },
+        )
+        _save_radius_profile_plot(sample_dir / "radius_profile.png", sample["centerlines_with_radius"])
+        _save_3d_radius_tree_plot(sample_dir / "tree_with_radius.png", sample)
+        _save_tube_surface_plot(sample_dir / "tree_tube_surface.png", sample)
         _write_json(
             sample_dir / "tortuosity_metrics.json",
             {
@@ -613,13 +952,137 @@ def main():
             "description": "Endpoint-preserving sinusoidal branch variants generated from dataset-derived centerlines",
             "variant_order": ["original", "low", "medium", "high", "very_high"],
         },
+        "static_radius_mvp": {
+            "defaults": DEFAULT_STATIC_RADIUS_MODEL,
+            "metadata_override_keys": [
+                "lmca_radius_mm",
+                "lad_radius_mm",
+                "lcx_radius_mm",
+                "lmca_diameter_mm",
+                "lad_diameter_mm",
+                "lcx_diameter_mm",
+            ],
+            "metadata_priority": "radius_mm, then diameter_mm / 2, then MVP default",
+            "taper_formula": "radius = proximal_radius - (proximal_radius - distal_radius) * s ** taper_exponent",
+            "default_taper_exponent": 1.0,
+            "distal_rules": {
+                "LMCA": "85% of proximal radius",
+                "LAD": "55% of proximal radius",
+                "LCX": "55% of proximal radius",
+            },
+            "radius_validation": [
+                "positive finite radius values",
+                "proximal radius >= distal radius",
+                "adjacent radius jumps below configured threshold",
+                "LMCA proximal radius > LAD/LCX proximal radius",
+                "LMCA distal radius >= LAD/LCX proximal radius",
+            ],
+            "no_disease_no_motion_no_pulsatility": True,
+        },
         "trees": [
             {
                 "tree_index": sample["tree_index"],
                 "validation_status": "valid" if sample["validation"]["is_valid"] else "invalid",
+                "radius_validation_status": "valid" if sample["radius_validation"]["is_valid"] else "invalid",
+                "radius_source": sample["radius_metadata"].get("branch_radius_source", {}),
+                "radius_output_shapes": {
+                    "control_points_27x4": list(sample["control_tree_with_radius"].shape),
+                    "LMCA": list(sample["centerlines_with_radius"]["LMCA"].shape),
+                    "LAD": list(sample["centerlines_with_radius"]["LAD"].shape),
+                    "LCX": list(sample["centerlines_with_radius"]["LCX"].shape),
+                    "tube_surface_LMCA": list(sample["tube_surfaces"]["LMCA"].shape),
+                    "tube_surface_LAD": list(sample["tube_surfaces"]["LAD"].shape),
+                    "tube_surface_LCX": list(sample["tube_surfaces"]["LCX"].shape),
+                },
                 "tortuosity": {
                     branch_name: sample["metrics"][branch_name]["tortuosity"]
                     for branch_name in ["LMCA", "LAD", "LCX"]
+                },
+                "radius": {
+                    branch_name: {
+                        "proximal_radius_mm": sample["radius_validation"]["branches"][branch_name]["proximal_radius_mm"],
+                        "distal_radius_mm": sample["radius_validation"]["branches"][branch_name]["distal_radius_mm"],
+                        "taper_exponent": sample["radius_metadata"]["branches"][branch_name]["taper_exponent"],
+                    }
+                    for branch_name in ["LMCA", "LAD", "LCX"]
+                },
+            }
+            for sample in export_samples
+        ],
+    }
+
+    radius_validation_report = {
+        "units": "mm",
+        "total_exported_trees": len(export_samples),
+        "valid_radius_trees": int(sum(1 for sample in export_samples if sample["radius_validation"]["is_valid"])),
+        "invalid_radius_trees": int(sum(1 for sample in export_samples if not sample["radius_validation"]["is_valid"])),
+        "trees": [
+            {
+                "tree_index": sample["tree_index"],
+                **sample["radius_validation"],
+            }
+            for sample in export_samples
+        ],
+    }
+
+    radius_summary = {
+        "mode": "static_radius_mvp",
+        "units": "mm",
+        "num_valid_dataset_trees_processed": len(export_samples),
+        "output_point_format": ["x", "y", "z", "radius_mm"],
+        "branch_files": [
+            "lmca_centerline_radius.npy",
+            "lad_centerline_radius.npy",
+            "lcx_centerline_radius.npy",
+            "tree_centerline_radius.npz",
+            "control_points_27x4.npy",
+            "tree_tube_surface.npz",
+        ],
+        "default_proximal_radius_mm": {
+            "LMCA": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["proximal_radius_mm"],
+            "LAD": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["proximal_radius_mm"],
+            "LCX": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["proximal_radius_mm"],
+        },
+        "distal_radius_fraction": {
+            "LMCA": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["distal_fraction"],
+            "LAD": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["distal_fraction"],
+            "LCX": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["distal_fraction"],
+        },
+        "taper_exponent": {
+            "LMCA": args.lmca_taper_exponent,
+            "LAD": args.lad_taper_exponent,
+            "LCX": args.lcx_taper_exponent,
+        },
+        "taper_formula": "radius = proximal_radius - (proximal_radius - distal_radius) * s ** taper_exponent",
+        "metadata_priority": "Use patient radius metadata first, patient diameter / 2 second, MVP default third.",
+        "adjacent_jump_threshold_mm": args.radius_adjacent_jump_threshold,
+        "tube_generation_compatibility": {
+            "compatible_shape": True,
+            "lca_format": "Each branch is N x 4 with columns x,y,z,radius in mm.",
+            "rca_format_observed": "RCA tube_generator saves each branch as N x 4 with columns X,Y,Z,R.",
+            "unit_note": "RCA tube code internally uses meters; convert LCA mm arrays to meters before direct surface generation.",
+        },
+        "simple_tube_surface": {
+            "surface_file": "tree_tube_surface.npz",
+            "surface_shape": "N x num_circle_points x 3",
+            "num_circle_points": args.tube_circle_points,
+            "method": "Circular cross-section sweep along each radius-bearing centerline",
+            "limitations": "Simple branch surfaces are generated independently and are not boolean-unioned at the bifurcation.",
+        },
+        "trees": [
+            {
+                "tree_index": sample["tree_index"],
+                "radius_validation_status": "valid" if sample["radius_validation"]["is_valid"] else "invalid",
+                "tube_surface_validation_status": "valid" if sample["tube_validation"]["is_valid"] else "invalid",
+                "radius_source": sample["radius_metadata"].get("branch_radius_source", {}),
+                "shapes": {
+                    "control_points_27x4": list(sample["control_tree_with_radius"].shape),
+                    "LMCA": list(sample["centerlines_with_radius"]["LMCA"].shape),
+                    "LAD": list(sample["centerlines_with_radius"]["LAD"].shape),
+                    "LCX": list(sample["centerlines_with_radius"]["LCX"].shape),
+                    "tube_surface_LMCA": list(sample["tube_surfaces"]["LMCA"].shape),
+                    "tube_surface_LAD": list(sample["tube_surfaces"]["LAD"].shape),
+                    "tube_surface_LCX": list(sample["tube_surfaces"]["LCX"].shape),
                 },
             }
             for sample in export_samples
@@ -628,6 +1091,8 @@ def main():
 
     _write_json(output_dir / "summary.json", summary)
     _write_json(output_dir / "validation_report.json", validation_report)
+    _write_json(output_dir / "radius_validation.json", radius_validation_report)
+    _write_json(output_dir / "radius_summary.json", radius_summary)
     _save_dataset_tree_gallery(output_dir / "01_dataset_trees.png", export_samples, projection)
     _save_3d_tree_gallery(output_dir / "01_dataset_trees_3d_matrix.png", export_samples)
     controlled_sample = export_samples[0]
@@ -642,6 +1107,8 @@ def main():
     )
     _save_tortuosity_label_gallery(output_dir / "04_dataset_trees_with_measured_tortuosity.png", export_samples, projection)
     _save_branch_gallery(output_dir / "05_dataset_branch_tortuosity_ranking.png", export_samples, projection)
+    _save_static_radius_gallery(output_dir / "06_static_radius_profiles.png", export_samples)
+    _save_tube_surface_gallery(output_dir / "07_lca_tube_surfaces.png", export_samples)
     if args.include_controlled_splines:
         _save_controlled_spline_gallery(output_dir / "controlled_tortuosity_splines.png")
 
@@ -653,6 +1120,8 @@ def main():
     print(f"Controlled branch tortuosity examples: {output_dir / '03_branch_controlled_tortuosity_examples.png'}")
     print(f"Measured tortuosity labels: {output_dir / '04_dataset_trees_with_measured_tortuosity.png'}")
     print(f"Dataset branch tortuosity ranking: {output_dir / '05_dataset_branch_tortuosity_ranking.png'}")
+    print(f"Static radius profiles: {output_dir / '06_static_radius_profiles.png'}")
+    print(f"Simple tube surface gallery: {output_dir / '07_lca_tube_surfaces.png'}")
     print(f"Validation report: {output_dir / 'validation_report.json'}")
     print(f"Summary: {output_dir / 'summary.json'}")
 

@@ -2,7 +2,7 @@
 
 This module processes clinical/patient coronary centerline data, normalizes their coordinate systems, and extracts control points.
 
-The primary workflow is dataset-driven: patient LCA centerlines are normalized, converted into fixed-topology control-point trees, interpolated into smooth centerlines, and measured for tortuosity.
+The primary workflow is dataset-driven: patient LCA centerlines are normalized, converted into fixed-topology control-point trees, interpolated into smooth centerlines, measured for tortuosity, and assigned static anatomical radius tapering.
 
 ## Workflow
 
@@ -53,6 +53,18 @@ Dataset-derived generation writes to `outputs/dataset_lca/`:
 - `trees/patient_XXXX/lad_centerline.npy`
 - `trees/patient_XXXX/lcx_centerline.npy`
 - `trees/patient_XXXX/tortuosity_metrics.json`
+- `trees/patient_XXXX/lmca_centerline_radius.npy`
+- `trees/patient_XXXX/lad_centerline_radius.npy`
+- `trees/patient_XXXX/lcx_centerline_radius.npy`
+- `trees/patient_XXXX/tree_centerline_radius.npz`
+- `trees/patient_XXXX/control_points_27x4.npy`
+- `trees/patient_XXXX/radius_validation.json`
+- `trees/patient_XXXX/radius_summary.json`
+- `trees/patient_XXXX/radius_profile.png`
+- `trees/patient_XXXX/tree_with_radius.png`
+- `trees/patient_XXXX/tree_tube_surface.npz`
+- `trees/patient_XXXX/tree_tube_surface.png`
+- `trees/patient_XXXX/tube_surface_validation.json`
 - `trees/patient_XXXX/tree_visualization.png`
 - `trees/patient_XXXX/tree_3d_matrix.png`
 - `trees/patient_XXXX/controlled_tortuosity_variants.png`
@@ -63,8 +75,16 @@ Dataset-derived generation writes to `outputs/dataset_lca/`:
 - `03_branch_controlled_tortuosity_examples.png`
 - `04_dataset_trees_with_measured_tortuosity.png`
 - `05_dataset_branch_tortuosity_ranking.png`
+- `06_static_radius_profiles.png`
+- `07_lca_tube_surfaces.png`
+- `radius_validation.json`
+- `radius_summary.json`
 - `validation_report.json`
 - `summary.json`
+
+Radius-enriched arrays use columns `[x, y, z, radius_mm]`. The current radius layer is static only: it does not include stenosis, disease, cardiac motion, flow, or pulse effects. Patient metadata radius is used first, patient metadata diameter divided by two is used second, and MVP defaults are used when metadata is missing. Taper defaults to linear behavior but can be made branch-wise non-linear with taper exponents.
+
+Simple tube surfaces are saved as `N x circle_points x 3` arrays per branch. The MVP tube surface is a circular sweep around each branch centerline; branch surfaces are not boolean-unioned at the bifurcation.
 
 Synthetic experimental outputs are kept separate under `outputs/synthetic_lca/`.
 
