@@ -5,36 +5,56 @@ This repository contains two decoupled subprojects for generating 3D coronary ar
 1. **Left Coronary Artery (LCA) Pipeline**: [lca_vessel_tree_generator](./lca_vessel_tree_generator/)
 2. **Right Coronary Artery (RCA) & Primitive Vessel Pipeline**: [rca_vessel_tree_generator](./rca_vessel_tree_generator/)
 
-For detailed guides, dependencies, and execution instructions, please refer to the respective subproject READMEs.
-
----
+The current LCA work is dataset-driven. Patient-derived LCA control trees are stored separately from experimental synthetic sampling outputs.
 
 ## Directory Overview
 
-```
-latest_lca/
-├── README.md                          <-- This file (repository overview)
-│
-├── lca_vessel_tree_generator/         <-- LCA centerline generator and patient preprocessor
-│   ├── README.md                      <-- LCA documentation & usage instructions
-│   ├── requirements.txt               <-- Python dependencies for LCA
-│   ├── LCA_topology_generator/        <-- Python source package (preprocessor, sampler, B-spline, visualize)
-│   ├── LCA_branch_control_points/     <-- Input control points databases (clinical & generated)
-│   ├── processed_dataset/             <-- Preprocessing patient centerline alignment outputs
-│   └── outputs/                       <-- Target output folder for generated synthetic centerlines and plots
-│
-└── rca_vessel_tree_generator/         <-- RCA, spline, and cylinder 3D surface/projection generator
-    ├── README.md                      <-- RCA documentation & usage instructions
-    ├── requirements.txt               <-- Python dependencies for RCA
-    ├── RCA_branch_control_points/     <-- RCA reference control points
-    ├── outputs/                       <-- Target folder for generated 3D surface labels and 2D projections
-    ├── example_images/                <-- Sample visual outputs
-    ├── tube_generator.py              <-- Main execution script
-    ├── tube_functions.py              <-- 3D tube geometry generation math
-    └── fwd_projection_functions.py    <-- Forward projections and skimage processing
+```text
+vessel_tree_generator/
+|-- README.md
+|-- lca_vessel_tree_generator/
+|   |-- README.md
+|   |-- requirements.txt
+|   |-- LCA_topology_generator/
+|   |   |-- patient_preprocessor.py
+|   |   |-- generate_lca_dataset.py
+|   |   |-- generate_lca.py
+|   |   |-- tortuosity.py
+|   |   |-- bspline.py
+|   |   |-- visualize.py
+|   |-- LCA_branch_control_points/
+|   |   |-- generated/
+|   |   |   |-- LCA_tree_ctrl_points.npy
+|   |   |   |-- LCA_tree_mean.npy
+|   |   |   |-- LCA_tree_std.npy
+|   |   |   |-- LMCA_patient_ctrl_points.npy
+|   |   |   |-- LAD_patient_ctrl_points.npy
+|   |   |   |-- LCX_patient_ctrl_points.npy
+|   |-- outputs/
+|   |   |-- dataset_lca/
+|   |   |-- synthetic_lca/
+|-- rca_vessel_tree_generator/
+|   |-- README.md
+|   |-- requirements.txt
+|   |-- RCA_branch_control_points/
+|   |-- tube_generator.py
+|   |-- tube_functions.py
+|   |-- fwd_projection_functions.py
 ```
 
----
+## LCA Workflows
+
+Dataset-derived LCA generation:
+
+```bash
+python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca_dataset
+```
+
+Experimental synthetic sampling:
+
+```bash
+python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca
+```
 
 ## Requirements Overview
 

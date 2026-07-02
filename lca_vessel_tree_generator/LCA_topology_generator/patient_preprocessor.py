@@ -10,6 +10,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+try:
+    from .tortuosity import calculate_tortuosity
+except ImportError:
+    from tortuosity import calculate_tortuosity
+
 # Mapping from patient folder to its anatomical centerline files
 PATIENT_MAPPING = {
     "0070_H_CORO_KD": {
@@ -393,6 +398,13 @@ def main():
                 raise ValueError(f"Suspiciously short lengths: LMCA={l_lmca:.1f}mm, LAD={l_lad:.1f}mm, LCx={l_lcx:.1f}mm")
                 
             lmca_norm, lad_norm, lcx_norm = normalize_artery_tree(lmca_arr, lad_arr, lcx_arr)
+            report["tortuosity"] = {
+                "definition": "distance_ratio = centerline_path_length / endpoint_chord_length",
+                "units": "mm",
+                "LMCA": calculate_tortuosity(lmca_norm),
+                "LAD": calculate_tortuosity(lad_norm),
+                "LCX": calculate_tortuosity(lcx_norm),
+            }
             
             p_out_dir = os.path.join(output_base_dir, patient_id)
             os.makedirs(p_out_dir, exist_ok=True)

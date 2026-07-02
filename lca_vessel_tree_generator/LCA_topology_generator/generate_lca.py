@@ -1,13 +1,16 @@
 # LCA_topology_generator/generate_lca.py
 
 import argparse
+import json
 import os
+from pathlib import Path
 import numpy as np
 
 from .statistics import load_tree_statistics
 from .control_point_sampler import sample_lca_control_points
 from .augmentation import apply_tree_shear, apply_tree_warp
 from .bspline import interpolate_lca_tree
+from .tortuosity import calculate_lca_tortuosity, summarize_lca_population_tortuosity
 from .visualize import (
     plot_original_control_points,
     plot_sampled_control_points,
@@ -17,7 +20,11 @@ from .visualize import (
 )
 
 def main():
-    parser = argparse.ArgumentParser(description="Synthetic Left Coronary Artery (LCA) Centerline Generator")
+    base_dir = Path(__file__).resolve().parent.parent
+    default_stats_dir = base_dir / "LCA_branch_control_points" / "generated"
+    default_output_dir = base_dir / "outputs" / "synthetic_lca"
+
+    parser = argparse.ArgumentParser(description="Synthetic experimental Left Coronary Artery (LCA) Centerline Generator")
     parser.add_argument("--seed", type=int, default=42, help="Seed for random number generator")
     parser.add_argument("--shear", action=argparse.BooleanOptionalAction, default=True, help="Apply random shear augmentation")
     parser.add_argument("--warp", action=argparse.BooleanOptionalAction, default=True, help="Apply random warp augmentation")
@@ -27,8 +34,8 @@ def main():
     parser.add_argument("--lad-points", type=int, default=300, help="Sampling density for LAD centerline")
     parser.add_argument("--lcx-points", type=int, default=250, help="Sampling density for LCX centerline")
     
-    parser.add_argument("--stats-dir", type=str, default="LCA_branch_control_points/generated", help="Directory containing statistical npy files")
-    parser.add_argument("--output", type=str, default="LCA_branch_control_points/generated", help="Directory to save output files and plots")
+    parser.add_argument("--stats-dir", type=str, default=str(default_stats_dir), help="Directory containing statistical npy files")
+    parser.add_argument("--output", type=str, default=str(default_output_dir), help="Directory to save synthetic output files and plots")
     
     args = parser.parse_args()
     
@@ -80,6 +87,28 @@ def main():
         original_pts = np.load(orig_path)
     else:
         original_pts = mean # Fallback to mean if patient data not present
+
+    tortuosity_metrics = {
+        "units": "mm",
+        "definition": "distance_ratio = centerline_path_length / endpoint_chord_length",
+        "sampled_control_points": calculate_lca_tortuosity({
+            "LMCA": sampled_tree[0:5],
+            "LAD": sampled_tree[5:17],
+            "LCX": sampled_tree[17:27],
+        }),
+        "augmented_control_points": calculate_lca_tortuosity({
+            "LMCA": augmented_tree[0:5],
+            "LAD": augmented_tree[5:17],
+            "LCX": augmented_tree[17:27],
+        }),
+        "final_centerlines": calculate_lca_tortuosity(centerlines),
+    }
+    if os.path.exists(orig_path):
+        tortuosity_metrics["patient_control_point_population_summary"] = summarize_lca_population_tortuosity(original_pts)
+
+    metrics_path = os.path.join(args.output, "tortuosity_metrics.json")
+    with open(metrics_path, "w", encoding="utf-8") as metrics_file:
+        json.dump(tortuosity_metrics, metrics_file, indent=2)
         
     plot_original_control_points(original_pts, os.path.join(args.output, "original_control_points.png"))
     plot_sampled_control_points(sampled_tree, os.path.join(args.output, "sampled_control_points.png"))
@@ -96,6 +125,7 @@ def main():
     )
     
     print("\nLCA Generation Pipeline completed successfully.")
+    print(f"Tortuosity metrics: {os.path.abspath(metrics_path)}")
     print(f"Check output plots and files in: {os.path.abspath(args.output)}")
 
 if __name__ == "__main__":
