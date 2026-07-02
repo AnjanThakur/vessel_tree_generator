@@ -51,7 +51,7 @@ Dataset-derived LCA generation:
 python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca_dataset
 ```
 
-This exports validated patient-derived LMCA/LAD/LCX centerlines, measured tortuosity, static radius taper profiles, simple tube surfaces, and visual checks under `lca_vessel_tree_generator/outputs/dataset_lca/`. Radius-enriched LCA arrays use `N x 4` branch format `[x, y, z, radius_mm]`; tube surfaces use `N x circle_points x 3`. Static taper defaults remain linear, with optional branch-wise taper exponents for non-linear tapering.
+This exports validated patient-derived LMCA/LAD/LCX centerlines, measured tortuosity, static radius taper profiles, simple tube surfaces, MVP connected tight meshes, and visual checks under `lca_vessel_tree_generator/outputs/dataset_lca/`. Radius-enriched LCA arrays use `N x 4` branch format `[x, y, z, radius_mm]`; tube surfaces use `N x circle_points x 3`; tight meshes use `vertices` (`V x 3`) and triangular `faces` (`F x 3`). Static taper defaults remain linear, with optional branch-wise taper exponents for non-linear tapering.
 
 Experimental synthetic sampling:
 

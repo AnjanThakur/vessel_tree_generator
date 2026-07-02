@@ -17,6 +17,13 @@ from .radius_model import (
     build_lca_radius_tree,
     validate_lca_radius_tree,
 )
+from .tight_mesh import (
+    build_lca_tight_mesh,
+    save_tight_mesh_ply,
+    save_tight_mesh_preview,
+    save_tight_mesh_stl,
+    validate_tight_mesh,
+)
 from .tortuosity import calculate_lca_tortuosity, calculate_tortuosity
 from .tortuosity_augmentation import make_target_tortuosity_variant
 from .tube_surface import build_lca_tube_surfaces, validate_lca_tube_surfaces
@@ -763,6 +770,12 @@ def _build_dataset_samples(tree_ctrl_points: np.ndarray, args) -> list:
             num_circle_points=args.tube_circle_points,
         )
         tube_validation = validate_lca_tube_surfaces(tube_surfaces, centerlines_with_radius)
+        tight_mesh_vertices, tight_mesh_faces, tight_mesh_metadata = build_lca_tight_mesh(tube_surfaces)
+        tight_mesh_validation = validate_tight_mesh(
+            tight_mesh_vertices,
+            tight_mesh_faces,
+            tight_mesh_metadata,
+        )
         samples.append({
             "tree_index": tree_index,
             "control_tree": tree,
@@ -770,12 +783,16 @@ def _build_dataset_samples(tree_ctrl_points: np.ndarray, args) -> list:
             "centerlines": centerlines,
             "centerlines_with_radius": centerlines_with_radius,
             "tube_surfaces": tube_surfaces,
+            "tight_mesh_vertices": tight_mesh_vertices,
+            "tight_mesh_faces": tight_mesh_faces,
             "metrics": metrics,
             "validation": validation,
             "radius_metadata": radius_metadata,
             "radius_validation": radius_validation,
             "tube_metadata": tube_metadata,
             "tube_validation": tube_validation,
+            "tight_mesh_metadata": tight_mesh_metadata,
+            "tight_mesh_validation": tight_mesh_validation,
         })
     return samples
 
@@ -869,6 +886,11 @@ def main():
             LAD=sample["tube_surfaces"]["LAD"],
             LCX=sample["tube_surfaces"]["LCX"],
         )
+        np.savez(
+            sample_dir / "tree_tight_mesh.npz",
+            vertices=sample["tight_mesh_vertices"],
+            faces=sample["tight_mesh_faces"],
+        )
         _write_json(
             sample_dir / "radius_validation.json",
             sample["radius_validation"],
@@ -876,6 +898,10 @@ def main():
         _write_json(
             sample_dir / "tube_surface_validation.json",
             sample["tube_validation"],
+        )
+        _write_json(
+            sample_dir / "tight_mesh_validation.json",
+            sample["tight_mesh_validation"],
         )
         _write_json(
             sample_dir / "radius_summary.json",
@@ -892,15 +918,34 @@ def main():
                     "tube_surface_LMCA": list(sample["tube_surfaces"]["LMCA"].shape),
                     "tube_surface_LAD": list(sample["tube_surfaces"]["LAD"].shape),
                     "tube_surface_LCX": list(sample["tube_surfaces"]["LCX"].shape),
+                    "tight_mesh_vertices": list(sample["tight_mesh_vertices"].shape),
+                    "tight_mesh_faces": list(sample["tight_mesh_faces"].shape),
                 },
                 "validation": sample["radius_validation"],
                 "tube_surface": sample["tube_metadata"],
                 "tube_validation": sample["tube_validation"],
+                "tight_mesh": sample["tight_mesh_metadata"],
+                "tight_mesh_validation": sample["tight_mesh_validation"],
             },
         )
         _save_radius_profile_plot(sample_dir / "radius_profile.png", sample["centerlines_with_radius"])
         _save_3d_radius_tree_plot(sample_dir / "tree_with_radius.png", sample)
         _save_tube_surface_plot(sample_dir / "tree_tube_surface.png", sample)
+        save_tight_mesh_preview(
+            sample_dir / "tree_tight_mesh.png",
+            sample["tight_mesh_vertices"],
+            sample["tight_mesh_faces"],
+        )
+        save_tight_mesh_ply(
+            sample_dir / "tree_tight_mesh.ply",
+            sample["tight_mesh_vertices"],
+            sample["tight_mesh_faces"],
+        )
+        save_tight_mesh_stl(
+            sample_dir / "tree_tight_mesh.stl",
+            sample["tight_mesh_vertices"],
+            sample["tight_mesh_faces"],
+        )
         _write_json(
             sample_dir / "tortuosity_metrics.json",
             {
@@ -984,6 +1029,8 @@ def main():
                 "tree_index": sample["tree_index"],
                 "validation_status": "valid" if sample["validation"]["is_valid"] else "invalid",
                 "radius_validation_status": "valid" if sample["radius_validation"]["is_valid"] else "invalid",
+                "tube_surface_validation_status": "valid" if sample["tube_validation"]["is_valid"] else "invalid",
+                "tight_mesh_validation_status": "valid" if sample["tight_mesh_validation"]["is_valid"] else "invalid",
                 "radius_source": sample["radius_metadata"].get("branch_radius_source", {}),
                 "radius_output_shapes": {
                     "control_points_27x4": list(sample["control_tree_with_radius"].shape),
@@ -993,6 +1040,8 @@ def main():
                     "tube_surface_LMCA": list(sample["tube_surfaces"]["LMCA"].shape),
                     "tube_surface_LAD": list(sample["tube_surfaces"]["LAD"].shape),
                     "tube_surface_LCX": list(sample["tube_surfaces"]["LCX"].shape),
+                    "tight_mesh_vertices": list(sample["tight_mesh_vertices"].shape),
+                    "tight_mesh_faces": list(sample["tight_mesh_faces"].shape),
                 },
                 "tortuosity": {
                     branch_name: sample["metrics"][branch_name]["tortuosity"]
@@ -1002,9 +1051,15 @@ def main():
                     branch_name: {
                         "proximal_radius_mm": sample["radius_validation"]["branches"][branch_name]["proximal_radius_mm"],
                         "distal_radius_mm": sample["radius_validation"]["branches"][branch_name]["distal_radius_mm"],
-                        "taper_exponent": sample["radius_metadata"]["branches"][branch_name]["taper_exponent"],
+                    "taper_exponent": sample["radius_metadata"]["branches"][branch_name]["taper_exponent"],
                     }
                     for branch_name in ["LMCA", "LAD", "LCX"]
+                },
+                "tight_mesh": {
+                    "vertex_count": sample["tight_mesh_validation"]["vertex_count"],
+                    "face_count": sample["tight_mesh_validation"]["face_count"],
+                    "boundary_edge_count": sample["tight_mesh_validation"]["boundary_edge_count"],
+                    "connected_component_count": sample["tight_mesh_validation"]["connected_component_count"],
                 },
             }
             for sample in export_samples
@@ -1037,6 +1092,9 @@ def main():
             "tree_centerline_radius.npz",
             "control_points_27x4.npy",
             "tree_tube_surface.npz",
+            "tree_tight_mesh.npz",
+            "tree_tight_mesh.ply",
+            "tree_tight_mesh.stl",
         ],
         "default_proximal_radius_mm": {
             "LMCA": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["proximal_radius_mm"],
@@ -1069,11 +1127,22 @@ def main():
             "method": "Circular cross-section sweep along each radius-bearing centerline",
             "limitations": "Simple branch surfaces are generated independently and are not boolean-unioned at the bifurcation.",
         },
+        "tight_mesh": {
+            "mesh_file": "tree_tight_mesh.npz",
+            "mesh_arrays": {
+                "vertices": "V x 3",
+                "faces": "F x 3 triangle indices",
+            },
+            "exports": ["tree_tight_mesh.ply", "tree_tight_mesh.stl"],
+            "method": "MVP branch-preserving mesh with capped free ends and simple bifurcation bridge faces",
+            "limitations": "Not CFD-grade, not clinical-grade, and not an advanced boolean union.",
+        },
         "trees": [
             {
                 "tree_index": sample["tree_index"],
                 "radius_validation_status": "valid" if sample["radius_validation"]["is_valid"] else "invalid",
                 "tube_surface_validation_status": "valid" if sample["tube_validation"]["is_valid"] else "invalid",
+                "tight_mesh_validation_status": "valid" if sample["tight_mesh_validation"]["is_valid"] else "invalid",
                 "radius_source": sample["radius_metadata"].get("branch_radius_source", {}),
                 "shapes": {
                     "control_points_27x4": list(sample["control_tree_with_radius"].shape),
@@ -1083,7 +1152,24 @@ def main():
                     "tube_surface_LMCA": list(sample["tube_surfaces"]["LMCA"].shape),
                     "tube_surface_LAD": list(sample["tube_surfaces"]["LAD"].shape),
                     "tube_surface_LCX": list(sample["tube_surfaces"]["LCX"].shape),
+                    "tight_mesh_vertices": list(sample["tight_mesh_vertices"].shape),
+                    "tight_mesh_faces": list(sample["tight_mesh_faces"].shape),
                 },
+                "tight_mesh_boundary_edge_count": sample["tight_mesh_validation"]["boundary_edge_count"],
+                "tight_mesh_connected_component_count": sample["tight_mesh_validation"]["connected_component_count"],
+            }
+            for sample in export_samples
+        ],
+    }
+
+    tight_mesh_validation_report = {
+        "total_exported_trees": len(export_samples),
+        "valid_tight_meshes": int(sum(1 for sample in export_samples if sample["tight_mesh_validation"]["is_valid"])),
+        "invalid_tight_meshes": int(sum(1 for sample in export_samples if not sample["tight_mesh_validation"]["is_valid"])),
+        "trees": [
+            {
+                "tree_index": sample["tree_index"],
+                **sample["tight_mesh_validation"],
             }
             for sample in export_samples
         ],
@@ -1093,6 +1179,7 @@ def main():
     _write_json(output_dir / "validation_report.json", validation_report)
     _write_json(output_dir / "radius_validation.json", radius_validation_report)
     _write_json(output_dir / "radius_summary.json", radius_summary)
+    _write_json(output_dir / "tight_mesh_validation.json", tight_mesh_validation_report)
     _save_dataset_tree_gallery(output_dir / "01_dataset_trees.png", export_samples, projection)
     _save_3d_tree_gallery(output_dir / "01_dataset_trees_3d_matrix.png", export_samples)
     controlled_sample = export_samples[0]

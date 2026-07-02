@@ -65,6 +65,11 @@ Dataset-derived generation writes to `outputs/dataset_lca/`:
 - `trees/patient_XXXX/tree_tube_surface.npz`
 - `trees/patient_XXXX/tree_tube_surface.png`
 - `trees/patient_XXXX/tube_surface_validation.json`
+- `trees/patient_XXXX/tree_tight_mesh.npz`
+- `trees/patient_XXXX/tree_tight_mesh.png`
+- `trees/patient_XXXX/tree_tight_mesh.ply`
+- `trees/patient_XXXX/tree_tight_mesh.stl`
+- `trees/patient_XXXX/tight_mesh_validation.json`
 - `trees/patient_XXXX/tree_visualization.png`
 - `trees/patient_XXXX/tree_3d_matrix.png`
 - `trees/patient_XXXX/controlled_tortuosity_variants.png`
@@ -79,12 +84,15 @@ Dataset-derived generation writes to `outputs/dataset_lca/`:
 - `07_lca_tube_surfaces.png`
 - `radius_validation.json`
 - `radius_summary.json`
+- `tight_mesh_validation.json`
 - `validation_report.json`
 - `summary.json`
 
 Radius-enriched arrays use columns `[x, y, z, radius_mm]`. The current radius layer is static only: it does not include stenosis, disease, cardiac motion, flow, or pulse effects. Patient metadata radius is used first, patient metadata diameter divided by two is used second, and MVP defaults are used when metadata is missing. Taper defaults to linear behavior but can be made branch-wise non-linear with taper exponents.
 
 Simple tube surfaces are saved as `N x circle_points x 3` arrays per branch. The MVP tube surface is a circular sweep around each branch centerline; branch surfaces are not boolean-unioned at the bifurcation.
+
+Tight meshes are saved as one connected MVP mesh with `vertices` (`V x 3`) and triangular `faces` (`F x 3`). The tight mesh caps the three free vessel ends and adds simple bridge faces at the LMCA/LAD/LCX bifurcation. It is not CFD-grade, not clinical-grade, and not an advanced boolean union.
 
 Synthetic experimental outputs are kept separate under `outputs/synthetic_lca/`.
 
