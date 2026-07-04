@@ -490,24 +490,38 @@ def _save_controlled_spline_gallery(path: Path):
 
 def _radius_model_from_args(args) -> dict:
     defaults = DEFAULT_STATIC_RADIUS_MODEL["branches"]
+    branch_types = DEFAULT_STATIC_RADIUS_MODEL["branch_types"]
     return {
         "units": DEFAULT_STATIC_RADIUS_MODEL["units"],
         "description": DEFAULT_STATIC_RADIUS_MODEL["description"],
+        "model": DEFAULT_STATIC_RADIUS_MODEL["model"],
+        "branch_types": {
+            "parent_trunk": {
+                **branch_types["parent_trunk"],
+                "taper_rate_per_mm": args.parent_trunk_taper_rate,
+            },
+            "distributing": {
+                **branch_types["distributing"],
+                "taper_rate_per_mm": args.distributing_taper_rate,
+            },
+            "delivering": {
+                **branch_types["delivering"],
+                "taper_rate_per_mm": args.delivering_taper_rate,
+            },
+        },
+        "lmca_bifurcation": DEFAULT_STATIC_RADIUS_MODEL["lmca_bifurcation"].copy(),
         "branches": {
             "LMCA": {
                 "proximal_radius_mm": args.lmca_radius_proximal,
-                "distal_fraction": defaults["LMCA"]["distal_fraction"],
-                "taper_exponent": args.lmca_taper_exponent,
+                "branch_type": defaults["LMCA"]["branch_type"],
             },
             "LAD": {
                 "proximal_radius_mm": args.lad_radius_proximal,
-                "distal_fraction": defaults["LAD"]["distal_fraction"],
-                "taper_exponent": args.lad_taper_exponent,
+                "branch_type": defaults["LAD"]["branch_type"],
             },
             "LCX": {
                 "proximal_radius_mm": args.lcx_radius_proximal,
-                "distal_fraction": defaults["LCX"]["distal_fraction"],
-                "taper_exponent": args.lcx_taper_exponent,
+                "branch_type": defaults["LCX"]["branch_type"],
             },
         },
     }
@@ -815,9 +829,9 @@ def main():
     parser.add_argument("--lmca-radius-proximal", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["proximal_radius_mm"])
     parser.add_argument("--lad-radius-proximal", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["proximal_radius_mm"])
     parser.add_argument("--lcx-radius-proximal", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["proximal_radius_mm"])
-    parser.add_argument("--lmca-taper-exponent", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["taper_exponent"])
-    parser.add_argument("--lad-taper-exponent", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["taper_exponent"])
-    parser.add_argument("--lcx-taper-exponent", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["taper_exponent"])
+    parser.add_argument("--parent-trunk-taper-rate", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branch_types"]["parent_trunk"]["taper_rate_per_mm"], help="Distance taper rate k for parent trunk branches in radius = proximal * exp(-k * distance)")
+    parser.add_argument("--distributing-taper-rate", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branch_types"]["distributing"]["taper_rate_per_mm"], help="Distance taper rate k for distributing branches in radius = proximal * exp(-k * distance)")
+    parser.add_argument("--delivering-taper-rate", type=float, default=DEFAULT_STATIC_RADIUS_MODEL["branch_types"]["delivering"]["taper_rate_per_mm"], help="Distance taper rate k for future delivering branches")
     parser.add_argument("--radius-adjacent-jump-threshold", type=float, default=0.2, help="Maximum allowed radius change between adjacent centerline points in mm")
     parser.add_argument("--tube-circle-points", type=int, default=24, help="Number of radial samples per centerline point for simple tube surfaces")
     args = parser.parse_args()
@@ -997,7 +1011,7 @@ def main():
             "description": "Endpoint-preserving sinusoidal branch variants generated from dataset-derived centerlines",
             "variant_order": ["original", "low", "medium", "high", "very_high"],
         },
-        "static_radius_mvp": {
+        "radius_taper_model_mvp": {
             "defaults": DEFAULT_STATIC_RADIUS_MODEL,
             "metadata_override_keys": [
                 "lmca_radius_mm",
@@ -1008,19 +1022,19 @@ def main():
                 "lcx_diameter_mm",
             ],
             "metadata_priority": "radius_mm, then diameter_mm / 2, then MVP default",
-            "taper_formula": "radius = proximal_radius - (proximal_radius - distal_radius) * s ** taper_exponent",
-            "default_taper_exponent": 1.0,
-            "distal_rules": {
-                "LMCA": "85% of proximal radius",
-                "LAD": "55% of proximal radius",
-                "LCX": "55% of proximal radius",
+            "taper_formula": "LAD/LCX radius = proximal_radius * exp(-branch_type_taper_rate * cumulative_distance_mm)",
+            "lmca_distal_rule": "LMCA distal radius = (LAD proximal^3 + LCX proximal^3)^(1/3)",
+            "branch_type_taper_rates_per_mm": {
+                "parent_trunk": args.parent_trunk_taper_rate,
+                "distributing": args.distributing_taper_rate,
+                "delivering": args.delivering_taper_rate,
             },
             "radius_validation": [
                 "positive finite radius values",
                 "proximal radius >= distal radius",
                 "adjacent radius jumps below configured threshold",
                 "LMCA proximal radius > LAD/LCX proximal radius",
-                "LMCA distal radius >= LAD/LCX proximal radius",
+                "LMCA distal radius compatible with LAD/LCX proximal radii by cube-law tolerance",
             ],
             "no_disease_no_motion_no_pulsatility": True,
         },
@@ -1051,7 +1065,9 @@ def main():
                     branch_name: {
                         "proximal_radius_mm": sample["radius_validation"]["branches"][branch_name]["proximal_radius_mm"],
                         "distal_radius_mm": sample["radius_validation"]["branches"][branch_name]["distal_radius_mm"],
-                    "taper_exponent": sample["radius_metadata"]["branches"][branch_name]["taper_exponent"],
+                        "branch_type": sample["radius_metadata"]["branches"][branch_name]["branch_type"],
+                        "taper_rate_per_mm": sample["radius_metadata"]["branches"][branch_name]["taper_rate_per_mm"],
+                        "arc_length_mm": sample["radius_metadata"]["branches"][branch_name]["arc_length_mm"],
                     }
                     for branch_name in ["LMCA", "LAD", "LCX"]
                 },
@@ -1081,7 +1097,7 @@ def main():
     }
 
     radius_summary = {
-        "mode": "static_radius_mvp",
+        "mode": "distance_based_radius_taper_mvp",
         "units": "mm",
         "num_valid_dataset_trees_processed": len(export_samples),
         "output_point_format": ["x", "y", "z", "radius_mm"],
@@ -1101,17 +1117,18 @@ def main():
             "LAD": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["proximal_radius_mm"],
             "LCX": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["proximal_radius_mm"],
         },
-        "distal_radius_fraction": {
-            "LMCA": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LMCA"]["distal_fraction"],
-            "LAD": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LAD"]["distal_fraction"],
-            "LCX": DEFAULT_STATIC_RADIUS_MODEL["branches"]["LCX"]["distal_fraction"],
+        "branch_types": DEFAULT_STATIC_RADIUS_MODEL["branch_types"],
+        "branch_type_assignments": {
+            branch_name: DEFAULT_STATIC_RADIUS_MODEL["branches"][branch_name]["branch_type"]
+            for branch_name in ["LMCA", "LAD", "LCX"]
         },
-        "taper_exponent": {
-            "LMCA": args.lmca_taper_exponent,
-            "LAD": args.lad_taper_exponent,
-            "LCX": args.lcx_taper_exponent,
+        "branch_type_taper_rates_per_mm": {
+            "parent_trunk": args.parent_trunk_taper_rate,
+            "distributing": args.distributing_taper_rate,
+            "delivering": args.delivering_taper_rate,
         },
-        "taper_formula": "radius = proximal_radius - (proximal_radius - distal_radius) * s ** taper_exponent",
+        "taper_formula": "radius(distance) = proximal_radius * exp(-k * cumulative_distance_mm)",
+        "lmca_distal_formula": "lmca_distal = (lad_proximal^3 + lcx_proximal^3)^(1/3)",
         "metadata_priority": "Use patient radius metadata first, patient diameter / 2 second, MVP default third.",
         "adjacent_jump_threshold_mm": args.radius_adjacent_jump_threshold,
         "tube_generation_compatibility": {

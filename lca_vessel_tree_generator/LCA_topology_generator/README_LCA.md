@@ -88,7 +88,7 @@ Dataset-derived generation writes to `outputs/dataset_lca/`:
 - `validation_report.json`
 - `summary.json`
 
-Radius-enriched arrays use columns `[x, y, z, radius_mm]`. The current radius layer is static only: it does not include stenosis, disease, cardiac motion, flow, or pulse effects. Patient metadata radius is used first, patient metadata diameter divided by two is used second, and MVP defaults are used when metadata is missing. Taper defaults to linear behavior but can be made branch-wise non-linear with taper exponents.
+Radius-enriched arrays use columns `[x, y, z, radius_mm]`. The current radius layer is static only: it does not include stenosis, disease, cardiac motion, flow, or pulse effects. Patient metadata radius is used first, patient metadata diameter divided by two is used second, and MVP defaults are used when metadata is missing. Radius tapering is distance-based and branch-type-based: LAD/LCX use `radius = proximal_radius * exp(-k * cumulative_distance_mm)`, while LMCA distal radius is estimated from LAD/LCX proximal radii using a cube-law bifurcation relation. See `../RADIUS_TAPER_MODEL_MVP.md`.
 
 Simple tube surfaces are saved as `N x circle_points x 3` arrays per branch. The MVP tube surface is a circular sweep around each branch centerline; branch surfaces are not boolean-unioned at the bifurcation.
 
