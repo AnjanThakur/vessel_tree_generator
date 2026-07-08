@@ -17,6 +17,7 @@ from .disease_model import (
     validate_disease_config,
     validate_diseased_lca_tree,
 )
+from .paths import output_path
 from .plaque_model import (
     build_lca_plaque_surfaces,
     has_eccentric_plaque,
@@ -456,13 +457,13 @@ def main():
     parser.add_argument(
         "--input-dir",
         type=Path,
-        default=Path("outputs/dataset_lca/trees"),
+        default=output_path("dataset_lca", "trees"),
         help="Folder containing normal patient_* radius-enabled LCA tree outputs.",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("outputs/dataset_lca_disease"),
+        default=output_path("dataset_lca_disease"),
         help="Folder where diseased outputs will be written.",
     )
     parser.add_argument(

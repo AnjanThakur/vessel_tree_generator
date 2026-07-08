@@ -16,7 +16,7 @@ The primary workflow is dataset-driven: patient LCA centerlines are normalized, 
    - **LCX**: 10 control points
 6. Saves individual patient normalized centerlines under `processed_dataset/`.
 7. Exports collective patient control point matrices and unified tree statistics to `LCA_branch_control_points/generated/`.
-8. Generates dataset-derived centerlines, tortuosity metrics, and vessel-style visualizations under `outputs/dataset_lca/`.
+8. Generates dataset-derived centerlines, tortuosity metrics, and vessel-style visualizations under repository-root `outputs/dataset_lca/`.
 
 ## Generated Files
 
@@ -47,7 +47,7 @@ The QC report includes per-branch tortuosity metrics for LMCA, LAD, and LCX:
 - `chord_length`: straight-line endpoint distance
 - `tortuosity`: `path_length / chord_length`
 
-Dataset-derived generation writes to `outputs/dataset_lca/`:
+Dataset-derived generation writes to repository-root `outputs/dataset_lca/`:
 - `trees/patient_XXXX/control_points_27x3.npy`
 - `trees/patient_XXXX/lmca_centerline.npy`
 - `trees/patient_XXXX/lad_centerline.npy`
@@ -94,7 +94,7 @@ Simple tube surfaces are saved as `N x circle_points x 3` arrays per branch. The
 
 Tight meshes are saved as one connected MVP mesh with `vertices` (`V x 3`) and triangular `faces` (`F x 3`). The tight mesh caps the three free vessel ends and adds simple bridge faces at the LMCA/LAD/LCX bifurcation. It is not CFD-grade, not clinical-grade, and not an advanced boolean union.
 
-Synthetic experimental outputs are kept separate under `outputs/synthetic_lca/`.
+Synthetic experimental outputs are kept separate under repository-root `outputs/synthetic_lca/`.
 
 ## Running Preprocessing
 

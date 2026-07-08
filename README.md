@@ -31,9 +31,6 @@ vessel_tree_generator/
 |   |   |   |-- LMCA_patient_ctrl_points.npy
 |   |   |   |-- LAD_patient_ctrl_points.npy
 |   |   |   |-- LCX_patient_ctrl_points.npy
-|   |-- outputs/
-|   |   |-- dataset_lca/
-|   |   |-- synthetic_lca/
 |-- rca_vessel_tree_generator/
 |   |-- README.md
 |   |-- requirements.txt
@@ -41,6 +38,11 @@ vessel_tree_generator/
 |   |-- tube_generator.py
 |   |-- tube_functions.py
 |   |-- fwd_projection_functions.py
+|-- outputs/
+|   |-- dataset_lca_anatomical/
+|   |-- dataset_lca_anatomical_pipeline/
+|   |-- dataset_lca_anatomical_synthetic/
+|   |-- legacy_lca_outputs/
 ```
 
 ## LCA Workflows
@@ -51,13 +53,15 @@ Dataset-derived LCA generation:
 python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca_dataset
 ```
 
-This exports validated patient-derived LMCA/LAD/LCX centerlines, measured tortuosity, static radius taper profiles, simple tube surfaces, MVP connected tight meshes, and visual checks under `lca_vessel_tree_generator/outputs/dataset_lca/`. Radius-enriched LCA arrays use `N x 4` branch format `[x, y, z, radius_mm]`; tube surfaces use `N x circle_points x 3`; tight meshes use `vertices` (`V x 3`) and triangular `faces` (`F x 3`). Static taper defaults remain linear, with optional branch-wise taper exponents for non-linear tapering.
+This exports validated patient-derived LMCA/LAD/LCX centerlines, measured tortuosity, static radius taper profiles, simple tube surfaces, MVP connected tight meshes, and visual checks under root `outputs/dataset_lca/`. Radius-enriched LCA arrays use `N x 4` branch format `[x, y, z, radius_mm]`; tube surfaces use `N x circle_points x 3`; tight meshes use `vertices` (`V x 3`) and triangular `faces` (`F x 3`).
 
 Experimental synthetic sampling:
 
 ```bash
 python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca
 ```
+
+Generated files should live under the repository-root `outputs/` folder. The package-level `lca_vessel_tree_generator/outputs/` folder is legacy and should not be recreated by current scripts.
 
 ## Requirements Overview
 

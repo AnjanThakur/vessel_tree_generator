@@ -10,6 +10,7 @@ from .statistics import load_tree_statistics
 from .control_point_sampler import sample_lca_control_points
 from .augmentation import apply_tree_shear, apply_tree_warp
 from .bspline import interpolate_lca_tree
+from .paths import lca_generated_control_points_dir, output_path
 from .tortuosity import calculate_lca_tortuosity, summarize_lca_population_tortuosity
 from .visualize import (
     plot_original_control_points,
@@ -20,9 +21,8 @@ from .visualize import (
 )
 
 def main():
-    base_dir = Path(__file__).resolve().parent.parent
-    default_stats_dir = base_dir / "LCA_branch_control_points" / "generated"
-    default_output_dir = base_dir / "outputs" / "synthetic_lca"
+    default_stats_dir = lca_generated_control_points_dir()
+    default_output_dir = output_path("synthetic_lca")
 
     parser = argparse.ArgumentParser(description="Synthetic experimental Left Coronary Artery (LCA) Centerline Generator")
     parser.add_argument("--seed", type=int, default=42, help="Seed for random number generator")

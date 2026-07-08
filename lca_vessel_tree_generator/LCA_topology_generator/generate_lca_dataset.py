@@ -12,6 +12,7 @@ import numpy as np
 
 from .bspline import interpolate_lca_tree
 from .lca_validation import DEFAULT_VALIDATION_CONFIG, validate_lca_tree
+from .paths import lca_generated_control_points_dir, output_path
 from .radius_model import (
     DEFAULT_STATIC_RADIUS_MODEL,
     build_lca_radius_tree,
@@ -812,9 +813,8 @@ def _build_dataset_samples(tree_ctrl_points: np.ndarray, args) -> list:
 
 
 def main():
-    base_dir = Path(__file__).resolve().parent.parent
-    default_dataset_dir = base_dir / "LCA_branch_control_points" / "generated"
-    default_output_dir = base_dir / "outputs" / "dataset_lca"
+    default_dataset_dir = lca_generated_control_points_dir()
+    default_output_dir = output_path("dataset_lca")
 
     parser = argparse.ArgumentParser(description="Generate LCA centerlines and visuals directly from patient-derived control trees.")
     parser.add_argument("--dataset-dir", type=str, default=str(default_dataset_dir), help="Directory containing LCA_tree_ctrl_points.npy")
