@@ -1,0 +1,51 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "adjacent_jump_threshold_mm": 0.2,
+  "cube_law_relative_tolerance": 0.08,
+  "branches": {
+    "LMCA": {
+      "num_points": 150,
+      "proximal_radius_mm": 1.9426172610036618,
+      "distal_radius_mm": 1.8335699581960947,
+      "min_radius_mm": 1.8335699581960947,
+      "max_radius_mm": 1.9426172610036618,
+      "max_step_mm": 0.0011192019779195927,
+      "adjacent_jump_threshold_mm": 0.2,
+      "passes_adjacent_jump_check": true,
+      "monotonic_nonincreasing": true
+    },
+    "LAD": {
+      "num_points": 300,
+      "proximal_radius_mm": 1.5298494937157072,
+      "distal_radius_mm": 1.025485693992847,
+      "min_radius_mm": 1.025485693992847,
+      "max_radius_mm": 1.5298494937157072,
+      "max_step_mm": 0.004259353202050065,
+      "adjacent_jump_threshold_mm": 0.2,
+      "passes_adjacent_jump_check": true,
+      "monotonic_nonincreasing": true
+    },
+    "LCX": {
+      "num_points": 250,
+      "proximal_radius_mm": 1.372225266117224,
+      "distal_radius_mm": 0.9696159451357986,
+      "min_radius_mm": 0.9696159451357986,
+      "max_radius_mm": 1.372225266117224,
+      "max_step_mm": 0.005376949997597746,
+      "adjacent_jump_threshold_mm": 0.2,
+      "passes_adjacent_jump_check": true,
+      "monotonic_nonincreasing": true
+    },
+    "bifurcation": {
+      "lmca_distal_radius_mm": 1.8335699581960947,
+      "lad_proximal_radius_mm": 1.5298494937157072,
+      "lcx_proximal_radius_mm": 1.372225266117224,
+      "cube_law_lmca_distal_radius_mm": 1.8335699581960947,
+      "cube_law_relative_error": 0.0,
+      "cube_law_relative_tolerance": 0.08,
+      "passes_cube_law_check": true
+    }
+  }
+}

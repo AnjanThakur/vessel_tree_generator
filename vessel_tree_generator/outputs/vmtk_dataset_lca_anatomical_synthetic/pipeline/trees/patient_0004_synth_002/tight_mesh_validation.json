@@ -1,0 +1,154 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "vertices_shape": [
+    16876,
+    3
+  ],
+  "faces_shape": [
+    33744,
+    3
+  ],
+  "vertex_count": 16876,
+  "face_count": 33744,
+  "branches_included": true,
+  "free_ends_capped": true,
+  "bifurcation_connector_created": true,
+  "boundary_edge_count": 0,
+  "nonmanifold_edge_count": 0,
+  "connected_component_count": 1,
+  "metadata": {
+    "method": "MVP hub-transition LCA mesh from branch-wise tube surfaces",
+    "ring_points": 24,
+    "branch_order": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "branch_surface_shapes": {
+      "LMCA": [
+        150,
+        24,
+        3
+      ],
+      "LAD": [
+        300,
+        24,
+        3
+      ],
+      "LCX": [
+        250,
+        24,
+        3
+      ]
+    },
+    "caps": {
+      "LMCA_proximal_start": true,
+      "LAD_distal_end": true,
+      "LCX_distal_end": true
+    },
+    "cap_vertex_indices": {
+      "LMCA_proximal": 16800,
+      "LAD_distal": 16801,
+      "LCX_distal": 16802
+    },
+    "bifurcation_connectors": {
+      "LMCA_last_ring_to_hub": true,
+      "hub_to_LAD_first_ring": true,
+      "hub_to_LCX_first_ring": true,
+      "shared_edge_reuse_avoided": true
+    },
+    "bifurcation_hub": {
+      "hub_center": [
+        17.862678275837666,
+        5.204170427930421e-17,
+        -4.240435163498862e-17
+      ],
+      "hub_center_vertex_index": 16875,
+      "transition_scale": 0.58,
+      "transition_offset_scale": 0.35,
+      "transition_ring_vertex_indices": {
+        "LMCA": [
+          16803,
+          16804,
+          16805,
+          16806,
+          16807,
+          16808,
+          16809,
+          16810,
+          16811,
+          16812,
+          16813,
+          16814,
+          16815,
+          16816,
+          16817,
+          16818,
+          16819,
+          16820,
+          16821,
+          16822,
+          16823,
+          16824,
+          16825,
+          16826
+        ],
+        "LAD": [
+          16827,
+          16828,
+          16829,
+          16830,
+          16831,
+          16832,
+          16833,
+          16834,
+          16835,
+          16836,
+          16837,
+          16838,
+          16839,
+          16840,
+          16841,
+          16842,
+          16843,
+          16844,
+          16845,
+          16846,
+          16847,
+          16848,
+          16849,
+          16850
+        ],
+        "LCX": [
+          16851,
+          16852,
+          16853,
+          16854,
+          16855,
+          16856,
+          16857,
+          16858,
+          16859,
+          16860,
+          16861,
+          16862,
+          16863,
+          16864,
+          16865,
+          16866,
+          16867,
+          16868,
+          16869,
+          16870,
+          16871,
+          16872,
+          16873,
+          16874
+        ]
+      }
+    },
+    "limitations": "Simple hub transition faces only; not a boolean union, CFD-grade mesh, or clinical-grade anatomical bifurcation."
+  }
+}

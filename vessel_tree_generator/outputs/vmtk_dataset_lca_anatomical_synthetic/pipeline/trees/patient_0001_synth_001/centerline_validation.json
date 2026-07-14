@@ -1,0 +1,33 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "bifurcation_gaps_mm": {
+    "LAD_to_LMCA": 0.0,
+    "LCX_to_LMCA": 0.0
+  },
+  "lad_lcx_angle_deg": 97.05147575047623,
+  "branches": {
+    "LMCA": {
+      "control_path_length_mm": 28.915802192936034,
+      "centerline_path_length_mm": 28.83808049709686,
+      "unique_control_points": 5,
+      "tortuosity": 1.005466215618758,
+      "spline_to_control_length_ratio": 0.997312137656753
+    },
+    "LAD": {
+      "control_path_length_mm": 110.78861631962094,
+      "centerline_path_length_mm": 110.73026124060165,
+      "unique_control_points": 12,
+      "tortuosity": 1.0163805869865594,
+      "spline_to_control_length_ratio": 0.9994732754956435
+    },
+    "LCX": {
+      "control_path_length_mm": 99.54788495861456,
+      "centerline_path_length_mm": 99.00710691809768,
+      "unique_control_points": 10,
+      "tortuosity": 1.0905503094434783,
+      "spline_to_control_length_ratio": 0.9945676591648159
+    }
+  }
+}

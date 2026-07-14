@@ -1,0 +1,72 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "minimum_radius_mm": 0.15,
+  "adjacent_jump_threshold_mm": 0.35,
+  "config_validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "normalized_config": {
+      "case_id": "patient_0000_synth_001_lad_focal_70",
+      "lesions": [
+        {
+          "branch": "LAD",
+          "type": "focal",
+          "center": 0.45,
+          "length": 0.1,
+          "severity": 0.7,
+          "plaque_mode": "symmetric"
+        }
+      ]
+    }
+  },
+  "branches": {
+    "LMCA": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        150,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 1.8335699581960947,
+      "diseased_min_radius_mm": 1.8335699581960947,
+      "diseased_max_radius_mm": 1.9426172610036618,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.0011285713355548843,
+      "passes_adjacent_jump_check": true
+    },
+    "LAD": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        300,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 1.0333870152908315,
+      "diseased_min_radius_mm": 0.3855332224078066,
+      "diseased_max_radius_mm": 1.5298494937157072,
+      "max_radius_reduction_fraction": 0.6994386941435055,
+      "max_adjacent_jump_mm": 0.09280123397220208,
+      "passes_adjacent_jump_check": true
+    },
+    "LCX": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        250,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 0.9676226385084277,
+      "diseased_min_radius_mm": 0.9676226385084277,
+      "diseased_max_radius_mm": 1.372225266117224,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.005437003476819635,
+      "passes_adjacent_jump_check": true
+    }
+  }
+}

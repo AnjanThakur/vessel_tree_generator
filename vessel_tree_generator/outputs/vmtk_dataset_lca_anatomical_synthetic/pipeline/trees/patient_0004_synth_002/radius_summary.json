@@ -1,0 +1,548 @@
+{
+  "units": "mm",
+  "columns": [
+    "x",
+    "y",
+    "z",
+    "radius_mm"
+  ],
+  "radius_model": {
+    "units": "mm",
+    "description": "MVP distance-based coronary radius taper; no disease, motion, pulsatility, or random sampling.",
+    "model": "distance_based_branch_type_with_lmca_cube_law",
+    "branch_types": {
+      "parent_trunk": {
+        "description": "Short parent segment feeding a bifurcation.",
+        "taper_rate_per_mm": 0.0025
+      },
+      "distributing": {
+        "description": "Main coronary distributing artery with gradual taper.",
+        "taper_rate_per_mm": 0.0035
+      },
+      "delivering": {
+        "description": "Smaller delivering branch with faster taper.",
+        "taper_rate_per_mm": 0.0065
+      }
+    },
+    "lmca_bifurcation": {
+      "method": "cube_law",
+      "formula": "lmca_distal = (lad_proximal^3 + lcx_proximal^3)^(1/3)",
+      "cube_law_relative_tolerance": 0.08,
+      "computed_lmca_distal_radius_mm": 1.5774171334380642
+    },
+    "metadata_source": null,
+    "branch_radius_source": {
+      "LMCA": "mvp_default",
+      "LAD": "mvp_default",
+      "LCX": "mvp_default"
+    },
+    "branches": {
+      "LMCA": {
+        "proximal_radius_mm": 2.0,
+        "branch_type": "parent_trunk",
+        "taper_rate_per_mm": 0.0025,
+        "taper_method": "cube_law_distal_transition",
+        "distal_radius_mm": 1.5774171334380642,
+        "arc_length_mm": 17.96318021889897,
+        "num_points": 150,
+        "min_radius_mm": 1.5774171334380642,
+        "max_radius_mm": 2.0,
+        "mean_radius_mm": 1.7869659594096077,
+        "is_monotonic_nonincreasing": true
+      },
+      "LAD": {
+        "proximal_radius_mm": 1.3,
+        "branch_type": "distributing",
+        "taper_rate_per_mm": 0.0035,
+        "taper_method": "distance_exponential",
+        "distal_radius_mm": 0.986152076957922,
+        "arc_length_mm": 78.94541842129762,
+        "num_points": 300,
+        "min_radius_mm": 0.986152076957922,
+        "max_radius_mm": 1.3,
+        "mean_radius_mm": 1.1324139311063812,
+        "is_monotonic_nonincreasing": true
+      },
+      "LCX": {
+        "proximal_radius_mm": 1.2,
+        "branch_type": "distributing",
+        "taper_rate_per_mm": 0.0035,
+        "taper_method": "distance_exponential",
+        "distal_radius_mm": 0.9928086058832963,
+        "arc_length_mm": 54.153981036640886,
+        "num_points": 250,
+        "min_radius_mm": 0.9928086058832963,
+        "max_radius_mm": 1.2,
+        "mean_radius_mm": 1.0766864335615935,
+        "is_monotonic_nonincreasing": true
+      }
+    }
+  },
+  "branch_radius_source": {
+    "LMCA": "mvp_default",
+    "LAD": "mvp_default",
+    "LCX": "mvp_default"
+  },
+  "output_shapes": {
+    "control_points_27x3": [
+      27,
+      3
+    ],
+    "control_points_27x4": [
+      27,
+      4
+    ],
+    "centerline_LMCA": [
+      150,
+      3
+    ],
+    "centerline_LAD": [
+      300,
+      3
+    ],
+    "centerline_LCX": [
+      250,
+      3
+    ],
+    "radius_LMCA": [
+      150,
+      4
+    ],
+    "radius_LAD": [
+      300,
+      4
+    ],
+    "radius_LCX": [
+      250,
+      4
+    ],
+    "tube_surface_LMCA": [
+      150,
+      24,
+      3
+    ],
+    "tube_surface_LAD": [
+      300,
+      24,
+      3
+    ],
+    "tube_surface_LCX": [
+      250,
+      24,
+      3
+    ],
+    "tight_mesh_vertices": [
+      16876,
+      3
+    ],
+    "tight_mesh_faces": [
+      33744,
+      3
+    ]
+  },
+  "validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "adjacent_jump_threshold_mm": 0.2,
+    "cube_law_relative_tolerance": 0.08,
+    "branches": {
+      "LMCA": {
+        "num_points": 150,
+        "proximal_radius_mm": 2.0,
+        "distal_radius_mm": 1.5774171334380642,
+        "min_radius_mm": 1.5774171334380642,
+        "max_radius_mm": 2.0,
+        "max_step_mm": 0.004346135988910094,
+        "adjacent_jump_threshold_mm": 0.2,
+        "passes_adjacent_jump_check": true,
+        "monotonic_nonincreasing": true
+      },
+      "LAD": {
+        "num_points": 300,
+        "proximal_radius_mm": 1.3,
+        "distal_radius_mm": 0.986152076957922,
+        "min_radius_mm": 0.986152076957922,
+        "max_radius_mm": 1.3,
+        "max_step_mm": 0.002503690059385111,
+        "adjacent_jump_threshold_mm": 0.2,
+        "passes_adjacent_jump_check": true,
+        "monotonic_nonincreasing": true
+      },
+      "LCX": {
+        "num_points": 250,
+        "proximal_radius_mm": 1.2,
+        "distal_radius_mm": 0.9928086058832963,
+        "min_radius_mm": 0.9928086058832963,
+        "max_radius_mm": 1.2,
+        "max_step_mm": 0.0026026710641697814,
+        "adjacent_jump_threshold_mm": 0.2,
+        "passes_adjacent_jump_check": true,
+        "monotonic_nonincreasing": true
+      },
+      "bifurcation": {
+        "lmca_distal_radius_mm": 1.5774171334380642,
+        "lad_proximal_radius_mm": 1.3,
+        "lcx_proximal_radius_mm": 1.2,
+        "cube_law_lmca_distal_radius_mm": 1.5774171334380642,
+        "cube_law_relative_error": 0.0,
+        "cube_law_relative_tolerance": 0.08,
+        "passes_cube_law_check": true
+      }
+    }
+  },
+  "tube_surface": {
+    "surface_shape": "N x num_circle_points x 3",
+    "num_circle_points": 24,
+    "branches": {
+      "LMCA": {
+        "shape": [
+          150,
+          24,
+          3
+        ],
+        "num_centerline_points": 150,
+        "num_circle_points": 24
+      },
+      "LAD": {
+        "shape": [
+          300,
+          24,
+          3
+        ],
+        "num_centerline_points": 300,
+        "num_circle_points": 24
+      },
+      "LCX": {
+        "shape": [
+          250,
+          24,
+          3
+        ],
+        "num_centerline_points": 250,
+        "num_circle_points": 24
+      }
+    }
+  },
+  "tube_validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "branches": {
+      "LMCA": {
+        "shape": [
+          150,
+          24,
+          3
+        ],
+        "matches_centerline_length": true,
+        "is_finite": true
+      },
+      "LAD": {
+        "shape": [
+          300,
+          24,
+          3
+        ],
+        "matches_centerline_length": true,
+        "is_finite": true
+      },
+      "LCX": {
+        "shape": [
+          250,
+          24,
+          3
+        ],
+        "matches_centerline_length": true,
+        "is_finite": true
+      }
+    }
+  },
+  "tight_mesh": {
+    "method": "MVP hub-transition LCA mesh from branch-wise tube surfaces",
+    "ring_points": 24,
+    "branch_order": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "branch_surface_shapes": {
+      "LMCA": [
+        150,
+        24,
+        3
+      ],
+      "LAD": [
+        300,
+        24,
+        3
+      ],
+      "LCX": [
+        250,
+        24,
+        3
+      ]
+    },
+    "caps": {
+      "LMCA_proximal_start": true,
+      "LAD_distal_end": true,
+      "LCX_distal_end": true
+    },
+    "cap_vertex_indices": {
+      "LMCA_proximal": 16800,
+      "LAD_distal": 16801,
+      "LCX_distal": 16802
+    },
+    "bifurcation_connectors": {
+      "LMCA_last_ring_to_hub": true,
+      "hub_to_LAD_first_ring": true,
+      "hub_to_LCX_first_ring": true,
+      "shared_edge_reuse_avoided": true
+    },
+    "bifurcation_hub": {
+      "hub_center": [
+        17.862678275837666,
+        5.204170427930421e-17,
+        -4.240435163498862e-17
+      ],
+      "hub_center_vertex_index": 16875,
+      "transition_scale": 0.58,
+      "transition_offset_scale": 0.35,
+      "transition_ring_vertex_indices": {
+        "LMCA": [
+          16803,
+          16804,
+          16805,
+          16806,
+          16807,
+          16808,
+          16809,
+          16810,
+          16811,
+          16812,
+          16813,
+          16814,
+          16815,
+          16816,
+          16817,
+          16818,
+          16819,
+          16820,
+          16821,
+          16822,
+          16823,
+          16824,
+          16825,
+          16826
+        ],
+        "LAD": [
+          16827,
+          16828,
+          16829,
+          16830,
+          16831,
+          16832,
+          16833,
+          16834,
+          16835,
+          16836,
+          16837,
+          16838,
+          16839,
+          16840,
+          16841,
+          16842,
+          16843,
+          16844,
+          16845,
+          16846,
+          16847,
+          16848,
+          16849,
+          16850
+        ],
+        "LCX": [
+          16851,
+          16852,
+          16853,
+          16854,
+          16855,
+          16856,
+          16857,
+          16858,
+          16859,
+          16860,
+          16861,
+          16862,
+          16863,
+          16864,
+          16865,
+          16866,
+          16867,
+          16868,
+          16869,
+          16870,
+          16871,
+          16872,
+          16873,
+          16874
+        ]
+      }
+    },
+    "limitations": "Simple hub transition faces only; not a boolean union, CFD-grade mesh, or clinical-grade anatomical bifurcation."
+  },
+  "tight_mesh_validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "vertices_shape": [
+      16876,
+      3
+    ],
+    "faces_shape": [
+      33744,
+      3
+    ],
+    "vertex_count": 16876,
+    "face_count": 33744,
+    "branches_included": true,
+    "free_ends_capped": true,
+    "bifurcation_connector_created": true,
+    "boundary_edge_count": 0,
+    "nonmanifold_edge_count": 0,
+    "connected_component_count": 1,
+    "metadata": {
+      "method": "MVP hub-transition LCA mesh from branch-wise tube surfaces",
+      "ring_points": 24,
+      "branch_order": [
+        "LMCA",
+        "LAD",
+        "LCX"
+      ],
+      "branch_surface_shapes": {
+        "LMCA": [
+          150,
+          24,
+          3
+        ],
+        "LAD": [
+          300,
+          24,
+          3
+        ],
+        "LCX": [
+          250,
+          24,
+          3
+        ]
+      },
+      "caps": {
+        "LMCA_proximal_start": true,
+        "LAD_distal_end": true,
+        "LCX_distal_end": true
+      },
+      "cap_vertex_indices": {
+        "LMCA_proximal": 16800,
+        "LAD_distal": 16801,
+        "LCX_distal": 16802
+      },
+      "bifurcation_connectors": {
+        "LMCA_last_ring_to_hub": true,
+        "hub_to_LAD_first_ring": true,
+        "hub_to_LCX_first_ring": true,
+        "shared_edge_reuse_avoided": true
+      },
+      "bifurcation_hub": {
+        "hub_center": [
+          17.862678275837666,
+          5.204170427930421e-17,
+          -4.240435163498862e-17
+        ],
+        "hub_center_vertex_index": 16875,
+        "transition_scale": 0.58,
+        "transition_offset_scale": 0.35,
+        "transition_ring_vertex_indices": {
+          "LMCA": [
+            16803,
+            16804,
+            16805,
+            16806,
+            16807,
+            16808,
+            16809,
+            16810,
+            16811,
+            16812,
+            16813,
+            16814,
+            16815,
+            16816,
+            16817,
+            16818,
+            16819,
+            16820,
+            16821,
+            16822,
+            16823,
+            16824,
+            16825,
+            16826
+          ],
+          "LAD": [
+            16827,
+            16828,
+            16829,
+            16830,
+            16831,
+            16832,
+            16833,
+            16834,
+            16835,
+            16836,
+            16837,
+            16838,
+            16839,
+            16840,
+            16841,
+            16842,
+            16843,
+            16844,
+            16845,
+            16846,
+            16847,
+            16848,
+            16849,
+            16850
+          ],
+          "LCX": [
+            16851,
+            16852,
+            16853,
+            16854,
+            16855,
+            16856,
+            16857,
+            16858,
+            16859,
+            16860,
+            16861,
+            16862,
+            16863,
+            16864,
+            16865,
+            16866,
+            16867,
+            16868,
+            16869,
+            16870,
+            16871,
+            16872,
+            16873,
+            16874
+          ]
+        }
+      },
+      "limitations": "Simple hub transition faces only; not a boolean union, CFD-grade mesh, or clinical-grade anatomical bifurcation."
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "validation_thresholds": {
+    "lad_downward_score_min": 0.78,
+    "lad_upward_step_fraction_max": 0.05,
+    "lcx_lateral_score_min": 0.74,
+    "lcx_vertical_score_max": 0.35,
+    "lmca_to_child_length_ratio_max": 0.45,
+    "min_lad_lcx_separation_mm": 4.0,
+    "min_lad_lcx_angle_deg": 45.0,
+    "lad_tortuosity_range": [
+      1.0,
+      1.3
+    ],
+    "lcx_tortuosity_range": [
+      1.02,
+      1.55
+    ],
+    "branch_length_preservation_ratio_range": [
+      0.9,
+      1.1
+    ],
+    "lad_guide_distance_mean_ratio_max": 0.035,
+    "lcx_guide_distance_mean_ratio_max": 0.045,
+    "lad_apex_axis_alignment_min": 0.88,
+    "lcx_coronary_plane_alignment_min": 0.94,
+    "lcx_coronary_plane_offset_mean_ratio_max": 0.08
+  },
+  "shape": [
+    27,
+    3
+  ],
+  "is_finite": true,
+  "unique_points": 25,
+  "expected_unique_points": 25,
+  "branch_lengths_mm": {
+    "LMCA": 27.086589793129157,
+    "LAD": 108.34071160164822,
+    "LCX": 102.93262842105774
+  },
+  "branch_length_ratios": {
+    "LMCA_to_min_child": 0.2631487236712576,
+    "LAD_to_LCX": 1.0525400280119934
+  },
+  "branch_length_preservation_ratios": {
+    "LMCA": 0.9673782068974699,
+    "LAD": 1.0064812590254746,
+    "LCX": 1.0065789192345092
+  },
+  "bifurcation_gaps_mm": {
+    "LAD_to_LMCA": 0.0,
+    "LCX_to_LMCA": 0.0
+  },
+  "direction_vectors": {
+    "LAD": [
+      22.7088643182742,
+      -6.649702899462219e-16,
+      -104.04296545646095
+    ],
+    "LCX": [
+      -57.26883269869862,
+      74.48489701076156,
+      -1.2618974410675595e-15
+    ]
+  },
+  "anatomical_metrics": {
+    "lad_downward_score": 0.9769989765935803,
+    "lad_upward_step_fraction": 0.0,
+    "lcx_lateral_score": 1.0,
+    "lcx_vertical_score": 1.3430735843227162e-17,
+    "lcx_vertical_range_mm": 10.147631009486433,
+    "lcx_vertical_range_ratio": 0.09858517328418336,
+    "lcx_crown_plane_score": 1.0,
+    "lad_tortuosity": 1.017356280588958,
+    "lcx_tortuosity": 1.0955414417852591,
+    "heart_guided": {
+      "heart_frame": {
+        "units": "mm",
+        "ostium": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "base_to_apex_axis": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "coronary_plane_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "lmca_axis": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "lcx_crown_axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "description": "MVP heart landmark frame: Z is base-to-apex, X/Y is the coronary/crown plane."
+      },
+      "landmarks": {
+        "frame": {
+          "units": "mm",
+          "ostium": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "base_to_apex_axis": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "coronary_plane_normal": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "lmca_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "lcx_crown_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "description": "MVP heart landmark frame: Z is base-to-apex, X/Y is the coronary/crown plane."
+        },
+        "ostium": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "lmca_bifurcation": [
+          27.086589793129157,
+          0.0,
+          0.0
+        ],
+        "apex": [
+          50.92154634549176,
+          -4.333628464065929,
+          -106.17389736961526
+        ],
+        "base_plane_z": 0.0,
+        "coronary_plane_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "coronary_groove_center": [
+          -16.14511414371509,
+          46.31968278947598,
+          0.0
+        ]
+      },
+      "guide_lengths_mm": {
+        "LMCA": 27.086589793129157,
+        "LAD": 108.34071160164822,
+        "LCX": 102.93262842105774
+      },
+      "lad_guide_distance_mean_mm": 0.5074635275455052,
+      "lad_guide_distance_max_mm": 0.9964998877579203,
+      "lad_guide_distance_mean_ratio": 0.004683959704929471,
+      "lad_apex_axis_alignment": 0.9769989765935803,
+      "lcx_guide_distance_mean_mm": 0.31117768199981455,
+      "lcx_guide_distance_max_mm": 0.6449981255731185,
+      "lcx_guide_distance_mean_ratio": 0.0030231199452801934,
+      "lcx_coronary_plane_alignment": 1.0,
+      "lcx_coronary_plane_offset_mean_ratio": 0.056772938598455544,
+      "lcx_coronary_plane_offset_max_ratio": 0.09858517328418336
+    },
+    "min_lad_lcx_separation_mm": 16.38367937927195,
+    "anatomical_score": 1.0,
+    "score_terms": {
+      "lad_downward_score": 1.0,
+      "lad_no_upward_loop_score": 1.0,
+      "lcx_lateral_score": 1.0,
+      "lcx_limited_vertical_score": 1.0,
+      "lcx_crown_plane_score": 1.0,
+      "lad_tortuosity_score": 1.0,
+      "lcx_tortuosity_score": 1.0,
+      "branch_length_preservation_score": 1.0,
+      "lad_apex_groove_score": 1.0,
+      "lad_apex_axis_alignment_score": 1.0,
+      "lcx_coronary_groove_score": 1.0,
+      "lcx_coronary_plane_alignment_score": 1.0,
+      "lcx_coronary_plane_offset_score": 1.0,
+      "lmca_short_trunk_score": 1.0,
+      "bifurcation_consistency_score": 1.0,
+      "lad_lcx_separation_score": 1.0,
+      "no_unexpected_duplicate_score": 1.0
+    }
+  },
+  "anatomical_checks": {
+    "lad_dominant_downward": true,
+    "lad_distal_lower_than_start": true,
+    "lad_no_upward_loop": true,
+    "lad_not_circumflex": true,
+    "lad_curvature_tortuosity_ok": true,
+    "lad_follows_apex_groove": true,
+    "lcx_dominant_lateral": true,
+    "lcx_limited_descent": true,
+    "lcx_crown_plane_behavior": true,
+    "lcx_curvature_tortuosity_ok": true,
+    "lcx_follows_coronary_groove": true,
+    "lcx_not_second_lad": true,
+    "lmca_shorter_than_lad_lcx": true,
+    "branch_topology_lmca_to_lad_lcx": true,
+    "lad_lcx_separation_ok": true,
+    "lad_lcx_separation_angle_ok": true,
+    "no_unexpected_duplicate_points": true,
+    "branch_length_preservation_ok": true
+  },
+  "lad_lcx_angle_deg": 97.46833885252497
+}

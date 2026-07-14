@@ -1,0 +1,80 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "minimum_radius_mm": 0.15,
+  "adjacent_jump_threshold_mm": 0.35,
+  "config_validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "normalized_config": {
+      "case_id": "patient_0001_synth_002_lad_tandem",
+      "lesions": [
+        {
+          "branch": "LAD",
+          "type": "focal",
+          "center": 0.35,
+          "length": 0.08,
+          "severity": 0.5,
+          "plaque_mode": "symmetric"
+        },
+        {
+          "branch": "LAD",
+          "type": "focal",
+          "center": 0.65,
+          "length": 0.1,
+          "severity": 0.7,
+          "plaque_mode": "symmetric"
+        }
+      ]
+    }
+  },
+  "branches": {
+    "LMCA": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        150,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 1.5774171334380642,
+      "diseased_min_radius_mm": 1.5774171334380642,
+      "diseased_max_radius_mm": 2.0,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.004387606663051713,
+      "passes_adjacent_jump_check": true
+    },
+    "LAD": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        300,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 0.8899077176282321,
+      "diseased_min_radius_mm": 0.30604466381531653,
+      "diseased_max_radius_mm": 1.3,
+      "max_radius_reduction_fraction": 0.6989572718848419,
+      "max_adjacent_jump_mm": 0.07130109107904359,
+      "passes_adjacent_jump_check": true
+    },
+    "LCX": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        250,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 0.8385974624902731,
+      "diseased_min_radius_mm": 0.8385974624902731,
+      "diseased_max_radius_mm": 1.2,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.004872494779001535,
+      "passes_adjacent_jump_check": true
+    }
+  }
+}

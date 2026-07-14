@@ -1,0 +1,80 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "minimum_radius_mm": 0.15,
+  "adjacent_jump_threshold_mm": 0.35,
+  "config_validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "normalized_config": {
+      "case_id": "patient_0000_synth_000_lad_tandem",
+      "lesions": [
+        {
+          "branch": "LAD",
+          "type": "focal",
+          "center": 0.35,
+          "length": 0.08,
+          "severity": 0.5,
+          "plaque_mode": "symmetric"
+        },
+        {
+          "branch": "LAD",
+          "type": "focal",
+          "center": 0.65,
+          "length": 0.1,
+          "severity": 0.7,
+          "plaque_mode": "symmetric"
+        }
+      ]
+    }
+  },
+  "branches": {
+    "LMCA": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        150,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 1.8335699581960947,
+      "diseased_min_radius_mm": 1.8335699581960947,
+      "diseased_max_radius_mm": 1.9426172610036618,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.0011192019779195927,
+      "passes_adjacent_jump_check": true
+    },
+    "LAD": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        300,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 1.025485693992847,
+      "diseased_min_radius_mm": 0.3557386204890417,
+      "diseased_max_radius_mm": 1.5298494937157072,
+      "max_radius_reduction_fraction": 0.6984835508409285,
+      "max_adjacent_jump_mm": 0.0829716098727371,
+      "passes_adjacent_jump_check": true
+    },
+    "LCX": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        250,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 0.9696159451357986,
+      "diseased_min_radius_mm": 0.9696159451357986,
+      "diseased_max_radius_mm": 1.372225266117224,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.005376949997597746,
+      "passes_adjacent_jump_check": true
+    }
+  }
+}

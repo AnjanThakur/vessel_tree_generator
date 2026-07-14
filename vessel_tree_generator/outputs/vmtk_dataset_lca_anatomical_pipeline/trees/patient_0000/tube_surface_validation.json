@@ -1,0 +1,34 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "branches": {
+    "LMCA": {
+      "shape": [
+        150,
+        24,
+        3
+      ],
+      "matches_centerline_length": true,
+      "is_finite": true
+    },
+    "LAD": {
+      "shape": [
+        300,
+        24,
+        3
+      ],
+      "matches_centerline_length": true,
+      "is_finite": true
+    },
+    "LCX": {
+      "shape": [
+        250,
+        24,
+        3
+      ],
+      "matches_centerline_length": true,
+      "is_finite": true
+    }
+  }
+}

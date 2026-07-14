@@ -1,0 +1,72 @@
+{
+  "is_valid": true,
+  "errors": [],
+  "warnings": [],
+  "minimum_radius_mm": 0.15,
+  "adjacent_jump_threshold_mm": 0.35,
+  "config_validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "normalized_config": {
+      "case_id": "patient_0001_lcx_diffuse_40",
+      "lesions": [
+        {
+          "branch": "LCX",
+          "type": "diffuse",
+          "start": 0.3,
+          "end": 0.7,
+          "severity": 0.4,
+          "plaque_mode": "symmetric"
+        }
+      ]
+    }
+  },
+  "branches": {
+    "LMCA": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        150,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 1.5774171334380642,
+      "diseased_min_radius_mm": 1.5774171334380642,
+      "diseased_max_radius_mm": 2.0,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.004402699540863919,
+      "passes_adjacent_jump_check": true
+    },
+    "LAD": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        300,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 0.8920812766996127,
+      "diseased_min_radius_mm": 0.8920812766996127,
+      "diseased_max_radius_mm": 1.3,
+      "max_radius_reduction_fraction": 0.0,
+      "max_adjacent_jump_mm": 0.0034095381894632126,
+      "passes_adjacent_jump_check": true
+    },
+    "LCX": {
+      "errors": [],
+      "warnings": [],
+      "shape": [
+        250,
+        4
+      ],
+      "xyz_unchanged": true,
+      "baseline_min_radius_mm": 0.8405851820416003,
+      "diseased_min_radius_mm": 0.5736089203317457,
+      "diseased_max_radius_mm": 1.2,
+      "max_radius_reduction_fraction": 0.4,
+      "max_adjacent_jump_mm": 0.045208727749621924,
+      "passes_adjacent_jump_check": true
+    }
+  }
+}
