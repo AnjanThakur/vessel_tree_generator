@@ -1,9 +1,22 @@
+# Python bytecode and environments
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
 .env
-outputs/
+
+# Python tool caches and build artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Generated datasets and visualizations
+/outputs/
 lca_vessel_tree_generator/outputs/
 lca_vessel_tree_generator/processed_dataset/
 rca_vessel_tree_generator/outputs/
