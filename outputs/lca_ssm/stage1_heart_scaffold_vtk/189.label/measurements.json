@@ -1,0 +1,268 @@
+{
+  "anatomical_frame": {
+    "X_crown": [
+      -0.8488780411811151,
+      -0.5285493223320555,
+      0.006456397047741563
+    ],
+    "Y": [
+      0.519433866329189,
+      -0.8363771031665255,
+      -0.1751051107451797
+    ],
+    "Z_superior": [
+      0.09795167028092724,
+      -0.1452892121291056,
+      0.9845285750693478
+    ],
+    "determinant": 1.0000000000000002,
+    "origin": [
+      -56.2568359375,
+      147.0595703125,
+      103.44999980926514
+    ],
+    "orthogonality_error": 2.220446049250313e-16,
+    "rotation_matrix": [
+      [
+        -0.8488780411811151,
+        -0.5285493223320555,
+        0.006456397047741563
+      ],
+      [
+        0.519433866329189,
+        -0.8363771031665255,
+        -0.1751051107451797
+      ],
+      [
+        0.09795167028092724,
+        -0.1452892121291056,
+        0.9845285750693478
+      ]
+    ]
+  },
+  "bifurcation_xyz": [
+    -56.2568359375,
+    147.0595703125,
+    103.44999980926514
+  ],
+  "case_id": "189.label",
+  "heart_height_mm": 93.19252814114722,
+  "heart_width_mm": 98.51503582495377,
+  "height_ellipse": {
+    "axis_major": [
+      0.09795167028092723,
+      -0.14528921212910556,
+      0.9845285750693477
+    ],
+    "axis_minor": [
+      0.3305094729603225,
+      -0.9283867304226706,
+      -0.1698869243308427
+    ],
+    "center": [
+      -67.42469240308208,
+      150.68376917242327,
+      53.24014830943195
+    ],
+    "fit_method": "robust axis-constrained ellipse using all unchanged LAD points; major axis fixed to measured superior-apex direction, long radius bounded from measured longitudinal span, and minor radius bounded from measured transverse LAD span",
+    "fit_rmse_mm": 2.43516523363121,
+    "major_radius_mm": 46.59626407057361,
+    "max_residual_mm": 6.3690546120007046,
+    "measured_longitudinal_source_span_mm": 93.19252814114719,
+    "measured_transverse_source_span_mm": 32.84396149305674,
+    "minor_radius_mm": 32.84396149305016,
+    "observed_angular_intervals_rad": [
+      [
+        -3.089562360532169,
+        -0.04094495254406192
+      ]
+    ],
+    "plane_normal": [
+      0.9387060022033876,
+      0.342036728457643,
+      -0.042917569983938315
+    ],
+    "source_3d_descriptive_rmse_mm": 4.204281301643361,
+    "source_arc_fraction": 1.0,
+    "source_intervals": {
+      "resolved_lad": [
+        0,
+        351
+      ]
+    },
+    "source_point_count": 352
+  },
+  "limitations": [
+    "The scaffold is a parametric reference envelope, not a true myocardial surface reconstruction.",
+    "The inferred RCA candidate is not annotated RCA ground truth.",
+    "Ellipse residuals are diagnostic and do not alter or reject source arteries."
+  ],
+  "model_name": "dataset-derived two-ellipse anatomical heart scaffold",
+  "planes": {
+    "LAD_centroid": [
+      -74.91160999644886,
+      171.38240744850853,
+      54.44431799108332
+    ],
+    "LAD_normal": [
+      0.9387060022033876,
+      0.342036728457643,
+      -0.042917569983938315
+    ],
+    "LAD_rmse": 3.4272367219469753,
+    "coronary_centroid": [
+      -29.480339031171678,
+      135.3632543272243,
+      54.51140331803707
+    ],
+    "coronary_normal": [
+      0.6738665339572304,
+      -0.5829822590867265,
+      0.4539114230801048
+    ],
+    "coronary_rmse": 1.6308595922919296,
+    "display_planes": "parallel copies translated to the LMCA bifurcation; not used for fit residuals",
+    "measurement_equation": "n dot (x - C) = 0",
+    "plane_angle_deg": 65.56375503066867
+  },
+  "source_integrity": {
+    "branches": {
+      "lad": {
+        "coordinate_sha256_after": "5078142fa10940591e58e59a8846e88579b6eadd7bd9205d944f55c82b244321",
+        "coordinate_sha256_before": "5078142fa10940591e58e59a8846e88579b6eadd7bd9205d944f55c82b244321",
+        "hash_unchanged": true,
+        "maximum_coordinate_change_mm": 0.0,
+        "maximum_segment_length_change_mm": 0.0,
+        "point_count": 352,
+        "vtk_maximum_coordinate_difference_mm": 0.0,
+        "vtk_point_count": 352
+      },
+      "lcx": {
+        "coordinate_sha256_after": "a970a7c69a7885c2dcc453593988a8f2f08679b6fdeec38727dab40c5bf6956f",
+        "coordinate_sha256_before": "a970a7c69a7885c2dcc453593988a8f2f08679b6fdeec38727dab40c5bf6956f",
+        "hash_unchanged": true,
+        "maximum_coordinate_change_mm": 0.0,
+        "maximum_segment_length_change_mm": 0.0,
+        "point_count": 187,
+        "vtk_maximum_coordinate_difference_mm": 0.0,
+        "vtk_point_count": 187
+      },
+      "lmca": {
+        "coordinate_sha256_after": "296f8bc5a22a490f1f2aed1cb4ca95fd1c0086ba859c280be1fe365d9b7fca2a",
+        "coordinate_sha256_before": "296f8bc5a22a490f1f2aed1cb4ca95fd1c0086ba859c280be1fe365d9b7fca2a",
+        "hash_unchanged": true,
+        "maximum_coordinate_change_mm": 0.0,
+        "maximum_segment_length_change_mm": 0.0,
+        "point_count": 42,
+        "vtk_maximum_coordinate_difference_mm": 0.0,
+        "vtk_point_count": 42
+      },
+      "rca": {
+        "coordinate_sha256_after": "e1e404a5c8c227cf4dd8e2f79a98e9a0274a7c426e5ec921caf485c04279808a",
+        "coordinate_sha256_before": "e1e404a5c8c227cf4dd8e2f79a98e9a0274a7c426e5ec921caf485c04279808a",
+        "hash_unchanged": true,
+        "maximum_coordinate_change_mm": 0.0,
+        "maximum_segment_length_change_mm": 0.0,
+        "point_count": 249,
+        "vtk_maximum_coordinate_difference_mm": 0.0,
+        "vtk_point_count": 249
+      }
+    },
+    "hashes_unchanged": true,
+    "max_coordinate_change_mm": 0.0,
+    "max_rigid_display_segment_length_error_mm": 1.0658141036401503e-14,
+    "max_segment_length_change_mm": 0.0,
+    "max_vtk_source_coordinate_difference_mm": 0.0,
+    "source_file_hash_unchanged": true
+  },
+  "source_point_counts": {
+    "lad": 352,
+    "lcx": 187,
+    "lmca": 42,
+    "rca": 249
+  },
+  "source_support_metadata": {
+    "assignment_confidence": 0.6304945520113278,
+    "inferred_rca_limitation": "Inferred disconnected component; not annotated RCA ground truth.",
+    "lcx_crown_interval": [
+      36,
+      185
+    ],
+    "lcx_crown_validation": "crown_supported",
+    "rca_compatible_interval": [
+      18,
+      118
+    ],
+    "resolved_assignment": {
+      "lad_source": "branch_a",
+      "lcx_source": "branch_b"
+    }
+  },
+  "vtk_paths": {
+    "APEX_AXIS": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\04_heart_scaffold\\apex_axis.vtp",
+    "BIFURCATION": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\01_source_geometry\\bifurcation.vtp",
+    "CORONARY_DISPLAY_PLANE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\03_display_planes\\coronary_plane_at_bifurcation.vtp",
+    "CORONARY_MEASUREMENT_PLANE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\02_measurement_planes\\coronary_centroid_SVD_plane.vtp",
+    "CROWN_AXIS": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\04_heart_scaffold\\crown_axis.vtp",
+    "HEART_HEIGHT_ELLIPSE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\04_heart_scaffold\\heart_height_ellipse.vtp",
+    "HEART_SCAFFOLD_MULTIBLOCK": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\04_heart_scaffold\\heart_scaffold.vtm",
+    "HEART_WIDTH_ELLIPSE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\04_heart_scaffold\\heart_width_ellipse.vtp",
+    "INFERRED_RCA_CANDIDATE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\01_source_geometry\\RCA_candidate_centerline.vtp",
+    "LAD_DISPLAY_PLANE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\03_display_planes\\LAD_plane_at_bifurcation.vtp",
+    "LAD_MEASUREMENT_PLANE": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\02_measurement_planes\\LAD_centroid_SVD_plane.vtp",
+    "SOURCE_LAD": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\01_source_geometry\\LAD_centerline.vtp",
+    "SOURCE_LCX": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\01_source_geometry\\LCX_centerline.vtp",
+    "SOURCE_LMCA": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\01_source_geometry\\LMCA_centerline.vtp",
+    "SOURCE_PLUS_HEART_SCAFFOLD_MULTIBLOCK": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\stage1_heart_scaffold_vtk\\189.label\\05_overlay\\source_plus_heart_scaffold.vtm"
+  },
+  "width_ellipse": {
+    "axis_major": [
+      0.7387367792582468,
+      0.5425223373537398,
+      -0.3999218479195496
+    ],
+    "axis_minor": [
+      -0.013109743842703414,
+      0.6048150122660415,
+      0.796258083509365
+    ],
+    "center": [
+      -31.813861778780986,
+      137.69347543912022,
+      60.968523154189015
+    ],
+    "fit_method": "robust nonlinear full ellipse using every exact point in two continuous coronary-support intervals",
+    "fit_rmse_mm": 1.1149967770385496,
+    "major_radius_mm": 49.257517912476885,
+    "max_residual_mm": 2.278369637487948,
+    "minor_radius_mm": 35.893964462927975,
+    "observed_angular_intervals_rad": [
+      [
+        -0.7183891410494284,
+        0.40396377828006763
+      ],
+      [
+        2.1514123013577806,
+        3.700284055232026
+      ]
+    ],
+    "plane_normal": [
+      0.6738665339572304,
+      -0.5829822590867265,
+      0.4539114230801048
+    ],
+    "source_3d_descriptive_rmse_mm": 1.6443058932705235,
+    "source_arc_fraction": 0.5762175328031967,
+    "source_intervals": {
+      "inferred_rca_candidate": [
+        18,
+        118
+      ],
+      "resolved_lcx": [
+        36,
+        185
+      ]
+    },
+    "source_point_count": 251
+  }
+}

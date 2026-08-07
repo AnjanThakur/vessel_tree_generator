@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="BIFURCATION" file="heart_scaffold/heart_scaffold_0.vtp"/>
+    <DataSet index="1" name="CORONARY_DISPLAY_PLANE" file="heart_scaffold/heart_scaffold_1.vtp"/>
+    <DataSet index="2" name="LAD_DISPLAY_PLANE" file="heart_scaffold/heart_scaffold_2.vtp"/>
+    <DataSet index="3" name="HEART_WIDTH_ELLIPSE" file="heart_scaffold/heart_scaffold_3.vtp"/>
+    <DataSet index="4" name="HEART_HEIGHT_ELLIPSE" file="heart_scaffold/heart_scaffold_4.vtp"/>
+    <DataSet index="5" name="CROWN_AXIS" file="heart_scaffold/heart_scaffold_5.vtp"/>
+    <DataSet index="6" name="APEX_AXIS" file="heart_scaffold/heart_scaffold_6.vtp"/>
+  </vtkMultiBlockDataSet>
+</VTKFile>

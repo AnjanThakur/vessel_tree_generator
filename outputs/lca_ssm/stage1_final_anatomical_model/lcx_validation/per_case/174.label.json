@@ -1,0 +1,723 @@
+{
+  "assignment_changed": false,
+  "assignment_scoring": {
+    "assignment_1": {
+      "evidence_votes": 5,
+      "lad_source": "branch_a",
+      "lcx_source": "branch_b",
+      "score": 0.053345716225705324
+    },
+    "assignment_1_votes": {
+      "LAD_downward_apical_dominance": false,
+      "LAD_inferior_apical_reach": true,
+      "LAD_inferior_progression": true,
+      "LAD_terminal_inferior_displacement": false,
+      "LCX_coherent_angular_progression": true,
+      "LCX_in_plane_path_fraction": true,
+      "LCX_lower_normalized_rca_plane_rmse": false,
+      "LCX_mean_in_plane_tangent_fraction": true
+    },
+    "assignment_2": {
+      "evidence_votes": 3,
+      "lad_source": "branch_b",
+      "lcx_source": "branch_a",
+      "score": -0.053345716225705324
+    },
+    "confidence": 0.36584571622570533,
+    "conflicting_evidence_count": 3,
+    "evidence_vote_count": 8,
+    "lad_group_contrasts_assignment_1": {
+      "downward_apical_dominance": -0.060686015831089034,
+      "inferior_apical_reach": 0.16363636363636067,
+      "inferior_progression": 0.22950819672102926,
+      "terminal_inferior_displacement": -0.04225352112675937
+    },
+    "lcx_group_contrasts_assignment_1": {
+      "coherent_angular_progression": 0.20302603333757283,
+      "in_plane_path_fraction": 0.12859152442123645,
+      "lower_normalized_rca_plane_rmse": -0.3705809612938972,
+      "mean_in_plane_tangent_fraction": 0.17552410994118903
+    },
+    "proposed_lcx_coherence": {
+      "absolute_plane_rmse_limit_mm": 12.458225895718725,
+      "coherent": false,
+      "criterion_type": "transparent geometric QC criterion; not a clinical threshold",
+      "vote_count": 5,
+      "votes": {
+        "absolute_plane_rmse": false,
+        "angular_monotonicity": true,
+        "continuous_coverage": true,
+        "in_plane_path_fraction": true,
+        "mean_in_plane_tangent_fraction": true,
+        "net_angular_sweep": true,
+        "normalized_plane_rmse": false
+      }
+    },
+    "reason": "only 2/4 LAD-role measurements support the proposed LAD; score margin 0.107 is below 0.160; winner score 0.053 is below 0.080; proposed LCX lacks minimum independent coronary-plane coherence",
+    "resolved": false,
+    "rule": {
+      "cohort_thresholds_used": false,
+      "minimum_LAD_group_votes": 3,
+      "minimum_LCX_group_votes": 3,
+      "minimum_score_margin": 0.16,
+      "minimum_votes": 5,
+      "minimum_winner_score": 0.08,
+      "pairwise_within_patient": true,
+      "proposed_lcx_must_show_coronary_plane_coherence": true
+    },
+    "score_margin": 0.10669143245141065,
+    "winning_LAD_group_votes": 2,
+    "winning_LCX_group_votes": 3,
+    "winning_candidate": 1,
+    "winning_score": 0.053345716225705324,
+    "winning_votes": 5
+  },
+  "case": "174.label",
+  "changed_or_unchanged": "unresolved",
+  "daughter_metrics": {
+    "branch_a": {
+      "lad": {
+        "best_fit_plane": {
+          "basis_u": [
+            -0.5377440028054612,
+            -0.8314567386584127,
+            -0.13968206465497293
+          ],
+          "basis_v": [
+            0.2693184570699964,
+            -0.01240541921206366,
+            -0.9629712738475689
+          ],
+          "centroid": [
+            -16.86745028409091,
+            172.16254971590908,
+            -293.8536241566051
+          ],
+          "equation": "n dot (x - C) = 0",
+          "max_residual_mm": 8.642529681949757,
+          "median_residual_mm": 2.109974363244518,
+          "normal": [
+            0.7989361402065854,
+            -0.5554509855186944,
+            0.23059758575950987
+          ],
+          "p95_residual_mm": 5.4365160258725425,
+          "point_count": 275,
+          "rmse_mm": 2.954501372591607,
+          "s3_over_s1": 0.0822774950203976,
+          "s3_over_s2": 0.373323467677733,
+          "singular_values": [
+            595.4831569098627,
+            131.23970690124443,
+            48.99486247738188
+          ],
+          "source": "all unchanged daughter points"
+        },
+        "best_fit_plane_normalized_rmse": 0.0172170203918013,
+        "downward_apical_dominance": 0.6268656716417911,
+        "downward_path_fraction": 0.3473321858396577,
+        "inferior_apical_reach_ras_z_mm": 32.0,
+        "most_inferior_index_fraction": 0.5,
+        "most_inferior_source_index": 137,
+        "point_count": 275,
+        "progression_toward_most_inferior_point": 0.5,
+        "signed_terminal_inferior_displacement_ras_z_mm": 17.0,
+        "terminal_displacement_magnitude_mm": 114.2305224487358,
+        "terminal_displacement_ras_mm": [
+          -65.0390625,
+          -92.35546875,
+          -17.0
+        ],
+        "terminal_inferior_displacement_ras_z_mm": 17.0,
+        "total_centerline_length_mm": 171.6035240336088
+      },
+      "lcx": {
+        "best_continuous_crown_interval": {
+          "angular_monotonic_fraction": 0.9378043715362375,
+          "angular_reversal_count": 9,
+          "arc_fraction": 0.3259659376544461,
+          "dominant_angular_direction": "increasing",
+          "end_index": 86,
+          "end_s_normalized": 0.3259659376544461,
+          "excluded_intervals": [
+            {
+              "index_interval": [
+                87,
+                274
+              ],
+              "reason": "continuous source suffix outside the highest-ranked multi-measurement interval"
+            }
+          ],
+          "in_plane_path_fraction": 0.7221740105769897,
+          "largest_angular_reversal_deg": 0.4575869285693983,
+          "length_mm": 55.93690361642263,
+          "mean_in_plane_fraction": 0.6932692759279658,
+          "mean_out_of_plane_fraction": 0.5222916867264102,
+          "median_in_plane_fraction": 0.836588573375373,
+          "median_out_of_plane_fraction": 0.5478316884753548,
+          "multi_measurement_selection_score": 0.7715847598012149,
+          "net_angular_sweep_deg": 19.777310631282973,
+          "normalized_plane_rmse": 0.4024658741771614,
+          "out_of_plane_path_fraction": 0.5223985668247958,
+          "plane_max_mm": 76.38384923359811,
+          "plane_p95_mm": 75.87257460273722,
+          "plane_rmse_mm": 69.06456231206798,
+          "pre_population_evidence_votes": {
+            "continuous_interval_meets_declared_minimum_arc_fraction": true,
+            "in_plane_path_exceeds_out_of_plane_path": true,
+            "mean_in_plane_tangent_exceeds_mean_out_of_plane_tangent": true,
+            "net_angular_sweep_exceeds_total_reverse_travel": true,
+            "net_angular_sweep_has_two_to_one_reversal_dominance": true
+          },
+          "pre_population_rule": "dimensionless geometric evidence votes used only for pilot interpretation; final cohort labels use population-derived QC thresholds",
+          "pre_population_support": "supported",
+          "selected_indices_are_continuous": true,
+          "selected_point_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86
+          ],
+          "selection_method": {
+            "candidate_intervals": "all continuous source-index intervals beginning within the first 20% of LCX arc length and spanning at least 25%",
+            "candidate_ranking": "within-case percentile ranks across multiple independent geometric measurements",
+            "clinical_thresholds_used": false,
+            "ellipse_used": false,
+            "feature_weights": {
+              "angular_monotonic_fraction": 0.12,
+              "arc_fraction": 0.05,
+              "in_plane_path_fraction": 0.18,
+              "mean_in_plane_fraction": 0.18,
+              "net_angular_sweep_deg": 0.14,
+              "normalized_plane_rmse": 0.18,
+              "out_of_plane_path_fraction": 0.12,
+              "start_s_normalized": 0.03
+            },
+            "isolated_point_removal_used": false,
+            "reference_plane": "true centroid SVD plane from inferred RCA candidate only",
+            "smoothing_used": false
+          },
+          "signed_angular_sweep_deg": 19.777310631282973,
+          "start_index": 0,
+          "start_s_normalized": 0.0,
+          "total_angular_variation_deg": 22.586926852609082,
+          "total_reverse_angular_travel_deg": 1.4048081106630548
+        },
+        "ellipse_used_for_measurement_or_selection": false,
+        "full_branch": {
+          "angular_monotonic_fraction": 0.5930547992309144,
+          "angular_reversal_count": 42,
+          "angular_sweep_deg": 10.227392821407292,
+          "crown_plane_in_plane_travel_mm": 99.02527720780088,
+          "curvature_median_per_mm": 0.11952746293924418,
+          "curvature_p95_per_mm": 0.2621516774393078,
+          "dominant_angular_direction": "increasing",
+          "downward_apical_dominance": 0.1864763569408558,
+          "in_plane_path_fraction": 0.5770585293365335,
+          "inferior_reach_ras_z_mm": 32.0,
+          "inferior_terminal_displacement_ras_z_mm": 17.0,
+          "initial_direction_ras": [
+            0.0,
+            -0.5005029492378555,
+            -0.8657348311141284
+          ],
+          "initial_tangent_to_rca_plane_angle_deg": 18.040820380087347,
+          "largest_angular_reversal_deg": 9.247985909650168,
+          "length_mm": 171.603524033609,
+          "maximum_local_turning_angle_deg": 22.995970177707576,
+          "mean_in_plane_fraction": 0.5182717723060213,
+          "mean_in_plane_tangent_fraction": 0.5182717723060213,
+          "median_in_plane_fraction": 0.4775271843181679,
+          "median_in_plane_tangent_fraction": 0.4775271843181679,
+          "net_angular_sweep_deg": 10.227392821407292,
+          "normalized_plane_rmse_by_length": 0.25964202055517566,
+          "out_of_plane_path_fraction": 0.6710992384189882,
+          "out_of_plane_travel_mm": 115.16299428896954,
+          "plane_max_mm": 76.38384923359811,
+          "plane_median_mm": 31.037225901980385,
+          "plane_p95_mm": 75.39069954074493,
+          "plane_rmse_mm": 44.55548571447489,
+          "point_count": 275,
+          "signed_angular_sweep_deg": 10.227392821407292,
+          "terminal_displacement_magnitude_mm": 114.2305224487358,
+          "terminal_displacement_ras_mm": [
+            -65.0390625,
+            -92.35546875,
+            -17.0
+          ],
+          "total_angular_variation_deg": 54.95360210292934,
+          "total_length_mm": 171.603524033609,
+          "total_reverse_angular_travel_deg": 22.363104640761023
+        },
+        "reference_plane_uses_lcx": false
+      },
+      "lcx_full_length_mm": 171.6035240336088
+    },
+    "branch_b": {
+      "lad": {
+        "best_fit_plane": {
+          "basis_u": [
+            -0.8809022116198518,
+            0.32832151835955836,
+            -0.3409050808441079
+          ],
+          "basis_v": [
+            -0.40646939172855073,
+            -0.15578639868545158,
+            0.9002850834999099
+          ],
+          "centroid": [
+            -10.606878621688741,
+            229.8574477442053,
+            -289.75859706449194
+          ],
+          "equation": "n dot (x - C) = 0",
+          "max_residual_mm": 3.8008205675942217,
+          "median_residual_mm": 1.6168225902014954,
+          "normal": [
+            0.24247459073287592,
+            0.9316306019913105,
+            0.27068523100131014
+          ],
+          "p95_residual_mm": 2.897790842287516,
+          "point_count": 151,
+          "rmse_mm": 1.7747179569235618,
+          "s3_over_s1": 0.10973736396878107,
+          "s3_over_s2": 0.32218612675677594,
+          "singular_values": [
+            198.72993640589783,
+            67.68789079279647,
+            21.808099362866727
+          ],
+          "source": "all unchanged daughter points"
+        },
+        "best_fit_plane_normalized_rmse": 0.019913580481845557,
+        "downward_apical_dominance": 0.7078651685393258,
+        "downward_path_fraction": 0.4547570028493028,
+        "inferior_apical_reach_ras_z_mm": 23.0,
+        "most_inferior_index_fraction": 0.31333333333333335,
+        "most_inferior_source_index": 47,
+        "point_count": 151,
+        "progression_toward_most_inferior_point": 0.31333333333333335,
+        "signed_terminal_inferior_displacement_ras_z_mm": 18.5,
+        "terminal_displacement_magnitude_mm": 51.223636750176794,
+        "terminal_displacement_ras_mm": [
+          -45.9609375,
+          13.0078125,
+          -18.5
+        ],
+        "terminal_inferior_displacement_ras_z_mm": 18.5,
+        "total_centerline_length_mm": 89.12098748597741
+      },
+      "lcx": {
+        "best_continuous_crown_interval": {
+          "angular_monotonic_fraction": 1.0,
+          "angular_reversal_count": 0,
+          "arc_fraction": 0.3298401815079295,
+          "dominant_angular_direction": "increasing",
+          "end_index": 56,
+          "end_s_normalized": 0.37675462377587826,
+          "excluded_intervals": [
+            {
+              "index_interval": [
+                0,
+                5
+              ],
+              "reason": "continuous source prefix outside the highest-ranked multi-measurement interval"
+            },
+            {
+              "index_interval": [
+                57,
+                150
+              ],
+              "reason": "continuous source suffix outside the highest-ranked multi-measurement interval"
+            }
+          ],
+          "in_plane_path_fraction": 0.9353127612779835,
+          "largest_angular_reversal_deg": 0.0,
+          "length_mm": 29.395682688540713,
+          "mean_in_plane_fraction": 0.9884518860543494,
+          "mean_out_of_plane_fraction": 0.12473495902177245,
+          "median_in_plane_fraction": 0.9938516499720481,
+          "median_out_of_plane_fraction": 0.11071990718853394,
+          "multi_measurement_selection_score": 0.6493232588699079,
+          "net_angular_sweep_deg": 27.99692783696591,
+          "normalized_plane_rmse": 0.8763828718178639,
+          "out_of_plane_path_fraction": 0.2439823784783613,
+          "plane_max_mm": 78.90293406348844,
+          "plane_p95_mm": 78.7330472552648,
+          "plane_rmse_mm": 78.10410695220483,
+          "pre_population_evidence_votes": {
+            "continuous_interval_meets_declared_minimum_arc_fraction": true,
+            "in_plane_path_exceeds_out_of_plane_path": true,
+            "mean_in_plane_tangent_exceeds_mean_out_of_plane_tangent": true,
+            "net_angular_sweep_exceeds_total_reverse_travel": true,
+            "net_angular_sweep_has_two_to_one_reversal_dominance": true
+          },
+          "pre_population_rule": "dimensionless geometric evidence votes used only for pilot interpretation; final cohort labels use population-derived QC thresholds",
+          "pre_population_support": "supported",
+          "selected_indices_are_continuous": true,
+          "selected_point_indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56
+          ],
+          "selection_method": {
+            "candidate_intervals": "all continuous source-index intervals beginning within the first 20% of LCX arc length and spanning at least 25%",
+            "candidate_ranking": "within-case percentile ranks across multiple independent geometric measurements",
+            "clinical_thresholds_used": false,
+            "ellipse_used": false,
+            "feature_weights": {
+              "angular_monotonic_fraction": 0.12,
+              "arc_fraction": 0.05,
+              "in_plane_path_fraction": 0.18,
+              "mean_in_plane_fraction": 0.18,
+              "net_angular_sweep_deg": 0.14,
+              "normalized_plane_rmse": 0.18,
+              "out_of_plane_path_fraction": 0.12,
+              "start_s_normalized": 0.03
+            },
+            "isolated_point_removal_used": false,
+            "reference_plane": "true centroid SVD plane from inferred RCA candidate only",
+            "smoothing_used": false
+          },
+          "signed_angular_sweep_deg": 27.99692783696591,
+          "start_index": 6,
+          "start_s_normalized": 0.046914442267948796,
+          "total_angular_variation_deg": 27.99692783696591,
+          "total_reverse_angular_travel_deg": -0.0
+        },
+        "ellipse_used_for_measurement_or_selection": false,
+        "full_branch": {
+          "angular_monotonic_fraction": 0.9841541386831649,
+          "angular_reversal_count": 12,
+          "angular_sweep_deg": 72.77511916769112,
+          "crown_plane_in_plane_travel_mm": 73.86142386793878,
+          "curvature_median_per_mm": 0.15502688522691488,
+          "curvature_p95_per_mm": 0.3770343781947715,
+          "dominant_angular_direction": "increasing",
+          "downward_apical_dominance": 0.2580761350250847,
+          "in_plane_path_fraction": 0.8287769912733558,
+          "inferior_reach_ras_z_mm": 23.0,
+          "inferior_terminal_displacement_ras_z_mm": 18.5,
+          "initial_direction_ras": [
+            0.2554959971726029,
+            0.7664879915178087,
+            -0.5892520295151923
+          ],
+          "initial_tangent_to_rca_plane_angle_deg": 46.11723050719708,
+          "largest_angular_reversal_deg": 0.28725696111318655,
+          "length_mm": 89.12098748597745,
+          "maximum_local_turning_angle_deg": 36.75779973153589,
+          "mean_in_plane_fraction": 0.8444814322731136,
+          "mean_in_plane_tangent_fraction": 0.8444814322731136,
+          "median_in_plane_fraction": 0.892242348806613,
+          "median_in_plane_tangent_fraction": 0.892242348806613,
+          "net_angular_sweep_deg": 72.77511916769112,
+          "normalized_plane_rmse_by_length": 0.7995124073529963,
+          "out_of_plane_path_fraction": 0.4095932760985096,
+          "out_of_plane_travel_mm": 36.50335723351578,
+          "plane_max_mm": 78.90293406348844,
+          "plane_median_mm": 74.21745007273834,
+          "plane_p95_mm": 78.60461048896627,
+          "plane_rmse_mm": 71.2533352505901,
+          "point_count": 151,
+          "signed_angular_sweep_deg": 72.77511916769112,
+          "terminal_displacement_magnitude_mm": 51.223636750176794,
+          "terminal_displacement_ras_mm": [
+            -45.9609375,
+            13.0078125,
+            -18.5
+          ],
+          "total_angular_variation_deg": 75.15697311359332,
+          "total_length_mm": 89.12098748597745,
+          "total_reverse_angular_travel_deg": 1.1909269729511038
+        },
+        "reference_plane_uses_lcx": false
+      },
+      "lcx_full_length_mm": 89.12098748597741
+    }
+  },
+  "lcx_crown_validation": {
+    "reason": "branch roles unresolved",
+    "status": "not_evaluated_unresolved_assignment"
+  },
+  "method_guards": {
+    "cohort_thresholds_used_for_assignment": false,
+    "ellipse_used_for_role_resolution": false,
+    "lcx_used_in_independent_reference_plane": false,
+    "raw_geometry_modified": false,
+    "single_feature_assignment": false
+  },
+  "neutral_reconstruction": {
+    "branch_a_source_array": "lad",
+    "branch_b_source_array": "lcx",
+    "source_sequences_reordered_or_modified": false
+  },
+  "new_resolved_assignment": {
+    "lad_source": null,
+    "lcx_source": null
+  },
+  "previous_adapter_assignment": {
+    "lad_source": "branch_b",
+    "lcx_source": "branch_a",
+    "method": "maximize combined LAD anterior-inferior alignment and LCX patient-left alignment; include a small prior favoring the longer daughter as LAD",
+    "status": "anatomically_inferred_not_ground_truth"
+  },
+  "previous_saved_assignment": {
+    "lad_source": "branch_a",
+    "lcx_source": "branch_b",
+    "margin": 0.28947038902391525,
+    "method": "multi_signal_ras_anatomy_score",
+    "score": 0.5380492003965384
+  },
+  "rca_reference_limitation": "The RCA path is an inferred disconnected component and is not annotated RCA ground truth.",
+  "rca_reference_plane": {
+    "basis_u": [
+      -0.3511527860961107,
+      0.34988916756085503,
+      -0.868486782421305
+    ],
+    "basis_v": [
+      -0.5717064777297094,
+      0.6544522698697179,
+      0.49481706698967387
+    ],
+    "centroid": [
+      -78.48575404353035,
+      200.75053040135782,
+      -259.02762357571635
+    ],
+    "equation": "n dot (x - C) = 0",
+    "max_residual_mm": 9.777785999555524,
+    "median_residual_mm": 4.066989501841756,
+    "normal": [
+      0.7415142777713916,
+      0.6702759110142226,
+      -0.029778834349678655
+    ],
+    "p95_residual_mm": 8.741141436043486,
+    "point_count": 313,
+    "rmse_mm": 4.98329035828749,
+    "s3_over_s1": 0.13676323814698643,
+    "s3_over_s2": 0.3561375642805698,
+    "singular_values": [
+      644.6425773444563,
+      247.55435867357903,
+      88.16340632504699
+    ],
+    "source": "all unchanged inferred-RCA candidate points only"
+  },
+  "reason": "only 2/4 LAD-role measurements support the proposed LAD; score margin 0.107 is below 0.160; winner score 0.053 is below 0.080; proposed LCX lacks minimum independent coronary-plane coherence",
+  "resolution_status": "unresolved_manual_review",
+  "source_integrity": {
+    "branches": {
+      "daughter_a": {
+        "coordinate_hash_after": "c6be118e6c0ae76f41eb01ded21c30e32b5e3b51bbb91a07e7e9cb7374e2f201",
+        "coordinate_hash_before": "c6be118e6c0ae76f41eb01ded21c30e32b5e3b51bbb91a07e7e9cb7374e2f201",
+        "coordinate_hash_unchanged": true,
+        "maximum_coordinate_difference_mm": 0.0,
+        "maximum_source_segment_length_difference_mm": 0.0,
+        "point_count_after": 275,
+        "point_count_before": 275,
+        "point_count_unchanged": true
+      },
+      "daughter_b": {
+        "coordinate_hash_after": "4374ef0e2f881ae4cf03760548dddedb194c1ba334ffcdd6dd22f89441f07901",
+        "coordinate_hash_before": "4374ef0e2f881ae4cf03760548dddedb194c1ba334ffcdd6dd22f89441f07901",
+        "coordinate_hash_unchanged": true,
+        "maximum_coordinate_difference_mm": 0.0,
+        "maximum_source_segment_length_difference_mm": 0.0,
+        "point_count_after": 151,
+        "point_count_before": 151,
+        "point_count_unchanged": true
+      },
+      "lmca": {
+        "coordinate_hash_after": "358d7babdb0e8b20164bcf8107f79513e16d9d30e40b073dc3b19e0be0d08869",
+        "coordinate_hash_before": "358d7babdb0e8b20164bcf8107f79513e16d9d30e40b073dc3b19e0be0d08869",
+        "coordinate_hash_unchanged": true,
+        "maximum_coordinate_difference_mm": 0.0,
+        "maximum_source_segment_length_difference_mm": 0.0,
+        "point_count_after": 104,
+        "point_count_before": 104,
+        "point_count_unchanged": true
+      },
+      "rca": {
+        "coordinate_hash_after": "efb90591c57b9bf54684773b5ace9099d4c35509b81431504b20dcdfe03c852e",
+        "coordinate_hash_before": "efb90591c57b9bf54684773b5ace9099d4c35509b81431504b20dcdfe03c852e",
+        "coordinate_hash_unchanged": true,
+        "maximum_coordinate_difference_mm": 0.0,
+        "maximum_source_segment_length_difference_mm": 0.0,
+        "point_count_after": 313,
+        "point_count_before": 313,
+        "point_count_unchanged": true
+      }
+    },
+    "maximum_coordinate_difference_mm": 0.0,
+    "maximum_source_segment_length_difference_mm": 0.0,
+    "pass": true,
+    "source_arrays_overwritten": false,
+    "source_file_sha256_after": "a3f21cd5d1e32292ae7c9978cbc197a810f6f0dd331b2dc8e0208efd31d8e9f0",
+    "source_file_sha256_before": "a3f21cd5d1e32292ae7c9978cbc197a810f6f0dd331b2dc8e0208efd31d8e9f0",
+    "source_file_sha256_unchanged": true
+  },
+  "source_qc_status": "accepted",
+  "source_snapshot": {
+    "arrays": {
+      "daughter_a": {
+        "coordinate_sha256": "c6be118e6c0ae76f41eb01ded21c30e32b5e3b51bbb91a07e7e9cb7374e2f201",
+        "point_count": 275,
+        "segment_lengths_sha256": "97e5274f6ade93865a55f9f3eaf60affff6ad55026a18c5c9662dcb0b7ca9a47"
+      },
+      "daughter_b": {
+        "coordinate_sha256": "4374ef0e2f881ae4cf03760548dddedb194c1ba334ffcdd6dd22f89441f07901",
+        "point_count": 151,
+        "segment_lengths_sha256": "270d9bba6dafd7907587552d004a9a212a4891e20c40ec107ba1296107a6489c"
+      },
+      "lmca": {
+        "coordinate_sha256": "358d7babdb0e8b20164bcf8107f79513e16d9d30e40b073dc3b19e0be0d08869",
+        "point_count": 104,
+        "segment_lengths_sha256": "cf88ae5e8869a1b5f8a2b6f7d92f5eec039ebe5d7f5babc0824ecbc03204916e"
+      },
+      "rca": {
+        "coordinate_sha256": "efb90591c57b9bf54684773b5ace9099d4c35509b81431504b20dcdfe03c852e",
+        "point_count": 313,
+        "segment_lengths_sha256": "b154c9498d55d3c9d32721d85743fc5c495e037badf8101120d36c42fc93654c"
+      }
+    },
+    "arrays_loaded_read_only": true,
+    "source_file": "C:\\Internship\\vessel_tree_generator\\outputs\\lca_ssm\\raw_cases\\174.label\\original_centerlines.npz",
+    "source_file_sha256": "a3f21cd5d1e32292ae7c9978cbc197a810f6f0dd331b2dc8e0208efd31d8e9f0"
+  }
+}

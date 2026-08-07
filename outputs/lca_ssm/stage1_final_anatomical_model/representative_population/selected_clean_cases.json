@@ -1,0 +1,209 @@
+{
+  "logic": "weighted robust-z ranking of assignment confidence, explicit crown evidence, plane residuals, crown coverage, LAD apical reach, and typical plane angle; failures/warnings/integrity failures excluded",
+  "montage_cases": [
+    "189.label",
+    "37.label",
+    "192.label",
+    "148.label",
+    "20.label",
+    "133.label",
+    "102.label",
+    "89.label",
+    "190.label"
+  ],
+  "primary_case": "189.label",
+  "ranking": [
+    {
+      "case": "189.label",
+      "rank_features": {
+        "angle_typical": -3.0832091168368265,
+        "apical": 90.0,
+        "assignment": 0.6304945520113278,
+        "cor_rmse": 1.6308595922919296,
+        "coverage": 0.8067427447038485,
+        "crown_votes": 7.0,
+        "lad_rmse": 3.4272367219469753
+      },
+      "ranking_score": 0.3007340960096126
+    },
+    {
+      "case": "89.label",
+      "rank_features": {
+        "angle_typical": -8.319849659330757,
+        "apical": 67.0,
+        "assignment": 0.753881809018099,
+        "cor_rmse": 3.4032470552319167,
+        "coverage": 0.5909018289869615,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.5595060766718385
+      },
+      "ranking_score": 0.20170659391354476
+    },
+    {
+      "case": "190.label",
+      "rank_features": {
+        "angle_typical": -8.989920907019517,
+        "apical": 92.0,
+        "assignment": 0.5955985770269157,
+        "cor_rmse": 3.006158882661598,
+        "coverage": 0.5409254249743882,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.5006665444793552
+      },
+      "ranking_score": 0.1368950463384319
+    },
+    {
+      "case": "81.label",
+      "rank_features": {
+        "angle_typical": -26.695100573452464,
+        "apical": 91.0,
+        "assignment": 0.6794533898219133,
+        "cor_rmse": 1.9465961089155115,
+        "coverage": 0.43428784059434894,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.8740780156044925
+      },
+      "ranking_score": 0.04879330734892717
+    },
+    {
+      "case": "133.label",
+      "rank_features": {
+        "angle_typical": -5.1517230405699195,
+        "apical": 61.0,
+        "assignment": 0.7668395903568459,
+        "cor_rmse": 3.447958110090833,
+        "coverage": 0.3437191895036839,
+        "crown_votes": 7.0,
+        "lad_rmse": 2.588063693091935
+      },
+      "ranking_score": 0.004275244659920057
+    },
+    {
+      "case": "37.label",
+      "rank_features": {
+        "angle_typical": -3.0832091168368265,
+        "apical": 74.5,
+        "assignment": 0.6886938097658619,
+        "cor_rmse": 3.142654787390461,
+        "coverage": 0.5980190805782726,
+        "crown_votes": 7.0,
+        "lad_rmse": 4.289558963765405
+      },
+      "ranking_score": -0.03433876468765168
+    },
+    {
+      "case": "121.label",
+      "rank_features": {
+        "angle_typical": -12.984082853467982,
+        "apical": 85.5,
+        "assignment": 0.5237572259728741,
+        "cor_rmse": 4.93913346221816,
+        "coverage": 0.9264262707794552,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.6661325063618535
+      },
+      "ranking_score": -0.10489483280592325
+    },
+    {
+      "case": "177.label",
+      "rank_features": {
+        "angle_typical": -17.704442737897423,
+        "apical": 64.5,
+        "assignment": 0.6419836595997126,
+        "cor_rmse": 7.988453926273815,
+        "coverage": 1.0,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.1874498413683212
+      },
+      "ranking_score": -0.32593896010057977
+    },
+    {
+      "case": "148.label",
+      "rank_features": {
+        "angle_typical": -4.383130136927832,
+        "apical": 75.0,
+        "assignment": 0.5178830865396015,
+        "cor_rmse": 2.4471795756003187,
+        "coverage": 0.3922909864864604,
+        "crown_votes": 7.0,
+        "lad_rmse": 4.512454820265634
+      },
+      "ranking_score": -0.37027888440119167
+    },
+    {
+      "case": "102.label",
+      "rank_features": {
+        "angle_typical": -6.270681964248851,
+        "apical": 69.5,
+        "assignment": 0.5017182551252105,
+        "cor_rmse": 4.999902807832358,
+        "coverage": 0.38620663961282287,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.945156366709818
+      },
+      "ranking_score": -0.4356871246708306
+    },
+    {
+      "case": "49.label",
+      "rank_features": {
+        "angle_typical": -12.02176019728531,
+        "apical": 88.5,
+        "assignment": 0.482610222757773,
+        "cor_rmse": 2.825730536048753,
+        "coverage": 0.5604685578361658,
+        "crown_votes": 7.0,
+        "lad_rmse": 5.146772995348762
+      },
+      "ranking_score": -0.45705921099241953
+    },
+    {
+      "case": "20.label",
+      "rank_features": {
+        "angle_typical": -4.744194827269965,
+        "apical": 72.0,
+        "assignment": 0.6902515622389319,
+        "cor_rmse": 9.794965313977452,
+        "coverage": 0.5957613747576971,
+        "crown_votes": 7.0,
+        "lad_rmse": 3.583364481086418
+      },
+      "ranking_score": -0.6148930512874093
+    },
+    {
+      "case": "113.label",
+      "rank_features": {
+        "angle_typical": -19.707983540022425,
+        "apical": 83.5,
+        "assignment": 0.49147310901208063,
+        "cor_rmse": 11.893637300784668,
+        "coverage": 0.7930674598451721,
+        "crown_votes": 7.0,
+        "lad_rmse": 1.693557052949954
+      },
+      "ranking_score": -0.9618883921617334
+    },
+    {
+      "case": "192.label",
+      "rank_features": {
+        "angle_typical": -3.1772188523531923,
+        "apical": 88.0,
+        "assignment": 0.4936499751203568,
+        "cor_rmse": 3.324824785088665,
+        "coverage": 0.3039054598228536,
+        "crown_votes": 6.0,
+        "lad_rmse": 4.261251843728525
+      },
+      "ranking_score": -1.0940788327967919
+    }
+  ],
+  "secondary_cases": [
+    "37.label",
+    "192.label",
+    "148.label",
+    "20.label",
+    "133.label",
+    "102.label",
+    "89.label",
+    "190.label"
+  ]
+}
