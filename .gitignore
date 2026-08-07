@@ -1,5 +1,44 @@
+# Python bytecode and environments
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
 .env
+
+# Local agent metadata
+.agents/
+.codex/
+
+# Python tool caches and build artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Generated datasets and visualizations
+/outputs/
+lca_vessel_tree_generator/outputs/
+lca_vessel_tree_generator/processed_dataset/
+rca_vessel_tree_generator/outputs/
+
+# Local LCA datasets and generated control points
+lca_vessel_tree_generator/LCA_branch_control_points/generated/
+lca_vessel_tree_generator/LCA_branch_control_points/vmtk_generated/
+lca_vessel_tree_generator/lca_raw_branches/
+lca_vessel_tree_generator/processed_vmtk_dataset/
+
+# Local PCA/SSM source data and extraction intermediates
+pca_ssm_vessel_tree_generator/nii files/
+pca_ssm_vessel_tree_generator/centerlines/
+pca_ssm_vessel_tree_generator/*.npy
+pca_ssm_vessel_tree_generator/*.npz
+pca_ssm_vessel_tree_generator/summary.csv
+
+# Superseded prototype/evidence scripts
+pca_ssm_vessel_tree_generator/create_corrected_two_plane_evidence.py
+pca_ssm_vessel_tree_generator/create_presentation_evidence.py
+pca_ssm_vessel_tree_generator/prototype_1_label_heart_scaffold.py

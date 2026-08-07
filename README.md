@@ -1,68 +1,103 @@
-# 3D Vessel Tree Generator
+# Coronary Vessel Tree Generators
 
-This repository can be used to generate random vessels or vessel trees. 
-Vessel trees are encoded and saved as an MxNX4 matrix, where M is the number of branches in the tree, 
-N is the number of interpolated centerline points per branch, and the last dimension corresponds to the (x,y,z) coordinates and radius r for each centerline point.
+This repository contains three decoupled subprojects for extracting and generating 3D coronary artery trees and centerlines:
 
-![example-single-splines](./example_images/splines.png)
+1. **Left Coronary Artery (LCA) Pipeline**: [lca_vessel_tree_generator](./lca_vessel_tree_generator/)
+2. **Right Coronary Artery (RCA) & Primitive Vessel Pipeline**: [rca_vessel_tree_generator](./rca_vessel_tree_generator/)
+3. **PCA/SSM Landmark Extraction Pipeline**: [pca_ssm_vessel_tree_generator](./pca_ssm_vessel_tree_generator/)
 
-![example-coronaries](./example_images/coronary_trees.png)
+The current LCA work is dataset-driven. Patient-derived LCA control trees are stored separately from experimental synthetic sampling outputs.
 
-The vessel tree generator is highly customizable. Many parameters are randomized by default but can be specified if the user would like more control over the geometries.
-Parameters include:
- - vessel tree type: cylinders, random splines, or right coronary tree
- - vessel dimensions including length and maximum radius
- - constant radius, linearly tapered radius, or user-specified radius
- - number, position, and severity of stenoses
- - relative positions and dimensions of side branches
- 
-An info file is saved for each geometry which contains the parameters used to construct it.
+## Directory Overview
 
-## Dependencies
-numpy\
-matplotlib\
-scikit-image (skimage)\
-[NURBS-python](https://nurbs-python.readthedocs.io/en/5.x/install.html) (geomdl)
-
-## Usage
-
-```commandline
-python ./tube_generator.py --save_path="/path/to/save" --dataset_name="test" --num_trees=10 --num_branches=3 --vessel_type='RCA' --shear --save_visualization
+```text
+vessel_tree_generator/
+|-- README.md
+|-- lca_vessel_tree_generator/
+|   |-- README.md
+|   |-- requirements.txt
+|   |-- LCA_topology_generator/
+|   |   |-- patient_preprocessor.py
+|   |   |-- generate_lca_dataset.py
+|   |   |-- generate_lca.py
+|   |   |-- radius_model.py
+|   |   |-- tortuosity.py
+|   |   |-- bspline.py
+|   |   |-- visualize.py
+|   |-- LCA_branch_control_points/
+|   |   |-- generated/
+|   |   |   |-- LCA_tree_ctrl_points.npy
+|   |   |   |-- LCA_tree_mean.npy
+|   |   |   |-- LCA_tree_std.npy
+|   |   |   |-- LMCA_patient_ctrl_points.npy
+|   |   |   |-- LAD_patient_ctrl_points.npy
+|   |   |   |-- LCX_patient_ctrl_points.npy
+|-- rca_vessel_tree_generator/
+|   |-- README.md
+|   |-- requirements.txt
+|   |-- RCA_branch_control_points/
+|   |-- tube_generator.py
+|   |-- tube_functions.py
+|   |-- fwd_projection_functions.py
+|-- pca_ssm_vessel_tree_generator/
+|   |-- README.md
+|   |-- requirements.txt
+|   |-- 01_extract_landmarks.py
+|   |-- 02_landmark_selection.py
+|   |-- build_lca_ssm_population_stats.py
+|   |-- lca_ssm_planes.py
+|   |-- lca_ssm_curve_fitting.py
+|   |-- LCA_SSM_PLAN_AFTER_LANDMARKS.md
+|   |-- centerlines/
+|   |-- nii files/
+|-- outputs/
+|   |-- generated LCA datasets and visualizations
 ```
 
-`tube_generator.py` contains optional code to generate random binary projections of the 3D geometries. 
-These images can be generated using the `--generate_projections` flag.
+## LCA Workflows
 
-For each generated geometry, the output will be:
-- numpy file containing MxNx4 matrix
-- info.0 JSON file containing parameters used for data generation
-- binary projection images (optional)
+Dataset-derived LCA generation:
 
+```bash
+python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca_dataset
+```
 
-The output directory structure will be as follows:
+This exports validated patient-derived LMCA/LAD/LCX centerlines, measured tortuosity, static radius taper profiles, simple tube surfaces, MVP connected tight meshes, and visual checks under repository-root `outputs/dataset_lca/`. Radius-enriched LCA arrays use `N x 4` branch format `[x, y, z, radius_mm]`; tube surfaces use `N x circle_points x 3`; tight meshes use `vertices` (`V x 3`) and triangular `faces` (`F x 3`). Radius tapering is distance-based and branch-type-based, with an LMCA cube-law bifurcation relation.
 
--- save_path directory\
-&nbsp; &nbsp; --> dataset_name directory\
-&nbsp; &nbsp;&nbsp; &nbsp; --> labels\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - 0000.npy\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - 0001.npy\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - 0002.npy\
-&nbsp; &nbsp;&nbsp; &nbsp; --> info\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - 0000.info.0\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - 0001.info.0\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - 0002.info.0\
-&nbsp; &nbsp;&nbsp; &nbsp; --> images (only if using `--generate_projections` flag)\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - image0000a.png, image0000b.png, image0000c.png\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - image0001a.png, image0001b.png, image0001c.png\
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - image0002a.png, image0002b.png, image0002c.png
+Experimental synthetic sampling:
 
+```bash
+python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca
+```
 
-### To do:
+## PCA/SSM Workflow
 
-- implement left coronary tree, other vessels
-- implement cosine profile stenoses
+Extract skeleton landmarks and paths from the configured NIfTI segmentation:
 
-## Citation
-If you find this work useful, please cite the following:
+```bash
+python pca_ssm_vessel_tree_generator/01_extract_landmarks.py
+```
 
-**A Multi-Stage Neural Network Approach for Coronary 3D Reconstruction from Uncalibrated X-ray Angiography Images. Iyer, K., Nallamothu, B.K., Figueroa, C.A., Nadakuditi, R.R. *In submission*.* https://doi.org/10.21203/rs.3.rs-2782923/v1*
+Select the LMCA bifurcation and two dominant downstream branches:
+
+```bash
+python pca_ssm_vessel_tree_generator/02_landmark_selection.py
+```
+
+Both stages open Napari for interactive 3D inspection. See the subproject README for data assumptions and generated files.
+
+Fit post-landmark LCA planes, curves, per-patient parameters, and population statistics from the 200 PCA label volumes and centerline graphs:
+
+```bash
+python pca_ssm_vessel_tree_generator/build_lca_ssm_population_stats.py --clean
+```
+
+This non-interactive stage writes only to `outputs/lca_ssm/`. It reproduces the existing root/bifurcation selection and infers LAD/LCX candidate identities from the cohort's common NIfTI RAS orientation; assignment confidence and warnings are retained for review.
+
+## Requirements Overview
+
+- **LCA**: Requires `numpy`, `matplotlib`, `geomdl`, and `scipy` (for VMTK extraction and validation).
+- **RCA**: Requires `numpy`, `matplotlib`, `scikit-image`, and `geomdl`.
+- **PCA/SSM**: Requires `numpy`, `nibabel`, `napari`, `scikit-image`, `skan`, `scipy`, `matplotlib`, `pandas`, and `networkx`.
+
+Please see the respective subproject `requirements.txt` files for installation details.
