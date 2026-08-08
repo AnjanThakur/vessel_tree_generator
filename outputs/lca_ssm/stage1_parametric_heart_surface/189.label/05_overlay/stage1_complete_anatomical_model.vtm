@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="LMCA" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_0.vtp"/>
+    <DataSet index="1" name="LAD" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_1.vtp"/>
+    <DataSet index="2" name="LCX" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_2.vtp"/>
+    <DataSet index="3" name="INFERRED_RCA_CANDIDATE" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_3.vtp"/>
+    <DataSet index="4" name="BIFURCATION" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_4.vtp"/>
+    <DataSet index="5" name="CORONARY_CENTROID_SVD_MEASUREMENT_PLANE" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_5.vtp"/>
+    <DataSet index="6" name="LAD_CENTROID_SVD_MEASUREMENT_PLANE" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_6.vtp"/>
+    <DataSet index="7" name="CORONARY_CROWN_REFERENCE_ELLIPSE" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_7.vtp"/>
+    <DataSet index="8" name="LONG_AXIS_APICAL_REFERENCE_ELLIPSE" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_8.vtp"/>
+    <DataSet index="9" name="CROWN_AXIS" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_9.vtp"/>
+    <DataSet index="10" name="SECONDARY_CROWN_AXIS" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_10.vtp"/>
+    <DataSet index="11" name="APEX_AXIS" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_11.vtp"/>
+    <DataSet index="12" name="PARAMETRIC_ANATOMICAL_SUPPORT_SURFACE" file="stage1_complete_anatomical_model/stage1_complete_anatomical_model_12.vtp"/>
+  </vtkMultiBlockDataSet>
+</VTKFile>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="LMCA" file="source_plus_scaffold/source_plus_scaffold_0.vtp"/>
+    <DataSet index="1" name="LAD" file="source_plus_scaffold/source_plus_scaffold_1.vtp"/>
+    <DataSet index="2" name="LCX" file="source_plus_scaffold/source_plus_scaffold_2.vtp"/>
+    <DataSet index="3" name="INFERRED_RCA_CANDIDATE" file="source_plus_scaffold/source_plus_scaffold_3.vtp"/>
+    <DataSet index="4" name="BIFURCATION" file="source_plus_scaffold/source_plus_scaffold_4.vtp"/>
+    <DataSet index="5" name="CORONARY_CROWN_REFERENCE_ELLIPSE" file="source_plus_scaffold/source_plus_scaffold_5.vtp"/>
+    <DataSet index="6" name="LONG_AXIS_APICAL_REFERENCE_ELLIPSE" file="source_plus_scaffold/source_plus_scaffold_6.vtp"/>
+    <DataSet index="7" name="CROWN_AXIS" file="source_plus_scaffold/source_plus_scaffold_7.vtp"/>
+    <DataSet index="8" name="SECONDARY_CROWN_AXIS" file="source_plus_scaffold/source_plus_scaffold_8.vtp"/>
+    <DataSet index="9" name="APEX_AXIS" file="source_plus_scaffold/source_plus_scaffold_9.vtp"/>
+  </vtkMultiBlockDataSet>
+</VTKFile>
