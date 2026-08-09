@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<VTKFile type="PolyData" version="0.1" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <PolyData>
+    <FieldData>
+      <DataArray type="Int32" Name="plane_id" NumberOfTuples="1" format="binary" RangeMin="1" RangeMax="1">
+        AQAAAACAAAAEAAAADAAAAA==eF5jZGBgAAAACAAC
+      </DataArray>
+      <DataArray type="Float64" Name="saved_centroid_ras_mm" NumberOfTuples="3" format="binary" RangeMin="-31.90526447821101" RangeMax="136.12436389048165">
+        AQAAAACAAAAYAAAAHwAAAA==eF6borohc/9z+wONvr9P/mJOdADSiWsEfR0AolMMHA==
+      </DataArray>
+      <DataArray type="Float64" Name="saved_normal_ras" NumberOfTuples="3" format="binary" RangeMin="-0.5636349224361757" RangeMax="0.6727364249330318">
+        AQAAAACAAAAYAAAAIQAAAA==eF5L9vrbydf+1D7+2XUpH85H+02mbvUSWnvPHgCUEAu9
+      </DataArray>
+      <DataArray type="Float64" Name="saved_basis_u_ras" NumberOfTuples="3" format="binary" RangeMin="-0.43581478583341277" RangeMax="0.7398822220923567">
+        AQAAAACAAAAYAAAAIQAAAA==eF4LeBlRLbv2ub1gZ+w6l7QH9jeVBDcnP7m9HwCNigwL
+      </DataArray>
+      <DataArray type="Float64" Name="saved_basis_v_ras" NumberOfTuples="3" format="binary" RangeMin="2.7755575615628914e-17" RangeMax="0.7617900601020515">
+        AQAAAACAAAAYAAAAHgAAAA==eF5jYACBBpttWv8jfu56Yu92JrBnasILewBeBgnV
+      </DataArray>
+      <DataArray type="Float64" Name="saved_plane_rmse_mm" NumberOfTuples="1" format="binary" RangeMin="2.0536912315409652" RangeMax="2.0536912315409652">
+        AQAAAACAAAAIAAAAEAAAAA==eF6zTZdZ/TWXwQEADhsDDg==
+      </DataArray>
+      <DataArray type="UInt8" Name="finite_display_patch_not_ellipse" NumberOfTuples="1" format="binary" RangeMin="1" RangeMax="1">
+        AQAAAACAAAABAAAACQAAAA==eF5jBAAAAgAC
+      </DataArray>
+    </FieldData>
+    <Piece NumberOfPoints="4" NumberOfVerts="0" NumberOfLines="0" NumberOfStrips="0" NumberOfPolys="1">
+      <PointData>
+      </PointData>
+      <CellData>
+      </CellData>
+      <Points>
+        <DataArray type="Float64" Name="Points" NumberOfComponents="3" format="binary" RangeMin="111.23785202739955" RangeMax="210.6683366812576">
+          AQAAAACAAABgAAAAYQAAAA==eF77WLfTbc/CwAPexpoesx4HOchM/iqwuN/FIe+QmNzJu1IO+/ZNi3yhmODQkRXG9KlR8EARVDyG8VG+xrQMhy/NDTdvnQxy+Ag1x+VOvBXvs0QHrS0KTac14xwAmEEtBw==
+          <InformationKey name="L2_NORM_RANGE" location="vtkDataArray" length="2">
+            <Value index="0">
+              111.23785203
+            </Value>
+            <Value index="1">
+              210.66833668
+            </Value>
+          </InformationKey>
+        </DataArray>
+      </Points>
+      <Verts>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Verts>
+      <Lines>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Lines>
+      <Strips>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Strips>
+      <Polys>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="3">
+          AQAAAACAAAAgAAAAEwAAAA==eF5jYIAARijNBKWZoTQAAHAABw==
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="4" RangeMax="4">
+          AQAAAACAAAAIAAAACwAAAA==eF5jYYAAAAAoAAU=
+        </DataArray>
+      </Polys>
+    </Piece>
+  </PolyData>
+</VTKFile>

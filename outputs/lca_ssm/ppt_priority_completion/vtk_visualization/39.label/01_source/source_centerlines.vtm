@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="SOURCE_LMCA" file="LMCA_source.vtp" />
+    <DataSet index="1" name="SOURCE_LAD" file="LAD_source.vtp" />
+    <DataSet index="2" name="SOURCE_LCX" file="LCX_source.vtp" />
+    <DataSet index="3" name="BIFURCATION" file="bifurcation.vtp" />
+  </vtkMultiBlockDataSet>
+</VTKFile>

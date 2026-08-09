@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<VTKFile type="PolyData" version="0.1" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <PolyData>
+    <FieldData>
+      <DataArray type="Int32" Name="plane_id" NumberOfTuples="1" format="binary" RangeMin="1" RangeMax="1">
+        AQAAAACAAAAEAAAADAAAAA==eF5jZGBgAAAACAAC
+      </DataArray>
+      <DataArray type="Float64" Name="saved_centroid_ras_mm" NumberOfTuples="3" format="binary" RangeMin="-219.873837248649" RangeMax="147.24264289183938">
+        AQAAAACAAAAYAAAAIQAAAA==eF47rZ5kVh4beODyQrbdh9OTHHTmd1R+q84+AACMXAvZ
+      </DataArray>
+      <DataArray type="Float64" Name="saved_normal_ras" NumberOfTuples="3" format="binary" RangeMin="0.11723247877836261" RangeMax="0.9310715878654374">
+        AQAAAACAAAAYAAAAIQAAAA==eF4Tv5A47xPTPvu96qfyq2Wu2RvsbV4SdvqtPQCR6wwC
+      </DataArray>
+      <DataArray type="Float64" Name="saved_basis_u_ras" NumberOfTuples="3" format="binary" RangeMin="-0.109909712700211" RangeMax="0.9931044989926694">
+        AQAAAACAAAAYAAAAIQAAAA==eF7Teiwq1nz8vb14/56SmQ+X7D+Z1v+XS3nPfgCWHwzH
+      </DataArray>
+      <DataArray type="Float64" Name="saved_basis_v_ras" NumberOfTuples="3" format="binary" RangeMin="-0.34788727100009037" RangeMax="0.9375363708550778">
+        AQAAAACAAAAYAAAAHgAAAA==eF5jYACBBBt7pxI3H4Z39uzfX/w44XxtPwBDMAjP
+      </DataArray>
+      <DataArray type="Float64" Name="saved_plane_rmse_mm" NumberOfTuples="1" format="binary" RangeMin="0.6902083319987331" RangeMax="0.6902083319987331">
+        AQAAAACAAAAIAAAAEAAAAA==eF5r6V99Ql/smT0AEwQD8Q==
+      </DataArray>
+      <DataArray type="UInt8" Name="finite_display_patch_not_ellipse" NumberOfTuples="1" format="binary" RangeMin="1" RangeMax="1">
+        AQAAAACAAAABAAAACQAAAA==eF5jBAAAAgAC
+      </DataArray>
+    </FieldData>
+    <Piece NumberOfPoints="4" NumberOfVerts="0" NumberOfLines="0" NumberOfStrips="0" NumberOfPolys="1">
+      <PointData>
+      </PointData>
+      <CellData>
+      </CellData>
+      <Points>
+        <DataArray type="Float64" Name="Points" NumberOfComponents="3" format="binary" RangeMin="228.04273486963388" RangeMax="330.73668402570445">
+          AQAAAACAAABgAAAAYAAAAA==eF57dcfu5YyTcQde5LZIHtsQ4aDQt/fdz+SMAzFTtWXWdOkfqEh9bdA7LdxB6JSDu/ODTLj4Jh7vTJXyDAeLDcEsnyfnHXgFNefVhOl3HVgyHdxKLqxeKZ57AABf8jB2
+          <InformationKey name="L2_NORM_RANGE" location="vtkDataArray" length="2">
+            <Value index="0">
+              228.04273487
+            </Value>
+            <Value index="1">
+              330.73668403
+            </Value>
+          </InformationKey>
+        </DataArray>
+      </Points>
+      <Verts>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Verts>
+      <Lines>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Lines>
+      <Strips>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Strips>
+      <Polys>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="3">
+          AQAAAACAAAAgAAAAEwAAAA==eF5jYIAARijNBKWZoTQAAHAABw==
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="4" RangeMax="4">
+          AQAAAACAAAAIAAAACwAAAA==eF5jYYAAAAAoAAU=
+        </DataArray>
+      </Polys>
+    </Piece>
+  </PolyData>
+</VTKFile>
