@@ -35,14 +35,18 @@ def ellipsoid_normal(u: float, v: float, a: float, b: float, c: float) -> np.nda
 
 def ellipsoid_tangent_u(u: float, v: float, a: float, b: float, c: float) -> np.ndarray:
     """Return unit circumferential tangent vector along u direction."""
-    tx = -a * math.sin(v) * math.sin(u)
-    ty = b * math.sin(v) * math.cos(u)
+    # The common sin(v) factor vanishes at both poles even though the limiting
+    # circumferential direction remains well defined for the stored azimuth.
+    # Remove that scale before normalization so the local basis does not
+    # become singular for points whose z/c projection is clipped to a pole.
+    del v, c
+    tx = -a * math.sin(u)
+    ty = b * math.cos(u)
     tz = 0.0
     t = np.array([tx, ty, tz], dtype=float)
     norm = float(np.linalg.norm(t))
     if norm <= EPS:
-        # Singular at poles v=0, v=pi
-        return np.array([1.0, 0.0, 0.0], dtype=float)
+        raise ValueError("ellipsoid circumferential tangent is singular")
     return t / norm
 
 
@@ -79,12 +83,18 @@ def project_point_to_surface(
     tang_v = ellipsoid_tangent_v(u, v, a, b, c)
 
     residual = cardiac_pt - surf
-    offset = float(np.dot(residual, normal))
-
-    dev_x = float(np.dot(residual, tang_u))
-    dev_y = float(np.dot(residual, tang_v))
-    dev_z = float(np.dot(residual, normal))
-    deviation_vector = np.array([dev_x, dev_y, dev_z], dtype=float)
+    # On a triaxial ellipsoid the two unit tangents are generally not
+    # orthogonal to each other.  Independent dot products therefore do not
+    # recover the coefficients of the local basis and visibly distort a path
+    # when it is reconstructed.  Solve the complete local basis instead.  The
+    # normal remains orthogonal to both tangents, while least-squares also
+    # handles the numerically delicate pole neighbourhoods safely.
+    local_basis = np.column_stack((tang_u, tang_v, normal))
+    deviation_vector, _, rank, _ = np.linalg.lstsq(local_basis, residual, rcond=None)
+    if rank < 3 or not np.all(np.isfinite(deviation_vector)):
+        raise ValueError("ellipsoid local basis is singular or non-finite")
+    deviation_vector = np.asarray(deviation_vector, dtype=float)
+    offset = float(deviation_vector[2])
 
     return u, v, offset, deviation_vector
 

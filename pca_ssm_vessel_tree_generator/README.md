@@ -54,3 +54,14 @@ This prototype constrains both planes to the shared bifurcation and correspondin
 ```bash
 python -m pip install -r pca_ssm_vessel_tree_generator/requirements.txt
 ```
+
+## Surface-relative statistical generator
+
+The completed Person 1 pipeline audits all 191 protected raw cases, verifies the authoritative daughter-assignment record, and excludes unresolved LAD/LCX identities before fitting generator statistics. The current strict gate contains 14 resolved assignments and 6 cases that also pass the raw-course and shape-preserving scaffold checks. Those 6 cases provide cardiac frames, ellipsoid parameters, exact fixed cardiac controls, local surface deviations, landmark statistics, validation limits, and a joint 126-dimensional PCA with 4 retained modes (96.743% cumulative variance):
+
+```powershell
+.\.venv\Scripts\python.exe pca_ssm_vessel_tree_generator\run_person1_week1_pipeline.py `
+  --full --output-dir outputs\lca_ssm\person1_week1 --clean
+```
+
+The frozen handoff is consumed by `run_person2_population_cohort.py`. The current final run produces 25 accepted LMCA/LAD/LCX trees, fixed front/lateral/crown previews, and a ParaView cohort VTM. Validation compares the generated scaffolds only with the 6 resolved, anatomy-gated reference scaffolds while retaining the full 191-case source audit. RCA generation remains optional in code but is excluded from the primary cohort because the available RCA arrays are inferred disconnected candidates rather than resolved RCA ground truth. See [generation/README.md](./generation/README.md) for commands, validation policy, and limitations.

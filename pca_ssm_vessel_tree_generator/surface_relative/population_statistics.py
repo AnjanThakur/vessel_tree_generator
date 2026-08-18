@@ -89,6 +89,14 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
     components_retained = Vt[:k_retained]
     singular_values_retained = S[:k_retained]
     eigenvalues = (S**2) / max(n_samples - 1, 1)
+    training_scores = centered @ components_retained.T
+    retained_scales = np.sqrt(np.maximum(eigenvalues[:k_retained], 0.0))
+    standardized_training_scores = np.divide(
+        training_scores,
+        retained_scales,
+        out=np.zeros_like(training_scores),
+        where=retained_scales > 1.0e-12,
+    )
 
     return {
         "n_samples": n_samples,
@@ -96,6 +104,8 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
         "mean_vector": mean_vector,
         "components_all": Vt,
         "components_retained": components_retained,
+        "training_scores": training_scores,
+        "standardized_training_scores": standardized_training_scores,
         "singular_values": S,
         "eigenvalues": eigenvalues,
         "explained_variance_ratio": explained_ratio,
@@ -120,6 +130,8 @@ def build_validation_thresholds(
         stats = compute_linear_stats(vals)
         thresholds[f"ellipsoid_{key}_mm"] = {
             "unit": "mm",
+            "min": stats["min"],
+            "max": stats["max"],
             "p2_5": stats["p2_5"],
             "p97_5": stats["p97_5"],
             "mean": stats["mean"],
@@ -131,6 +143,8 @@ def build_validation_thresholds(
         stats = compute_linear_stats(lengths)
         thresholds[f"branch_length_{vessel}_mm"] = {
             "unit": "mm",
+            "min": stats["min"],
+            "max": stats["max"],
             "p2_5": stats["p2_5"],
             "p97_5": stats["p97_5"],
             "mean": stats["mean"],
@@ -141,6 +155,8 @@ def build_validation_thresholds(
     angle_stats = compute_linear_stats(bifurcation_angles)
     thresholds["bifurcation_angle_deg"] = {
         "unit": "deg",
+        "min": angle_stats["min"],
+        "max": angle_stats["max"],
         "p2_5": angle_stats["p2_5"],
         "p97_5": angle_stats["p97_5"],
         "mean": angle_stats["mean"],

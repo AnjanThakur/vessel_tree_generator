@@ -1,0 +1,435 @@
+{
+  "seed": 20285033,
+  "maximum_attempts": 1000,
+  "attempt_count": 4,
+  "accepted_attempt": 4,
+  "attempts": [
+    {
+      "attempt": 1,
+      "accepted": false,
+      "ellipsoid_source_case_id": "37.label",
+      "trajectory_source_case_id": "37.label",
+      "errors": [
+        "LCX length 102.573 mm outside observed smooth-scaffold range [35.890, 102.132]",
+        "LCX tortuosity 1.391 outside smooth-scaffold bounds [1.000, 1.385]"
+      ],
+      "metrics": {
+        "topology_errors": {
+          "LMCA_to_LAD_mm": 0.0,
+          "LMCA_to_LCX_mm": 0.0,
+          "LAD_to_LCX_mm": 0.0
+        },
+        "branch_lengths_mm": {
+          "LMCA": 7.382825328617454,
+          "LAD": 127.82587483152389,
+          "LCX": 102.57253185597426
+        },
+        "branch_tortuosity": {
+          "LMCA": 1.009838905855134,
+          "LAD": 1.2512463638196898,
+          "LCX": 1.3911363881600072
+        },
+        "branch_obliquity_rad": {
+          "LMCA": 0.25756005927329584,
+          "LAD": -4.045403460336901,
+          "LCX": 1.2675357983053082
+        },
+        "bifurcation_angle_deg": 112.44736216949408,
+        "LAD_LCX_terminal_separation_mm": 81.9743524775361,
+        "anatomical_direction": {
+          "LAD_length_mm": 127.82587483152389,
+          "LCX_length_mm": 102.57253185597426,
+          "LAD_minus_LCX_length_mm": 25.25334297554963,
+          "LAD_inferior_displacement_mm": 82.11893116161399,
+          "LCX_inferior_displacement_mm": 25.78424167280557,
+          "LAD_minus_LCX_inferior_displacement_mm": 56.334689488808415,
+          "LCX_to_LAD_inferior_displacement_ratio": 0.31398657176943706,
+          "LAD_inferior_displacement_to_length_ratio": 0.6424280785861843,
+          "LCX_inferior_span_to_length_ratio": 0.33494738885198355,
+          "LAD_descending_segment_fraction": 1.0,
+          "LAD_horizontal_path_fraction": 0.6621768382769636,
+          "LCX_horizontal_path_fraction": 0.7638715222237955,
+          "LAD_terminal_lateral_fraction": 0.4754069768146414,
+          "LCX_terminal_lateral_fraction": 0.6734512405872798,
+          "LAD_terminal_lateral_displacement_mm": 60.76931271234153,
+          "LCX_terminal_lateral_displacement_mm": 69.07759882858414,
+          "LCX_to_LAD_lateral_displacement_ratio": 1.1367184479372152,
+          "LAD_initial_inferior_direction_fraction": 0.8327772642669294,
+          "LCX_initial_horizontal_direction_fraction": 0.8932212082698194
+        },
+        "anatomical_role_acceptance": {
+          "accepted": true,
+          "checks": {
+            "lad_has_minimum_inferior_reach": true,
+            "lad_is_dominant_descending_branch": true,
+            "lcx_is_not_apex_descending_branch": true,
+            "lad_has_longitudinal_course": true,
+            "lad_descent_is_sustained": true,
+            "lcx_has_horizontal_crown_course": true,
+            "lcx_inferior_span_is_limited": true,
+            "lcx_is_more_lateral_than_lad": true,
+            "lcx_has_substantial_absolute_lateral_reach": true
+          },
+          "failed_checks": [],
+          "policy": {
+            "coordinate_frame": "common cardiac frame; negative Z is apex-directed",
+            "criterion_type": "repository geometric anatomy QC; not a clinical threshold",
+            "unresolved_assignments_may_train": false
+          }
+        },
+        "minimum_nonlocal_distance_mm": {
+          "LMCA": 2.986713547043227,
+          "LAD": 11.762204902821432,
+          "LCX": 9.281371574130418
+        },
+        "minimum_interbranch_distance_mm": {
+          "LMCA_to_LAD_mm": 10.812885346331562,
+          "LMCA_to_LCX_mm": 8.8304418874989,
+          "LAD_to_LCX_mm": 15.275995834828473
+        },
+        "branch_progression": {
+          "LMCA": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 1.7380006845932983
+          },
+          "LAD": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 22.81050582259988
+          },
+          "LCX": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 0.9661016949152542,
+            "max_resampled_turn_angle_deg": 23.874031061733344
+          }
+        },
+        "ellipsoid_axes_mm": {
+          "a": 59.56030516067869,
+          "b": 33.683228083776314,
+          "c": 176.0288751547734
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "accepted": false,
+      "ellipsoid_source_case_id": "37.label",
+      "trajectory_source_case_id": "37.label",
+      "errors": [
+        "LCX length 102.608 mm outside observed smooth-scaffold range [35.890, 102.132]",
+        "LCX tortuosity 1.392 outside smooth-scaffold bounds [1.000, 1.385]",
+        "LAD maximum local turn 45.809 deg exceeds observed real maximum 40.041 deg"
+      ],
+      "metrics": {
+        "topology_errors": {
+          "LMCA_to_LAD_mm": 0.0,
+          "LMCA_to_LCX_mm": 0.0,
+          "LAD_to_LCX_mm": 0.0
+        },
+        "branch_lengths_mm": {
+          "LMCA": 7.392939669602762,
+          "LAD": 129.67540650332847,
+          "LCX": 102.60767422432875
+        },
+        "branch_tortuosity": {
+          "LMCA": 1.0112223674134697,
+          "LAD": 1.2693508343125772,
+          "LCX": 1.3916130053059375
+        },
+        "branch_obliquity_rad": {
+          "LMCA": 0.25756005927329584,
+          "LAD": -4.045403460336901,
+          "LCX": 1.2675357983053082
+        },
+        "bifurcation_angle_deg": 112.98273512958599,
+        "LAD_LCX_terminal_separation_mm": 81.9743524775361,
+        "anatomical_direction": {
+          "LAD_length_mm": 129.67540650332847,
+          "LCX_length_mm": 102.60767422432875,
+          "LAD_minus_LCX_length_mm": 27.067732278999728,
+          "LAD_inferior_displacement_mm": 82.11893116161399,
+          "LCX_inferior_displacement_mm": 25.78424167280557,
+          "LAD_minus_LCX_inferior_displacement_mm": 56.334689488808415,
+          "LCX_to_LAD_inferior_displacement_ratio": 0.31398657176943706,
+          "LAD_inferior_displacement_to_length_ratio": 0.633265268842679,
+          "LCX_inferior_span_to_length_ratio": 0.334913187104458,
+          "LAD_descending_segment_fraction": 1.0,
+          "LAD_horizontal_path_fraction": 0.6666033590886796,
+          "LCX_horizontal_path_fraction": 0.7633106495201659,
+          "LAD_terminal_lateral_fraction": 0.46862635214320086,
+          "LCX_terminal_lateral_fraction": 0.6732205885259753,
+          "LAD_terminal_lateral_displacement_mm": 60.76931271234153,
+          "LCX_terminal_lateral_displacement_mm": 69.07759882858414,
+          "LCX_to_LAD_lateral_displacement_ratio": 1.1367184479372152,
+          "LAD_initial_inferior_direction_fraction": 0.8181094944949094,
+          "LCX_initial_horizontal_direction_fraction": 0.8955902756089168
+        },
+        "anatomical_role_acceptance": {
+          "accepted": true,
+          "checks": {
+            "lad_has_minimum_inferior_reach": true,
+            "lad_is_dominant_descending_branch": true,
+            "lcx_is_not_apex_descending_branch": true,
+            "lad_has_longitudinal_course": true,
+            "lad_descent_is_sustained": true,
+            "lcx_has_horizontal_crown_course": true,
+            "lcx_inferior_span_is_limited": true,
+            "lcx_is_more_lateral_than_lad": true,
+            "lcx_has_substantial_absolute_lateral_reach": true
+          },
+          "failed_checks": [],
+          "policy": {
+            "coordinate_frame": "common cardiac frame; negative Z is apex-directed",
+            "criterion_type": "repository geometric anatomy QC; not a clinical threshold",
+            "unresolved_assignments_may_train": false
+          }
+        },
+        "minimum_nonlocal_distance_mm": {
+          "LMCA": 2.97573775704702,
+          "LAD": 10.814263649953944,
+          "LCX": 9.302347632405837
+        },
+        "minimum_interbranch_distance_mm": {
+          "LMCA_to_LAD_mm": 10.969462012558655,
+          "LMCA_to_LCX_mm": 8.943902281244704,
+          "LAD_to_LCX_mm": 15.534931018352406
+        },
+        "branch_progression": {
+          "LMCA": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 3.196393769809899
+          },
+          "LAD": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 45.80946061374509
+          },
+          "LCX": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 0.9661016949152542,
+            "max_resampled_turn_angle_deg": 25.76178030441809
+          }
+        },
+        "ellipsoid_axes_mm": {
+          "a": 59.56030516067869,
+          "b": 33.683228083776314,
+          "c": 176.0288751547734
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "accepted": false,
+      "ellipsoid_source_case_id": "37.label",
+      "trajectory_source_case_id": "37.label",
+      "errors": [
+        "LCX length 102.394 mm outside observed smooth-scaffold range [35.890, 102.132]",
+        "LCX tortuosity 1.389 outside smooth-scaffold bounds [1.000, 1.385]",
+        "LAD maximum local turn 65.780 deg exceeds observed real maximum 40.041 deg"
+      ],
+      "metrics": {
+        "topology_errors": {
+          "LMCA_to_LAD_mm": 0.0,
+          "LMCA_to_LCX_mm": 0.0,
+          "LAD_to_LCX_mm": 0.0
+        },
+        "branch_lengths_mm": {
+          "LMCA": 7.37981194751222,
+          "LAD": 128.36426400745114,
+          "LCX": 102.39393433350796
+        },
+        "branch_tortuosity": {
+          "LMCA": 1.0094267290335535,
+          "LAD": 1.2565164822490513,
+          "LCX": 1.388714165486524
+        },
+        "branch_obliquity_rad": {
+          "LMCA": 0.25756005927329584,
+          "LAD": -4.045403460336901,
+          "LCX": 1.2675357983053082
+        },
+        "bifurcation_angle_deg": 113.22825403486378,
+        "LAD_LCX_terminal_separation_mm": 81.9743524775361,
+        "anatomical_direction": {
+          "LAD_length_mm": 128.36426400745114,
+          "LCX_length_mm": 102.39393433350796,
+          "LAD_minus_LCX_length_mm": 25.970329673943183,
+          "LAD_inferior_displacement_mm": 82.11893116161399,
+          "LCX_inferior_displacement_mm": 25.78424167280557,
+          "LAD_minus_LCX_inferior_displacement_mm": 56.334689488808415,
+          "LCX_to_LAD_inferior_displacement_ratio": 0.31398657176943706,
+          "LAD_inferior_displacement_to_length_ratio": 0.6397335878219754,
+          "LCX_inferior_span_to_length_ratio": 0.3382629621082817,
+          "LAD_descending_segment_fraction": 1.0,
+          "LAD_horizontal_path_fraction": 0.6709729855148292,
+          "LCX_horizontal_path_fraction": 0.7599308263120825,
+          "LAD_terminal_lateral_fraction": 0.47341301087360316,
+          "LCX_terminal_lateral_fraction": 0.6746258875412585,
+          "LAD_terminal_lateral_displacement_mm": 60.76931271234153,
+          "LCX_terminal_lateral_displacement_mm": 69.07759882858414,
+          "LCX_to_LAD_lateral_displacement_ratio": 1.1367184479372152,
+          "LAD_initial_inferior_direction_fraction": 0.8162245655131147,
+          "LCX_initial_horizontal_direction_fraction": 0.8888764804422805
+        },
+        "anatomical_role_acceptance": {
+          "accepted": true,
+          "checks": {
+            "lad_has_minimum_inferior_reach": true,
+            "lad_is_dominant_descending_branch": true,
+            "lcx_is_not_apex_descending_branch": true,
+            "lad_has_longitudinal_course": true,
+            "lad_descent_is_sustained": true,
+            "lcx_has_horizontal_crown_course": true,
+            "lcx_inferior_span_is_limited": true,
+            "lcx_is_more_lateral_than_lad": true,
+            "lcx_has_substantial_absolute_lateral_reach": true
+          },
+          "failed_checks": [],
+          "policy": {
+            "coordinate_frame": "common cardiac frame; negative Z is apex-directed",
+            "criterion_type": "repository geometric anatomy QC; not a clinical threshold",
+            "unresolved_assignments_may_train": false
+          }
+        },
+        "minimum_nonlocal_distance_mm": {
+          "LMCA": 2.9887009867493948,
+          "LAD": 10.75097095544981,
+          "LCX": 9.323527921941448
+        },
+        "minimum_interbranch_distance_mm": {
+          "LMCA_to_LAD_mm": 10.640285504870738,
+          "LMCA_to_LCX_mm": 8.813104102967694,
+          "LAD_to_LCX_mm": 15.199015279842124
+        },
+        "branch_progression": {
+          "LMCA": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 1.832888833621175
+          },
+          "LAD": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 65.77995055314318
+          },
+          "LCX": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 0.9661016949152542,
+            "max_resampled_turn_angle_deg": 22.96553522656131
+          }
+        },
+        "ellipsoid_axes_mm": {
+          "a": 59.56030516067869,
+          "b": 33.683228083776314,
+          "c": 176.0288751547734
+        }
+      }
+    },
+    {
+      "attempt": 4,
+      "accepted": true,
+      "ellipsoid_source_case_id": "37.label",
+      "trajectory_source_case_id": "37.label",
+      "errors": [],
+      "metrics": {
+        "topology_errors": {
+          "LMCA_to_LAD_mm": 0.0,
+          "LMCA_to_LCX_mm": 0.0,
+          "LAD_to_LCX_mm": 0.0
+        },
+        "branch_lengths_mm": {
+          "LMCA": 7.383825819334617,
+          "LAD": 126.9175143721198,
+          "LCX": 102.13704811455366
+        },
+        "branch_tortuosity": {
+          "LMCA": 1.0099757551514628,
+          "LAD": 1.242354715525751,
+          "LCX": 1.3852301550956532
+        },
+        "branch_obliquity_rad": {
+          "LMCA": 0.25756005927329584,
+          "LAD": -4.045403460336901,
+          "LCX": 1.2675357983053082
+        },
+        "bifurcation_angle_deg": 112.94868478930164,
+        "LAD_LCX_terminal_separation_mm": 81.9743524775361,
+        "anatomical_direction": {
+          "LAD_length_mm": 126.9175143721198,
+          "LCX_length_mm": 102.13704811455366,
+          "LAD_minus_LCX_length_mm": 24.780466257566133,
+          "LAD_inferior_displacement_mm": 82.11893116161399,
+          "LCX_inferior_displacement_mm": 25.78424167280557,
+          "LAD_minus_LCX_inferior_displacement_mm": 56.334689488808415,
+          "LCX_to_LAD_inferior_displacement_ratio": 0.31398657176943706,
+          "LAD_inferior_displacement_to_length_ratio": 0.6470259961193598,
+          "LCX_inferior_span_to_length_ratio": 0.3374406715478647,
+          "LAD_descending_segment_fraction": 1.0,
+          "LAD_horizontal_path_fraction": 0.6587075064722134,
+          "LCX_horizontal_path_fraction": 0.7613816748735703,
+          "LAD_terminal_lateral_fraction": 0.4788095087819561,
+          "LCX_terminal_lateral_fraction": 0.6763226478907919,
+          "LAD_terminal_lateral_displacement_mm": 60.76931271234153,
+          "LCX_terminal_lateral_displacement_mm": 69.07759882858414,
+          "LCX_to_LAD_lateral_displacement_ratio": 1.1367184479372152,
+          "LAD_initial_inferior_direction_fraction": 0.834193795704949,
+          "LCX_initial_horizontal_direction_fraction": 0.8905836494298499
+        },
+        "anatomical_role_acceptance": {
+          "accepted": true,
+          "checks": {
+            "lad_has_minimum_inferior_reach": true,
+            "lad_is_dominant_descending_branch": true,
+            "lcx_is_not_apex_descending_branch": true,
+            "lad_has_longitudinal_course": true,
+            "lad_descent_is_sustained": true,
+            "lcx_has_horizontal_crown_course": true,
+            "lcx_inferior_span_is_limited": true,
+            "lcx_is_more_lateral_than_lad": true,
+            "lcx_has_substantial_absolute_lateral_reach": true
+          },
+          "failed_checks": [],
+          "policy": {
+            "coordinate_frame": "common cardiac frame; negative Z is apex-directed",
+            "criterion_type": "repository geometric anatomy QC; not a clinical threshold",
+            "unresolved_assignments_may_train": false
+          }
+        },
+        "minimum_nonlocal_distance_mm": {
+          "LMCA": 2.99146147829533,
+          "LAD": 11.860127378343241,
+          "LCX": 9.301305683532824
+        },
+        "minimum_interbranch_distance_mm": {
+          "LMCA_to_LAD_mm": 10.624658922438304,
+          "LMCA_to_LCX_mm": 8.798692718168079,
+          "LAD_to_LCX_mm": 15.165349847746755
+        },
+        "branch_progression": {
+          "LMCA": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 1.8645500087061697
+          },
+          "LAD": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 26.263157263444064
+          },
+          "LCX": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 0.9661016949152542,
+            "max_resampled_turn_angle_deg": 23.187802785896917
+          }
+        },
+        "ellipsoid_axes_mm": {
+          "a": 59.56030516067869,
+          "b": 33.683228083776314,
+          "c": 176.0288751547734
+        }
+      }
+    }
+  ]
+}

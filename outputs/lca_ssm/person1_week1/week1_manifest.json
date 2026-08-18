@@ -1,0 +1,37 @@
+{
+  "implementation": "Person 1 complete real-data to generator-ready statistical handoff",
+  "created_utc": "2026-08-18T19:07:02.753385+00:00",
+  "smoke_test": false,
+  "status": "PASS",
+  "input_case_count": 191,
+  "frame_pass_count": 191,
+  "resolved_assignment_count": 14,
+  "unresolved_assignments_used_for_statistics": false,
+  "statistics_eligible_count": 6,
+  "complete_pca_case_count": 6,
+  "pca_retained_components": 4,
+  "protected_inputs_unchanged": true,
+  "generator_statistics_manifest": {
+    "schema_version": 2,
+    "source_population_case_count": 191,
+    "statistics_eligible_case_count": 6,
+    "pca_case_count": 6,
+    "resolved_assignment_count": 14,
+    "unresolved_assignments_used_for_statistics": false,
+    "source_geometry_modified": false,
+    "PPT_planes_or_ellipses_refitted": false,
+    "frozen": true,
+    "created_utc": "2026-08-18T19:07:02.032283+00:00",
+    "files": {
+      "population_surface_statistics.json": "5964ca856d0eab2d1bddb3ea8b3c1254fa7d67597ae590dc404d78235188986e",
+      "population_ellipsoid_parameters.csv": "785bc89a60d748adf56788970dc58e6df4037286d58fc4ab3b9249702c6ac1c9",
+      "landmark_stats.json": "11eece6000aa46728a5075eee0b91af02acb1a6fc57bee6b695016a8bf3029c5",
+      "surface_deviation_pca.npz": "7ebc751826ee1f8d6604396c620f2b2b4b9e4a23eafdce4d587a9f511c01cbb0",
+      "surface_deviation_pca_summary.json": "f201cc5f72e612be5fdb6a4ff64422432acc164d73bfec75ad3f036ec9884fe5",
+      "population_validation_thresholds.json": "95f9a24372e2151230b9a91d11b58e361c5d9fe841b7392cfa34156fedf16da9",
+      "fixed_branch_surface_coordinates.npz": "40082b4c9409e1494ad3424f1ed3258a482935f99c7efac86eff6fb31d89f2f3",
+      "branch_assignment_gate.json": "f7fd6c159dba2ab73cccc74ce5025e584592613992c65af2cf0e0113615abdf7",
+      "validation_scaffold_case_metrics.csv": "33ed95aa3a6303765e7ceed8498cc9a8c067780c2a50de569619ebcfdb567d9b"
+    }
+  }
+}
