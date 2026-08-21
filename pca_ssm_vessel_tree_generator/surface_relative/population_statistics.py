@@ -1,11 +1,16 @@
-"""Population statistics, circular statistics, 126-D joint deviation PCA, and validation thresholds."""
+"""Population statistics, circular statistics, 126-D joint deviation PCA, and validation thresholds for Batch 4.
+
+Implements Part 5 (§5.1 – §5.6) of the Technical Design Document.
+"""
 
 from __future__ import annotations
 
 import math
-from typing import Any
+from typing import Any, Iterable
 import numpy as np
 from scipy.stats import circmean, circstd
+
+EPS = 1.0e-12
 
 
 def compute_linear_stats(data: Iterable[float]) -> dict[str, float]:
@@ -60,10 +65,13 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
     """Fit 126-D joint deviation PCA across complete patient shape vectors.
 
     Design Doc §5.3.3:
-    - Input shape vectors: (N_complete, 126)
-    - Center shape vectors by population mean
-    - SVD: U, S, Vt
-    - Retain k components explaining >= 95% variance
+    - Input shape vectors X: (N, 126)
+    - Mean shape vector mu: (126,)
+    - Center shape vectors: X_centered = X - mu
+    - SVD: U, S, Vt = SVD(X_centered)
+    - Eigenvalues: lambda_j = S_j^2 / (N - 1)
+    - Explained variance ratio: r_j = S_j^2 / sum(S^2)
+    - Retain k components explaining >= 95% cumulative variance
     """
     X = np.asarray(shape_vectors_matrix, dtype=float)
     n_samples, n_features = X.shape
@@ -76,8 +84,8 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
     # SVD
     U, S, Vt = np.linalg.svd(centered, full_matrices=False)
 
-    total_var = np.sum(S**2)
-    if total_var <= 1.0e-12:
+    total_var = float(np.sum(S**2))
+    if total_var <= EPS:
         explained_ratio = np.ones(len(S)) / len(S)
     else:
         explained_ratio = (S**2) / total_var
@@ -86,16 +94,18 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
     k_retained = int(np.searchsorted(cum_explained_variance, variance_cutoff) + 1)
     k_retained = min(k_retained, len(S))
 
-    components_retained = Vt[:k_retained]
+    components_retained = Vt[:k_retained]  # (k, 126)
     singular_values_retained = S[:k_retained]
-    eigenvalues = (S**2) / max(n_samples - 1, 1)
-    training_scores = centered @ components_retained.T
-    retained_scales = np.sqrt(np.maximum(eigenvalues[:k_retained], 0.0))
+    eigenvalues = (S**2) / max(n_samples - 1, 1)  # lambda_j = S_j^2 / (N - 1)
+    eigenvalues_retained = eigenvalues[:k_retained]
+
+    training_scores = centered @ components_retained.T  # (N, k)
+    retained_scales = np.sqrt(np.maximum(eigenvalues_retained, 0.0))
     standardized_training_scores = np.divide(
         training_scores,
         retained_scales,
         out=np.zeros_like(training_scores),
-        where=retained_scales > 1.0e-12,
+        where=retained_scales > EPS,
     )
 
     return {
@@ -108,6 +118,7 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
         "standardized_training_scores": standardized_training_scores,
         "singular_values": S,
         "eigenvalues": eigenvalues,
+        "eigenvalues_retained": eigenvalues_retained,
         "explained_variance_ratio": explained_ratio,
         "cumulative_explained_variance": cum_explained_variance,
         "k_retained": k_retained,
@@ -115,13 +126,115 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
     }
 
 
+def compute_landmark_statistics(landmarks_matrix: np.ndarray) -> dict[str, Any]:
+    """Compute Level 2 Landmark Statistics (18-D vector) across population (Design Doc §5.2).
+
+    Vector ordering (18-D):
+    [lca_ost_u, lca_ost_v, lca_ost_off,
+     rca_ost_u, rca_ost_v, rca_ost_off,
+     bif_u, bif_v, bif_off,
+     lad_end_u, lad_end_v, lad_end_off,
+     lcx_end_u, lcx_end_v, lcx_end_off,
+     rca_end_u, rca_end_v, rca_end_off]
+    """
+    L = np.asarray(landmarks_matrix, dtype=float)
+    n_samples, n_dims = L.shape
+    if n_dims != 18:
+        raise ValueError(f"Landmark matrix must have shape (N, 18); got {L.shape}")
+
+    mean_vec = np.mean(L, axis=0)
+    std_vec = np.std(L, axis=0, ddof=1) if n_samples > 1 else np.zeros(18)
+
+    centered = L - mean_vec
+    U, S, Vt = np.linalg.svd(centered, full_matrices=False)
+    total_var = float(np.sum(S**2))
+    explained_ratio = (S**2) / total_var if total_var > EPS else np.ones(18) / 18
+    cum_var = np.cumsum(explained_ratio)
+
+    return {
+        "n_samples": n_samples,
+        "mean_18d": mean_vec.tolist(),
+        "std_18d": std_vec.tolist(),
+        "singular_values": S.tolist(),
+        "explained_variance_ratio": explained_ratio.tolist(),
+        "cumulative_explained_variance": cum_var.tolist(),
+        "components_all": Vt.tolist(),
+    }
+
+
+def compute_side_branch_statistics(patient_branches_data: list[dict[str, Any]]) -> dict[str, Any]:
+    """Compute Level 5 Side Branch Statistics across population (Design Doc §5.5).
+
+    Statistics per parent vessel (RCA, LMCA, LAD, LCX):
+    - count: number of side branches per parent vessel
+    - attachment_t: parametric attachment position t in [0, 1]
+    - branch_length_mm: side branch length in mm
+    - branch_angle_deg: relative branch angle in degrees
+    """
+    results = {}
+    for vessel in ["RCA", "LMCA", "LAD", "LCX"]:
+        counts = []
+        attachments_t = []
+        lengths_mm = []
+        angles_deg = []
+
+        for p_data in patient_branches_data:
+            v_data = p_data.get(vessel, {})
+            counts.append(v_data.get("count", 0))
+            attachments_t.extend(v_data.get("attachment_t", []))
+            lengths_mm.extend(v_data.get("length_mm", []))
+            angles_deg.extend(v_data.get("angle_deg", []))
+
+        results[vessel] = {
+            "branch_count": compute_linear_stats(counts),
+            "attachment_t": compute_linear_stats(attachments_t),
+            "branch_length_mm": compute_linear_stats(lengths_mm),
+            "branch_angle_deg": compute_linear_stats(angles_deg),
+        }
+    return results
+
+
+def measure_tortuosity(u_path: np.ndarray, v_path: np.ndarray) -> float:
+    """Measure vessel tortuosity in parameter space (Design Doc §5.4.1).
+
+    Computes standard deviation of deviation from a straight line in (u, v) parameter space:
+    T = sqrt(std(u - u_linear)^2 + std(v - v_linear)^2)
+    """
+    u_p = np.asarray(u_path, dtype=float)
+    v_p = np.asarray(v_path, dtype=float)
+    n_pts = len(u_p)
+    if n_pts < 2:
+        return 0.0
+
+    t = np.linspace(0.0, 1.0, n_pts)
+    u_linear = u_p[0] + (u_p[-1] - u_p[0]) * t
+    v_linear = v_p[0] + (v_p[-1] - v_p[0]) * t
+
+    u_dev = float(np.std(u_p - u_linear))
+    v_dev = float(np.std(v_p - v_linear))
+    return float(math.sqrt(u_dev**2 + v_dev**2))
+
+
+def measure_obliquity(u_path: np.ndarray) -> float:
+    """Measure vessel obliquity (Design Doc §5.4.2).
+
+    Obliquity = total drift in u from start to end: Omega = u_end - u_start
+    """
+    u_p = np.asarray(u_path, dtype=float)
+    if len(u_p) < 2:
+        return 0.0
+    return float(u_p[-1] - u_p[0])
+
+
 def build_validation_thresholds(
     scaffold_params: list[dict[str, float]],
     branch_lengths: dict[str, list[float]],
     bifurcation_angles: list[float],
+    max_out_of_plane_devs: dict[str, list[float]] | None = None,
+    tortuosities: dict[str, list[float]] | None = None,
     pca_results: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Compute empirical P2.5 - P97.5 population validation thresholds."""
+    """Compute empirical P2.5 - P97.5 population validation thresholds (Design Doc §5.6)."""
     thresholds = {}
 
     # Scaffold semi-axes thresholds
@@ -162,6 +275,34 @@ def build_validation_thresholds(
         "mean": angle_stats["mean"],
         "std": angle_stats["std"],
     }
+
+    # Max out-of-plane deviation thresholds
+    if max_out_of_plane_devs is not None:
+        for vessel, devs in max_out_of_plane_devs.items():
+            stats = compute_linear_stats(devs)
+            thresholds[f"max_out_of_plane_{vessel}_mm"] = {
+                "unit": "mm",
+                "min": stats["min"],
+                "max": stats["max"],
+                "p2_5": stats["p2_5"],
+                "p97_5": stats["p97_5"],
+                "mean": stats["mean"],
+                "std": stats["std"],
+            }
+
+    # Tortuosity thresholds
+    if tortuosities is not None:
+        for vessel, torts in tortuosities.items():
+            stats = compute_linear_stats(torts)
+            thresholds[f"tortuosity_{vessel}"] = {
+                "unit": "dimensionless",
+                "min": stats["min"],
+                "max": stats["max"],
+                "p2_5": stats["p2_5"],
+                "p97_5": stats["p97_5"],
+                "mean": stats["mean"],
+                "std": stats["std"],
+            }
 
     if pca_results is not None:
         thresholds["pca"] = {
