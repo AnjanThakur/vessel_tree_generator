@@ -23,12 +23,13 @@ def phase_radius(
     *,
     amplitude: float = 0.03,
     stenosis_compliance_factor: float = 0.35,
-    peak_phase: float = 0.35,
+    peak_phase: float = 0.60,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     """Return time-varying radii with reduced pulsatility inside lesions.
 
-    The supplied diseased radius is the reference-diastolic radius. At peak
-    systole the healthy epicardial lumen expands by ``amplitude``. At the
+    The supplied diseased radius is the end-diastolic reference radius. The
+    independent pulse response peaks in early diastole (default phase 0.60),
+    after the mechanical contraction peak. At the
     maximum lesion location its amplitude is multiplied by
     ``stenosis_compliance_factor``; transitions follow the continuous lesion
     reduction profile. This is a scalar research approximation to the reduced
@@ -49,18 +50,20 @@ def phase_radius(
     maximum_reduction = float(np.max(reduction)) if len(reduction) else 0.0
     lesion_weight = reduction / maximum_reduction if maximum_reduction > 1.0e-12 else np.zeros_like(reduction)
     local_amplitude = amplitude * (1.0 - (1.0 - stenosis_compliance_factor) * lesion_weight)
-    systolic_scale = float(contraction_curve(phase, peak_phase=peak_phase))
-    radius = diseased * (1.0 + local_amplitude * systolic_scale)
+    pulse_scale = float(contraction_curve(phase, peak_phase=peak_phase))
+    radius = diseased * (1.0 + local_amplitude * pulse_scale)
     if np.any(radius <= 0.0) or not np.all(np.isfinite(radius)):
         raise RuntimeError("pulsatility produced invalid radii")
     return radius, {
         "phase": phase,
-        "contraction_scale": systolic_scale,
+        "pulse_scale": pulse_scale,
+        "pulse_peak_phase": float(peak_phase),
         "healthy_amplitude": float(amplitude),
         "stenosis_compliance_factor": float(stenosis_compliance_factor),
         "minimum_local_amplitude": float(np.min(local_amplitude)),
         "maximum_local_amplitude": float(np.max(local_amplitude)),
         "maximum_disease_reduction_fraction": maximum_reduction,
         "reference_phase": "end_diastole",
-        "peak_response": "systolic_lumen_expansion",
+        "peak_response": "early_diastolic_lumen_expansion",
+        "physiology_scope": "parametric phase-offset response; not patient-specific mechanics",
     }

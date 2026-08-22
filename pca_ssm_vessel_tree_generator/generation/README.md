@@ -28,8 +28,10 @@ sampling.
   deviations.
 - `deviation_sampler.py`: draws one coordinated PCA innovation; it adds no
   independent point noise.
-- `surface_path_generator.py`: uses shape-preserving interpolation for empirical
-  controls and evaluates them on the sampled ellipsoid.
+- `surface_path_generator.py`: converts normalized-arc empirical samples into
+  shape-preserving cubic Hermite/Bezier controls, assembles an explicit clamped
+  SciPy `BSpline`, and densely evaluates it. Endpoints remain exact; the stable
+  B-spline form avoids the hooks observed with an unconstrained global cubic.
 - `tree_assembler.py`: assembles LMCA/LAD/LCX and snaps the shared bifurcation
   exactly.
 - `validator.py`: performs topology, anatomy, continuity, progression, and
@@ -39,6 +41,11 @@ sampling.
 The empirical baseline, ellipsoid parameters, and PCA baseline come from the
 same eligible source case. A low-scale PCA innovation supplies coordinated
 variation around that baseline.
+
+This is a bootstrap-based statistical generator. It is generative because the
+joint PCA innovation makes every canonical tree non-identical to its training
+baseline, but derivatives are not new independent patients. The final novelty
+and holdout evidence quantifies this distinction.
 
 ## Run
 

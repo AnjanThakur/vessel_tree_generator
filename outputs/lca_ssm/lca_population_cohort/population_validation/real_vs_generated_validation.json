@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "structural_and_anatomical_acceptance_pass": true,
-  "generated_tree_count": 25,
+  "generated_tree_count": 52,
   "source_population_case_count_audited": 191,
   "resolved_assignment_count": 181,
   "real_anatomy_eligible_reference_case_count": 52,
@@ -67,13 +67,11 @@
     "91.label",
     "94.label"
   ],
-  "represented_eligible_baseline_count": 25,
-  "represented_eligible_baseline_fraction": 0.4807692307692308,
-  "descriptive_distribution_pass_count": 49,
-  "descriptive_distribution_warning_count": 1,
-  "descriptive_distribution_warnings": [
-    "lmca_max_resampled_turn_angle_deg"
-  ],
+  "represented_eligible_baseline_count": 52,
+  "represented_eligible_baseline_fraction": 1.0,
+  "descriptive_distribution_pass_count": 50,
+  "descriptive_distribution_warning_count": 0,
+  "descriptive_distribution_warnings": [],
   "interpretation": "Every generated LCA tree passed individual structural, anatomical, collision, progression, and scaffold-reference checks. Distribution comparisons use only resolved, anatomy-gated real references; all unresolved daughter assignments are excluded rather than used to make generated shapes appear valid.",
   "artifacts": {
     "metrics_csv": "real_vs_generated_metrics.csv",

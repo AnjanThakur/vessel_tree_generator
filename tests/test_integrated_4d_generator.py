@@ -53,7 +53,7 @@ class Integrated4DGeneratorTests(unittest.TestCase):
         peak, metadata = phase_radius(
             baseline,
             diseased,
-            0.35,
+            0.60,
             amplitude=0.03,
             stenosis_compliance_factor=0.35,
         )
@@ -61,7 +61,8 @@ class Integrated4DGeneratorTests(unittest.TestCase):
         lesion_relative_expansion = peak[1] / diseased[1] - 1.0
         self.assertTrue(np.isclose(healthy_relative_expansion, 0.03))
         self.assertTrue(np.isclose(lesion_relative_expansion, 0.03 * 0.35))
-        self.assertEqual(metadata["peak_response"], "systolic_lumen_expansion")
+        self.assertEqual(metadata["peak_response"], "early_diastolic_lumen_expansion")
+        self.assertEqual(metadata["pulse_peak_phase"], 0.60)
         self.assertLess(metadata["minimum_local_amplitude"], metadata["maximum_local_amplitude"])
 
     def test_real_frozen_model_end_to_end_export(self) -> None:
@@ -71,7 +72,7 @@ class Integrated4DGeneratorTests(unittest.TestCase):
             generation=GenerationConfig(seed=20260822, maximum_attempts=250),
             motion=MotionConfig(number_of_phases=3),
             pulsatility=PulsatilityConfig(amplitude=0.03, stenosis_compliance_factor=0.35),
-            phase_values=(0.0, 0.35, 1.0),
+            phase_values=(0.0, 0.35, 0.60, 1.0),
         )
         self.assertTrue(case["validation"]["is_valid"])
         for frame in case["frames"]:
@@ -91,7 +92,7 @@ class Integrated4DGeneratorTests(unittest.TestCase):
             self.assertEqual(manifest["status"], "PASS")
             self.assertTrue(manifest["vtk_readback_passed"])
             cine = np.load(output / "geometry_cine.npy", allow_pickle=False)
-            self.assertEqual(cine.shape, (3, 3, 50, 4))
+            self.assertEqual(cine.shape, (4, 3, 50, 4))
             self.assertTrue(np.all(np.isfinite(cine)))
             self.assertTrue(np.all(cine[..., 3] > 0.0))
             exported_radius_change = np.max(

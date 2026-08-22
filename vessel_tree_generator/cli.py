@@ -66,6 +66,7 @@ def _pulsatility(args: argparse.Namespace) -> PulsatilityConfig:
     return PulsatilityConfig(
         amplitude=args.pulsatility,
         stenosis_compliance_factor=args.stenosis_compliance,
+        peak_phase=args.pulse_peak_phase,
     )
 
 
@@ -83,6 +84,7 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--peak-phase", type=float, default=0.35)
     parser.add_argument("--pulsatility", type=float, default=0.03)
     parser.add_argument("--stenosis-compliance", type=float, default=0.35)
+    parser.add_argument("--pulse-peak-phase", type=float, default=0.60)
     parser.add_argument("--points-per-branch", type=int, default=50)
     parser.add_argument("--clean", action="store_true", help="Explicitly replace the selected output directory.")
 
@@ -251,6 +253,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     audit.add_argument("--input-dir", type=Path, required=True)
     audit.add_argument("--release", action="store_true", help="Audit all four curated demo cases.")
+    present = commands.add_parser(
+        "present", help="Start the local Coronary4D presentation and verification center."
+    )
+    present.add_argument("--host", default="127.0.0.1")
+    present.add_argument("--port", type=int, default=8765)
+    present.add_argument("--no-browser", action="store_true")
     return parser
 
 
@@ -272,9 +280,13 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "compare":
         result = _run_compare(args)
         location = args.output_file or (args.input_dir / "disease_mode_comparison.png")
-    else:
+    elif args.command == "audit":
         result = _run_audit(args)
         location = args.input_dir
+    else:
+        from submission_release.presentation_center.app import serve
+
+        return serve(args.host, args.port, not args.no_browser)
     print(json.dumps({
         "status": result["status"],
         "command": args.command,

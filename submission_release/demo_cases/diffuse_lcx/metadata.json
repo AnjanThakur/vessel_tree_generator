@@ -1,0 +1,835 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "diffuse_lcx",
+  "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+  "branch_order": [
+    "LMCA",
+    "LAD",
+    "LCX"
+  ],
+  "hierarchy": {
+    "root": "LMCA",
+    "nodes": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "directed_edges": [
+      [
+        "LMCA",
+        "LAD"
+      ],
+      [
+        "LMCA",
+        "LCX"
+      ]
+    ],
+    "shared_bifurcation": "LMCA[-1] == LAD[0] == LCX[0]"
+  },
+  "heart_rate_bpm": 60.0,
+  "cardiac_period_seconds": 1.0,
+  "phase_values": [
+    0.0,
+    0.1111111111111111,
+    0.2222222222222222,
+    0.3333333333333333,
+    0.4444444444444444,
+    0.5555555555555556,
+    0.6666666666666666,
+    0.7777777777777777,
+    0.8888888888888888,
+    1.0
+  ],
+  "time_seconds": [
+    0.0,
+    0.1111111111111111,
+    0.2222222222222222,
+    0.3333333333333333,
+    0.4444444444444444,
+    0.5555555555555556,
+    0.6666666666666666,
+    0.7777777777777777,
+    0.8888888888888888,
+    1.0
+  ],
+  "disease": {
+    "case_id": "diffuse_lcx",
+    "minimum_radius_mm": 0.15,
+    "input_format": [
+      "x",
+      "y",
+      "z",
+      "radius_mm"
+    ],
+    "radius_only": true,
+    "branches": {
+      "LMCA": {
+        "minimum_radius_mm": 0.15,
+        "num_lesions": 0,
+        "lesions": [],
+        "min_baseline_radius_mm": 1.5774171334380642,
+        "min_unclamped_radius_mm": 1.5774171334380642,
+        "min_diseased_radius_mm": 1.5774171334380642,
+        "max_radius_reduction_fraction": 0.0,
+        "clamped_point_count": 0
+      },
+      "LAD": {
+        "minimum_radius_mm": 0.15,
+        "num_lesions": 0,
+        "lesions": [],
+        "min_baseline_radius_mm": 0.8505906750865518,
+        "min_unclamped_radius_mm": 0.8505906750865518,
+        "min_diseased_radius_mm": 0.8505906750865518,
+        "max_radius_reduction_fraction": 0.0,
+        "clamped_point_count": 0
+      },
+      "LCX": {
+        "minimum_radius_mm": 0.15,
+        "num_lesions": 1,
+        "lesions": [
+          {
+            "branch": "LCX",
+            "type": "diffuse",
+            "start": 0.32500000000000007,
+            "end": 0.775,
+            "severity": 0.45,
+            "plaque_mode": "symmetric",
+            "max_radius_reduction_fraction": 0.45,
+            "affected_point_count": 67
+          }
+        ],
+        "min_baseline_radius_mm": 0.9015320624325718,
+        "min_unclamped_radius_mm": 0.539155452682243,
+        "min_diseased_radius_mm": 0.539155452682243,
+        "max_radius_reduction_fraction": 0.44999999999999996,
+        "clamped_point_count": 0
+      }
+    },
+    "config": {
+      "case_id": "diffuse_lcx",
+      "lesions": [
+        {
+          "branch": "LCX",
+          "type": "diffuse",
+          "start": 0.32500000000000007,
+          "end": 0.775,
+          "severity": 0.45,
+          "plaque_mode": "symmetric"
+        }
+      ]
+    },
+    "healthy": false,
+    "requested_config": {
+      "case_id": "diffuse_lcx",
+      "lesions": [
+        {
+          "branch": "LCX",
+          "type": "diffuse",
+          "start": 0.32500000000000007,
+          "end": 0.775,
+          "severity": 0.45
+        }
+      ]
+    },
+    "lesion_modes": [
+      "diffuse"
+    ],
+    "validation": {
+      "is_valid": true,
+      "errors": [],
+      "warnings": [],
+      "minimum_radius_mm": 0.15,
+      "adjacent_jump_threshold_mm": 0.35,
+      "config_validation": {
+        "is_valid": true,
+        "errors": [],
+        "warnings": [],
+        "normalized_config": {
+          "case_id": "diffuse_lcx",
+          "lesions": [
+            {
+              "branch": "LCX",
+              "type": "diffuse",
+              "start": 0.32500000000000007,
+              "end": 0.775,
+              "severity": 0.45,
+              "plaque_mode": "symmetric"
+            }
+          ]
+        }
+      },
+      "branches": {
+        "LMCA": {
+          "errors": [],
+          "warnings": [],
+          "shape": [
+            60,
+            4
+          ],
+          "xyz_unchanged": true,
+          "baseline_min_radius_mm": 1.5774171334380642,
+          "diseased_min_radius_mm": 1.5774171334380642,
+          "diseased_max_radius_mm": 2.0,
+          "max_radius_reduction_fraction": 0.0,
+          "max_adjacent_jump_mm": 0.008144190018107844,
+          "passes_adjacent_jump_check": true
+        },
+        "LAD": {
+          "errors": [],
+          "warnings": [],
+          "shape": [
+            180,
+            4
+          ],
+          "xyz_unchanged": true,
+          "baseline_min_radius_mm": 0.8505906750865518,
+          "diseased_min_radius_mm": 0.8505906750865518,
+          "diseased_max_radius_mm": 1.3,
+          "max_radius_reduction_fraction": 0.0,
+          "max_adjacent_jump_mm": 0.0033144215201617033,
+          "passes_adjacent_jump_check": true
+        },
+        "LCX": {
+          "errors": [],
+          "warnings": [],
+          "shape": [
+            160,
+            4
+          ],
+          "xyz_unchanged": true,
+          "baseline_min_radius_mm": 0.9015320624325718,
+          "diseased_min_radius_mm": 0.539155452682243,
+          "diseased_max_radius_mm": 1.2,
+          "max_radius_reduction_fraction": 0.44999999999999996,
+          "max_adjacent_jump_mm": 0.06732133970324317,
+          "passes_adjacent_jump_check": true
+        }
+      }
+    }
+  },
+  "radius_model": {
+    "metadata": {
+      "units": "mm",
+      "description": "MVP distance-based coronary radius taper; no disease, motion, pulsatility, or random sampling.",
+      "model": "distance_based_branch_type_with_lmca_cube_law",
+      "branch_types": {
+        "parent_trunk": {
+          "description": "Short parent segment feeding a bifurcation.",
+          "taper_rate_per_mm": 0.0025
+        },
+        "distributing": {
+          "description": "Main coronary distributing artery with gradual taper.",
+          "taper_rate_per_mm": 0.0035
+        },
+        "delivering": {
+          "description": "Smaller delivering branch with faster taper.",
+          "taper_rate_per_mm": 0.0065
+        }
+      },
+      "lmca_bifurcation": {
+        "method": "cube_law",
+        "formula": "lmca_distal = (lad_proximal^3 + lcx_proximal^3)^(1/3)",
+        "cube_law_relative_tolerance": 0.08,
+        "computed_lmca_distal_radius_mm": 1.5774171334380642
+      },
+      "metadata_source": null,
+      "branch_radius_source": {},
+      "branches": {
+        "LMCA": {
+          "proximal_radius_mm": 2.0,
+          "branch_type": "parent_trunk",
+          "taper_rate_per_mm": 0.0025,
+          "taper_method": "cube_law_distal_transition",
+          "distal_radius_mm": 1.5774171334380642,
+          "arc_length_mm": 6.673245891880772,
+          "num_points": 60,
+          "min_radius_mm": 1.5774171334380642,
+          "max_radius_mm": 2.0,
+          "mean_radius_mm": 1.7942191131225944,
+          "is_monotonic_nonincreasing": true
+        },
+        "LAD": {
+          "proximal_radius_mm": 1.3,
+          "branch_type": "distributing",
+          "taper_rate_per_mm": 0.0035,
+          "taper_method": "distance_exponential",
+          "distal_radius_mm": 0.8505906750865518,
+          "arc_length_mm": 121.19672098233872,
+          "num_points": 180,
+          "min_radius_mm": 0.8505906750865518,
+          "max_radius_mm": 1.3,
+          "mean_radius_mm": 1.0605978160814344,
+          "is_monotonic_nonincreasing": true
+        },
+        "LCX": {
+          "proximal_radius_mm": 1.2,
+          "branch_type": "distributing",
+          "taper_rate_per_mm": 0.0035,
+          "taper_method": "distance_exponential",
+          "distal_radius_mm": 0.9015320624325718,
+          "arc_length_mm": 81.70892231890409,
+          "num_points": 160,
+          "min_radius_mm": 0.9015320624325718,
+          "max_radius_mm": 1.2,
+          "mean_radius_mm": 1.042174751595669,
+          "is_monotonic_nonincreasing": true
+        }
+      }
+    },
+    "validation": {
+      "is_valid": true,
+      "errors": [],
+      "warnings": [],
+      "adjacent_jump_threshold_mm": 0.2,
+      "cube_law_relative_tolerance": 0.08,
+      "branches": {
+        "LMCA": {
+          "num_points": 60,
+          "proximal_radius_mm": 2.0,
+          "distal_radius_mm": 1.5774171334380642,
+          "min_radius_mm": 1.5774171334380642,
+          "max_radius_mm": 2.0,
+          "max_step_mm": 0.008144190018107844,
+          "adjacent_jump_threshold_mm": 0.2,
+          "passes_adjacent_jump_check": true,
+          "monotonic_nonincreasing": true
+        },
+        "LAD": {
+          "num_points": 180,
+          "proximal_radius_mm": 1.3,
+          "distal_radius_mm": 0.8505906750865518,
+          "min_radius_mm": 0.8505906750865518,
+          "max_radius_mm": 1.3,
+          "max_step_mm": 0.0033144215201617033,
+          "adjacent_jump_threshold_mm": 0.2,
+          "passes_adjacent_jump_check": true,
+          "monotonic_nonincreasing": true
+        },
+        "LCX": {
+          "num_points": 160,
+          "proximal_radius_mm": 1.2,
+          "distal_radius_mm": 0.9015320624325718,
+          "min_radius_mm": 0.9015320624325718,
+          "max_radius_mm": 1.2,
+          "max_step_mm": 0.00253680636158804,
+          "adjacent_jump_threshold_mm": 0.2,
+          "passes_adjacent_jump_check": true,
+          "monotonic_nonincreasing": true
+        },
+        "bifurcation": {
+          "lmca_distal_radius_mm": 1.5774171334380642,
+          "lad_proximal_radius_mm": 1.3,
+          "lcx_proximal_radius_mm": 1.2,
+          "cube_law_lmca_distal_radius_mm": 1.5774171334380642,
+          "cube_law_relative_error": 0.0,
+          "cube_law_relative_tolerance": 0.08,
+          "passes_cube_law_check": true
+        }
+      }
+    }
+  },
+  "motion": {
+    "number_of_phases": 10,
+    "radial_amplitude": 0.14,
+    "longitudinal_amplitude": 0.1,
+    "torsion_amplitude_deg": 10.0,
+    "peak_phase": 0.35
+  },
+  "pulsatility": {
+    "amplitude": 0.03,
+    "stenosis_compliance_factor": 0.35,
+    "peak_phase": 0.6
+  },
+  "provenance": {
+    "generator_version": "1.0.0",
+    "generation": {
+      "seed": 20260822,
+      "source_case_id": "63.label",
+      "pca_scale": 0.04,
+      "maximum_attempts": 250,
+      "heart_rate_bpm": 60.0
+    },
+    "sampling_strategy": "case_matched_empirical_bootstrap_plus_joint_pca_innovation",
+    "phase_convention": "9 unique temporal intervals plus repeated phase-1 closure frame",
+    "statistics_package": "outputs/lca_ssm/lca_population_model/generator_statistics",
+    "generation_parameters": {
+      "generator_version": "1.0.0",
+      "seed": 20260822,
+      "generation_mode": "frozen_lca_statistics",
+      "sampling_strategy": "case_matched_empirical_bootstrap_plus_joint_pca_innovation",
+      "statistics_package_manifest_sha256": "b041a82e852296dab87084f87993bc927ecf655ad18f45cc4b802fb865af04b6",
+      "git_commit": null,
+      "population_derived": true,
+      "ellipsoid": {
+        "a": 49.0724479702214,
+        "b": 32.415965400222746,
+        "c": 52.60248490987272,
+        "sampling_method": "empirical_joint_patient_bootstrap",
+        "source_case_id": "63.label"
+      },
+      "landmarks": {
+        "lca_ostium": {
+          "name": "lca_ostium",
+          "u": 0.0,
+          "v": 1.4790693283823835,
+          "offset": -3.3826534496557947,
+          "sampling_method": "empirical_joint_case_bootstrap:63.label"
+        },
+        "bifurcation": {
+          "name": "bifurcation",
+          "u": 0.16692753692892914,
+          "v": 1.554478798516074,
+          "offset": -2.6524430311512934,
+          "sampling_method": "empirical_joint_case_bootstrap:63.label"
+        },
+        "lad_endpoint": {
+          "name": "lad_endpoint",
+          "u": 2.784314670777732,
+          "v": 3.1315926535897933,
+          "offset": 4.239977227748651,
+          "sampling_method": "empirical_joint_case_bootstrap:63.label"
+        },
+        "lcx_endpoint": {
+          "name": "lcx_endpoint",
+          "u": 1.6398446404652685,
+          "v": 1.825374894199308,
+          "offset": 14.383640659809451,
+          "sampling_method": "empirical_joint_case_bootstrap:63.label"
+        }
+      },
+      "generation": {
+        "coordinate_frame": "common cardiac frame",
+        "topology_constraint": "LMCA[-1] == LAD[0] == LCX[0]",
+        "topology_error_before_snap_mm": 0.0,
+        "topology_error_after_snap_mm": 0.0,
+        "deviation_sample": {
+          "pca_applied": true,
+          "pca_mean_included": true,
+          "variation_scale": 0.04,
+          "coefficients": [
+            18.811390160930635,
+            -5.3702656036194245,
+            -16.163903897324374,
+            12.184621142875082,
+            11.403386471003367,
+            3.6072405068438953,
+            -6.232817767286024,
+            -2.03999009580148,
+            -7.794757156821309,
+            -1.405390043852132,
+            -7.197320637945027,
+            3.227438630146352,
+            1.2309388661787746
+          ],
+          "coefficient_standard_norms": [
+            0.6771887385382013,
+            -0.2933948572907164,
+            -0.061262055866116695,
+            1.8419822978012794,
+            0.13544013069816516,
+            1.8070491165464908,
+            -0.8133890029281137,
+            1.1351015251344405,
+            1.54963160578091,
+            0.3249634494262519,
+            1.014663435682464,
+            2.5052577215422813,
+            -0.3573935403226243
+          ],
+          "baseline_case_id": "63.label",
+          "baseline_coefficients": [
+            17.505344166450254,
+            -5.016858432660241,
+            -16.108332650501634,
+            10.660931212709771,
+            11.305362713005795,
+            2.5346743815013886,
+            -5.856545028491914,
+            -2.4967926780997742,
+            -8.341001260916983,
+            -1.511026361831006,
+            -7.483020348641082,
+            2.573972201734729,
+            1.3193926588853016
+          ],
+          "innovation_coefficients": [
+            1.3060459944803804,
+            -0.3534071709591835,
+            -0.055571246822740276,
+            1.5236899301653106,
+            0.0980237579975711,
+            1.0725661253425067,
+            -0.3762727387941098,
+            0.4568025822982941,
+            0.546244104095673,
+            0.10563631797887406,
+            0.28569971069605543,
+            0.6534664284116228,
+            -0.08845379270652709
+          ],
+          "innovation_branch_shapes": {
+            "LMCA": [
+              5,
+              3
+            ],
+            "LAD": [
+              12,
+              3
+            ],
+            "LCX": [
+              10,
+              3
+            ]
+          },
+          "branch_shapes": {
+            "LMCA": [
+              5,
+              3
+            ],
+            "LAD": [
+              12,
+              3
+            ],
+            "LCX": [
+              10,
+              3
+            ]
+          }
+        },
+        "pointwise_independent_noise_added": false,
+        "unlearned_tortuosity_perturbation_applied": false,
+        "effective_tortuosity_strength_rad": {
+          "LMCA": 0.0,
+          "LAD": 0.0,
+          "LCX": 0.0
+        },
+        "PCA_endpoint_trend_removed_to_preserve_landmarks": true,
+        "baseline_geometry_source": "exact_matched_fixed_trajectory_and_local_basis_coefficients",
+        "exact_local_deviations_available": true,
+        "exact_cardiac_controls_available": true,
+        "empirical_trajectory_source_case_id": "63.label",
+        "path_interpolation": "normalized_arc_shape_preserving_cubic_bspline",
+        "include_rca": false,
+        "path_config": {
+          "LMCA": {
+            "control_point_count": 4,
+            "sample_count": 60,
+            "tortuosity_strength_rad": 0.008
+          },
+          "LAD": {
+            "control_point_count": 7,
+            "sample_count": 180,
+            "tortuosity_strength_rad": 0.018
+          },
+          "LCX": {
+            "control_point_count": 7,
+            "sample_count": 160,
+            "tortuosity_strength_rad": 0.018
+          },
+          "RCA": {
+            "control_point_count": 8,
+            "sample_count": 190,
+            "tortuosity_strength_rad": 0.018
+          }
+        }
+      },
+      "accepted_generation_attempt": 1
+    },
+    "static_validation": {
+      "accepted": true,
+      "validation_level": "population_thresholds",
+      "validation_policy": {
+        "central_95_population_intervals_are_warnings": true,
+        "observed_real_min_max_used_as_hard_population_limits": true,
+        "branch_course_extrema_used_as_hard_population_limits": true,
+        "shared_anatomical_role_gate_is_hard": true,
+        "hard_anatomical_role_checks": [
+          "lad_is_dominant_descending_branch",
+          "lcx_has_horizontal_crown_course",
+          "lcx_is_more_lateral_than_lad",
+          "lcx_is_not_apex_descending_branch"
+        ],
+        "lmca_must_be_shorter_than_both_daughters": true,
+        "absolute_size_anatomy_checks_are_descriptive": true,
+        "self_clearance_uses_physical_arc_separation": true
+      },
+      "errors": [],
+      "warnings": [
+        "LAD obliquity is outside the real central 95% interval"
+      ],
+      "metrics": {
+        "topology_errors": {
+          "LMCA_to_LAD_mm": 0.0,
+          "LMCA_to_LCX_mm": 0.0,
+          "LAD_to_LCX_mm": 0.0
+        },
+        "branch_lengths_mm": {
+          "LMCA": 6.6732458918807716,
+          "LAD": 121.19672098233872,
+          "LCX": 81.70892231890409
+        },
+        "lmca_is_shorter_than_both_daughters": true,
+        "branch_tortuosity": {
+          "LMCA": 1.0341156221591854,
+          "LAD": 1.27571937706798,
+          "LCX": 1.2305184925629618
+        },
+        "branch_obliquity_rad": {
+          "LMCA": 0.16692753692892895,
+          "LAD": 2.617387133848803,
+          "LCX": 1.4729171035363393
+        },
+        "bifurcation_angle_deg": 103.87320605711716,
+        "LAD_LCX_terminal_separation_mm": 63.26523804587492,
+        "anatomical_direction": {
+          "LAD_length_mm": 121.19672098233872,
+          "LCX_length_mm": 81.70892231890409,
+          "LAD_minus_LCX_length_mm": 39.48779866343463,
+          "LAD_inferior_displacement_mm": 57.70076658255373,
+          "LCX_inferior_displacement_mm": 14.105587019844643,
+          "LAD_minus_LCX_inferior_displacement_mm": 43.59517956270909,
+          "LCX_to_LAD_inferior_displacement_ratio": 0.24446099861885673,
+          "LAD_inferior_displacement_to_length_ratio": 0.47609181267339834,
+          "LCX_inferior_span_to_length_ratio": 0.2083299808500657,
+          "LAD_descending_segment_fraction": 0.810126582278481,
+          "LAD_horizontal_path_fraction": 0.6719136740741465,
+          "LCX_horizontal_path_fraction": 0.8709197124160379,
+          "LAD_terminal_lateral_fraction": 0.622728703864575,
+          "LCX_terminal_lateral_fraction": 0.7941180346985934,
+          "LAD_terminal_lateral_displacement_mm": 75.47267696996833,
+          "LCX_terminal_lateral_displacement_mm": 64.88652880922815,
+          "LCX_to_LAD_lateral_displacement_ratio": 0.8597353560818763,
+          "LAD_initial_inferior_direction_fraction": 0.9763316444437514,
+          "LCX_initial_horizontal_direction_fraction": 0.9354330816827378
+        },
+        "anatomical_role_acceptance": {
+          "accepted": true,
+          "checks": {
+            "lad_has_minimum_inferior_reach": true,
+            "lad_is_dominant_descending_branch": true,
+            "lcx_is_not_apex_descending_branch": true,
+            "lad_has_longitudinal_course": true,
+            "lad_descent_is_sustained": true,
+            "lcx_has_horizontal_crown_course": true,
+            "lcx_inferior_span_is_limited": true,
+            "lcx_is_more_lateral_than_lad": true,
+            "lcx_has_substantial_absolute_lateral_reach": true
+          },
+          "failed_checks": [],
+          "policy": {
+            "coordinate_frame": "common cardiac frame; negative Z is apex-directed",
+            "criterion_type": "repository geometric anatomy QC; not a clinical threshold",
+            "unresolved_assignments_may_train": false
+          }
+        },
+        "minimum_nonlocal_distance_mm": {
+          "LMCA": 2.9317637480037955,
+          "LAD": 11.63151094930516,
+          "LCX": 7.795783396898692
+        },
+        "minimum_interbranch_distance_mm": {
+          "LMCA_to_LAD_mm": 9.633239300221783,
+          "LMCA_to_LCX_mm": 6.987757627910386,
+          "LAD_to_LCX_mm": 12.306920590681143
+        },
+        "branch_progression": {
+          "LMCA": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 3.9790285569208783
+          },
+          "LAD": {
+            "backward_progress_ratio": 0.006148682878842549,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 17.0155154765158
+          },
+          "LCX": {
+            "backward_progress_ratio": -0.0,
+            "terminal_progress_fraction": 1.0,
+            "max_resampled_turn_angle_deg": 19.425870931210227
+          }
+        },
+        "ellipsoid_axes_mm": {
+          "a": 49.0724479702214,
+          "b": 32.415965400222746,
+          "c": 52.60248490987272
+        }
+      }
+    },
+    "sampling": {
+      "attempt_count": 1,
+      "accepted_attempt": 1
+    },
+    "random_seed": 20260822,
+    "clinical_status": "research prototype; not clinically validated"
+  },
+  "validation": {
+    "is_valid": true,
+    "errors": [],
+    "warnings": [],
+    "checks": {
+      "mandatory_lca_branches_present": true,
+      "exact_shared_bifurcation_all_phases": true,
+      "phase_zero_matches_static_reference": true,
+      "all_radii_positive_and_finite": true,
+      "temporal_point_correspondence_preserved": true,
+      "requested_full_cycle_closes_exactly": true,
+      "disease_validation_pass": true
+    },
+    "metrics": {
+      "frame_count": 10,
+      "phase_zero_identity_error_mm": 1.7763568394002505e-14,
+      "maximum_reference_displacement_mm": 7.810685750742066,
+      "maximum_consecutive_phase_displacement_mm": 3.7954145506650243,
+      "maximum_cycle_closing_displacement_mm": 0.0,
+      "maximum_radius_variation_fraction": 0.029797150732258304,
+      "maximum_topology_error_mm": 0.0
+    },
+    "validation_scope": "engineering topology, numerical, temporal-correspondence, disease, and radius checks; not clinical validation"
+  },
+  "arrays": {
+    "geometry_cine.npy": [
+      10,
+      3,
+      50,
+      4
+    ],
+    "geometry_static.npy": [
+      3,
+      50,
+      4
+    ],
+    "geometry_healthy_reference.npy": [
+      3,
+      50,
+      4
+    ],
+    "disease_reduction.npy": [
+      3,
+      50
+    ],
+    "column_order": [
+      "x_mm",
+      "y_mm",
+      "z_mm",
+      "radius_mm"
+    ],
+    "branch_order": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ]
+  },
+  "frame_summaries": [
+    {
+      "phase_index": 0,
+      "phase": 0.0,
+      "time_seconds": 0.0,
+      "contraction_scale": 0.0,
+      "ellipsoid_params": {
+        "a_mm": 49.0724479702214,
+        "b_mm": 32.415965400222746,
+        "c_mm": 52.60248490987272
+      }
+    },
+    {
+      "phase_index": 1,
+      "phase": 0.1111111111111111,
+      "time_seconds": 0.1111111111111111,
+      "contraction_scale": 0.47825397862131824,
+      "ellipsoid_params": {
+        "a_mm": 45.786774882678955,
+        "b_mm": 30.245536380931693,
+        "c_mm": 50.086750140521275
+      }
+    },
+    {
+      "phase_index": 2,
+      "phase": 0.2222222222222222,
+      "time_seconds": 0.2222222222222222,
+      "contraction_scale": 0.8400259231507715,
+      "ellipsoid_params": {
+        "a_mm": 43.301349993177915,
+        "b_mm": 28.603730223802366,
+        "c_mm": 48.183739815228684
+      }
+    },
+    {
+      "phase_index": 3,
+      "phase": 0.3333333333333333,
+      "time_seconds": 0.3333333333333333,
+      "contraction_scale": 0.9972037971811801,
+      "ellipsoid_params": {
+        "a_mm": 42.2215155668181,
+        "b_mm": 27.890420070127323,
+        "c_mm": 47.356945140543644
+      }
+    },
+    {
+      "phase_index": 4,
+      "phase": 0.4444444444444444,
+      "time_seconds": 0.4444444444444444,
+      "contraction_scale": 0.9740671762355546,
+      "ellipsoid_params": {
+        "a_mm": 42.380467454676634,
+        "b_mm": 27.995419496694527,
+        "c_mm": 47.47864951595941
+      }
+    },
+    {
+      "phase_index": 5,
+      "phase": 0.5555555555555556,
+      "time_seconds": 0.5555555555555556,
+      "contraction_scale": 0.8791372219950946,
+      "ellipsoid_params": {
+        "a_mm": 43.0326497883159,
+        "b_mm": 28.426233952389012,
+        "c_mm": 47.978004664502286
+      }
+    },
+    {
+      "phase_index": 6,
+      "phase": 0.6666666666666666,
+      "time_seconds": 0.6666666666666666,
+      "contraction_scale": 0.7212024473438146,
+      "ellipsoid_params": {
+        "a_mm": 44.117684229962805,
+        "b_mm": 29.14297909907132,
+        "c_mm": 48.80878082453609
+      }
+    },
+    {
+      "phase_index": 7,
+      "phase": 0.7777777777777777,
+      "time_seconds": 0.7777777777777777,
+      "contraction_scale": 0.5115815086468103,
+      "ellipsoid_params": {
+        "a_mm": 45.55780999503768,
+        "b_mm": 30.09428821250632,
+        "c_mm": 49.91143905099635
+      }
+    },
+    {
+      "phase_index": 8,
+      "phase": 0.8888888888888888,
+      "time_seconds": 0.8888888888888888,
+      "contraction_scale": 0.2652972365459009,
+      "ellipsoid_params": {
+        "a_mm": 47.24981809303548,
+        "b_mm": 31.211984154532217,
+        "c_mm": 51.20695552166905
+      }
+    },
+    {
+      "phase_index": 9,
+      "phase": 1.0,
+      "time_seconds": 1.0,
+      "contraction_scale": 0.0,
+      "ellipsoid_params": {
+        "a_mm": 49.0724479702214,
+        "b_mm": 32.415965400222746,
+        "c_mm": 52.60248490987272
+      }
+    }
+  ]
+}

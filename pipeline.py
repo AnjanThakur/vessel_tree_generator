@@ -14,6 +14,15 @@ sys.path.insert(0, str(ROOT / "pca_ssm_vessel_tree_generator"))
 from pca_ssm_vessel_tree_generator.run_person1_week1_pipeline import run_pipeline as build_statistics
 from pca_ssm_vessel_tree_generator.run_person2_population_cohort import run as generate_cohort
 from pca_ssm_vessel_tree_generator.validate_person2_population_cohort import run as validate_cohort
+from pca_ssm_vessel_tree_generator.final_validation_audit import (
+    AUDIT as FINAL_AUDIT_DIR,
+    COHORT as FINAL_AUDIT_COHORT,
+    FINAL as FINAL_VALIDATION_DIR,
+    holdout_audit,
+    load_fixed,
+    novelty_audit,
+    run as run_final_audit,
+)
 from run_batch6_cardiac_motion import run_batch6
 from run_batch7_output_formatting import run_batch7
 
@@ -70,6 +79,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     export.add_argument("--input-dir", type=Path, default=DEFAULT_MOTION)
     export.add_argument("--output-dir", type=Path, default=DEFAULT_EXPORT)
     export.add_argument("--num-points", type=int, default=50)
+
+    final_audit = commands.add_parser("audit-final", help="Run the complete independent final system audit")
+    final_audit.add_argument("--cohort-dir", type=Path, default=DEFAULT_COHORT)
+    final_audit.add_argument("--clean", action="store_true")
+    novelty = commands.add_parser("novelty-validate", help="Recompute generation novelty evidence")
+    novelty.add_argument("--cohort-dir", type=Path, default=DEFAULT_COHORT)
+    holdout = commands.add_parser("holdout-validate", help="Run source-grouped internal 5-fold validation")
 
     run_all = commands.add_parser(
         "run-all", help="Run statistics, generation, validation, motion and export"
@@ -153,6 +169,16 @@ def main(argv: list[str] | None = None) -> int:
         _run_motion(args)
     elif args.command == "export":
         _run_export(args)
+    elif args.command == "audit-final":
+        run_final_audit(args)
+    elif args.command == "novelty-validate":
+        FINAL_AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+        FINAL_VALIDATION_DIR.mkdir(parents=True, exist_ok=True)
+        novelty_audit(load_fixed(), args.cohort_dir.resolve())
+    elif args.command == "holdout-validate":
+        FINAL_AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+        FINAL_VALIDATION_DIR.mkdir(parents=True, exist_ok=True)
+        holdout_audit(load_fixed())
     elif args.command == "run-all":
         build_statistics(
             smoke_test=False,

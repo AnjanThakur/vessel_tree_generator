@@ -75,9 +75,12 @@ class PulsatilityConfig:
 
     amplitude: float = 0.03
     stenosis_compliance_factor: float = 0.35
+    peak_phase: float = 0.60
 
     def validate(self) -> None:
         validate_pulsatility(self.amplitude, self.stenosis_compliance_factor)
+        if not 0.0 < self.peak_phase < 1.0:
+            raise ValueError("pulsatility peak_phase must lie in (0, 1)")
 
 
 def _json_load(path: Path) -> dict[str, Any]:
@@ -247,7 +250,7 @@ class CoronaryTreeGenerator:
                     phase,
                     amplitude=pulsatility.amplitude,
                     stenosis_compliance_factor=pulsatility.stenosis_compliance_factor,
-                    peak_phase=motion.peak_phase,
+                    peak_phase=pulsatility.peak_phase,
                 )
                 branches[name] = np.column_stack((frame["vessels_3d"][name], radius))
                 radius_phase_metadata[name] = radius_details
@@ -292,7 +295,14 @@ class CoronaryTreeGenerator:
             "motion": asdict(motion),
             "pulsatility": asdict(pulsatility),
             "provenance": {
+                "generator_version": "1.0.0",
                 "generation": asdict(generation),
+                "sampling_strategy": "case_matched_empirical_bootstrap_plus_joint_pca_innovation",
+                "phase_convention": (
+                    f"{len(phases) - 1} unique temporal intervals plus repeated phase-1 closure frame"
+                    if len(phases) > 1 and phases[0] == 0.0 and phases[-1] == 1.0
+                    else "custom explicit phase sequence"
+                ),
                 "statistics_package": "outputs/lca_ssm/lca_population_model/generator_statistics",
                 "generation_parameters": reference["generation_parameters"],
                 "static_validation": reference["static_validation"],

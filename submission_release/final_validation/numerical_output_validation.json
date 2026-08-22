@@ -1,0 +1,153 @@
+{
+  "cases": [
+    {
+      "case_id": "diffuse_lcx",
+      "geometry_cine_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "geometry_static_shape": [
+        3,
+        50,
+        4
+      ],
+      "branch_order": [
+        "LMCA",
+        "LAD",
+        "LCX"
+      ],
+      "phase_values": [
+        0.0,
+        0.1111111111111111,
+        0.2222222222222222,
+        0.3333333333333333,
+        0.4444444444444444,
+        0.5555555555555556,
+        0.6666666666666666,
+        0.7777777777777777,
+        0.8888888888888888,
+        1.0
+      ],
+      "phase_zero_static_identity_max_error": 8.881784197001252e-15,
+      "cycle_closure_max_error": 0.0,
+      "disease_xyz_identity_max_error": 0.0,
+      "all_finite": true,
+      "all_radii_positive": true,
+      "manifest_validation_passed": true
+    },
+    {
+      "case_id": "focal_lad",
+      "geometry_cine_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "geometry_static_shape": [
+        3,
+        50,
+        4
+      ],
+      "branch_order": [
+        "LMCA",
+        "LAD",
+        "LCX"
+      ],
+      "phase_values": [
+        0.0,
+        0.1111111111111111,
+        0.2222222222222222,
+        0.3333333333333333,
+        0.4444444444444444,
+        0.5555555555555556,
+        0.6666666666666666,
+        0.7777777777777777,
+        0.8888888888888888,
+        1.0
+      ],
+      "phase_zero_static_identity_max_error": 8.881784197001252e-15,
+      "cycle_closure_max_error": 0.0,
+      "disease_xyz_identity_max_error": 0.0,
+      "all_finite": true,
+      "all_radii_positive": true,
+      "manifest_validation_passed": true
+    },
+    {
+      "case_id": "healthy",
+      "geometry_cine_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "geometry_static_shape": [
+        3,
+        50,
+        4
+      ],
+      "branch_order": [
+        "LMCA",
+        "LAD",
+        "LCX"
+      ],
+      "phase_values": [
+        0.0,
+        0.1111111111111111,
+        0.2222222222222222,
+        0.3333333333333333,
+        0.4444444444444444,
+        0.5555555555555556,
+        0.6666666666666666,
+        0.7777777777777777,
+        0.8888888888888888,
+        1.0
+      ],
+      "phase_zero_static_identity_max_error": 8.881784197001252e-15,
+      "cycle_closure_max_error": 0.0,
+      "disease_xyz_identity_max_error": 0.0,
+      "all_finite": true,
+      "all_radii_positive": true,
+      "manifest_validation_passed": true
+    },
+    {
+      "case_id": "tandem_lad",
+      "geometry_cine_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "geometry_static_shape": [
+        3,
+        50,
+        4
+      ],
+      "branch_order": [
+        "LMCA",
+        "LAD",
+        "LCX"
+      ],
+      "phase_values": [
+        0.0,
+        0.1111111111111111,
+        0.2222222222222222,
+        0.3333333333333333,
+        0.4444444444444444,
+        0.5555555555555556,
+        0.6666666666666666,
+        0.7777777777777777,
+        0.8888888888888888,
+        1.0
+      ],
+      "phase_zero_static_identity_max_error": 8.881784197001252e-15,
+      "cycle_closure_max_error": 0.0,
+      "disease_xyz_identity_max_error": 0.0,
+      "all_finite": true,
+      "all_radii_positive": true,
+      "manifest_validation_passed": true
+    }
+  ],
+  "pass": false
+}

@@ -192,6 +192,12 @@ class TreeAssembler:
                 "empirical_trajectory_source_case_id": (
                     None if trajectory_sample is None else trajectory_sample.source_case_id
                 ),
+                "path_interpolation": (
+                    "normalized_arc_shape_preserving_cubic_bspline"
+                    if trajectory_sample is not None
+                    and trajectory_sample.exact_cardiac_points_available
+                    else "normalized_parameter_cubic_bspline"
+                ),
                 "include_rca": include_rca,
                 "path_config": self.path_config,
             },

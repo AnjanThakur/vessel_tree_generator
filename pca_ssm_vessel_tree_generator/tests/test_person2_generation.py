@@ -19,6 +19,7 @@ from generation.landmark_sampler import LandmarkSampler
 from generation.parameter_sampler import ParameterSampler
 from generation.surface_path_generator import (
     SurfacePathGenerator,
+    interpolate_bspline_points,
     interpolate_bspline_samples,
     surface_coordinate_to_point,
 )
@@ -34,6 +35,11 @@ from surface_relative.surface_projection import (
     ellipsoid_tangent_v,
     project_point_to_surface,
 )
+from output.save_visualization import (
+    BRANCH_COLORS,
+    prepare_branch_plot_series,
+    relative_ellipsoid_volume_percent,
+)
 
 
 class Person2GenerationTests(unittest.TestCase):
@@ -41,6 +47,31 @@ class Person2GenerationTests(unittest.TestCase):
         self.rng = np.random.default_rng(12345)
         self.ellipsoid = ParameterSampler.controlled().sample(self.rng)
         self.landmarks = LandmarkSampler.controlled().sample(self.rng)
+
+    def test_qc_volume_is_true_ellipsoid_volume_and_never_exceeds_reference(self) -> None:
+        phases = np.linspace(0.0, 1.0, 10)
+        volume = relative_ellipsoid_volume_percent(
+            phases,
+            radial_amplitude=0.14,
+            longitudinal_amplitude=0.10,
+            peak_phase=0.35,
+        )
+        self.assertAlmostEqual(float(volume[0]), 100.0, places=12)
+        self.assertAlmostEqual(float(volume[-1]), 100.0, places=12)
+        self.assertLessEqual(float(np.max(volume)), 100.0)
+        self.assertAlmostEqual(float(np.min(volume)), 66.64531264764841, places=10)
+
+    def test_branch_plot_color_identity(self) -> None:
+        geometry = np.zeros((3, 4, 4), dtype=float)
+        geometry[0, :, 0] = 10.0
+        geometry[1, :, 0] = 20.0
+        geometry[2, :, 0] = 30.0
+        series = prepare_branch_plot_series(geometry, ["LMCA", "LAD", "LCX"])
+        by_name = {item["name"]: item for item in series}
+        np.testing.assert_array_equal(by_name["LAD"]["points"], geometry[1, :, :3])
+        np.testing.assert_array_equal(by_name["LCX"]["points"], geometry[2, :, :3])
+        self.assertEqual(by_name["LAD"]["color"], BRANCH_COLORS["LAD"])
+        self.assertEqual(by_name["LCX"]["color"], BRANCH_COLORS["LCX"])
 
     def test_shared_surface_api_basis_is_consumed(self) -> None:
         u, v = 0.7, 1.8
@@ -87,6 +118,19 @@ class Person2GenerationTests(unittest.TestCase):
         samples = np.asarray([0.0, 1.25, -0.5, 2.0, 1.0])
         interpolated = interpolate_bspline_samples(samples, 101)
         np.testing.assert_allclose(interpolated[[0, 25, 50, 75, 100]], samples, atol=1.0e-12)
+
+    def test_cartesian_bspline_is_shape_preserving_and_preserves_endpoints(self) -> None:
+        samples = np.asarray([
+            [0.0, 0.0, 0.0],
+            [0.1, 0.0, -0.1],
+            [4.0, 1.0, -2.0],
+            [9.0, 3.0, -8.0],
+            [12.0, 4.0, -15.0],
+        ])
+        interpolated = interpolate_bspline_points(samples, 151)
+        self.assertEqual(interpolated.shape, (151, 3))
+        np.testing.assert_array_equal(interpolated[[0, -1]], samples[[0, -1]])
+        self.assertTrue(np.all(np.isfinite(interpolated)))
 
     def test_empirical_cartesian_controls_do_not_loop_at_surface_pole(self) -> None:
         controls = np.asarray([

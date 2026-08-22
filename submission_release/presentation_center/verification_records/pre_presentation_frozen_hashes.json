@@ -1,0 +1,1947 @@
+{
+  "created_utc": "2026-08-22T14:54:36.827241+00:00",
+  "file_count": 485,
+  "aggregate_sha256": "a55628c0f9725b739a21c15a575580d260f94dc2fc21fb3c4a7e1217a0741229",
+  "files": {
+    "outputs/lca_ssm/ppt_priority_completion/figures/01_population_case_flow.png": {
+      "sha256": "4b5b2399f00bc0c18f7c6a097d43835f81163fd8d8b928cc699bbb5fbea3d5bf",
+      "size_bytes": 76002
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/01_population_case_flow.svg": {
+      "sha256": "d048682371e63676cb97bc6dc0ca852bd30803e9a8602de78d7ae9b70d6e2df3",
+      "size_bytes": 41515
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/02_crown_ellipse_parameter_distributions.png": {
+      "sha256": "272d36bb47d127a3d7a12744491d89f605e2dd55d55ce41a2312b55cacc15823",
+      "size_bytes": 106975
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/02_crown_ellipse_parameter_distributions.svg": {
+      "sha256": "143bf920298a54f8113ae5331cc677f882c7fb31f2bcc52f88bfc9da042177dd",
+      "size_bytes": 63813
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/03_lad_ellipse_parameter_distributions.png": {
+      "sha256": "2faf7d13c1e5faf3ab0d1b906ef8db0fb2e295b4b06b06e85ac0cc92b94d5712",
+      "size_bytes": 112229
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/03_lad_ellipse_parameter_distributions.svg": {
+      "sha256": "b72fb1f9da908faf23921aae52e6bd18ed2c8ad9783fac38ff666cb9158c1f88",
+      "size_bytes": 63920
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/04_plane_angle_distribution.png": {
+      "sha256": "c142af51196f843ad5b20d658a300d7ed0c87abe935191d72fc5569366ba2523",
+      "size_bytes": 54804
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/04_plane_angle_distribution.svg": {
+      "sha256": "139b02ac7d94c19e4b9150036cdc1c273d8694bb769b7e7a556014ddbe25b1ff",
+      "size_bytes": 38948
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/05_landmark_angle_distributions.png": {
+      "sha256": "5cda5a411796513352e50b1bd6fb0ab424a520c0d40088769c2214b7a092044e",
+      "size_bytes": 178558
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/05_landmark_angle_distributions.svg": {
+      "sha256": "72535e4bf0e53c62dc6f0b730000149c582fade3eba6dac8948d3d95d64d26eb",
+      "size_bytes": 98487
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/06_branch_angular_extent_distributions.png": {
+      "sha256": "642472a15ae01b6aa63810b5e8560f12b87b19543d4ae9b181637d1b3a5189d1",
+      "size_bytes": 87273
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/06_branch_angular_extent_distributions.svg": {
+      "sha256": "1072c96716b0c69d3f2fac4511f415d9a40cff7f1079e8ee819a07e8581e7e58",
+      "size_bytes": 54869
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/07_residual_noise_distribution.png": {
+      "sha256": "2757eabe15abc15430ffb383f60306c93648a9652fdbc106eef5d137244768e9",
+      "size_bytes": 121221
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/07_residual_noise_distribution.svg": {
+      "sha256": "5e956317cde66b5c16e522eda8ef7836d574c348e2f2719d5f86107dd9a0ca8c",
+      "size_bytes": 83610
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/08_parameter_correlation.png": {
+      "sha256": "f559b9990d953733b79b5cf8b67e2d4a7d3d40efcd987eab4d1870a8f22e82b2",
+      "size_bytes": 214153
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/08_parameter_correlation.svg": {
+      "sha256": "e3667c421ef2ae21ffca5794941f80d4431d8218184c0d233aad383e42e5d786",
+      "size_bytes": 84101
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/09_example_patient_two_planes.png": {
+      "sha256": "eab63883de328972047297ae8605dd11ca3922396b8a4f7cdf65514e8893b54d",
+      "size_bytes": 442787
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/09_example_patient_two_planes.svg": {
+      "sha256": "809a40edc29de94dd2eb030f53e8aadd1ae332b061e6afd046e8b6bbba9c87ea",
+      "size_bytes": 83120
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/10_example_patient_two_ellipses.png": {
+      "sha256": "358ecc0b32c5949fd6aad88d3217ed78829841024067e0d450ad7be4a7b801e9",
+      "size_bytes": 380867
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/10_example_patient_two_ellipses.svg": {
+      "sha256": "aaa0702ba9b4477c8fd59e7fa6e5363c3d0408b698b70f270cfa63d4aedf79bc",
+      "size_bytes": 52239
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/11_example_patient_source_vs_ellipse.png": {
+      "sha256": "8415adc602bc7a4b9765b5f79ad5053eaddc20bee2f2559e30cb0bdcda77a409",
+      "size_bytes": 290625
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/11_example_patient_source_vs_ellipse.svg": {
+      "sha256": "650284c105b81c3e8ab698a8123765d7af38a1d714e2958167c534828131cba7",
+      "size_bytes": 194178
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/12_population_mean_reference_model.png": {
+      "sha256": "d98aedf96279322f9ff184aa9b4e5836d480748da2f1e749c6dc9513af282bbb",
+      "size_bytes": 475264
+    },
+    "outputs/lca_ssm/ppt_priority_completion/figures/12_population_mean_reference_model.svg": {
+      "sha256": "420df133b9864c6ec08c1a63203d2b8909f97b4e2ed69bfdc325f6a24104a6fc",
+      "size_bytes": 64113
+    },
+    "outputs/lca_ssm/ppt_priority_completion/GENERATOR_METHOD.md": {
+      "sha256": "014bcdb5960013e44972a70363c13a50bb7c400a496f7c35048c27b8b1158dda",
+      "size_bytes": 1455
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/1.label/two_plane_two_ellipse.json": {
+      "sha256": "9436b32e6a4147ee924f6c24b43fbce4449e7eb7620a22aa70aff84086027b1f",
+      "size_bytes": 294474
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/10.label/two_plane_two_ellipse.json": {
+      "sha256": "6c34e717a6f688dba3fb049c608018b7dbc0d1b14f661969b20cfbe4909d984c",
+      "size_bytes": 246167
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/100.label/two_plane_two_ellipse.json": {
+      "sha256": "2c60bdaac65e540ad3b40909ee9be45f9b2cfefb0cc0d38eca73337dca7ab771",
+      "size_bytes": 250497
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/101.label/two_plane_two_ellipse.json": {
+      "sha256": "85f013215c764665ca24736555fe9ad9bf0027e75a78f07cd12605278b076779",
+      "size_bytes": 235904
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/102.label/two_plane_two_ellipse.json": {
+      "sha256": "5c9e9096dee15fd3f635043fe7c08019a77f61299bfea8d43e4183b85ee0641e",
+      "size_bytes": 271000
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/103.label/two_plane_two_ellipse.json": {
+      "sha256": "a49b0572b067f6c1d7c5af49c8ea938a77c4b1d048c3bd1e75b95c6bfc3b76c7",
+      "size_bytes": 242430
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/104.label/two_plane_two_ellipse.json": {
+      "sha256": "31f1cffa01da862b9957b61c81dede65d10b2a4eea342a9ea78c94250da2bee5",
+      "size_bytes": 211604
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/105.label/two_plane_two_ellipse.json": {
+      "sha256": "e0a56f35a491800fc3d9cfe7e30989fbd67e21d6b8fa6611f33013ce87e980eb",
+      "size_bytes": 263753
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/106.label/two_plane_two_ellipse.json": {
+      "sha256": "c72e3a22b2f2f21bbf2496516a1961c3cad033c38bf91ae4fe76e1b94937180b",
+      "size_bytes": 240505
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/107.label/two_plane_two_ellipse.json": {
+      "sha256": "e5c5521eba4c7a752d75f9dd2045c4f4fb16b6728d93e2fd9308aafe08d3ba37",
+      "size_bytes": 289598
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/108.label/two_plane_two_ellipse.json": {
+      "sha256": "8e0ed30d3224c4229f7c1759c0be4dd531f271a45058dcbc1de5f120f465bce0",
+      "size_bytes": 226757
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/109.label/two_plane_two_ellipse.json": {
+      "sha256": "75f6a2bd9ab4382b6481da72b295d6f29582e37f54c3525969373c599426f10a",
+      "size_bytes": 238668
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/11.label/two_plane_two_ellipse.json": {
+      "sha256": "bb5a1fe6c884fbfe61173627e1c5d1eacdc88d299bedbb9f7a37e20409f7b3e5",
+      "size_bytes": 219239
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/110.label/two_plane_two_ellipse.json": {
+      "sha256": "ce6796f177fddc4031a651e6551fcaa09ea8f89595cfce7384a82310fa7b23ce",
+      "size_bytes": 253902
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/111.label/two_plane_two_ellipse.json": {
+      "sha256": "00b39a3b8ee439ffa8afeaffc43b0699c0d43c3613f7891004159f0c32722976",
+      "size_bytes": 246426
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/112.label/two_plane_two_ellipse.json": {
+      "sha256": "3388cb37d04ddcdb8662eb515065deaf31debf157065c6242a516e6b2a84ed43",
+      "size_bytes": 287060
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/113.label/two_plane_two_ellipse.json": {
+      "sha256": "11a4405626a20781b270c7cc68848af01c3a5b4d6ba3a4d5b5fe56da695d23cf",
+      "size_bytes": 283039
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/114.label/two_plane_two_ellipse.json": {
+      "sha256": "9da4259873c337156b88b5dec1ffd3991bbed94742cd19eb1984f482e0d903af",
+      "size_bytes": 221687
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/115.label/two_plane_two_ellipse.json": {
+      "sha256": "e19512a4e0587f1c43c3778ad1822e4c778322dcec34c4bedbc2edd50b266109",
+      "size_bytes": 258282
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/116.label/two_plane_two_ellipse.json": {
+      "sha256": "be68b5180d755a266caa6b5d688842384776190cf8cdb89338d8736074257f21",
+      "size_bytes": 241885
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/117.label/two_plane_two_ellipse.json": {
+      "sha256": "49ee6db4c7c04462a1751c5772f940a74754c494307460a3210593a77f2ec667",
+      "size_bytes": 236635
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/118.label/two_plane_two_ellipse.json": {
+      "sha256": "bdc6053e053b83b510d50930b9cba587f6b912fbd747685ed9958dabf06ce6a1",
+      "size_bytes": 281603
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/119.label/two_plane_two_ellipse.json": {
+      "sha256": "edf531f8fcfdff17337aedf382ac7e1609558f30ecae676899f3c66a4bd9d3fa",
+      "size_bytes": 300320
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/12.label/two_plane_two_ellipse.json": {
+      "sha256": "00bcb411a46d3e7a9457571b165eb85e6a9505dd8d85791c9b3ef4faf55875aa",
+      "size_bytes": 228276
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/120.label/two_plane_two_ellipse.json": {
+      "sha256": "38247d81f96e3a82cb46c5ff1b16a026ae33d68544f0651af7085134b7aec002",
+      "size_bytes": 250244
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/121.label/two_plane_two_ellipse.json": {
+      "sha256": "f6ad66bf0ac247c5819f1dac82641ab0acda951149a54088a6abf094631f889e",
+      "size_bytes": 235123
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/122.label/two_plane_two_ellipse.json": {
+      "sha256": "b6f16677e51b4aace90b8f725dbf4e4af7ac75d301f689b3d1cea8fba86f8abc",
+      "size_bytes": 276802
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/123.label/two_plane_two_ellipse.json": {
+      "sha256": "2b60667599a7ff57cb6cf5e867b0f349c3002f3f877c85ece06355934b8114e0",
+      "size_bytes": 241905
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/124.label/two_plane_two_ellipse.json": {
+      "sha256": "28dc0415dc535fa9210230a4f0bd94750b6ef0777d4878f2de2d71cd468e58d8",
+      "size_bytes": 248874
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/125.label/two_plane_two_ellipse.json": {
+      "sha256": "72faa0f30efb3dfbd71dbed7c7fd96d00341a1e8afcd2e7622835ebced0df502",
+      "size_bytes": 294241
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/126.label/two_plane_two_ellipse.json": {
+      "sha256": "4b1ce6f8026ec1192a46766bd72a6908158c5bfd976ac1de3cd305bd2352a16d",
+      "size_bytes": 272942
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/127.label/two_plane_two_ellipse.json": {
+      "sha256": "71d31a9ef4df329bbd798bb25227cc6075caccbd2c6c5410375333acd331e9fe",
+      "size_bytes": 207063
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/128.label/two_plane_two_ellipse.json": {
+      "sha256": "2693a3f89ddf70f34486adde56c2e40414fbeb48e4d7dcd9599c9aa93323fb7f",
+      "size_bytes": 257117
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/129.label/two_plane_two_ellipse.json": {
+      "sha256": "ec62a13c0281a8a9cb3af67b61fab3dea07a3dcfa53c97ec0052dc3c9645f9fe",
+      "size_bytes": 272066
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/13.label/two_plane_two_ellipse.json": {
+      "sha256": "b8b32bf3546899a1dcead962f2394dd708c61ee97f4987d3133705ab1fa3f510",
+      "size_bytes": 251911
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/131.label/two_plane_two_ellipse.json": {
+      "sha256": "276cd11e8cd8afacb32c2cc95fec1fea0e09df39cb9c2e09a54e341169244c0c",
+      "size_bytes": 256616
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/132.label/two_plane_two_ellipse.json": {
+      "sha256": "528825f83062ddef690f466014640e6899d736b3a81a343cc6f7e2e99dcde2cf",
+      "size_bytes": 281883
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/133.label/two_plane_two_ellipse.json": {
+      "sha256": "3e622ade43d9ee155101a6be7a3e59f096b3672df6bbf4cc6f1cf99dcb6300c8",
+      "size_bytes": 257046
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/134.label/two_plane_two_ellipse.json": {
+      "sha256": "e3f54f53910e423e321b5598edf99fb23c7c1de07c3e3cec05781c92b7cae784",
+      "size_bytes": 193686
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/135.label/two_plane_two_ellipse.json": {
+      "sha256": "d617b0223f0859f94edf99190864f1825de031bd966ac29b159560a72e121df9",
+      "size_bytes": 263378
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/136.label/two_plane_two_ellipse.json": {
+      "sha256": "3f4385d482aeef9159a6785b628857fda8b00ade99a479043f194ca9731b513d",
+      "size_bytes": 296875
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/137.label/two_plane_two_ellipse.json": {
+      "sha256": "76d56c77fd4f9afe350695c9fdda66bac071207dcefce59b5520611cacffe098",
+      "size_bytes": 265811
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/138.label/two_plane_two_ellipse.json": {
+      "sha256": "6b7b68ba5a35b621db3ad10be272c47ea28e8dd8cb41679bcdcab6b7f19f7081",
+      "size_bytes": 262760
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/139.label/two_plane_two_ellipse.json": {
+      "sha256": "5378c08d585ef3400d601af05f77816ac8e5b3a48ae56ec0bcee9025bb5a4443",
+      "size_bytes": 281135
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/14.label/two_plane_two_ellipse.json": {
+      "sha256": "73d1146fdca1feaf8646dfc4184a3e42c8a63a2a7cb683e443d0a7f2315e2140",
+      "size_bytes": 262086
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/140.label/two_plane_two_ellipse.json": {
+      "sha256": "cea7e526850147afb979787ca5b166b0e2c721cbbeaed3f5b19d93681f0515b5",
+      "size_bytes": 281750
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/141.label/two_plane_two_ellipse.json": {
+      "sha256": "430a39093763546ed159e1b9a15ec22ff686ab82ffad5f20cce4da6cb1a0522d",
+      "size_bytes": 263080
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/142.label/two_plane_two_ellipse.json": {
+      "sha256": "95ac5b0b5d3167aeb516c6c0da160d6027e66413a271368936e35f7165e60257",
+      "size_bytes": 289916
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/143.label/two_plane_two_ellipse.json": {
+      "sha256": "d6edfa6e7a6a39c128a87678f899d7d53a710f73d2bb839c58dd1f59ad203bce",
+      "size_bytes": 275255
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/144.label/two_plane_two_ellipse.json": {
+      "sha256": "3a581a31b6f95078add4becd1535d01f119b5505c8872597f8fd36b257ded9a0",
+      "size_bytes": 255081
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/145.label/two_plane_two_ellipse.json": {
+      "sha256": "f1590e1bbd4228beaf4cd073b58da58ef623d09e978404ecb646ad66fdce21e2",
+      "size_bytes": 239078
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/146.label/two_plane_two_ellipse.json": {
+      "sha256": "2dbe3582bec83e4e468c214d79f04224f8b9618c89147126354859431860b58e",
+      "size_bytes": 224314
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/147.label/two_plane_two_ellipse.json": {
+      "sha256": "b0998106c66cef5a2854d3a509d176291d2cd098286e156a6e29ed646efc983d",
+      "size_bytes": 255954
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/148.label/two_plane_two_ellipse.json": {
+      "sha256": "86003423ff6c2649922b92b1b1a9f1d487e16dadd8ea70b0e913c2b83c1dcc40",
+      "size_bytes": 293842
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/15.label/two_plane_two_ellipse.json": {
+      "sha256": "2aef4ea9ae43cc3c424fd510488b1cf066b82fb7fd7977642b6c65161d181d1c",
+      "size_bytes": 258789
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/150.label/two_plane_two_ellipse.json": {
+      "sha256": "c673bd2cadd5c82b1f21242c6b8c8160b411662ad36c360e68d65b3c9949ae56",
+      "size_bytes": 236042
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/151.label/two_plane_two_ellipse.json": {
+      "sha256": "f815fc1366b288aa33f8759956cf4e2c7f4ccd737beaaab62a3bbbbad6f03a00",
+      "size_bytes": 278938
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/152.label/two_plane_two_ellipse.json": {
+      "sha256": "7049515f32b3f01aa2c77abb94b7dc2f6cd2929b749369fcf9c18f36f35917dd",
+      "size_bytes": 272932
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/153.label/two_plane_two_ellipse.json": {
+      "sha256": "482d814d17872f2a314b87d6df2551b9ffb2ba47ce33a4ff6889ba9896fa8f34",
+      "size_bytes": 297964
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/154.label/two_plane_two_ellipse.json": {
+      "sha256": "7b357881d2d428364a03ee7ea778f3068c56375013ef1253c1aaa568ec24d4e6",
+      "size_bytes": 221501
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/155.label/two_plane_two_ellipse.json": {
+      "sha256": "c9acc8289d7d2cfe8c5f2b0b677b90119313e41b2ac5244d53e2816dbda9d344",
+      "size_bytes": 219909
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/156.label/two_plane_two_ellipse.json": {
+      "sha256": "eab1ca46ac0467285d3fa0adea7f2cbca77186c3df036946c0d34176bf9d55eb",
+      "size_bytes": 274040
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/157.label/two_plane_two_ellipse.json": {
+      "sha256": "620e7bfe86c13fb4d281f1b550cb8cbc8b159eda51c4c00856968370d911a95b",
+      "size_bytes": 233905
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/158.label/two_plane_two_ellipse.json": {
+      "sha256": "b2dee318d5a65fcd560faf88f78de57261a4f1ed08faadcd1809a6c383a91ed8",
+      "size_bytes": 233825
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/159.label/two_plane_two_ellipse.json": {
+      "sha256": "acfdefbd876494c0169c37b068c75e4d1f5791b4fff325edb007c16f2cb6e44d",
+      "size_bytes": 231909
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/16.label/two_plane_two_ellipse.json": {
+      "sha256": "c5511ba3874b7a00c1e71bdfa500e3fadd061a49546cdeac1738b67577ec3696",
+      "size_bytes": 285314
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/160.label/two_plane_two_ellipse.json": {
+      "sha256": "9ae9d619cd24a71522f79beca80fca41c2122e0402fc0bf0c0a760a5ab9547e5",
+      "size_bytes": 211841
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/161.label/two_plane_two_ellipse.json": {
+      "sha256": "bf337544b8a207731b7bcf18c2a60f236812bb5b331c5967b37d5b353ca23ba2",
+      "size_bytes": 266703
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/162.label/two_plane_two_ellipse.json": {
+      "sha256": "27afb583d2c79de071e0ea1b4dba831909c654ba08f2697d3265eeedcb41bd0c",
+      "size_bytes": 253011
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/163.label/two_plane_two_ellipse.json": {
+      "sha256": "d021b9cdc83b5ec7200e43702aea834f38dfef45bc78935edcf5a976885d59f1",
+      "size_bytes": 250162
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/164.label/two_plane_two_ellipse.json": {
+      "sha256": "a8c5859e8a1239c702eb9e64b4853ed2a6e65d58275b1af29fb0c603a5bcebed",
+      "size_bytes": 270633
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/166.label/two_plane_two_ellipse.json": {
+      "sha256": "e78752eec5a52ad402a3262ca351674cc05173d4c1c0c6cc97c52c8b0ff40061",
+      "size_bytes": 231159
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/167.label/two_plane_two_ellipse.json": {
+      "sha256": "eb909815addc9b02ff10e661050db29d648b58d455aae083fc49221a938dd866",
+      "size_bytes": 276975
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/168.label/two_plane_two_ellipse.json": {
+      "sha256": "f4e9876384137dd91a8f0d28931bf3aa9851b7e42990ddd3ba6ea871e519686e",
+      "size_bytes": 274434
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/169.label/two_plane_two_ellipse.json": {
+      "sha256": "914f12fbd926bac411ebcddbdaeadda6cd463a4bae5636a09521fc09e4870438",
+      "size_bytes": 228833
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/17.label/two_plane_two_ellipse.json": {
+      "sha256": "8be7940e5ed9a71a689b7bf0467146d745eefaf4702f8f64472a0fa094201ce2",
+      "size_bytes": 194549
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/170.label/two_plane_two_ellipse.json": {
+      "sha256": "96122a1747c4e20048cdc6ba9093d0871caacc08311eae0f712ab7deb20f46fe",
+      "size_bytes": 271001
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/172.label/two_plane_two_ellipse.json": {
+      "sha256": "cf13886f44670e4c104c14e6d4e7fc6e5f028548be94f14e77cc58cd7913b560",
+      "size_bytes": 277637
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/173.label/two_plane_two_ellipse.json": {
+      "sha256": "4060f2e3edb5274d520e848359a84c0ccb0594fffad1c6126736a8c98c9b0b18",
+      "size_bytes": 246967
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/174.label/two_plane_two_ellipse.json": {
+      "sha256": "f95381412f5a84dd3ebad12f521f0b616168e16ba20b9cd82dbefb5d1f8af24e",
+      "size_bytes": 254621
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/175.label/two_plane_two_ellipse.json": {
+      "sha256": "00130f3d714c6df5d2875783b2a68509b21ad221ea4038a40630e54373dafa2b",
+      "size_bytes": 267204
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/177.label/two_plane_two_ellipse.json": {
+      "sha256": "286b26a03fd3bce53bedaf7abecb888ad7ea136d91078a656eae2ada744ac6e3",
+      "size_bytes": 259996
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/178.label/two_plane_two_ellipse.json": {
+      "sha256": "a595d0fea5e2f2d3554daf1fb158836b118cc5392e97d33052186ba665f130a1",
+      "size_bytes": 258622
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/179.label/two_plane_two_ellipse.json": {
+      "sha256": "89acf32f2535220693945bd0583a0a7472cf7aef2dde776e308da4d9c036edcd",
+      "size_bytes": 251186
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/18.label/two_plane_two_ellipse.json": {
+      "sha256": "bea6f7f215f3018ddb122e6a98fab3d9ba57b336a66c6114493dab3366b2f1da",
+      "size_bytes": 252306
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/180.label/two_plane_two_ellipse.json": {
+      "sha256": "c1f90d8817d8ca6435f61e156c2be0f5bb9b3f0dba332999691288f86013c245",
+      "size_bytes": 237438
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/181.label/two_plane_two_ellipse.json": {
+      "sha256": "b1dae9ce3dc30e6d0a292db835ab6d6f5446bbb22034b2915c6a379caadbb999",
+      "size_bytes": 294363
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/182.label/two_plane_two_ellipse.json": {
+      "sha256": "8ac913279e46a9a5e0aada62fa2c397f284d800d16cc3e9e4addc6569a2fa74e",
+      "size_bytes": 214274
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/183.label/two_plane_two_ellipse.json": {
+      "sha256": "bd5f2f0bea050406bc31c37f7f97b9d5881a99d3d93bb0bb6b549426153d37f6",
+      "size_bytes": 254624
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/184.label/two_plane_two_ellipse.json": {
+      "sha256": "8f50ece12235fb3b7dd8d1015a30d8c5b5f495e474b9403b9dc30c673cbd49b9",
+      "size_bytes": 236332
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/185.label/two_plane_two_ellipse.json": {
+      "sha256": "8102cb2276689a6fd533f0e9f3f5d712d38974660592abe633345380000c73e5",
+      "size_bytes": 248129
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/186.label/two_plane_two_ellipse.json": {
+      "sha256": "35a0c931590d81222febb804d0225501b1ea4772762557cbbf22146524632da1",
+      "size_bytes": 214308
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/187.label/two_plane_two_ellipse.json": {
+      "sha256": "9ecdd21ccec7458acb19253d07ed12de5c2d3fcab40313e76a8d4b9295d9c326",
+      "size_bytes": 295268
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/188.label/two_plane_two_ellipse.json": {
+      "sha256": "24325e9ecd2fafd05d573e1f549465d4a6a67a1158329e08a1ae7724da923cfd",
+      "size_bytes": 260916
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/189.label/two_plane_two_ellipse.json": {
+      "sha256": "e4c3ed05281cce5da69011259b19e693f0f05f0af26b903f8b5ce42124c2b273",
+      "size_bytes": 263299
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/19.label/two_plane_two_ellipse.json": {
+      "sha256": "87ded054d7d6a99b1d038e9716fd076565e6d5dc56524fd65ec0b6272ef671b6",
+      "size_bytes": 248896
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/190.label/two_plane_two_ellipse.json": {
+      "sha256": "ad2c49cd24e75dcb4ad082147acfee33e9998094ed7c7ba2772291f0f1bbc01e",
+      "size_bytes": 300262
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/191.label/two_plane_two_ellipse.json": {
+      "sha256": "fe4a449fd339201894fbd514401d5d03a188a99253cd47a0c4fbe7f6b649f904",
+      "size_bytes": 237042
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/192.label/two_plane_two_ellipse.json": {
+      "sha256": "ac72a969b41bb1e85597c13ab3b511c322ce7cfcaf9f6d525d917aeb615be265",
+      "size_bytes": 259489
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/193.label/two_plane_two_ellipse.json": {
+      "sha256": "71cbdfcfddeba15e16afa237fbe696790e2d9a0b31baa8292bd960260cec1170",
+      "size_bytes": 239484
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/194.label/two_plane_two_ellipse.json": {
+      "sha256": "f17dc5b2e6286308135efc8dd1b93b3129dd8e1ddc82c9e7b4346302b49a0a7a",
+      "size_bytes": 274001
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/195.label/two_plane_two_ellipse.json": {
+      "sha256": "19f07f9492c29376d22e11cf71ace548f32d5f177490415996e14f3179d5839d",
+      "size_bytes": 250758
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/196.label/two_plane_two_ellipse.json": {
+      "sha256": "a9d91af8aca8032d578d23938d5bdb418b25a3a70b5bd72fb89b3dcebf9737ae",
+      "size_bytes": 254812
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/197.label/two_plane_two_ellipse.json": {
+      "sha256": "dd1c1cb283ce0f493328a16b20c1b74ffeefc6e075f21ecd667a5d1f49ef0608",
+      "size_bytes": 298069
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/198.label/two_plane_two_ellipse.json": {
+      "sha256": "1dab23f3a48339199da0f0e9515acfbd2d0edefbfc83943d42951edf02054004",
+      "size_bytes": 210005
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/199.label/two_plane_two_ellipse.json": {
+      "sha256": "1dcc32583187851868d00577e0abe8157fe9a3513a0b5e15cc147f3452213887",
+      "size_bytes": 212491
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/2.label/two_plane_two_ellipse.json": {
+      "sha256": "0d9f8518fec4257d5f5a59e08dac2a17643df618d8ecd5b22b3c63bfa3e2cbec",
+      "size_bytes": 272312
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/20.label/two_plane_two_ellipse.json": {
+      "sha256": "02187a97089e062c1a5d05a1b76b96ef79d41fd3852373267d556609ca2fdcc0",
+      "size_bytes": 302547
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/200.label/two_plane_two_ellipse.json": {
+      "sha256": "f175b1970334f2e5b8ba9b61ce9d42812d6147c0d214f88467ee0af8618ee587",
+      "size_bytes": 200957
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/21.label/two_plane_two_ellipse.json": {
+      "sha256": "0c23e3d13a96d12c1663ab6215a067da32583b1fd1493677a6bfa87479dc4416",
+      "size_bytes": 244094
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/22.label/two_plane_two_ellipse.json": {
+      "sha256": "39272d8643861ec8806eef6abe760d9075e6bcceba92769211a917053e8c6faa",
+      "size_bytes": 290750
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/23.label/two_plane_two_ellipse.json": {
+      "sha256": "09267e2a58274f0baf6bdea3bb52c8afc3d8eab85f71ed215a2f955a2103dac1",
+      "size_bytes": 236811
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/24.label/two_plane_two_ellipse.json": {
+      "sha256": "0c3999f3efbccde8ffce6773c6d679cd8d46221f7effb34dee7447eee133b72e",
+      "size_bytes": 263856
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/25.label/two_plane_two_ellipse.json": {
+      "sha256": "5a9bcfe39147f2b7328cf7aa6faa4f108297abfd056d76d8d9960a96c7f3e432",
+      "size_bytes": 222167
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/26.label/two_plane_two_ellipse.json": {
+      "sha256": "8d95403bd1f7d8e29102569b571f69acbcc464cce7920506ff1fb1b509786084",
+      "size_bytes": 241610
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/27.label/two_plane_two_ellipse.json": {
+      "sha256": "0113c67ffa15bf4aa10eb061bdfe21a65ff81eeacbea1c9665736fc8c78d70e0",
+      "size_bytes": 246913
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/28.label/two_plane_two_ellipse.json": {
+      "sha256": "60bd700f6d3bf332a486b5e77a8d9f40369fd8e48c65e3e26a0bf6caac945a8d",
+      "size_bytes": 256020
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/29.label/two_plane_two_ellipse.json": {
+      "sha256": "e91c70b2503392ca1ab02b84f2d1144da4b8a3c4be5520fed0a3297433e39b50",
+      "size_bytes": 289436
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/3.label/two_plane_two_ellipse.json": {
+      "sha256": "3bdc22376e7f6c1dc5cb6ede0a21b3f6b5229aec83d928faf5558bf70e7800f9",
+      "size_bytes": 242508
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/30.label/two_plane_two_ellipse.json": {
+      "sha256": "bed3246fd038b9b027094efe81886525bd6ab7a2fb1ae63c058382caa875ba7d",
+      "size_bytes": 254524
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/31.label/two_plane_two_ellipse.json": {
+      "sha256": "7b4d73079fa4c701a06f8599d24f830ee058c3a851dac166020d439aaee990ff",
+      "size_bytes": 232181
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/32.label/two_plane_two_ellipse.json": {
+      "sha256": "74141b3ee0995ac6dfccab8c1f842a9eac60412ea8397a155201dd3d780d711c",
+      "size_bytes": 276579
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/33.label/two_plane_two_ellipse.json": {
+      "sha256": "c0e26c84b83a45e7381168c29996cab52784d72d50097971c383c248ab3574f6",
+      "size_bytes": 224626
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/34.label/two_plane_two_ellipse.json": {
+      "sha256": "58d965e76c97b9e850254f602c1e97d31eb60a1c4e339487b5486c8b29908216",
+      "size_bytes": 200120
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/35.label/two_plane_two_ellipse.json": {
+      "sha256": "57f39d000be6b2909c81e98880a36082a5d32e030dd4ec618890d86f27a38df0",
+      "size_bytes": 218487
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/36.label/two_plane_two_ellipse.json": {
+      "sha256": "310134f362ea93b95a1bb392f553d62a865683161ef22aadb3f9fe74dde37e31",
+      "size_bytes": 229645
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/37.label/two_plane_two_ellipse.json": {
+      "sha256": "eaa57a997bc459ebac561e750174063a3d27d462ee007a89ac7aa564558de170",
+      "size_bytes": 279468
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/38.label/two_plane_two_ellipse.json": {
+      "sha256": "b7bf505464b737489cc0084388351b99a56419f8535d43bcca138edd707ab4c3",
+      "size_bytes": 220807
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/39.label/two_plane_two_ellipse.json": {
+      "sha256": "2b88d877cdb47e4e81cc7a408dda3ae400d84cdde95e8c515dd85fa9ba2ff105",
+      "size_bytes": 245709
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/4.label/two_plane_two_ellipse.json": {
+      "sha256": "41e98244b47305c67920059afb8d95f19b9a8ad833ea8f5a8381f4c3dae44b5d",
+      "size_bytes": 292529
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/40.label/two_plane_two_ellipse.json": {
+      "sha256": "f8591ead2f53229a795831bcad9a133a4de9e4e13e4bcf51e1f00c15009c8dea",
+      "size_bytes": 295135
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/41.label/two_plane_two_ellipse.json": {
+      "sha256": "a7546c595b7382214aeffe6a5b76e6c0487d00cc92371d00e53148a91540d436",
+      "size_bytes": 194383
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/42.label/two_plane_two_ellipse.json": {
+      "sha256": "1fb6e8d1bbe9c9c0a57fb05007aff30120c6e19505fdfd20ae3b0c5c19cd40f2",
+      "size_bytes": 242622
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/43.label/two_plane_two_ellipse.json": {
+      "sha256": "c6f2984b6669f6475f851993dc7fd7def47c29065f5be5f16ca7bcb74b03c938",
+      "size_bytes": 286899
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/44.label/two_plane_two_ellipse.json": {
+      "sha256": "e6c4688fe0035ffb8905c7e78f1bbaa9f88fb9f477a71dafa4effd2c5839b78b",
+      "size_bytes": 283373
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/45.label/two_plane_two_ellipse.json": {
+      "sha256": "fc113e4c3553dea16e105b46bc2e664cf74cae501b0c7a56c62d3d5f4a9acc28",
+      "size_bytes": 290785
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/46.label/two_plane_two_ellipse.json": {
+      "sha256": "ebf2921376de75ae4833b1cf7b0153ef3600afd93df501893256ab6e397e08e6",
+      "size_bytes": 223279
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/47.label/two_plane_two_ellipse.json": {
+      "sha256": "90a59a0df6874c8a950ef55d5841457221580db842184654f09b7363fffae116",
+      "size_bytes": 267272
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/48.label/two_plane_two_ellipse.json": {
+      "sha256": "246ad8a378e111a50ef6da17e16c03cec4065064ae283d183785c3373b2aa392",
+      "size_bytes": 274226
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/49.label/two_plane_two_ellipse.json": {
+      "sha256": "511618793f4bfcdd722c7ed7a8cb2c044c9377069722fae85f6cb6b046919850",
+      "size_bytes": 275202
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/5.label/two_plane_two_ellipse.json": {
+      "sha256": "1a01019f7dae7e8cafdd631628ef88ed71ac3b70bd2a9ad2d729742b59479d86",
+      "size_bytes": 268005
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/50.label/two_plane_two_ellipse.json": {
+      "sha256": "c4583714c230ff334328749584dbe29e0cf67e7d9b8876f378a28bcff064761b",
+      "size_bytes": 209275
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/51.label/two_plane_two_ellipse.json": {
+      "sha256": "d10fb96387d32dc206fb83f41e1385e736a15cb3ba35dac1b59f9db1048fb7f8",
+      "size_bytes": 206209
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/52.label/two_plane_two_ellipse.json": {
+      "sha256": "5e54cedcecf408a0de85ab6c2d83faedf67c4d0eefbdf11d38d384626c6e4497",
+      "size_bytes": 292335
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/53.label/two_plane_two_ellipse.json": {
+      "sha256": "c5b0abbb6ac55b4a36b3e4509b1bc22f5e8d963f9ab5efef71249bb2db172e0f",
+      "size_bytes": 295741
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/54.label/two_plane_two_ellipse.json": {
+      "sha256": "24f71955e800b97d109cf96e5ae94d3f6c46e766fb345ca1dc6a2cfc6b2529b2",
+      "size_bytes": 270177
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/55.label/two_plane_two_ellipse.json": {
+      "sha256": "6bea036f951a56825be7d819a6abdc5b99af511d152a7e3c965eb87fca67257d",
+      "size_bytes": 285483
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/56.label/two_plane_two_ellipse.json": {
+      "sha256": "321915b56122be70faa35951982848e9aec58a1b57738ac42e69ca9f1c3e36fa",
+      "size_bytes": 273410
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/57.label/two_plane_two_ellipse.json": {
+      "sha256": "6f89dd5c3693999ff5954bd53240e0d1ee1bd2e02a633827423bea81eabd7743",
+      "size_bytes": 280877
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/58.label/two_plane_two_ellipse.json": {
+      "sha256": "6a662538d33e3dfe98ed24db174fb7d9b48d55a839be1466227e08ce22902c59",
+      "size_bytes": 276651
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/59.label/two_plane_two_ellipse.json": {
+      "sha256": "1072b5e9027384024177201bcc4cd33c85c1c2d08f28a27c7d38f2dd411e414c",
+      "size_bytes": 272755
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/6.label/two_plane_two_ellipse.json": {
+      "sha256": "62f491c0cf4d2f70981065faf23698b31bdb299055a9ab146241f49411628d80",
+      "size_bytes": 247154
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/60.label/two_plane_two_ellipse.json": {
+      "sha256": "44b37ba7d9b99003838fb042f37eab6c13d5583f7a2a211d63c5b403693126b4",
+      "size_bytes": 217233
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/61.label/two_plane_two_ellipse.json": {
+      "sha256": "b2b71905d4c7b1cf030c85739b473d8ff0f7ceeb2adf9fbd4b4143ae3caa1656",
+      "size_bytes": 261908
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/62.label/two_plane_two_ellipse.json": {
+      "sha256": "276c454cd76eb76524799f97fa5ba1c66c3cc4b8cc7f8205699301db3c7faf06",
+      "size_bytes": 277989
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/63.label/two_plane_two_ellipse.json": {
+      "sha256": "6254766cb2b59bed4fe8aeb17c752f95775d8ba7e138a45482f05d9bba90371a",
+      "size_bytes": 245812
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/64.label/two_plane_two_ellipse.json": {
+      "sha256": "47f8e16e83d99c44055bd0647c529688bf7c3b435893ac96b44b423df8c7ed05",
+      "size_bytes": 219750
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/66.label/two_plane_two_ellipse.json": {
+      "sha256": "6993001cffb818bd7ec687afcfb5e8c2fb5a260a61632681b0c6776062d03f57",
+      "size_bytes": 242813
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/67.label/two_plane_two_ellipse.json": {
+      "sha256": "cabdf86fac31cd2b681b44db983fab9c0f967916c4fb0294717c49ce282e62cf",
+      "size_bytes": 228985
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/68.label/two_plane_two_ellipse.json": {
+      "sha256": "486394ab56d3d160e7c1fae8cea6b86b09e89fa88b9b9c195263a7f0ffd64fb2",
+      "size_bytes": 219691
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/69.label/two_plane_two_ellipse.json": {
+      "sha256": "05781ad49c0b2fad849aaf2f20ff8fea99915f105d11da99608e1d840b1cccb7",
+      "size_bytes": 255776
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/7.label/two_plane_two_ellipse.json": {
+      "sha256": "9493f3966a5e5e94ef6cd3ada588c633d61ab8c32dcf5b9a54ecc1e77eaabf0b",
+      "size_bytes": 278768
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/70.label/two_plane_two_ellipse.json": {
+      "sha256": "fb110045a8861ebd65d447d27e2c82da0ad9d5238de26552bd5bf8f0ecb6a7a1",
+      "size_bytes": 298717
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/71.label/two_plane_two_ellipse.json": {
+      "sha256": "623a6f8c45c098600a9ac2f4dc696c7e1d9106b96aeb8b8014f22ef6f666a60d",
+      "size_bytes": 258874
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/72.label/two_plane_two_ellipse.json": {
+      "sha256": "ba742f1c18b9741fa75f376e0993e70a42820027524c14c067f21e7c29e13326",
+      "size_bytes": 222674
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/73.label/two_plane_two_ellipse.json": {
+      "sha256": "81a94e747e9a7e484f0a74a39e5a751297557900793b4b6c21dba1bc516f1377",
+      "size_bytes": 252538
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/74.label/two_plane_two_ellipse.json": {
+      "sha256": "11722deb71ef27ef753d6cddb0cc988190edcc303697cbb4419464e236d10cb1",
+      "size_bytes": 253151
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/76.label/two_plane_two_ellipse.json": {
+      "sha256": "f785906c4d97e0f645e92632beec6f47698d916a5d48d388eedf244ef087b20a",
+      "size_bytes": 264512
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/77.label/two_plane_two_ellipse.json": {
+      "sha256": "22bf63c22fd04bb71f2ff28f778b46524318b648b3616d11a29079d2af27c09b",
+      "size_bytes": 303687
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/78.label/two_plane_two_ellipse.json": {
+      "sha256": "fa56b793f9cce690dc88cffa23e5fb33ca4013162060b23c9a3532cd4e5b1f2d",
+      "size_bytes": 243542
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/79.label/two_plane_two_ellipse.json": {
+      "sha256": "9c6df5ecc0ded8f4007d263a5d3a571f2db97b5aa9de609f93fc2ef3e8bba995",
+      "size_bytes": 234035
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/8.label/two_plane_two_ellipse.json": {
+      "sha256": "b8ef97221ba56323d5a9ca61d6ed307b856fbf1417ed865081a2fae83677cea7",
+      "size_bytes": 241917
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/81.label/two_plane_two_ellipse.json": {
+      "sha256": "9569f6ae2ab40d350557d68fe48f14317c5d4cb7bad8116299e87e1e47fe9d55",
+      "size_bytes": 284508
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/82.label/two_plane_two_ellipse.json": {
+      "sha256": "3b81df66783b908130f618152c053dcd13c9c2c17a1e563fdd6bbbaf27b7c785",
+      "size_bytes": 225042
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/83.label/two_plane_two_ellipse.json": {
+      "sha256": "ed36f7e2ba8c085de5f27d7b0a2bd9d8735dd398093972ad78f00a4c98c0f8d8",
+      "size_bytes": 225617
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/84.label/two_plane_two_ellipse.json": {
+      "sha256": "49380f5fcc8ca05d99bfabdc37d4cff3c9e18114f62584fd48a243d7a0155eec",
+      "size_bytes": 269552
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/85.label/two_plane_two_ellipse.json": {
+      "sha256": "65757d53259ff92bf1f26f6a846474b27f9f17fdab916724b047b543ad2abc1c",
+      "size_bytes": 231233
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/86.label/two_plane_two_ellipse.json": {
+      "sha256": "b812fecbb6779fb6daadeb0302b429ad34ce3b8350d069e96f01ebe2a3a97110",
+      "size_bytes": 230648
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/87.label/two_plane_two_ellipse.json": {
+      "sha256": "edcd853fda28c02ea89dcb998971ca0fd5496d324c2f905178a587125aa00ef1",
+      "size_bytes": 259244
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/88.label/two_plane_two_ellipse.json": {
+      "sha256": "424e4601bb3cba314a59838c74789bd84c52c4dcd5f085d0788b7e81416a9da8",
+      "size_bytes": 212091
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/89.label/two_plane_two_ellipse.json": {
+      "sha256": "018199587c1cde69ebf015dd9bfcc9289cead9faee0df564f409715d385acf67",
+      "size_bytes": 243025
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/9.label/two_plane_two_ellipse.json": {
+      "sha256": "87ed19d1d1f97982a8cb0b951d7fe255ed389cc227e3c095ca9882f85b6a2cff",
+      "size_bytes": 274239
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/90.label/two_plane_two_ellipse.json": {
+      "sha256": "2912406838ac2710a0fbd0650c6f9252b0c9a035766138f7d09958de6f4b0043",
+      "size_bytes": 258500
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/91.label/two_plane_two_ellipse.json": {
+      "sha256": "71d1c3e61cb45ef93ac8c3ecddc6f4eb1ccbaa7938bd27a061e87f8d1d6afe02",
+      "size_bytes": 271218
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/92.label/two_plane_two_ellipse.json": {
+      "sha256": "b5249af24b93ff5ee10aa99baa6c9624404b11bb9a20cbf6ffd43ed14bd585ad",
+      "size_bytes": 285308
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/93.label/two_plane_two_ellipse.json": {
+      "sha256": "a6083c56e7db0a4a9bb765a7c2fccd69427d37e71bd55adae77a881fe2f98647",
+      "size_bytes": 251815
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/94.label/two_plane_two_ellipse.json": {
+      "sha256": "28351689c0ea0b96eb6a27b10a1c2d2a0ec7ef7385facd93dce8c74341992ab0",
+      "size_bytes": 257910
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/95.label/two_plane_two_ellipse.json": {
+      "sha256": "681d4689277ea8366f50ab422a52b25a39b88c4caac8f11f2c7ad7f4051fc401",
+      "size_bytes": 272208
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/96.label/two_plane_two_ellipse.json": {
+      "sha256": "50d34b46924fc7b2c2a7ea64e4efd1f921790c5591f2f551b3ca2edcdd0558e1",
+      "size_bytes": 271523
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/98.label/two_plane_two_ellipse.json": {
+      "sha256": "07bc3eb29299e3b9d41c3ddafe8d549899058bfae5d060b262182b8815d5df49",
+      "size_bytes": 268460
+    },
+    "outputs/lca_ssm/ppt_priority_completion/patients/99.label/two_plane_two_ellipse.json": {
+      "sha256": "956965227801d4745775dd29e80a8971fe1a6f17fc48f61ba7a07da6ec456869",
+      "size_bytes": 280077
+    },
+    "outputs/lca_ssm/ppt_priority_completion/population_case_status.csv": {
+      "sha256": "be9d5f9773806c3b6e6835fbead13e71d52946e8fc1e9ba0d9b61f97bf3f59cf",
+      "size_bytes": 11131
+    },
+    "outputs/lca_ssm/ppt_priority_completion/population_parameter_correlation.csv": {
+      "sha256": "30c51e677192f7726d77e1af693e432be9933fa980e6b131e679aafe6abdbe39",
+      "size_bytes": 4823
+    },
+    "outputs/lca_ssm/ppt_priority_completion/population_pointwise_ellipse_residuals.csv": {
+      "sha256": "fd7a0a4d4d9d8d504008f2d2f45ea2596c0c85abf48f5ae744c002c15aa8499c",
+      "size_bytes": 18270577
+    },
+    "outputs/lca_ssm/ppt_priority_completion/population_statistics.csv": {
+      "sha256": "63399931a446a242afcf2a724553c092dd4dc3407fa48209d79920d971bdb953",
+      "size_bytes": 8435
+    },
+    "outputs/lca_ssm/ppt_priority_completion/population_statistics.json": {
+      "sha256": "2042b459eb9f1ece19916754056afa70e3fe579ee05e76deddfb7b963abadd3a",
+      "size_bytes": 16339
+    },
+    "outputs/lca_ssm/ppt_priority_completion/POPULATION_TWO_ELLIPSE_METHOD.md": {
+      "sha256": "8ebaa8db32b16062210f4ec14f418aca4d47a22949be8d6fac054cf867eeb297",
+      "size_bytes": 2513
+    },
+    "outputs/lca_ssm/ppt_priority_completion/population_two_plane_two_ellipse_parameters.csv": {
+      "sha256": "ffbf2af7f0c1da0043fdecbb7156ff35dd46622f64065903345df7bca926ab33",
+      "size_bytes": 324973
+    },
+    "outputs/lca_ssm/ppt_priority_completion/PPT_PRIORITY_IMPLEMENTATION_REPORT.md": {
+      "sha256": "71b97706c2091e4e5368562407825d90a061243988ffa4b207a1d28e8020958d",
+      "size_bytes": 2001
+    },
+    "outputs/lca_ssm/ppt_priority_completion/PPT_REQUIREMENT_GAP_AUDIT.md": {
+      "sha256": "459f513e52a165301ec9f5b2807bbd309e6590bb5bc935a17ad750eebda07042",
+      "size_bytes": 3306
+    },
+    "outputs/lca_ssm/ppt_priority_completion/presentation/LCA_PPT_Priority_Two_Plane_Two_Ellipse_Generative_Model.pptx": {
+      "sha256": "9e3b6c06abc3f4fdf2648c957e93b96273135c7950231381c6a22ca312eb1437",
+      "size_bytes": 2351954
+    },
+    "outputs/lca_ssm/ppt_priority_completion/protected_stage1_integrity.json": {
+      "sha256": "224e1203520a3d73e6d5717e778a82b8b6828628c92290a1cb95fcbcec30ccbc",
+      "size_bytes": 41565
+    },
+    "outputs/lca_ssm/ppt_priority_completion/run_manifest.json": {
+      "sha256": "7d6991fa2498a23146e4b177a1c8c902b94185a57ab38fd0ea076027ac907a15",
+      "size_bytes": 1903
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/01_source/bifurcation.vtp": {
+      "sha256": "30bc54fc7fe775ef5e62fa9ff522c53dd2dcc306e1153d912c0fa0c1dc3827a4",
+      "size_bytes": 2482
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/01_source/LAD_source.vtp": {
+      "sha256": "c20d76124d08e718d6c487ef83c94cce9f53fb31000a51fa029c8038ba8ebc77",
+      "size_bytes": 10732
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/01_source/LCX_source.vtp": {
+      "sha256": "e4f5fab52d68fdc30ac8e64745d2deaef1f8e06efe39a21b01ae6fd9df3dc9ea",
+      "size_bytes": 7232
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/01_source/LMCA_source.vtp": {
+      "sha256": "98350bf71ed68b2d3adaefb82b8c98cc73154b57c97934dad24f1b151fd10732",
+      "size_bytes": 4003
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/01_source/RCA_candidate_source.vtp": {
+      "sha256": "9f87ad1f88b4f29a36e35d09bbb2778647149659e3e66b2c7a865f0060ec7da6",
+      "size_bytes": 8545
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/01_source/source_centerlines.vtm": {
+      "sha256": "a5041d23e546b55a03d1b8a9f3244486c7a8ad8e8f5e3a0bdc7196e02b72cd18",
+      "size_bytes": 541
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/02_planes/coronary_SVD_plane.vtp": {
+      "sha256": "0d37640d876385461dafe9ceeb85e66e36af582489e3084e24b01bc2a65098a8",
+      "size_bytes": 4010
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/02_planes/LAD_SVD_plane.vtp": {
+      "sha256": "9b94b81ce7dc3519c1f837ff3e05dcdbfb2d03b05814041dac69120e6b37b30f",
+      "size_bytes": 3987
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/02_planes/measurement_planes.vtm": {
+      "sha256": "d72a270c038fc49984b3d88d839466832d6e47c3fee11ae6428159a51d1cd033",
+      "size_bytes": 338
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/03_ellipses/crown_fitted_ellipse.vtp": {
+      "sha256": "20b4fd6c326245ad4c58cea35a87c399acf18c5ae0f5f184fe30819a8f6a6e43",
+      "size_bytes": 34457
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/03_ellipses/fitted_ellipses.vtm": {
+      "sha256": "82d17ff3414ecbc6bbec0762f71a9b77db92af16f5e9903f56aea179c7f9b8c9",
+      "size_bytes": 352
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/03_ellipses/LAD_fitted_ellipse.vtp": {
+      "sha256": "270d8dfce0757a117af67eb2614584c4c70bd6dbad05b06fcf65594c6e4175c8",
+      "size_bytes": 34575
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/04_landmarks/landmark_points.vtp": {
+      "sha256": "3d8c8aaebfd7211d7a8a00e2348f78859362982d7d54ac3d5b8c879e004f4f73",
+      "size_bytes": 3134
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/04_landmarks/landmarks.vtm": {
+      "sha256": "c5a8be047583dd707c691466648ba362be3bfff0400dbd7a9a519d22e29859ca",
+      "size_bytes": 253
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/05_residuals/LAD_source_to_ellipse_residuals.vtp": {
+      "sha256": "8f4c6bf61cb60bb43e92261a99e99e72ac2b6a94ce8af72f037b329d91cf4493",
+      "size_bytes": 7340
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/05_residuals/LCX_source_to_ellipse_residuals.vtp": {
+      "sha256": "3aff55867d57af397219d0c4d7ff400015ee5e827cb679a2b88b6c5f23c30327",
+      "size_bytes": 5687
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/05_residuals/residuals.vtm": {
+      "sha256": "3e1563af6c98bbf8e55d7bce0eaea07e656cd2df6a2170bfc81d31f109fd9dcd",
+      "size_bytes": 380
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/06_combined/ppt_two_plane_two_ellipse_model.vtm": {
+      "sha256": "de766ed9e4269dcdb96a3998b53b1d2eca28f8f69b339caef594e7c42f24ee0d",
+      "size_bytes": 1307
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/measurements.json": {
+      "sha256": "a86ca7d34033a29ab151d13fa10d577e21226e8ddad435fc4307cfe23c732389",
+      "size_bytes": 263992
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_01_source_only.png": {
+      "sha256": "e4635cff829144de36de3f0925855adf7501a284cb095655eaf46f9324ce4a44",
+      "size_bytes": 286971
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_02_measurement_planes.png": {
+      "sha256": "e287b64fade233f7dce34acc472eba8ca1ee74970b38b37dc682a768794bc9e1",
+      "size_bytes": 374864
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_03_fitted_ellipses.png": {
+      "sha256": "72b87f55f1fe64aa65397794332382a4c8efb8d758af822a9fb1bbaf6358e7ea",
+      "size_bytes": 325808
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_04_source_plus_planes.png": {
+      "sha256": "64fa5761b748d3e44c5f803ec964b28aa7d6ca51111828ab7caf8898ffee43d1",
+      "size_bytes": 407265
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_05_source_plus_ellipses.png": {
+      "sha256": "cc1d4dbf057b73c2abf8ee09b6477ad088a352cf4200bc4d1c1951049ddcf839",
+      "size_bytes": 335381
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_06_complete_model.png": {
+      "sha256": "d1c3d29e9533eb0154375e37ab6f78cc767887e67a0e25a17a55c455d086e35e",
+      "size_bytes": 345773
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/preview_07_residual_connectors.png": {
+      "sha256": "b7cbab4aa7ce18f4f924701967bdd7c6f3f338028f722a2c2a898cae96fc4671",
+      "size_bytes": 341070
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/README.md": {
+      "sha256": "d11d40b798e9f6b464953a0e6bfc05489cb8d8feaa7efc3154abb5cd61f33169",
+      "size_bytes": 1008
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/189.label/vtk_validation.json": {
+      "sha256": "39f506c52a2cde74ed73f857244e803f69cc4b3ab833769e051aae7b6719ed6f",
+      "size_bytes": 4274
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/01_source/bifurcation.vtp": {
+      "sha256": "768a9482b0c2899b5f871a47528a910cd843acd81eda9a29e614fc50b86cde6e",
+      "size_bytes": 2482
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/01_source/LAD_source.vtp": {
+      "sha256": "5bd40c5a352c2a18b87ea186ee991780f224395e8a4f097bfb286997aceec26b",
+      "size_bytes": 13545
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/01_source/LCX_source.vtp": {
+      "sha256": "4c9f753935ec5305962c5c9a98209e33cee185bd9f024e4e67aadbbd3e4664a3",
+      "size_bytes": 7188
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/01_source/LMCA_source.vtp": {
+      "sha256": "22d4d6f675bd9c4edd54bb17bb7684ed641ff8c5e86876ce042ff33e73c64dbc",
+      "size_bytes": 4776
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/01_source/source_centerlines.vtm": {
+      "sha256": "5d64ebe40e71d49ee613a62cd9caf1b285efbf3cf5add6738e0c65a3cf33cdb4",
+      "size_bytes": 454
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/02_planes/coronary_SVD_plane.vtp": {
+      "sha256": "aa666f894204f271754908faabb6deb599a3f72b799c4d81b926394450cdc0bf",
+      "size_bytes": 4002
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/02_planes/LAD_SVD_plane.vtp": {
+      "sha256": "8505a616fdf18ff817e7eeddeee48685a93d90f36bc7f0fa6d33c9a8da755c91",
+      "size_bytes": 4003
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/02_planes/measurement_planes.vtm": {
+      "sha256": "d72a270c038fc49984b3d88d839466832d6e47c3fee11ae6428159a51d1cd033",
+      "size_bytes": 338
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/03_ellipses/crown_fitted_ellipse.vtp": {
+      "sha256": "be8a55eff23bcbf337dd51bbe4984a4d087ddb8200a38ca025016900076b87fc",
+      "size_bytes": 34489
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/03_ellipses/fitted_ellipses.vtm": {
+      "sha256": "82d17ff3414ecbc6bbec0762f71a9b77db92af16f5e9903f56aea179c7f9b8c9",
+      "size_bytes": 352
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/03_ellipses/LAD_fitted_ellipse.vtp": {
+      "sha256": "8cc005ded97fac8549f6cc444f607c2610d0fe2f89473a1b852102182e835e24",
+      "size_bytes": 34362
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/04_landmarks/landmark_points.vtp": {
+      "sha256": "538ad8a9baaff90ee7f92e38e380d94df59db173e0da580fe54c00f7a829375a",
+      "size_bytes": 3028
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/04_landmarks/landmarks.vtm": {
+      "sha256": "c5a8be047583dd707c691466648ba362be3bfff0400dbd7a9a519d22e29859ca",
+      "size_bytes": 253
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/05_residuals/LAD_source_to_ellipse_residuals.vtp": {
+      "sha256": "7d44991104aa5047d6b3c067675e7d44e2ba316c5abfe6ef9e5bf98d2adfbe0f",
+      "size_bytes": 8641
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/05_residuals/LCX_source_to_ellipse_residuals.vtp": {
+      "sha256": "75ae86fc76cf949c67a96da341f7a593d25b7de1d1f64aaa3d053c7386f32669",
+      "size_bytes": 5757
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/05_residuals/residuals.vtm": {
+      "sha256": "3e1563af6c98bbf8e55d7bce0eaea07e656cd2df6a2170bfc81d31f109fd9dcd",
+      "size_bytes": 380
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/06_combined/ppt_two_plane_two_ellipse_model.vtm": {
+      "sha256": "dd442ca1429fc299e0932d7da7c6ce8480e36499a44eb6b2689aaa3a8631b5e1",
+      "size_bytes": 1206
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/measurements.json": {
+      "sha256": "2d3ca025c5b94e9636b6d8f8b6606a6586f7b97755da6f5c28f79c2b7af35c1f",
+      "size_bytes": 246292
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_01_source_only.png": {
+      "sha256": "9a3a21b07ec6091a32ba87c2516559998b0f308c80b0bf56c2a1205794f0844c",
+      "size_bytes": 271017
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_02_measurement_planes.png": {
+      "sha256": "2e689d009a71c58415dad9680a9dfe4529a2c5e5cd11d2bebb48a87443f623a8",
+      "size_bytes": 340961
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_03_fitted_ellipses.png": {
+      "sha256": "209e4ebe45a43b932fcbe9d1af8e01671fec0d25ab34737554e276f9721b045f",
+      "size_bytes": 273821
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_04_source_plus_planes.png": {
+      "sha256": "c04f962b49d163b8c3d8507199d7386d036138031cfc1afcd188cf7a68a9c57f",
+      "size_bytes": 368682
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_05_source_plus_ellipses.png": {
+      "sha256": "61991271376bf7fd24c570dd881d054039959650336db2fd9ce9db337a11f25d",
+      "size_bytes": 284708
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_06_complete_model.png": {
+      "sha256": "f54535d000f69597bf5e25fe7f9222ad2c3db81a3e38f7e5d79c98ebe63c2874",
+      "size_bytes": 290429
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/preview_07_residual_connectors.png": {
+      "sha256": "7bf4e34594c5896a4565b3c7c4537fec1b2e023d75671fcc9792372e92148cd5",
+      "size_bytes": 292045
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/README.md": {
+      "sha256": "8088691bcf25d0524dcdba71d2a70613a44d85740e270e81494cad7f8502b955",
+      "size_bytes": 1113
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/39.label/vtk_validation.json": {
+      "sha256": "09c048ba54183fd64f01d9c2eb94ef0ed7f6095b17bf008fc906056964df7d1f",
+      "size_bytes": 3943
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/01_source/bifurcation.vtp": {
+      "sha256": "f3f01883a7d5aa2c84255bb7f6123302224f046e6128c7c09c3b50411659ca98",
+      "size_bytes": 2484
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/01_source/LAD_source.vtp": {
+      "sha256": "518995c9918cc50491b66b8aa1157fa1394fe841442113180faa6a2489a76c65",
+      "size_bytes": 10054
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/01_source/LCX_source.vtp": {
+      "sha256": "1cbbedafbf840df460781969da5a7142934045e6681ccf9d3de590eabd5e2be7",
+      "size_bytes": 8234
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/01_source/LMCA_source.vtp": {
+      "sha256": "cca5929da3dec82ed5059c83e09985119901c03d2062a477934353d466c7d42b",
+      "size_bytes": 4173
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/01_source/RCA_candidate_source.vtp": {
+      "sha256": "856a4363cee33555db91acf27d24f083f0d55e8427a68c5f04f1b827f9c76272",
+      "size_bytes": 9370
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/01_source/source_centerlines.vtm": {
+      "sha256": "a5041d23e546b55a03d1b8a9f3244486c7a8ad8e8f5e3a0bdc7196e02b72cd18",
+      "size_bytes": 541
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/02_planes/coronary_SVD_plane.vtp": {
+      "sha256": "0e7726e07cce8a3b125d7fc7f8769ed9e7abc3aa8475af4033c854e913646689",
+      "size_bytes": 3984
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/02_planes/LAD_SVD_plane.vtp": {
+      "sha256": "249371a05374ebece758a8ab1aa10a504cec9ccc918b89645807302132ad8c54",
+      "size_bytes": 3999
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/02_planes/measurement_planes.vtm": {
+      "sha256": "d72a270c038fc49984b3d88d839466832d6e47c3fee11ae6428159a51d1cd033",
+      "size_bytes": 338
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/03_ellipses/crown_fitted_ellipse.vtp": {
+      "sha256": "58b8d8e0844049ca89ba31596d7a854ef56d4eb0f4fa5c0c226f6de4055d3630",
+      "size_bytes": 34348
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/03_ellipses/fitted_ellipses.vtm": {
+      "sha256": "82d17ff3414ecbc6bbec0762f71a9b77db92af16f5e9903f56aea179c7f9b8c9",
+      "size_bytes": 352
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/03_ellipses/LAD_fitted_ellipse.vtp": {
+      "sha256": "276614ee6bab8e46f656afa60018c0343ec8156090a23ccaa223896253cf74fb",
+      "size_bytes": 34423
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/04_landmarks/landmark_points.vtp": {
+      "sha256": "d5ce2b1a6dd721a13c4d06083a9555f7e0c31830a76d470a457ef825df8ba453",
+      "size_bytes": 3124
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/04_landmarks/landmarks.vtm": {
+      "sha256": "c5a8be047583dd707c691466648ba362be3bfff0400dbd7a9a519d22e29859ca",
+      "size_bytes": 253
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/05_residuals/LAD_source_to_ellipse_residuals.vtp": {
+      "sha256": "8fde560dd37b533c88440a115d2924052da3f2051a8467111135493dd3ce8a09",
+      "size_bytes": 6938
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/05_residuals/LCX_source_to_ellipse_residuals.vtp": {
+      "sha256": "5bf3ac523ec52f80d153eb0339b7c9a09c9e56e43565b49c69d3ad2bce6ec088",
+      "size_bytes": 6176
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/05_residuals/residuals.vtm": {
+      "sha256": "3e1563af6c98bbf8e55d7bce0eaea07e656cd2df6a2170bfc81d31f109fd9dcd",
+      "size_bytes": 380
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/06_combined/ppt_two_plane_two_ellipse_model.vtm": {
+      "sha256": "de766ed9e4269dcdb96a3998b53b1d2eca28f8f69b339caef594e7c42f24ee0d",
+      "size_bytes": 1307
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/measurements.json": {
+      "sha256": "d81d5670e4f54dfcae5d23508bcd84fdbaf8ab3826f950ae0a07a057cf87dc93",
+      "size_bytes": 271899
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_01_source_only.png": {
+      "sha256": "53299c57750c8c1a978392751fde1a7f012d9b0dd55bd1345d282075590d6e6a",
+      "size_bytes": 299521
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_02_measurement_planes.png": {
+      "sha256": "ffcf127b91da653305d0ca7377626cd527656a1de462f53dc352827f03c256e8",
+      "size_bytes": 361111
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_03_fitted_ellipses.png": {
+      "sha256": "6fa595a1fdff5d9fb29f79d0b5d873e37ccca97703ee77b5716ca61e14d6ca1c",
+      "size_bytes": 307758
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_04_source_plus_planes.png": {
+      "sha256": "804225eab333b4497b3c59284ba1efdcfb1b92f258b613ab25b836e927fd0906",
+      "size_bytes": 397618
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_05_source_plus_ellipses.png": {
+      "sha256": "080b129983c37943b0fa91e13925fa4c474d400a636e6bc4a3285ea6858a8f0e",
+      "size_bytes": 345919
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_06_complete_model.png": {
+      "sha256": "3a45dad7ce3af6d95c3a609e09970b2c2b574fec5ec17dfc253330131015279c",
+      "size_bytes": 421749
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/preview_07_residual_connectors.png": {
+      "sha256": "08566326d51b0081287049d5406974c88a09c8d310a4449ef4dc8650de0a4b2c",
+      "size_bytes": 360094
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/README.md": {
+      "sha256": "7fecdef063e5db131a6427e576b391b6470af3364857f3ecd6fc0bdce5e51b80",
+      "size_bytes": 1006
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/91.label/vtk_validation.json": {
+      "sha256": "2745b9ff44dedf1ffa7794de4459279de73e811fe29aeae94d6bbdfacf83814b",
+      "size_bytes": 4273
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/export_manifest.json": {
+      "sha256": "15adf20d65be4150201c44dc5e32bb8885e5fceed58bb2c16d6c3ec2a54c84d8",
+      "size_bytes": 45632
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/presentation_demo/91_label_ppt_two_plane_two_ellipse_model.vtm": {
+      "sha256": "62e52f3ac85f1ceb28e4d658d6504d16783c4917299da830837417c09df52792",
+      "size_bytes": 1415
+    },
+    "outputs/lca_ssm/ppt_priority_completion/vtk_visualization/presentation_demo/PARAVIEW_DEMO_STEPS.md": {
+      "sha256": "77239090ed13ac6799ace06b3862aaec23e6c377d8ae8688203c2501cfd7b981",
+      "size_bytes": 1023
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/01_source_geometry/bifurcation.vtp": {
+      "sha256": "6807b3d74db96ffc14c5d5d532425c7c1bc76c8822977d3a715494fcb12a8a32",
+      "size_bytes": 2323
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/01_source_geometry/LAD_centerline.vtp": {
+      "sha256": "7c1095041c03aff71800b048357f2c6b3bf4bdab67ac73a43fee94ef5c6a33ec",
+      "size_bytes": 7271
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/01_source_geometry/LCX_centerline.vtp": {
+      "sha256": "cf00ac3f473ae36a4caca514accc1b715ecf31da2f8cfd4e8b667c8cdb732455",
+      "size_bytes": 5043
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/01_source_geometry/LMCA_centerline.vtp": {
+      "sha256": "6f90b6a787a23f5a34c27b78b8e27d532e70d47f1482f7bbbb66612c5f465516",
+      "size_bytes": 2964
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/01_source_geometry/RCA_candidate_centerline.vtp": {
+      "sha256": "f5e07501fb83e929a5016051ceb59dd7b1166d3d54d421eae3e4e3f42a3e7ede",
+      "size_bytes": 5848
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/02_measurement_planes/coronary_centroid_SVD_plane.vtp": {
+      "sha256": "b64cbef520c3624cc49e4dd3f452bb14e67c06d420373beb4b89eea4fc804b43",
+      "size_bytes": 2440
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/02_measurement_planes/LAD_centroid_SVD_plane.vtp": {
+      "sha256": "68f3234966815420b318c548d8914032c3821ce373f23888ce0a1201adfbb2e6",
+      "size_bytes": 2441
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/03_display_planes/coronary_plane_at_bifurcation.vtp": {
+      "sha256": "271657b54630fd66748c6bf3f5b92aa3a8c8fc6b2b990f2f4db4fb473e7066d5",
+      "size_bytes": 2440
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/03_display_planes/LAD_plane_at_bifurcation.vtp": {
+      "sha256": "6e5420c865db3ee5903e95a9b3756710710cb3bdc1407a4ad684f948882c3563",
+      "size_bytes": 2441
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/apex_axis.vtp": {
+      "sha256": "0f7d299b3d9bf638957e3a4beb3d86e832da3b9969e4e1cf0d7dd8c62ec6247a",
+      "size_bytes": 2396
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/crown_axis.vtp": {
+      "sha256": "b60c38b7451900abb6a856aca41730224b955e624f5b3ea8715e12aa837d416b",
+      "size_bytes": 2403
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_height_ellipse.vtp": {
+      "sha256": "26c2ed9f9081cb2d4edef3fd6033edf1b971833871a4995e6d251afbbd87799d",
+      "size_bytes": 54771
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_0.vtp": {
+      "sha256": "6807b3d74db96ffc14c5d5d532425c7c1bc76c8822977d3a715494fcb12a8a32",
+      "size_bytes": 2323
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_1.vtp": {
+      "sha256": "271657b54630fd66748c6bf3f5b92aa3a8c8fc6b2b990f2f4db4fb473e7066d5",
+      "size_bytes": 2440
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_2.vtp": {
+      "sha256": "6e5420c865db3ee5903e95a9b3756710710cb3bdc1407a4ad684f948882c3563",
+      "size_bytes": 2441
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_3.vtp": {
+      "sha256": "60d32d7a98f7d17130e3b92e274edb85c073caa9e504b401a50dc702752f1007",
+      "size_bytes": 55163
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_4.vtp": {
+      "sha256": "26c2ed9f9081cb2d4edef3fd6033edf1b971833871a4995e6d251afbbd87799d",
+      "size_bytes": 54771
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_5.vtp": {
+      "sha256": "b60c38b7451900abb6a856aca41730224b955e624f5b3ea8715e12aa837d416b",
+      "size_bytes": 2403
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold/heart_scaffold_6.vtp": {
+      "sha256": "0f7d299b3d9bf638957e3a4beb3d86e832da3b9969e4e1cf0d7dd8c62ec6247a",
+      "size_bytes": 2396
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_scaffold.vtm": {
+      "sha256": "19036dd90d68886b2ffd424b1d177deccba629e6597a4e4adaac37e1718ef539",
+      "size_bytes": 870
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/04_heart_scaffold/heart_width_ellipse.vtp": {
+      "sha256": "60d32d7a98f7d17130e3b92e274edb85c073caa9e504b401a50dc702752f1007",
+      "size_bytes": 55163
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_0.vtp": {
+      "sha256": "6f90b6a787a23f5a34c27b78b8e27d532e70d47f1482f7bbbb66612c5f465516",
+      "size_bytes": 2964
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_1.vtp": {
+      "sha256": "7c1095041c03aff71800b048357f2c6b3bf4bdab67ac73a43fee94ef5c6a33ec",
+      "size_bytes": 7271
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_10.vtp": {
+      "sha256": "0f7d299b3d9bf638957e3a4beb3d86e832da3b9969e4e1cf0d7dd8c62ec6247a",
+      "size_bytes": 2396
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_2.vtp": {
+      "sha256": "cf00ac3f473ae36a4caca514accc1b715ecf31da2f8cfd4e8b667c8cdb732455",
+      "size_bytes": 5043
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_3.vtp": {
+      "sha256": "f5e07501fb83e929a5016051ceb59dd7b1166d3d54d421eae3e4e3f42a3e7ede",
+      "size_bytes": 5848
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_4.vtp": {
+      "sha256": "6807b3d74db96ffc14c5d5d532425c7c1bc76c8822977d3a715494fcb12a8a32",
+      "size_bytes": 2323
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_5.vtp": {
+      "sha256": "b64cbef520c3624cc49e4dd3f452bb14e67c06d420373beb4b89eea4fc804b43",
+      "size_bytes": 2440
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_6.vtp": {
+      "sha256": "68f3234966815420b318c548d8914032c3821ce373f23888ce0a1201adfbb2e6",
+      "size_bytes": 2441
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_7.vtp": {
+      "sha256": "60d32d7a98f7d17130e3b92e274edb85c073caa9e504b401a50dc702752f1007",
+      "size_bytes": 55163
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_8.vtp": {
+      "sha256": "26c2ed9f9081cb2d4edef3fd6033edf1b971833871a4995e6d251afbbd87799d",
+      "size_bytes": 54771
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold/source_plus_heart_scaffold_9.vtp": {
+      "sha256": "b60c38b7451900abb6a856aca41730224b955e624f5b3ea8715e12aa837d416b",
+      "size_bytes": 2403
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/05_overlay/source_plus_heart_scaffold.vtm": {
+      "sha256": "4b0b795d3fffa4287adf94a75c35b8f01972bb3bd29b9e09363e9596ed221ed9",
+      "size_bytes": 1505
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/01_source_centerlines_only.png": {
+      "sha256": "c1742d1cfa22b655c9991290188c074fbc13939666bc07992e272d121e9d6566",
+      "size_bytes": 328680
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/01_source_centerlines_only.svg": {
+      "sha256": "a47f3fd5649f2d50c4e9f04fbba9d1fc6332ebd7ab51a24f336dfdf3b106f8c1",
+      "size_bytes": 67208
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/02_measurement_planes_and_source_support.png": {
+      "sha256": "e973562200b47ef964430c29b6df7e305fb2d42143b4c246868fb33adf512e31",
+      "size_bytes": 425873
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/02_measurement_planes_and_source_support.svg": {
+      "sha256": "eaf57bc9ee1cd0e97ccc4ba8fd1fa993c6d3a67a97df660074e4bfca27c82a4b",
+      "size_bytes": 204782
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/03_heart_scaffold_only.png": {
+      "sha256": "baf35b420b6122e3fa14eee6a3ccb23ae60fc15a0f96d466f18337e9ffa9d7df",
+      "size_bytes": 360876
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/03_heart_scaffold_only.svg": {
+      "sha256": "879de0d5bb453de421761a7fb75de056ca583365876f30d16989c7ed11aa207c",
+      "size_bytes": 65312
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/04_source_plus_heart_scaffold_overlay.png": {
+      "sha256": "947a17d1e8a616a0d50cd3d68e1282a8461699d85b85c1d880287595541afb58",
+      "size_bytes": 392884
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/04_source_plus_heart_scaffold_overlay.svg": {
+      "sha256": "4b0e9e14b9a7d401f5c9d577f7a65a67ce210de84b7c8f9cb3a348bed98b9ad3",
+      "size_bytes": 83881
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/05_front_orthographic_view.png": {
+      "sha256": "5af4eef84cc48964729c11d51617cad7a5764e31ce2bab58a9bf6903b248c127",
+      "size_bytes": 264627
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/05_front_orthographic_view.svg": {
+      "sha256": "9d672f3ce9058e18e8642116f0f7d225f33573f6cf20c478a73421c421c3ccab",
+      "size_bytes": 78078
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/06_superior_orthographic_view.png": {
+      "sha256": "509945980fe88c5f21d8933c0cf58b2578e3d025772edeb663638954198b684b",
+      "size_bytes": 236715
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/06_superior_orthographic_view.svg": {
+      "sha256": "66ed745aca4ad051c8cd49a60476cef46bf5e752a8f75f83332d4f63f755cfff",
+      "size_bytes": 69427
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/07_lateral_long_axis_view.png": {
+      "sha256": "34677cfb8334c03116301e15d484519c41f17efc18a5d22b64c20a29c5b18a18",
+      "size_bytes": 266445
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/07_lateral_long_axis_view.svg": {
+      "sha256": "32ea8f4bc4203ed7d77184d1add3d0ce4b9a6e3ecec58c6be152ce434e894700",
+      "size_bytes": 76875
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/08_technical_measurement_summary.png": {
+      "sha256": "b5ce76556870ee9a02b9ebc3352fb9d42cb01574b2745fb8112c70a67845b79b",
+      "size_bytes": 169772
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/08_technical_measurement_summary.svg": {
+      "sha256": "4ebc60dc792cd0a1ffea2a643c8cc5563c22a9e9d059b942d62ee350a1bf5cf3",
+      "size_bytes": 62676
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/06_diagnostic_figures/figure_manifest.json": {
+      "sha256": "307cda90e646098d5314d597690aadc15a5d2c00a1d1b31374a204e0f08fab56",
+      "size_bytes": 3004
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/measurements.json": {
+      "sha256": "9c586dfa408bbb25c7c5eacf6c28dd1876c48aa7e3ccfcbeae8ef5cfba2463a6",
+      "size_bytes": 10182
+    },
+    "outputs/lca_ssm/stage1_heart_scaffold_vtk/189.label/validation.json": {
+      "sha256": "28d8d7b71e3c5d8cb37cd18a4297f906a21cf724f730bf42a8fade10b84972b8",
+      "size_bytes": 5144
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/bifurcation.vtp": {
+      "sha256": "8dd90df9e3d5d294c7af47e9a2315326ac806f74fe1742749d9c22961202d70b",
+      "size_bytes": 2189
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/LAD_centerline.vtp": {
+      "sha256": "8d26d906fc45b61f280d060f4ba5f00cb7aecda23e3b0701b3bb217ef7eabf78",
+      "size_bytes": 34411
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/LCX_centerline.vtp": {
+      "sha256": "b71dc652c28bf99d0a5261783efa09f3e032d4fed24742bbad263f3bb24ab25d",
+      "size_bytes": 20091
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/LMCA_centerline.vtp": {
+      "sha256": "5341a7beff8a3134c6c640d837708e184892023608a38365ca1b1e6b3d1318db",
+      "size_bytes": 7284
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/RCA_candidate_centerline.vtp": {
+      "sha256": "9d6177188f5888257c3521400f6fa2bd255fa1738d3409c2864c16524a104876",
+      "size_bytes": 25321
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_centerlines/source_centerlines_0.vtp": {
+      "sha256": "5341a7beff8a3134c6c640d837708e184892023608a38365ca1b1e6b3d1318db",
+      "size_bytes": 7284
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_centerlines/source_centerlines_1.vtp": {
+      "sha256": "8d26d906fc45b61f280d060f4ba5f00cb7aecda23e3b0701b3bb217ef7eabf78",
+      "size_bytes": 34411
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_centerlines/source_centerlines_2.vtp": {
+      "sha256": "b71dc652c28bf99d0a5261783efa09f3e032d4fed24742bbad263f3bb24ab25d",
+      "size_bytes": 20091
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_centerlines/source_centerlines_3.vtp": {
+      "sha256": "9d6177188f5888257c3521400f6fa2bd255fa1738d3409c2864c16524a104876",
+      "size_bytes": 25321
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_centerlines/source_centerlines_4.vtp": {
+      "sha256": "8dd90df9e3d5d294c7af47e9a2315326ac806f74fe1742749d9c22961202d70b",
+      "size_bytes": 2189
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_centerlines.vtm": {
+      "sha256": "ecaf77aab4c3b8dd7242f3cd1002a6f40314453e85e2b05a6b6ad65d0678e3b6",
+      "size_bytes": 681
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/01_source_geometry/source_hash_manifest.json": {
+      "sha256": "e0f8284d8a6e4556eeb7b4d7b6e94932871022904679497eec0795bbb541db43",
+      "size_bytes": 1978
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/02_measurement_planes/coronary_centroid_SVD_plane.vtp": {
+      "sha256": "58e4f8ebd7b7464610e5f3e91625960ce9db58aa88162326720ae8c2fd7173f9",
+      "size_bytes": 9491
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/02_measurement_planes/LAD_centroid_SVD_plane.vtp": {
+      "sha256": "7cb83faa0f0fb412eedfe76ef44f7f712ec2c755c5f2ee09dcc762821380e88b",
+      "size_bytes": 9477
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/apex_axis.vtp": {
+      "sha256": "b16afe5bfec4f094fb4561ac921b4b2c6768fb0273ef9d28e547202b5301561e",
+      "size_bytes": 2325
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/coronary_crown_reference_ellipse.vtp": {
+      "sha256": "f43efa910481499a4e9223cd817f2f2960c73f4684a1fec3d498b9625b86f18e",
+      "size_bytes": 52176
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/crown_axis.vtp": {
+      "sha256": "aa31f0b2dcb44824a6457707ab73e9be67b58931be5d8995766b814c5a1c09e0",
+      "size_bytes": 2324
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_0.vtp": {
+      "sha256": "8dd90df9e3d5d294c7af47e9a2315326ac806f74fe1742749d9c22961202d70b",
+      "size_bytes": 2189
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_1.vtp": {
+      "sha256": "f43efa910481499a4e9223cd817f2f2960c73f4684a1fec3d498b9625b86f18e",
+      "size_bytes": 52176
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_2.vtp": {
+      "sha256": "9620535bbbf44a7b478345d75cfa2e289c0919647419b7928a44f54fc4db36b4",
+      "size_bytes": 44809
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_3.vtp": {
+      "sha256": "aa31f0b2dcb44824a6457707ab73e9be67b58931be5d8995766b814c5a1c09e0",
+      "size_bytes": 2324
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_4.vtp": {
+      "sha256": "3d69a94aaabb6f43b612caa9d9a82501137edae0f05a8370444c803728726999",
+      "size_bytes": 2327
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_5.vtp": {
+      "sha256": "b16afe5bfec4f094fb4561ac921b4b2c6768fb0273ef9d28e547202b5301561e",
+      "size_bytes": 2325
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold/heart_scaffold_6.vtp": {
+      "sha256": "75f8f2f54e7b8f3f35da91b7d4ccfdb6253e82ccfb140e79228359284f385ce9",
+      "size_bytes": 696886
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/heart_scaffold.vtm": {
+      "sha256": "6766c017511502d38adff9ebdce9285670f1ffeb061cc5e0d5e715b2c26c60e7",
+      "size_bytes": 903
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/long_axis_apical_reference_ellipse.vtp": {
+      "sha256": "9620535bbbf44a7b478345d75cfa2e289c0919647419b7928a44f54fc4db36b4",
+      "size_bytes": 44809
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/03_reference_ellipses/secondary_crown_axis.vtp": {
+      "sha256": "3d69a94aaabb6f43b612caa9d9a82501137edae0f05a8370444c803728726999",
+      "size_bytes": 2327
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/04_parametric_surface/parametric_heart_support_surface.vtp": {
+      "sha256": "75f8f2f54e7b8f3f35da91b7d4ccfdb6253e82ccfb140e79228359284f385ce9",
+      "size_bytes": 696886
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface/source_plus_parametric_surface_0.vtp": {
+      "sha256": "5341a7beff8a3134c6c640d837708e184892023608a38365ca1b1e6b3d1318db",
+      "size_bytes": 7284
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface/source_plus_parametric_surface_1.vtp": {
+      "sha256": "8d26d906fc45b61f280d060f4ba5f00cb7aecda23e3b0701b3bb217ef7eabf78",
+      "size_bytes": 34411
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface/source_plus_parametric_surface_2.vtp": {
+      "sha256": "b71dc652c28bf99d0a5261783efa09f3e032d4fed24742bbad263f3bb24ab25d",
+      "size_bytes": 20091
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface/source_plus_parametric_surface_3.vtp": {
+      "sha256": "9d6177188f5888257c3521400f6fa2bd255fa1738d3409c2864c16524a104876",
+      "size_bytes": 25321
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface/source_plus_parametric_surface_4.vtp": {
+      "sha256": "8dd90df9e3d5d294c7af47e9a2315326ac806f74fe1742749d9c22961202d70b",
+      "size_bytes": 2189
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface/source_plus_parametric_surface_5.vtp": {
+      "sha256": "75f8f2f54e7b8f3f35da91b7d4ccfdb6253e82ccfb140e79228359284f385ce9",
+      "size_bytes": 696886
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_parametric_surface.vtm": {
+      "sha256": "6b1faeb94e3cee2e786ccef4e0fb5ba0dbcc23b2e82d95f0170cc6c0ef6a0b67",
+      "size_bytes": 946
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_0.vtp": {
+      "sha256": "5341a7beff8a3134c6c640d837708e184892023608a38365ca1b1e6b3d1318db",
+      "size_bytes": 7284
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_1.vtp": {
+      "sha256": "8d26d906fc45b61f280d060f4ba5f00cb7aecda23e3b0701b3bb217ef7eabf78",
+      "size_bytes": 34411
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_2.vtp": {
+      "sha256": "b71dc652c28bf99d0a5261783efa09f3e032d4fed24742bbad263f3bb24ab25d",
+      "size_bytes": 20091
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_3.vtp": {
+      "sha256": "9d6177188f5888257c3521400f6fa2bd255fa1738d3409c2864c16524a104876",
+      "size_bytes": 25321
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_4.vtp": {
+      "sha256": "8dd90df9e3d5d294c7af47e9a2315326ac806f74fe1742749d9c22961202d70b",
+      "size_bytes": 2189
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_5.vtp": {
+      "sha256": "f43efa910481499a4e9223cd817f2f2960c73f4684a1fec3d498b9625b86f18e",
+      "size_bytes": 52176
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_6.vtp": {
+      "sha256": "9620535bbbf44a7b478345d75cfa2e289c0919647419b7928a44f54fc4db36b4",
+      "size_bytes": 44809
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_7.vtp": {
+      "sha256": "aa31f0b2dcb44824a6457707ab73e9be67b58931be5d8995766b814c5a1c09e0",
+      "size_bytes": 2324
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_8.vtp": {
+      "sha256": "3d69a94aaabb6f43b612caa9d9a82501137edae0f05a8370444c803728726999",
+      "size_bytes": 2327
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold/source_plus_scaffold_9.vtp": {
+      "sha256": "b16afe5bfec4f094fb4561ac921b4b2c6768fb0273ef9d28e547202b5301561e",
+      "size_bytes": 2325
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/source_plus_scaffold.vtm": {
+      "sha256": "8c59b8397c91fb91a3ddee1d58174d33605456a75b5c5464ee045f9eba43234e",
+      "size_bytes": 1246
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_0.vtp": {
+      "sha256": "5341a7beff8a3134c6c640d837708e184892023608a38365ca1b1e6b3d1318db",
+      "size_bytes": 7284
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_1.vtp": {
+      "sha256": "8d26d906fc45b61f280d060f4ba5f00cb7aecda23e3b0701b3bb217ef7eabf78",
+      "size_bytes": 34411
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_10.vtp": {
+      "sha256": "3d69a94aaabb6f43b612caa9d9a82501137edae0f05a8370444c803728726999",
+      "size_bytes": 2327
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_11.vtp": {
+      "sha256": "b16afe5bfec4f094fb4561ac921b4b2c6768fb0273ef9d28e547202b5301561e",
+      "size_bytes": 2325
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_12.vtp": {
+      "sha256": "75f8f2f54e7b8f3f35da91b7d4ccfdb6253e82ccfb140e79228359284f385ce9",
+      "size_bytes": 696886
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_2.vtp": {
+      "sha256": "b71dc652c28bf99d0a5261783efa09f3e032d4fed24742bbad263f3bb24ab25d",
+      "size_bytes": 20091
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_3.vtp": {
+      "sha256": "9d6177188f5888257c3521400f6fa2bd255fa1738d3409c2864c16524a104876",
+      "size_bytes": 25321
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_4.vtp": {
+      "sha256": "8dd90df9e3d5d294c7af47e9a2315326ac806f74fe1742749d9c22961202d70b",
+      "size_bytes": 2189
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_5.vtp": {
+      "sha256": "58e4f8ebd7b7464610e5f3e91625960ce9db58aa88162326720ae8c2fd7173f9",
+      "size_bytes": 9491
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_6.vtp": {
+      "sha256": "7cb83faa0f0fb412eedfe76ef44f7f712ec2c755c5f2ee09dcc762821380e88b",
+      "size_bytes": 9477
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_7.vtp": {
+      "sha256": "f43efa910481499a4e9223cd817f2f2960c73f4684a1fec3d498b9625b86f18e",
+      "size_bytes": 52176
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_8.vtp": {
+      "sha256": "9620535bbbf44a7b478345d75cfa2e289c0919647419b7928a44f54fc4db36b4",
+      "size_bytes": 44809
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model/stage1_complete_anatomical_model_9.vtp": {
+      "sha256": "aa31f0b2dcb44824a6457707ab73e9be67b58931be5d8995766b814c5a1c09e0",
+      "size_bytes": 2324
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/05_overlay/stage1_complete_anatomical_model.vtm": {
+      "sha256": "58205afef6c4a95c298c1db12dcc88c4ec4b4c765ffc7c1adbcd3c1a99a7fd33",
+      "size_bytes": 1938
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/01_original_dataset_centerlines.png": {
+      "sha256": "caab9e14ce01a3ce63796230c9527a8c7ef461bf81a58908df6b9dc5cb7fecd7",
+      "size_bytes": 336854
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/01_original_dataset_centerlines.svg": {
+      "sha256": "32580f8526d0ed1ae0d1eaedde2229083f6f0045d0fc21f807f9ba31dc4d9b47",
+      "size_bytes": 76821
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/02_centroid_svd_measurement_planes.png": {
+      "sha256": "cfbf5ee3a51cff3ca44c0b7b8851abc2a933293aa20cc13d11f682ffc0dd54ec",
+      "size_bytes": 546112
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/02_centroid_svd_measurement_planes.svg": {
+      "sha256": "e5ef19faed8531f09d0dab9ec1004a9936aa84a28c7ce86d85ac80c730911d98",
+      "size_bytes": 123586
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/03_two_ellipse_anatomical_scaffold.png": {
+      "sha256": "98ae79f66e0037eb8028887f6e82385d22ade7cc47f05d0c8da0b15cd7a63d0e",
+      "size_bytes": 399012
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/03_two_ellipse_anatomical_scaffold.svg": {
+      "sha256": "a184734b7185ca1c6e7041903f2be4658b13042c305784092cdb395c670e31a8",
+      "size_bytes": 79214
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/04_3d_parametric_anatomical_support_surface.png": {
+      "sha256": "c6c473e30f800539f397874cd6b768eebf93b8fcb16e8077d7e7d52f91d5c0b0",
+      "size_bytes": 685939
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/04_3d_parametric_anatomical_support_surface.svg": {
+      "sha256": "b3b2530c1d54c79c8dfc16173755c4301aa18086191353515dd676930cf1435c",
+      "size_bytes": 316262
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/05_unchanged_centerlines_on_support_surface.png": {
+      "sha256": "c9d4a04a48264f4db7a3f21520632ce564496d478c6333f433cb6f393f738033",
+      "size_bytes": 616986
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/05_unchanged_centerlines_on_support_surface.svg": {
+      "sha256": "26984c0648f231949a1fe49c6907f14b98a0d6533fcfbfe5ca2268a06476a07a",
+      "size_bytes": 312884
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/06_superior_crown_view.png": {
+      "sha256": "8b79ba046801214852f3b944dbc2839ea9294f443d7823533d0c1d6c552399f0",
+      "size_bytes": 311819
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/06_superior_crown_view.svg": {
+      "sha256": "c93ff0191859b758d8eb0a6dda74d7d40f17a2dc1c8385b00f701217dcee20e5",
+      "size_bytes": 64161
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/07_front_long_axis_view.png": {
+      "sha256": "014c9767913329b73576ec0ec0d4c9f9b1ab1b648422d74331bb2c5447658e7f",
+      "size_bytes": 262250
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/07_front_long_axis_view.svg": {
+      "sha256": "19186af3201618bb31a5dbe0ae200f22ea98b2a27320998c4a16336c2bf6ec6e",
+      "size_bytes": 62299
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/08_lateral_view.png": {
+      "sha256": "f625f4ac13d0dd6c5f0a244b0e138f7596a2e45d011124250a69b87737b2986c",
+      "size_bytes": 250475
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/08_lateral_view.svg": {
+      "sha256": "d04150825058583f5790047f8d45f7fe4424c00d5e80b5aeb4d744a2bd8a8ce9",
+      "size_bytes": 62198
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/09_observed_vs_extrapolated_reference_geometry.png": {
+      "sha256": "81cc8ff7ccd70e92b721522ec64e6db951ea4d0f92733721beeb362c9ef20ae0",
+      "size_bytes": 391255
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/09_observed_vs_extrapolated_reference_geometry.svg": {
+      "sha256": "04777c2deb5364efed79765c79d58cc857467ab23012adc275b2a70939872e9f",
+      "size_bytes": 83091
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/10_source_to_surface_distance_diagnostics.png": {
+      "sha256": "9ae92420aabc66bc9c8f494e90c5d7b9fe209dfccc1ccb87ba04ee033df55eb7",
+      "size_bytes": 354020
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/10_source_to_surface_distance_diagnostics.svg": {
+      "sha256": "0f41c6e3c9e53d76a7f88a51a6e79eb4b4b12c2b76314971506fb772f35e5d76",
+      "size_bytes": 78447
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/11_stage1_technical_validation_summary.png": {
+      "sha256": "1074b63dc5b065bf4db87e1c2bbe2cd07d4f6b89f88c502fc376795d49c182bf",
+      "size_bytes": 222848
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/11_stage1_technical_validation_summary.svg": {
+      "sha256": "f5febd8209baef6a5c47d24ae260ae5db8a2a6f5e7af66afd531261351dcc4c4",
+      "size_bytes": 77439
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/figure_manifest.json": {
+      "sha256": "b02214929646d099f72a683a707322d8a568c8a0b087115b2803d3c9933ca749",
+      "size_bytes": 4764
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/source_to_surface_distance_diagnostics.csv": {
+      "sha256": "ec2b68a53cf768f42f4abccdf8c91d492c09a0e80d3d6b9c48dd62481cd6aa11",
+      "size_bytes": 31093
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/06_diagnostics/source_to_surface_distance_diagnostics.json": {
+      "sha256": "bd7b7553e666d852d3c8963e6b1f63509dcb78b1ed74499ab299570387182037",
+      "size_bytes": 145426
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/07_validation/generator_architecture.json": {
+      "sha256": "fff235696686fb2fdba3b65fbbed38174451e2a406028f9b2fc6697bbbc33605",
+      "size_bytes": 1445
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/07_validation/GENERATOR_ARCHITECTURE.md": {
+      "sha256": "af7e22d9b6f283a30d9b556bd0c091aca363f2735705288f0d1e8e2337809bda",
+      "size_bytes": 764
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/07_validation/validation.json": {
+      "sha256": "2de591578f38a2308914e56c99a7de14adbd31ed04e298dee7e841e0aa00a423",
+      "size_bytes": 16722
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/189.label/measurements.json": {
+      "sha256": "101430b88f4d144d944fd4efc7cbe3dd0106a6cb77fa9d8fb13d96abd4abfbef",
+      "size_bytes": 9219
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/presentation/LCA_Stage1_Dataset_Derived_Anatomical_Scaffold.pptx": {
+      "sha256": "561be4e9a305465025dbe9b64d59653a71aeb506679bc00dd68fcd50b39ff7af",
+      "size_bytes": 5012107
+    },
+    "outputs/lca_ssm/stage1_parametric_heart_surface/STAGE1_PARAMETRIC_HEART_SURFACE_REPORT.md": {
+      "sha256": "c4f097dc92d581fe594f9f311a3ad85ef4ae29e531c83cdb41fa8a5471e48cbc",
+      "size_bytes": 10603
+    },
+    "outputs/lca_ssm/lca_population_model/branch_assignment_gate.json": {
+      "sha256": "fd9326c274ccc5da9fa80d0d4b988139c7e5595d9454c1020e5b4b7faefa0492",
+      "size_bytes": 698980
+    },
+    "outputs/lca_ssm/lca_population_model/cardiac_frame_validation.csv": {
+      "sha256": "95d86f158b2f360025b6a1d82533084333f2d0e43f4a54701d1a5f426f322108",
+      "size_bytes": 35703
+    },
+    "outputs/lca_ssm/lca_population_model/fixed_branch_surface_coordinates.npz": {
+      "sha256": "614d9c7c74746cc1f16dd260d576798fdb222cdc3f54d652abf669e838d496b4",
+      "size_bytes": 155160
+    },
+    "outputs/lca_ssm/lca_population_model/fixed_surface_representation.npz": {
+      "sha256": "f697cb048a236e539a19f520e51258f901092a59a8020befaea1afa0845d6ab5",
+      "size_bytes": 30590
+    },
+    "outputs/lca_ssm/lca_population_model/fixed_surface_representation_summary.json": {
+      "sha256": "d35f3cc2c98a974c4ef0b7ca552dda8bc1eab74bf4ea03774d5dd0ab0d8f402a",
+      "size_bytes": 1221
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/branch_assignment_gate.json": {
+      "sha256": "fd9326c274ccc5da9fa80d0d4b988139c7e5595d9454c1020e5b4b7faefa0492",
+      "size_bytes": 698980
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/fixed_branch_surface_coordinates.npz": {
+      "sha256": "614d9c7c74746cc1f16dd260d576798fdb222cdc3f54d652abf669e838d496b4",
+      "size_bytes": 155160
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/generator_statistics_manifest.json": {
+      "sha256": "b041a82e852296dab87084f87993bc927ecf655ad18f45cc4b802fb865af04b6",
+      "size_bytes": 1581
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/landmark_stats.json": {
+      "sha256": "2fb812407fb707f49ff1c250c07db9a96ab65bd207cad17c49bb6c07184ecb6f",
+      "size_bytes": 53792
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/population_ellipsoid_parameters.csv": {
+      "sha256": "ec77430ff3bebd9f86a8f578f7221b094d7b1684b999b2920749eee5d79e4015",
+      "size_bytes": 92281
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/population_surface_statistics.json": {
+      "sha256": "69c649fafc430c5474946dc03739af214d3903be839615615ce89bf41db8d4fe",
+      "size_bytes": 23866
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/population_validation_thresholds.json": {
+      "sha256": "fb63892811a1d6011e6984070bddff37794ac9d9d6519ce21bb059346de0ad02",
+      "size_bytes": 4759
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/surface_deviation_pca.npz": {
+      "sha256": "9dae30b3960f620a2708654228de6d7445f1dd75a31bd13533362541b668d3aa",
+      "size_bytes": 53220
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/surface_deviation_pca_summary.json": {
+      "sha256": "c6fffc739a186ec2fb7b727ddac48cf37abd8a2d6aa7739bba49ab82e434912b",
+      "size_bytes": 4142
+    },
+    "outputs/lca_ssm/lca_population_model/generator_statistics/validation_scaffold_case_metrics.csv": {
+      "sha256": "37d89a6d60aa73c4114852a64c5062c70a0336a93bf31f48d4a0be946eec8d86",
+      "size_bytes": 40288
+    },
+    "outputs/lca_ssm/lca_population_model/landmark_stats.json": {
+      "sha256": "2fb812407fb707f49ff1c250c07db9a96ab65bd207cad17c49bb6c07184ecb6f",
+      "size_bytes": 53792
+    },
+    "outputs/lca_ssm/lca_population_model/population_cardiac_frames.csv": {
+      "sha256": "6fcb0b0caa53d438394d00353797c1d26b3c63437b6632359022d5a77106a73d",
+      "size_bytes": 53101
+    },
+    "outputs/lca_ssm/lca_population_model/population_case_qc.csv": {
+      "sha256": "9c08a0199b9c2379c05b62c78f15da9e4a89fcd1af4d2235862b66a1a573df82",
+      "size_bytes": 179189
+    },
+    "outputs/lca_ssm/lca_population_model/population_ellipsoid_parameters.csv": {
+      "sha256": "ec77430ff3bebd9f86a8f578f7221b094d7b1684b999b2920749eee5d79e4015",
+      "size_bytes": 92281
+    },
+    "outputs/lca_ssm/lca_population_model/population_landmarks.csv": {
+      "sha256": "cc445a45816ab8c5f35118301c6f6648cf36f8b1c94f082a03d187af5166c70a",
+      "size_bytes": 225605
+    },
+    "outputs/lca_ssm/lca_population_model/population_surface_coordinates.csv": {
+      "sha256": "b00ea4568a6d659ade032809dd23f7168ce0fb87a203f879f979d35a4344235b",
+      "size_bytes": 40965993
+    },
+    "outputs/lca_ssm/lca_population_model/population_surface_statistics.json": {
+      "sha256": "69c649fafc430c5474946dc03739af214d3903be839615615ce89bf41db8d4fe",
+      "size_bytes": 23866
+    },
+    "outputs/lca_ssm/lca_population_model/population_validation_thresholds.json": {
+      "sha256": "fb63892811a1d6011e6984070bddff37794ac9d9d6519ce21bb059346de0ad02",
+      "size_bytes": 4759
+    },
+    "outputs/lca_ssm/lca_population_model/protected_source_integrity.json": {
+      "sha256": "b46f7d6eb8659c305275451a795119888a4f4a578892f3d33c2a23bf77786bf1",
+      "size_bytes": 77698
+    },
+    "outputs/lca_ssm/lca_population_model/surface_deviation_pca.npz": {
+      "sha256": "9dae30b3960f620a2708654228de6d7445f1dd75a31bd13533362541b668d3aa",
+      "size_bytes": 53220
+    },
+    "outputs/lca_ssm/lca_population_model/surface_deviation_pca_summary.json": {
+      "sha256": "c6fffc739a186ec2fb7b727ddac48cf37abd8a2d6aa7739bba49ab82e434912b",
+      "size_bytes": 4142
+    },
+    "outputs/lca_ssm/lca_population_model/validation_scaffold_case_metrics.csv": {
+      "sha256": "37d89a6d60aa73c4114852a64c5062c70a0336a93bf31f48d4a0be946eec8d86",
+      "size_bytes": 40288
+    },
+    "outputs/lca_ssm/lca_population_model/week1_manifest.json": {
+      "sha256": "543f8a368ced9bddc906a63f8d94179f279c0f5557db7df1fec3833ffd7a87b4",
+      "size_bytes": 2164
+    }
+  }
+}

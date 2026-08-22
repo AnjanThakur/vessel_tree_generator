@@ -62,10 +62,13 @@ def ellipsoid_tangent_v(u: float, v: float, a: float, b: float, c: float) -> np.
     return t / norm
 
 
-def project_point_to_surface(
+def parameterize_point_angular_radial(
     cardiac_pt: np.ndarray, a: float, b: float, c: float
 ) -> tuple[float, float, float, np.ndarray]:
-    """Map a 3D cardiac frame point to surface parameters (u, v, offset) and local deviation vector.
+    """Map cardiac XYZ to angular/radial ellipsoid coordinates and a local residual.
+
+    This exactly reconstructable angular parameterization is not a Euclidean
+    nearest-point-on-ellipsoid optimization.
 
     Design Doc §4.4 & §5.3.1:
     - v: polar angle [0, pi] (base v=0 to apex v=pi) -> acos(clip(z/c, -1, 1))
@@ -97,6 +100,17 @@ def project_point_to_surface(
     offset = float(deviation_vector[2])
 
     return u, v, offset, deviation_vector
+
+
+def project_point_to_surface(
+    cardiac_pt: np.ndarray, a: float, b: float, c: float
+) -> tuple[float, float, float, np.ndarray]:
+    """Compatibility alias for angular/radial surface parameterization.
+
+    Historical callers retain this public name. It must not be interpreted as
+    a Euclidean nearest-surface-point solver.
+    """
+    return parameterize_point_angular_radial(cardiac_pt, a, b, c)
 
 
 def project_centerline_to_surface(

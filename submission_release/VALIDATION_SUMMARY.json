@@ -1,0 +1,131 @@
+{
+  "status": "PASS",
+  "release": "4D Coronary LCA Generator 1.0.0",
+  "model_scope": "population-derived major-vessel LCA: LMCA, LAD, LCX",
+  "clinical_validation": false,
+  "original_ppt_measurement": {
+    "nifti_discovered": 200,
+    "two_plane_two_ellipse_cases": 191,
+    "pointwise_residual_records": 77337,
+    "maximum_source_coordinate_change_mm": 0.0,
+    "maximum_source_segment_length_change_mm": 0.0
+  },
+  "source_data_audit": {
+    "protected_lca_cases": 191,
+    "resolved_daughter_assignments": 181,
+    "source_and_scaffold_core_anatomy_pass": 65,
+    "statistics_eligible_cases": 52,
+    "exclusive_final_reasons": {
+      "core_anatomy_gate_failed": 116,
+      "pca_eligible": 52,
+      "ellipsoid_invalid": 13,
+      "daughter_assignment_unresolved": 10,
+      "centerline_or_landmark_extraction_failed": 9
+    },
+    "unresolved_assignments_used": false,
+    "source_geometry_modified": false
+  },
+  "statistical_model": {
+    "pca_matrix_shape": [
+      52,
+      81
+    ],
+    "retained_modes": 13,
+    "retained_cumulative_variance_fraction": 0.9554694673427548,
+    "independent_recomputation_pass": true
+  },
+  "final_population_generation": {
+    "requested_trees": 52,
+    "accepted_trees": 52,
+    "sampling_attempts": 64,
+    "candidate_acceptance_rate": 0.8125,
+    "eligible_baselines_represented": 52,
+    "pca_innovation_scale": 0.04,
+    "population_comparisons_passed": 50,
+    "population_comparison_warnings": 0
+  },
+  "novelty": {
+    "canonical_tree_count": 52,
+    "mean_rms_displacement_from_baseline_mm": 0.9336877657298467,
+    "median_nearest_training_rms_coordinate_mm": 0.4365887355084037,
+    "median_pca_mahalanobis_displacement": 0.1404266579056413,
+    "exact_duplicate_count": 0,
+    "near_duplicate_under_0_1mm_count": 0,
+    "variant_baseline_count": 5,
+    "variants_per_baseline": 5,
+    "variant_acceptance_count": 23,
+    "variant_count": 25,
+    "variant_mean_rms_displacement_mm": 0.5359012976979812,
+    "interpretation": "Bootstrap-derived synthetic anatomies are derivatives, not independent patients. Distances quantify non-identity without claiming external generalization."
+  },
+  "internal_holdout": {
+    "validation_type": "internal source-grouped 5-fold fixed-representation holdout; not external validation",
+    "fold_count": 5,
+    "training_case_counts": [
+      41,
+      42
+    ],
+    "holdout_case_counts": [
+      10,
+      11
+    ],
+    "total_holdout_predictions": 52,
+    "source_leakage_count": 0,
+    "baseline_leakage_count": 0,
+    "generated_anatomy_acceptance_count": 41,
+    "generated_anatomy_acceptance_rate": 0.7884615384615384,
+    "median_holdout_reconstruction_rms_local": 2.556727799153246,
+    "median_nearest_train_rms_coordinate_mm": 0.29721918123299806,
+    "median_nearest_holdout_rms_coordinate_mm": 8.963024569708656,
+    "pass": true,
+    "limitation": "This tests internal representation stability and leakage control. It is not an external clinical cohort and does not remove selection bias in the 52 eligible cases."
+  },
+  "population_motion": {
+    "tree_count": 52,
+    "stored_frames_per_tree": 10,
+    "independent_geometric_positions_per_closed_cycle": 9,
+    "snapshot_count": 520,
+    "status": "PASS"
+  },
+  "submission_demo": {
+    "case_count": 4,
+    "stored_frames_per_case": 10,
+    "independent_geometric_positions": 9,
+    "all_engineering_audits_pass": true,
+    "maximum_point_displacement_mm": 7.810356360512908,
+    "observed_global_radius_change_fraction": 0.029797150732258526,
+    "observed_lesion_pulsatility": {
+      "focal_lad": {
+        "branch": "LAD",
+        "radius_change_fraction": 0.010441171382654213,
+        "lesion_to_healthy_ratio": 0.3504083822132213
+      },
+      "diffuse_lcx": {
+        "branch": "LCX",
+        "radius_change_fraction": 0.010429002756290329,
+        "lesion_to_healthy_ratio": 0.34999999999999476
+      },
+      "tandem_lad": {
+        "branch": "LAD",
+        "radius_change_fraction": 0.01165960672094335,
+        "lesion_to_healthy_ratio": 0.39129938381392315
+      }
+    },
+    "vtk_readback_pass": true
+  },
+  "final_regression": {
+    "pytest_tests_passed": 71,
+    "focused_person2_tests_passed": 21,
+    "total_tests_passed": 92,
+    "tests_failed": 0,
+    "compileall_pass": true,
+    "pip_check_pass": true
+  },
+  "limitations": [
+    "LCA-only; RCA candidates are not annotated ground truth and side branches are absent.",
+    "Fifty-two eligible source anatomies; synthetic derivatives do not increase independent N.",
+    "Internal holdout only; no external cohort or clinical validation.",
+    "Radius, taper, disease, motion, pulsatility, and compliance are parametric engineering models.",
+    "No hemodynamics, vessel-wall mechanics, FSI, perfusion, or patient-specific prediction."
+  ]
+}

@@ -52,7 +52,7 @@ def parse_args():
         "--num-phases",
         type=int,
         default=10,
-        help="Number of cardiac phases in one full cycle [0, 1) (default: 10)",
+        help="Stored frames in one closed cycle [0, 1], including repeated closure (default: 10)",
     )
     parser.add_argument(
         "--radial-amplitude",

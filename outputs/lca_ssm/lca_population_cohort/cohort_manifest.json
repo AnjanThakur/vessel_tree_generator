@@ -2,15 +2,15 @@
   "schema_version": 2,
   "status": "PASS",
   "generation_mode": "frozen_lca_statistics_case_matched_bootstrap_plus_pca_innovation",
-  "tree_count": 25,
+  "tree_count": 52,
   "all_trees_accepted": true,
   "include_rca": false,
   "base_seed": 20260822,
   "seed_stride": 1009,
-  "pca_innovation_scale": 0.08,
+  "pca_innovation_scale": 0.04,
   "maximum_attempts_per_tree": 250,
-  "total_sampling_attempts": 30,
-  "unique_source_case_count": 25,
+  "total_sampling_attempts": 64,
+  "unique_source_case_count": 52,
   "eligible_source_case_count": 52,
   "eligible_source_cases": [
     "2.label",
@@ -78,6 +78,6 @@
   "population_validation": {
     "status": "PASS",
     "report": "population_validation/real_vs_generated_validation.json",
-    "descriptive_warning_count": 1
+    "descriptive_warning_count": 0
   }
 }

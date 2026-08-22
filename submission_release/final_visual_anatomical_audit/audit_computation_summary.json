@@ -1,0 +1,210 @@
+{
+  "status": "PASS_WITH_EXPLANATION",
+  "tree_count": 52,
+  "validator_pass_count": 52,
+  "independent_coordinate_gate_pass_count": 52,
+  "coordinate_gate_mismatches": [],
+  "full_descriptive_anatomy_pass_count": 35,
+  "selected_3d_cases": [
+    "tree_0036",
+    "tree_0052",
+    "tree_0004",
+    "tree_0031",
+    "tree_0029",
+    "tree_0044",
+    "tree_0002",
+    "tree_0012",
+    "tree_0001",
+    "tree_0028"
+  ],
+  "phase_rows": 56,
+  "phase_failures": [],
+  "disease_rows": [
+    {
+      "case_id": "diffuse_lcx",
+      "maximum_radius_reduction_fraction": 0.44999999999999996,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.6975,
+      "minimum_lumen_radius_mm": 0.5412081723699917,
+      "minimum_lumen_diameter_mm": 1.0824163447399835,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case_id": "focal_lad",
+      "maximum_radius_reduction_fraction": 0.6480048680770767,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.8760994271025638,
+      "minimum_lumen_radius_mm": 0.3782403839287474,
+      "minimum_lumen_diameter_mm": 0.7564807678574949,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case_id": "healthy",
+      "maximum_radius_reduction_fraction": 0.0,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.0,
+      "minimum_lumen_radius_mm": 0.8505906750865518,
+      "minimum_lumen_diameter_mm": 1.7011813501731037,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case_id": "tandem_lad",
+      "maximum_radius_reduction_fraction": 0.5161160935125131,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.7658563650424091,
+      "minimum_lumen_radius_mm": 0.48678678454529634,
+      "minimum_lumen_diameter_mm": 0.9735735690905927,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    }
+  ],
+  "curvature": {
+    "method": "Menger curvature after 1.0 mm uniform arc-length resampling",
+    "cohorts": {
+      "real_eligible": {
+        "LMCA": {
+          "n": 867,
+          "mean": 0.07931766702459066,
+          "sd": 0.0854762200386519,
+          "median": 0.05017251986662498,
+          "p95": 0.2626147907166454,
+          "p99": 0.42854493477858013,
+          "min": 1.1741201580726811e-14,
+          "max": 0.6085511792263978,
+          "minimum_robust_radius_of_curvature_mm": 2.3334775862341677
+        },
+        "LAD": {
+          "n": 6248,
+          "mean": 0.04975375287384332,
+          "sd": 0.053677750925761436,
+          "median": 0.03403986881988562,
+          "p95": 0.14293971700034028,
+          "p99": 0.2701630070077946,
+          "min": 0.00020292900965022143,
+          "max": 0.9223018764027977,
+          "minimum_robust_radius_of_curvature_mm": 3.70146901707808
+        },
+        "LCX": {
+          "n": 3985,
+          "mean": 0.06179666716592409,
+          "sd": 0.07286947898175089,
+          "median": 0.03973915998221436,
+          "p95": 0.19039753978978421,
+          "p99": 0.3636158486355632,
+          "min": 4.5473723370401634e-05,
+          "max": 1.1754110171717038,
+          "minimum_robust_radius_of_curvature_mm": 2.7501551534467295
+        }
+      },
+      "generated": {
+        "LMCA": {
+          "n": 869,
+          "mean": 0.08051241335121563,
+          "sd": 0.08765193028357311,
+          "median": 0.04985657534578138,
+          "p95": 0.260649328499551,
+          "p99": 0.4750933108724879,
+          "min": 0.00046748693392448926,
+          "max": 0.6053782790284584,
+          "minimum_robust_radius_of_curvature_mm": 2.1048496729275015
+        },
+        "LAD": {
+          "n": 6257,
+          "mean": 0.050165699932006876,
+          "sd": 0.05407942027363884,
+          "median": 0.034106120790040106,
+          "p95": 0.14690464444359894,
+          "p99": 0.26994283880192416,
+          "min": 0.00011826718219343938,
+          "max": 0.8424897681753687,
+          "minimum_robust_radius_of_curvature_mm": 3.704487973966109
+        },
+        "LCX": {
+          "n": 3987,
+          "mean": 0.06178522386535548,
+          "sd": 0.07285087020051342,
+          "median": 0.039633638553248716,
+          "p95": 0.19094836619549468,
+          "p99": 0.37011287381980124,
+          "min": 0.0002548569363966373,
+          "max": 1.140297773457012,
+          "minimum_robust_radius_of_curvature_mm": 2.7018784558325715
+        }
+      }
+    },
+    "endpoint_verification": {
+      "maximum_first_point_error_mm": 0.0,
+      "maximum_last_point_error_mm": 0.0,
+      "maximum_shared_bifurcation_error_mm": 0.0,
+      "maximum_surface_coordinate_reconstruction_difference_mm": 0.0,
+      "all_finite": true
+    }
+  },
+  "lmca_statistics": {
+    "n": 52,
+    "mean": 17.176605133440265,
+    "sd": 15.062154534154882,
+    "median": 10.376927454532218,
+    "p95": 47.7872068688117,
+    "p99": 63.3816521077691,
+    "min": 4.47232488629716,
+    "max": 72.77997403983494
+  },
+  "lmca_longest_10": [
+    "150.label",
+    "5.label",
+    "185.label",
+    "194.label",
+    "155.label",
+    "113.label",
+    "72.label",
+    "7.label",
+    "134.label",
+    "177.label"
+  ],
+  "external_sanity_rows": 8,
+  "pulsatility": {
+    "motion_peak_phase": 0.35,
+    "radius_maximum_phase": 0.6,
+    "classification": "PHYSIOLOGICAL_MODEL_ISSUE_FIXED",
+    "assumption": "parametric early-diastolic expansion; literature mixed",
+    "charter_alignment": true
+  },
+  "ellipsoid_volume": {
+    "classification": "VISUALIZATION_ERROR",
+    "original_behavior": "The panel used 100*(1-radial*sin(pi*phase/0.7)), omitted longitudinal shortening, sampled 0..0.9, and exceeded 100%.",
+    "formula": "100*(a/a0)*(b/b0)*(c/c0)",
+    "phase_values": [
+      0.0,
+      0.1111111111111111,
+      0.2222222222222222,
+      0.3333333333333333,
+      0.4444444444444444,
+      0.5555555555555556,
+      0.6666666666666666,
+      0.7777777777777777,
+      0.8888888888888888,
+      1.0
+    ],
+    "stored_relative_volume_percent": [
+      100.0,
+      82.89364835559395,
+      71.321697486061,
+      66.64531264764841,
+      67.3206244567936,
+      70.13852906494891,
+      74.99661618888972,
+      81.77942689690984,
+      90.25006652630529,
+      100.0
+    ],
+    "stored_min_percent": 66.64531264764841,
+    "stored_max_percent": 100.0,
+    "continuous_min_percent": 66.564,
+    "continuous_max_percent": 100.0,
+    "continuous_min_phase": 0.35000000000000003
+  }
+}

@@ -339,20 +339,22 @@ def landmark_plot(path: Path, real: dict[str, np.ndarray], generated: dict[str, 
 
 def pca_plot(path: Path, real: dict[str, np.ndarray], generated: dict[str, np.ndarray]) -> None:
     names = sorted(name for name in real if name.startswith("pca_mode_"))
-    real_std = [np.std(real[name], ddof=1) for name in names]
-    generated_std = [np.std(generated[name], ddof=1) for name in names]
+    real_std = np.asarray([np.std(real[name], ddof=1) for name in names])
+    generated_std = np.asarray([np.std(generated[name], ddof=1) for name in names])
+    sd_ratio = generated_std / np.maximum(real_std, 1.0e-12)
     generated_mean = [np.mean(generated[name]) for name in names]
     x = np.arange(1, len(names) + 1)
     figure, axes = plt.subplots(2, 1, figsize=(14, 8), sharex=True)
-    axes[0].plot(x, real_std, marker="o", label="Real score SD")
-    axes[0].plot(x, generated_std, marker="o", label="Generated score SD")
-    axes[0].axhline(1.0, color="black", linewidth=0.8, alpha=0.5)
-    axes[0].set_ylabel("Standard deviation")
+    axes[0].plot(x, sd_ratio, marker="o", color="#4c78a8", label="Generated / Real SD")
+    axes[0].axhline(1.0, color="black", linewidth=0.9, linestyle="--", label="Expected reference = 1")
+    axes[0].set_ylabel("SD ratio")
+    axes[0].set_title("A. Generated / Real PCA Score SD by Mode")
     axes[0].legend()
     axes[1].bar(x, generated_mean, color="#f58518")
     axes[1].axhline(0.0, color="black", linewidth=0.8)
     axes[1].set_ylabel("Generated mean score")
     axes[1].set_xlabel("PCA mode")
+    axes[1].set_title("B. Generated PCA Score Mean by Mode (expected reference = 0)")
     for axis in axes:
         axis.grid(alpha=0.2)
     figure.suptitle("PCA score distribution comparison", fontsize=16)

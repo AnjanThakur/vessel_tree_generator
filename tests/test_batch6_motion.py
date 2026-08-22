@@ -93,6 +93,14 @@ def test_deformed_3d_surface_reconstruction():
 
     assert res_4d["num_phases"] == 10
     assert len(res_4d["frames"]) == 10
+    assert res_4d["phase_values"][0] == 0.0
+    assert res_4d["phase_values"][-1] == 1.0
+    for name in ("LMCA", "LAD", "LCX", "RCA"):
+        np.testing.assert_allclose(
+            res_4d["frames"][0]["vessels_3d"][name],
+            res_4d["frames"][-1]["vessels_3d"][name],
+            atol=1.0e-10,
+        )
     # Phase 0 (diastole) vs Phase 3 (peak systole ~0.35)
     pts_d = res_4d["frames"][0]["vessels_3d"]["LMCA"]
     pts_s = res_4d["frames"][3]["vessels_3d"]["LMCA"]

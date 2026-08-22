@@ -45,7 +45,11 @@ def apply_cardiac_motion_to_tree(
     if phase_values is None:
         if num_phases < 1:
             raise ValueError("num_phases must be at least one")
-        phases = np.linspace(0.0, 1.0, num_phases, endpoint=False, dtype=float)
+        phases = (
+            np.asarray([0.0], dtype=float)
+            if num_phases == 1
+            else np.linspace(0.0, 1.0, num_phases, endpoint=True, dtype=float)
+        )
     else:
         phases = np.asarray(tuple(phase_values), dtype=float)
         if phases.ndim != 1 or len(phases) == 0:

@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "shared_anatomy_comparison": true,
+  "case_order": [
+    "healthy",
+    "focal_lad",
+    "diffuse_lcx",
+    "tandem_lad"
+  ],
+  "output": "disease_mode_comparison.png",
+  "disease_summary": {
+    "healthy": {
+      "LMCA": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      },
+      "LAD": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      },
+      "LCX": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      }
+    },
+    "focal_lad": {
+      "LMCA": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      },
+      "LAD": {
+        "maximum_reduction_fraction": 0.6480048680770767,
+        "affected_export_point_count": 6
+      },
+      "LCX": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      }
+    },
+    "diffuse_lcx": {
+      "LMCA": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      },
+      "LAD": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      },
+      "LCX": {
+        "maximum_reduction_fraction": 0.44999999999999996,
+        "affected_export_point_count": 23
+      }
+    },
+    "tandem_lad": {
+      "LMCA": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      },
+      "LAD": {
+        "maximum_reduction_fraction": 0.5161160935125131,
+        "affected_export_point_count": 8
+      },
+      "LCX": {
+        "maximum_reduction_fraction": 0.0,
+        "affected_export_point_count": 0
+      }
+    }
+  }
+}

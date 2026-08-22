@@ -1,0 +1,267 @@
+{
+  "release": {
+    "name": "4D Coronary LCA Generator",
+    "version": "1.0.0",
+    "status": "PASS",
+    "clinical_validation": false,
+    "scope": "LCA major-vessel tree: LMCA, LAD, LCX"
+  },
+  "cohort": {
+    "source_labels": 200,
+    "extracted": 191,
+    "resolved": 181,
+    "anatomy_pass": 65,
+    "eligible": 52,
+    "exclusion_reasons": {
+      "core_anatomy_gate_failed": 116,
+      "pca_eligible": 52,
+      "ellipsoid_invalid": 13,
+      "daughter_assignment_unresolved": 10,
+      "centerline_or_landmark_extraction_failed": 9
+    }
+  },
+  "source_integrity": {
+    "coordinate_change_mm": 0.0,
+    "segment_length_change_mm": 0.0,
+    "pointwise_residual_records": 77337
+  },
+  "pca": {
+    "matrix_shape": [
+      52,
+      81
+    ],
+    "fixed_points": 27,
+    "branch_points": {
+      "LMCA": 5,
+      "LAD": 12,
+      "LCX": 10
+    },
+    "dimensions": 81,
+    "modes": 13,
+    "variance": 0.9554694673427548,
+    "recomputation_pass": true,
+    "audit": {
+      "training_case_count": 52,
+      "feature_dimension": 81,
+      "maximum_centered_rank": 51,
+      "numerical_rank": 51,
+      "retained_mode_count_at_95_percent": 13,
+      "retained_variance": 0.9554694673427548,
+      "mean_max_abs_error": 0.0,
+      "eigenvalue_max_abs_error": 0.0,
+      "component_min_abs_dot_alignment": 0.9999999999999981,
+      "score_standard_deviation_max_abs_error_vs_sqrt_eigenvalue": 1.4210854715202004e-14,
+      "stored_score_max_abs_error_up_to_sign": 0.0,
+      "explained_variance_ratio": [
+        0.4247003242191922,
+        0.16566502283856174,
+        0.0939511827547427,
+        0.07812812368132788,
+        0.059807145156052156,
+        0.04022474902089728,
+        0.02443396909461959,
+        0.018491527605773533,
+        0.014187363554732603,
+        0.012065423830487107,
+        0.009052336391310454,
+        0.007768315343505563,
+        0.006993983851552126,
+        0.006416247108053275,
+        0.0057261112925783356,
+        0.00510719956131973,
+        0.004084725830769868,
+        0.0035093469092922465,
+        0.003202100965925531,
+        0.002636360744476667,
+        0.0024396560151659606,
+        0.0018118622669555803,
+        0.0014808267171416251,
+        0.0013723717113023955,
+        0.0010392032123326075,
+        0.0009244764149242291,
+        0.0007400655750411301,
+        0.000699396904552602,
+        0.0005610168122888996,
+        0.0004793515195756366,
+        0.0004493490668969989,
+        0.0003531464051370689,
+        0.00026379234814110367,
+        0.00024602612785524955,
+        0.00019717658953463337,
+        0.0001679361916030454,
+        0.00012198948106289574,
+        0.0001102282634689644,
+        8.625168595349303e-05,
+        6.357827950846076e-05,
+        5.967757305860076e-05,
+        4.392206663637636e-05,
+        3.830566986169696e-05,
+        2.4997231388690995e-05,
+        1.9168759697855442e-05,
+        1.535640060446399e-05,
+        1.4269822475128043e-05,
+        1.1263272217704262e-05,
+        7.800297852554232e-06,
+        3.988105879989052e-06,
+        1.989456714018567e-06,
+        4.400953486501154e-33
+      ],
+      "pass": true
+    }
+  },
+  "generation": {
+    "requested_trees": 52,
+    "accepted_trees": 52,
+    "sampling_attempts": 64,
+    "candidate_acceptance_rate": 0.8125,
+    "eligible_baselines_represented": 52,
+    "pca_innovation_scale": 0.04,
+    "population_comparisons_passed": 50,
+    "population_comparison_warnings": 0
+  },
+  "novelty": {
+    "canonical_tree_count": 52,
+    "mean_rms_displacement_from_baseline_mm": 0.9336877657298467,
+    "median_nearest_training_rms_coordinate_mm": 0.4365887355084037,
+    "median_pca_mahalanobis_displacement": 0.1404266579056413,
+    "exact_duplicate_count": 0,
+    "near_duplicate_under_0_1mm_count": 0,
+    "variant_baseline_count": 5,
+    "variants_per_baseline": 5,
+    "variant_acceptance_count": 23,
+    "variant_count": 25,
+    "variant_mean_rms_displacement_mm": 0.5359012976979812,
+    "interpretation": "Bootstrap-derived synthetic anatomies are derivatives, not independent patients. Distances quantify non-identity without claiming external generalization."
+  },
+  "holdout": {
+    "validation_type": "internal source-grouped 5-fold fixed-representation holdout; not external validation",
+    "fold_count": 5,
+    "training_case_counts": [
+      41,
+      42
+    ],
+    "holdout_case_counts": [
+      10,
+      11
+    ],
+    "total_holdout_predictions": 52,
+    "source_leakage_count": 0,
+    "baseline_leakage_count": 0,
+    "generated_anatomy_acceptance_count": 41,
+    "generated_anatomy_acceptance_rate": 0.7884615384615384,
+    "median_holdout_reconstruction_rms_local": 2.556727799153246,
+    "median_nearest_train_rms_coordinate_mm": 0.29721918123299806,
+    "median_nearest_holdout_rms_coordinate_mm": 8.963024569708656,
+    "pass": true,
+    "limitation": "This tests internal representation stability and leakage control. It is not an external clinical cohort and does not remove selection bias in the 52 eligible cases."
+  },
+  "motion": {
+    "tree_count": 52,
+    "stored_frames_per_tree": 10,
+    "independent_geometric_positions_per_closed_cycle": 9,
+    "snapshot_count": 520,
+    "status": "PASS"
+  },
+  "demo": {
+    "case_count": 4,
+    "stored_frames_per_case": 10,
+    "independent_geometric_positions": 9,
+    "all_engineering_audits_pass": true,
+    "maximum_point_displacement_mm": 7.810356360512908,
+    "observed_global_radius_change_fraction": 0.029916113915435583,
+    "observed_lesion_pulsatility": {
+      "focal_lad": {
+        "branch": "LAD",
+        "radius_change_fraction": 0.01048285707921437,
+        "lesion_to_healthy_ratio": 0.3504083822132263
+      },
+      "diffuse_lcx": {
+        "branch": "LCX",
+        "radius_change_fraction": 0.010470639870402643,
+        "lesion_to_healthy_ratio": 0.3500000000000063
+      },
+      "tandem_lad": {
+        "branch": "LAD",
+        "radius_change_fraction": 0.011706156941217127,
+        "lesion_to_healthy_ratio": 0.3912993838139249
+      }
+    },
+    "vtk_readback_pass": true
+  },
+  "tests": {
+    "status": "PASS",
+    "passed": 90,
+    "failed": 0,
+    "compileall_pass": true,
+    "pip_check_pass": true
+  },
+  "integrity": {
+    "status": "PASS",
+    "unchanged": 485,
+    "total": 485
+  },
+  "bspline": {
+    "type": "genuine composite cubic B-spline",
+    "maximum_numerical_difference_mm": 2.842170943040401e-14,
+    "evidence_source": "FINAL_IMPLEMENTATION_TRUTH_AUDIT.md verified contract"
+  },
+  "projection": {
+    "record_count": 156690,
+    "maximum_reconstruction_error_mm": 2.1700912329287863e-12,
+    "status": "PASS"
+  },
+  "figures": {
+    "funnel": "figures/01_cohort_funnel.png",
+    "planes": "figures/02_ppt_two_plane_two_ellipse_summary.png",
+    "pca": "figures/03_pca_variance.png",
+    "lengths": "figures/04_real_vs_generated_lengths.png",
+    "angles": "figures/05_real_vs_generated_angles.png",
+    "tortuosity": "figures/06_real_vs_generated_tortuosity.png",
+    "landmarks": "figures/07_landmark_distributions.png",
+    "scaffold": "figures/08_scaffold_distributions.png",
+    "novelty": "figures/09_generation_novelty.png",
+    "holdout": "figures/10_holdout_results.png",
+    "population": "figures/11_static_population_montage.png",
+    "disease": "figures/12_disease_comparison.png",
+    "motion": "figures/13_motion_qc.png",
+    "pulsatility": "figures/14_pulsatility_qc.png",
+    "vtk": "figures/15_vtk_export_qc.png",
+    "anatomical_model": "figures/anatomical_two_plane_model.png",
+    "disease_comparison": "figures/disease_mode_comparison.png",
+    "focal_dashboard": "figures/focal_lad_validation_dashboard.png",
+    "cardiac_gif": "figures/focal_lad_cardiac_cycle.gif"
+  },
+  "demo_cases": {
+    "healthy": {
+      "preview": "figures/healthy_preview.png",
+      "dashboard": "figures/healthy_validation_dashboard.png",
+      "gif": "figures/healthy_cardiac_cycle.gif",
+      "pvd": "C:\\Internship\\vessel_tree_generator\\submission_release\\demo_cases\\healthy\\vtk\\cine.pvd"
+    },
+    "focal_lad": {
+      "preview": "figures/focal_lad_preview.png",
+      "dashboard": "figures/focal_lad_validation_dashboard.png",
+      "gif": "figures/focal_lad_cardiac_cycle.gif",
+      "pvd": "C:\\Internship\\vessel_tree_generator\\submission_release\\demo_cases\\focal_lad\\vtk\\cine.pvd"
+    },
+    "diffuse_lcx": {
+      "preview": "figures/diffuse_lcx_preview.png",
+      "dashboard": "figures/diffuse_lcx_validation_dashboard.png",
+      "gif": "figures/diffuse_lcx_cardiac_cycle.gif",
+      "pvd": "C:\\Internship\\vessel_tree_generator\\submission_release\\demo_cases\\diffuse_lcx\\vtk\\cine.pvd"
+    },
+    "tandem_lad": {
+      "preview": "figures/tandem_lad_preview.png",
+      "dashboard": "figures/tandem_lad_validation_dashboard.png",
+      "gif": "figures/tandem_lad_cardiac_cycle.gif",
+      "pvd": "C:\\Internship\\vessel_tree_generator\\submission_release\\demo_cases\\tandem_lad\\vtk\\cine.pvd"
+    }
+  },
+  "limitations": [
+    "LCA-only; RCA candidates are not annotated ground truth and side branches are absent.",
+    "Fifty-two eligible source anatomies; synthetic derivatives do not increase independent N.",
+    "Internal holdout only; no external cohort or clinical validation.",
+    "Radius, taper, disease, motion, pulsatility, and compliance are parametric engineering models.",
+    "No hemodynamics, vessel-wall mechanics, FSI, perfusion, or patient-specific prediction."
+  ]
+}

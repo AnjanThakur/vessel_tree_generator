@@ -1,0 +1,42 @@
+{
+  "root": "LMCA",
+  "nodes": [
+    "LMCA",
+    "LAD",
+    "LCX"
+  ],
+  "directed_edges": [
+    [
+      "LMCA",
+      "LAD"
+    ],
+    [
+      "LMCA",
+      "LCX"
+    ]
+  ],
+  "shared_bifurcation": "LMCA[-1] == LAD[0] == LCX[0]",
+  "node_attributes": {
+    "LMCA": {
+      "branch_index": 0,
+      "point_count": 50,
+      "reference_length_mm": 6.672470712577375,
+      "minimum_radius_mm": 1.5774171334380642,
+      "maximum_radius_mm": 2.0595943014645166
+    },
+    "LAD": {
+      "branch_index": 1,
+      "point_count": 50,
+      "reference_length_mm": 121.0644167265167,
+      "minimum_radius_mm": 0.3782403839287474,
+      "maximum_radius_mm": 1.3387362959519358
+    },
+    "LCX": {
+      "branch_index": 2,
+      "point_count": 50,
+      "reference_length_mm": 81.63866754892676,
+      "minimum_radius_mm": 0.9015320624325718,
+      "maximum_radius_mm": 1.2357565808787099
+    }
+  }
+}

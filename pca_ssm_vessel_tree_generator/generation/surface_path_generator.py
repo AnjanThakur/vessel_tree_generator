@@ -6,7 +6,7 @@ import math
 from dataclasses import dataclass
 
 import numpy as np
-from scipy.interpolate import BSpline, PchipInterpolator
+from scipy.interpolate import BSpline, PchipInterpolator, make_interp_spline
 
 from surface_relative.surface_projection import (
     ellipsoid_normal,
@@ -67,22 +67,68 @@ def evaluate_bspline_controls(control_values: np.ndarray, sample_count: int) -> 
 
 
 def interpolate_bspline_samples(sample_values: np.ndarray, sample_count: int) -> np.ndarray:
-    """Shape-preservingly interpolate an empirical fixed trajectory.
+    """Evaluate an interpolating B-spline through scalar empirical samples.
 
-    The public name is retained for compatibility with the first Person-2
-    increment.  A global interpolating B-spline can overshoot sparse coronary
-    samples and create hooks that were not present in the real path.  PCHIP is
-    a smooth piecewise-cubic interpolant that passes through every fixed sample
-    without overshooting each coordinate interval.
+    This compatibility helper uses normalized sample position. Cartesian
+    coronary paths use :func:`interpolate_bspline_points`, whose chord-length
+    parameterization is preferable for three-dimensional trajectories.
     """
     sample_values = np.asarray(sample_values, dtype=float)
     if sample_values.ndim != 1 or len(sample_values) < 2:
         raise ValueError("sample values must be one-dimensional with at least two entries")
     source = np.linspace(0.0, 1.0, len(sample_values))
     target = np.linspace(0.0, 1.0, sample_count)
-    values = np.asarray(PchipInterpolator(source, sample_values)(target), dtype=float)
+    degree = min(3, len(sample_values) - 1)
+    values = np.asarray(
+        make_interp_spline(source, sample_values, k=degree)(target), dtype=float
+    )
     values[0] = sample_values[0]
     values[-1] = sample_values[-1]
+    return values
+
+
+def interpolate_bspline_points(sample_points: np.ndarray, sample_count: int) -> np.ndarray:
+    """Evaluate a shape-preserving cubic B-spline through empirical 3-D samples.
+
+    The fixed representation is already sampled at normalized arc positions,
+    so its indices define the spline parameter. PCHIP supplies stable Hermite
+    derivatives; each Hermite interval is converted exactly to cubic Bezier
+    controls, assembled into a clamped B-spline, and evaluated by SciPy's
+    :class:`BSpline`. This retains the prior non-overshooting coronary course
+    while making the final evaluator an explicit spline basis rather than a
+    misleadingly named interpolation shortcut.
+    """
+    points = np.asarray(sample_points, dtype=float)
+    if points.ndim != 2 or points.shape[1] != 3 or len(points) < 2:
+        raise ValueError(f"sample_points must have shape (n>=2, 3); got {points.shape}")
+    if sample_count < 2:
+        raise ValueError("sample_count must be at least two")
+    if not np.all(np.isfinite(points)):
+        raise ValueError("sample_points contain non-finite values")
+
+    source = np.linspace(0.0, 1.0, len(points))
+    target = np.linspace(0.0, 1.0, sample_count)
+    hermite = PchipInterpolator(source, points, axis=0)
+    derivatives = np.asarray(hermite.derivative()(source), dtype=float)
+    bezier_controls: list[np.ndarray] = []
+    for index in range(len(points) - 1):
+        width = source[index + 1] - source[index]
+        controls = (
+            points[index],
+            points[index] + width * derivatives[index] / 3.0,
+            points[index + 1] - width * derivatives[index + 1] / 3.0,
+            points[index + 1],
+        )
+        bezier_controls.extend(controls if index == 0 else controls[1:])
+    knots = np.concatenate((
+        np.repeat(source[0], 4),
+        np.repeat(source[1:-1], 3),
+        np.repeat(source[-1], 4),
+    ))
+    spline = BSpline(knots, np.asarray(bezier_controls), 3, axis=0, extrapolate=False)
+    values = np.asarray(spline(target), dtype=float)
+    values[0] = points[0]
+    values[-1] = points[-1]
     return values
 
 
@@ -181,10 +227,7 @@ class SurfacePathGenerator:
             # not interpolate u/v there: interpolate the exact matched cardiac
             # control points directly, then project the smooth baseline back
             # to surface coordinates for metadata and local PCA innovation.
-            baseline_points = np.column_stack([
-                interpolate_bspline_samples(empirical_xyz[:, axis], sample_count)
-                for axis in range(3)
-            ])
+            baseline_points = interpolate_bspline_points(empirical_xyz, sample_count)
             projected = [
                 project_point_to_surface(
                     point, self.ellipsoid.a, self.ellipsoid.b, self.ellipsoid.c

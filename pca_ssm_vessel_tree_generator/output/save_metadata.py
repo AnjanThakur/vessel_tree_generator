@@ -91,6 +91,11 @@ def build_global_pipeline_report(outputs_dir: Path) -> dict[str, Any]:
         report["missing_evidence"].append(str(population_dir / "week1_manifest.json"))
     else:
         report["patient_accounting"] = {
+            # The local source inventory contains 200 numbered NIfTI label
+            # volumes.  Person 1's protected LCA handoff contains 191 records;
+            # keeping both counts prevents the end-to-end funnel from silently
+            # starting after the first extraction step.
+            "source_label_inventory_count": 200,
             "source_cases_audited": population["input_case_count"],
             "cardiac_frames_valid": population["frame_pass_count"],
             "assignments_confidence_resolved": population["resolved_assignment_count"],
@@ -105,6 +110,7 @@ def build_global_pipeline_report(outputs_dir: Path) -> dict[str, Any]:
             "population_shape_matrix_dimensions": [pca["n_samples"], pca["n_features"]],
             "retained_pca_modes_k": pca["k_retained"],
             "retained_cumulative_variance_percent": 100.0 * pca["cumulative_variance_retained"],
+            "explained_variance_ratio": pca["explained_variance_ratio"],
             "branch_order": pca["branch_order"],
             "branch_counts": pca["branch_counts"],
         }
@@ -129,6 +135,7 @@ def build_global_pipeline_report(outputs_dir: Path) -> dict[str, Any]:
             "num_phases_per_tree": motion["num_phases"],
             "total_3d_snapshots_generated": motion["num_trees_processed"] * motion["num_phases"],
             "peak_systole_phase": motion["peak_systole_phase"],
+            "phase_values": motion["phase_values"],
             "motion_parameters": motion["motion_parameters"],
             "motion_parameters_are_design_defaults_not_population_learned": True,
         }

@@ -1,0 +1,132 @@
+{
+  "case_id": "diffuse_lcx",
+  "status": "PASS",
+  "phases": [
+    0.0,
+    0.1111111111111111,
+    0.2222222222222222,
+    0.3333333333333333,
+    0.4444444444444444,
+    0.5555555555555556,
+    0.6666666666666666,
+    0.7777777777777777,
+    0.8888888888888888,
+    1.0
+  ],
+  "branches": {
+    "LMCA": {
+      "arc_length_mm": 6.672470712577375,
+      "chord_length_mm": 6.4530945562425055,
+      "distance_metric_arc_over_chord": 1.033995496954659,
+      "total_turning_angle_deg": 100.89099392972761,
+      "mean_discrete_curvature_per_mm": 0.2694153286282081,
+      "maximum_discrete_curvature_per_mm": 0.6953928044288685,
+      "point_count": 50,
+      "maximum_radius_reduction_fraction": 0.0,
+      "affected_export_point_count": 0,
+      "minimum_healthy_radius_mm": 1.5774171334380642,
+      "minimum_diseased_radius_mm": 1.5774171334380642,
+      "maximum_4d_displacement_mm": 7.588242504392251,
+      "maximum_radius_variation_fraction": 0.029797150732258526,
+      "affected_arc_range": null,
+      "maximum_reduction_arc_position": null
+    },
+    "LAD": {
+      "arc_length_mm": 121.0644167265167,
+      "chord_length_mm": 95.0026496116163,
+      "distance_metric_arc_over_chord": 1.2743267395324702,
+      "total_turning_angle_deg": 295.7057587285736,
+      "mean_discrete_curvature_per_mm": 0.04354482395861738,
+      "maximum_discrete_curvature_per_mm": 0.1379583121682165,
+      "point_count": 50,
+      "maximum_radius_reduction_fraction": 0.0,
+      "affected_export_point_count": 0,
+      "minimum_healthy_radius_mm": 0.8505906750865518,
+      "minimum_diseased_radius_mm": 0.8505906750865518,
+      "maximum_4d_displacement_mm": 7.588242504392251,
+      "maximum_radius_variation_fraction": 0.029797150732258526,
+      "affected_arc_range": null,
+      "maximum_reduction_arc_position": null
+    },
+    "LCX": {
+      "arc_length_mm": 81.63866754892676,
+      "chord_length_mm": 66.40202712331306,
+      "distance_metric_arc_over_chord": 1.2294604710985437,
+      "total_turning_angle_deg": 284.18124016669714,
+      "mean_discrete_curvature_per_mm": 0.062077718861625074,
+      "maximum_discrete_curvature_per_mm": 0.22106602403314105,
+      "point_count": 50,
+      "maximum_radius_reduction_fraction": 0.44999999999999996,
+      "affected_export_point_count": 23,
+      "minimum_healthy_radius_mm": 0.9015320624325718,
+      "minimum_diseased_radius_mm": 0.5412081723699917,
+      "maximum_4d_displacement_mm": 7.810356360512908,
+      "maximum_radius_variation_fraction": 0.029797150732258526,
+      "affected_arc_range": [
+        0.32630290995256406,
+        0.7754424456228138
+      ],
+      "maximum_reduction_arc_position": 0.4078516319603457
+    }
+  },
+  "four_dimensional": {
+    "frame_count": 10,
+    "maximum_displacement_by_phase_mm": [
+      1.1916163935586911e-14,
+      3.7951637020384004,
+      6.602249126128398,
+      7.810356360512908,
+      7.633076024714927,
+      6.903592373625036,
+      5.68394371372823,
+      4.055736725620077,
+      2.1183746461506794,
+      1.1916163935586911e-14
+    ],
+    "mean_displacement_by_phase_mm": [
+      2.451590808776258e-15,
+      3.317714166347455,
+      5.795518029729031,
+      6.862877613749745,
+      6.706121827569653,
+      6.061646579756192,
+      4.984870818409169,
+      3.5471670427077417,
+      1.8460787527802571,
+      2.451590808776258e-15
+    ],
+    "maximum_radius_variation_by_phase_fraction": [
+      0.0,
+      0.00860409698133302,
+      0.016485269342124464,
+      0.02298133329356955,
+      0.027546483206408512,
+      0.029797150732258526,
+      0.02897777478867236,
+      0.02298133329356955,
+      0.012678547852221111,
+      0.0
+    ],
+    "maximum_displacement_mm": 7.810356360512908,
+    "maximum_radius_variation_fraction": 0.029797150732258526,
+    "cycle_closing_error_mm": 0.0
+  },
+  "topology": {
+    "maximum_LMCA_to_LAD_error_mm": 0.0,
+    "maximum_LMCA_to_LCX_error_mm": 0.0,
+    "exact_shared_bifurcation": true
+  },
+  "source_export_verification": {
+    "status": "PASS",
+    "case_id": "diffuse_lcx",
+    "errors": [],
+    "checksum_count": 6,
+    "array_and_topology_readback": true,
+    "vtk_readback": true
+  },
+  "metric_definitions": {
+    "distance_metric_arc_over_chord": "centerline arc length divided by endpoint chord; 1 is straight",
+    "total_turning_angle_deg": "sum of unsigned angles between consecutive centerline segments",
+    "discrete_curvature_per_mm": "turning angle divided by local mean segment length"
+  }
+}

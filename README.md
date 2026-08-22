@@ -58,16 +58,17 @@ ground truth.
 - 200 source label volumes are available locally.
 - 191 cases have protected raw LCA centerline records.
 - 181 daughter assignments pass the multi-signal confidence gate.
-- 52 cases pass assignment, frame, ellipsoid, source-integrity, representation,
-  and core anatomical checks and enter the PCA.
+- 65 resolved cases pass both source and scaffold core-anatomy gates; 13 then
+  fail the predeclared ellipsoid-quality contract, leaving 52 PCA cases.
 - The primary representation has 27 points: LMCA 5, LAD 12, and LCX 10.
 - The PCA matrix is 52 x 81; 13 modes retain 95.55% cumulative variance.
 - The final reference run generated 52/52 accepted static trees in 64 attempts,
   representing every eligible source baseline exactly once.
 - All 50 real-versus-generated population comparisons pass with no descriptive
   warnings at the validated PCA innovation scale of 0.04.
-- Optional motion generated 52 trees x 10 phases with exact phase-0 identity
-  and continuous LMCA-to-daughter junctions.
+- Optional motion generated 52 trees x 10 stored frames: nine independent
+  geometric positions plus the repeated phase-1 closure frame, with exact
+  phase-0/phase-1 identity and continuous LMCA-to-daughter junctions.
 
 These are engineering validation results, not claims of clinical validity.
 Motion amplitudes and radius tapers are explicit prototype defaults, not learned
@@ -83,6 +84,9 @@ Run commands from the repository root with the project virtual environment:
 .\.venv\Scripts\python.exe pipeline.py validate --clean
 .\.venv\Scripts\python.exe pipeline.py motion
 .\.venv\Scripts\python.exe pipeline.py export
+.\.venv\Scripts\python.exe pipeline.py audit-final
+.\.venv\Scripts\python.exe pipeline.py novelty-validate
+.\.venv\Scripts\python.exe pipeline.py holdout-validate
 ```
 
 Or rebuild the complete statistical pipeline:
@@ -93,6 +97,12 @@ Or rebuild the complete statistical pipeline:
 
 Use `.\.venv\Scripts\python.exe pipeline.py --help` for all configurable
 paths and sampling parameters.
+
+The independent final audit writes the verified cohort funnel, original-PPT
+compliance package, PCA recomputation, novelty analysis, three-strategy
+comparison, source-grouped five-fold internal holdout, VTK readback, and final
+validation figures under `submission_release/final_audit/` and
+`submission_release/final_validation/`.
 
 ## Canonical outputs
 

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "case_id": "focal_lad",
+  "source_case_directory_name": "focal_lad",
+  "artifacts": [
+    "validation_dashboard.png",
+    "tortuosity_analysis.png",
+    "interactive_tree.html",
+    "visualization_metrics.json",
+    "cardiac_cycle.gif"
+  ],
+  "interactive_html_self_contained": true,
+  "source_export_verification": "PASS",
+  "checks_visualized": [
+    "fixed cardiac anatomy views",
+    "exact LMCA daughter topology",
+    "disease location and severity",
+    "healthy versus diseased radius",
+    "4D cardiac phase motion",
+    "radius pulsatility",
+    "cycle closure",
+    "branch tortuosity and curvature"
+  ]
+}

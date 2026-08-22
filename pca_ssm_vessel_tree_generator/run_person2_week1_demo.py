@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +29,7 @@ from generation.vtk_export import export_tree_vtk
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = REPO_ROOT / "outputs/lca_ssm/lca_population_demo/tree_0001"
 COLORS = {"LMCA": "#222222", "LAD": "#d62728", "LCX": "#1f77b4", "RCA": "#9467bd"}
+GENERATOR_VERSION = "1.0.0"
 
 
 def jsonable(value: Any) -> Any:
@@ -45,6 +48,25 @@ def jsonable(value: Any) -> Any:
 
 def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(jsonable(payload), indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def git_commit() -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT,
+            check=True, capture_output=True, text=True, timeout=5,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return result.stdout.strip() or None
 
 
 def _plot_projection(ax, tree, horizontal: int, vertical: int, labels: tuple[str, str]) -> None:
@@ -238,8 +260,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     preview(tree, output / "preview.png", population_derived=population_derived)
     preview_multiview(tree, output / "preview_multiview.png", population_derived=population_derived)
     parameters = {
+        "generator_version": GENERATOR_VERSION,
         "seed": args.seed,
         "generation_mode": mode,
+        "sampling_strategy": (
+            "case_matched_empirical_bootstrap_plus_joint_pca_innovation"
+            if population_derived else "controlled_nonpopulation_demo"
+        ),
+        "statistics_package_manifest_sha256": (
+            file_sha256(args.stats_dir.resolve() / "generator_statistics_manifest.json")
+            if args.stats_dir is not None
+            else None
+        ),
+        "git_commit": git_commit(),
         "population_derived": population_derived,
         "ellipsoid": ellipsoid.to_dict(),
         "landmarks": {name: landmark.to_dict() for name, landmark in landmarks.items()},

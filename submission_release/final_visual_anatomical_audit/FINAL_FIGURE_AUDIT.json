@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "report": "submission_release/FINAL_PROJECT_REPORT.docx",
+  "created_utc": "2026-08-22T17:41:42.873277+00:00",
+  "figure_count": 15,
+  "all_embedded_images_traced": true,
+  "page_render_count": 39,
+  "page_by_page_visual_inspection": "PASS",
+  "figures": [
+    {
+      "figure_id": "DOCX_IMAGE_01",
+      "embedded_member": "word/media/image1.png",
+      "embedded_sha256": "53a5741e22945609db1a2fa3b06a919ed08fe2938fd29da97c0c894761114d6b",
+      "source_image": "submission_release/final_validation/02_ppt_two_plane_two_ellipse_summary.png",
+      "generated_timestamp": "2026-08-22T16:23:18.449720+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/final_validation_audit.py",
+      "input_files": [
+        "population_two_plane_two_ellipse_parameters.csv"
+      ],
+      "metrics_represented": "raw partial-arc ellipse axes and measured plane angle",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "FIXED",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_02",
+      "embedded_member": "word/media/image2.png",
+      "embedded_sha256": "b700ff821f637f04d69ddd177cfe60089e4008237e9f865363abe1805cc8eb2f",
+      "source_image": "outputs/lca_ssm/lca_population_cohort/population_validation/pca_score_comparison.png",
+      "generated_timestamp": "2026-08-22T15:54:01.410493+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/validate_person2_population_cohort.py",
+      "input_files": [
+        "real_reference_case_metrics.csv",
+        "generated_case_metrics.csv"
+      ],
+      "metrics_represented": "generated/real PCA score SD ratio and generated score mean",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "FIXED",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_03",
+      "embedded_member": "word/media/image3.png",
+      "embedded_sha256": "7679ef520af4bbbe1bd9ec2bfe378ffda44485fe0ae2cf2917d8d4ba4d748f9d",
+      "source_image": "submission_release/final_visual_anatomical_audit/population_montage_fixed_scale.png",
+      "generated_timestamp": "2026-08-22T17:34:51.578699+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/final_math_anatomy_visual_audit.py",
+      "input_files": [
+        "52 tree LMCA/LAD/LCX NPY arrays"
+      ],
+      "metrics_represented": "fixed-scale cardiac X-Z anatomy, labels and shared junction",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "PASS_WITH_EXPLANATION",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "FIXED",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_04",
+      "embedded_member": "word/media/image4.png",
+      "embedded_sha256": "13a2a602762d9c0eccd84d5de51a2f72618e84c2a396e03b9002c2b5a75156da",
+      "source_image": "submission_release/final_visual_anatomical_audit/population_montage_3d_selected.png",
+      "generated_timestamp": "2026-08-22T17:34:53.030687+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/final_math_anatomy_visual_audit.py",
+      "input_files": [
+        "accepted_tree_anatomy_audit.csv",
+        "selected tree NPY arrays"
+      ],
+      "metrics_represented": "selected typical/low-margin 3D anatomy",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "PASS_WITH_EXPLANATION",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_05",
+      "embedded_member": "word/media/image5.png",
+      "embedded_sha256": "e195df91a52cd72c2120df0d63b31e3ffa4a391279e03edc6f8382f9892be2c4",
+      "source_image": "submission_release/final_validation/04_real_vs_generated_lengths.png",
+      "generated_timestamp": "2026-08-22T15:53:58.402767+00:00",
+      "source_script": "tools/build_final_project_report.py",
+      "input_files": [
+        "submission_release/final_validation/04_real_vs_generated_lengths.png"
+      ],
+      "metrics_represented": "document visual",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_06",
+      "embedded_member": "word/media/image6.png",
+      "embedded_sha256": "315c97b7b48d4b2622e9673fe69e9a2b9d7d4f10ad04878679113e7268b45379",
+      "source_image": "outputs/lca_ssm/lca_population_motion/qc_visualization_4d.png",
+      "generated_timestamp": "2026-08-22T13:36:37.266693+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/motion/batch6_pipeline.py",
+      "input_files": [
+        "4d_trees_summary.json",
+        "synthetic_trees_4d.npz"
+      ],
+      "metrics_represented": "motion response, scaffold axes, LAD length and bifurcation identity",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_07",
+      "embedded_member": "word/media/image7.png",
+      "embedded_sha256": "b85a78f761bc80feb0c0bad752c073cafa8b000800bdd66564aad745c8e99862",
+      "source_image": "submission_release/demo_cases/disease_mode_comparison.png",
+      "generated_timestamp": "2026-08-22T15:52:07.713665+00:00",
+      "source_script": "vessel_tree_generator/visualization.py",
+      "input_files": [
+        "four demo geometry and disease arrays"
+      ],
+      "metrics_represented": "same-anatomy disease comparison",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_08",
+      "embedded_member": "word/media/image8.png",
+      "embedded_sha256": "b2f47382f2bdc528680ae86d0e60f4810f74dcfac43b229f40724389ace7f0c2",
+      "source_image": "outputs/lca_ssm/lca_population_export/pipeline_qc_report.png",
+      "generated_timestamp": "2026-08-22T15:53:11.824141+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/output/save_visualization.py",
+      "input_files": [
+        "pipeline_report.json",
+        "surface_deviation_pca_summary.json",
+        "4d_trees_summary.json"
+      ],
+      "metrics_represented": "complete funnel, true PCA cumulative variance, generation acceptance, true ellipsoid volume",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "FIXED",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_09",
+      "embedded_member": "word/media/image9.png",
+      "embedded_sha256": "bd57648ab4156582effe60126a3cd084941a0bc5cbdfe8acbe9b0d8797e4dda3",
+      "source_image": "submission_release/final_validation/09_generation_novelty.png",
+      "generated_timestamp": "2026-08-22T16:23:08.383068+00:00",
+      "source_script": "tools/build_final_project_report.py",
+      "input_files": [
+        "submission_release/final_validation/09_generation_novelty.png"
+      ],
+      "metrics_represented": "document visual",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_10",
+      "embedded_member": "word/media/image10.png",
+      "embedded_sha256": "addff9c7a46bd4397d54afc5246b4643d13195a0a03e1427e159bdd32442dfd8",
+      "source_image": "submission_release/final_validation/10_holdout_results.png",
+      "generated_timestamp": "2026-08-22T16:23:14.524887+00:00",
+      "source_script": "tools/build_final_project_report.py",
+      "input_files": [
+        "submission_release/final_validation/10_holdout_results.png"
+      ],
+      "metrics_represented": "document visual",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_11",
+      "embedded_member": "word/media/image11.png",
+      "embedded_sha256": "174f319eca112a697c022114ed1e1f2727af4d7478dd07f07399e4b8de3e5107",
+      "source_image": "submission_release/demo_cases/healthy/visualizations/validation_dashboard.png",
+      "generated_timestamp": "2026-08-22T15:51:21.297398+00:00",
+      "source_script": "vessel_tree_generator/visualization.py",
+      "input_files": [
+        "demo geometry, metadata and validation JSON"
+      ],
+      "metrics_represented": "anatomy, disease, radius, motion, pulsatility and acceptance",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "PASS_WITH_EXPLANATION",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_12",
+      "embedded_member": "word/media/image12.png",
+      "embedded_sha256": "ed38e2488901e7868430bdfa147e1a4aed65bb90660ea0341eb97e62ad14e748",
+      "source_image": "submission_release/final_validation/14_pulsatility_qc.png",
+      "generated_timestamp": "2026-08-22T15:51:21.180055+00:00",
+      "source_script": "tools/build_final_project_report.py",
+      "input_files": [
+        "submission_release/final_validation/14_pulsatility_qc.png"
+      ],
+      "metrics_represented": "document visual",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_13",
+      "embedded_member": "word/media/image13.png",
+      "embedded_sha256": "40b822bcaf8ce109b12870c5be671cafc8b0e4d99e3a61c733a5486b0e70b83b",
+      "source_image": "submission_release/final_validation/13_motion_qc.png",
+      "generated_timestamp": "2026-08-22T15:52:45.188282+00:00",
+      "source_script": "tools/build_final_project_report.py",
+      "input_files": [
+        "submission_release/final_validation/13_motion_qc.png"
+      ],
+      "metrics_represented": "document visual",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_14",
+      "embedded_member": "word/media/image14.png",
+      "embedded_sha256": "2aae2efc82c9060293c0ae70e54d48aac555c130f32872f80723cd37ee8725fb",
+      "source_image": "submission_release/demo_cases/healthy/visualizations/tortuosity_analysis.png",
+      "generated_timestamp": "2026-08-22T15:51:23.232862+00:00",
+      "source_script": "vessel_tree_generator/visualization.py",
+      "input_files": [
+        "geometry_static.npy"
+      ],
+      "metrics_represented": "branch curvature and distance-metric tortuosity",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    },
+    {
+      "figure_id": "DOCX_IMAGE_15",
+      "embedded_member": "word/media/image15.png",
+      "embedded_sha256": "16698172946b6dcc90ddaff6cd2e4306ce8b61d4c808c6e3f4c2de71c2c8fcd0",
+      "source_image": "submission_release/final_visual_anatomical_audit/real_vs_generated_curvature.png",
+      "generated_timestamp": "2026-08-22T17:34:59.387693+00:00",
+      "source_script": "pca_ssm_vessel_tree_generator/final_math_anatomy_visual_audit.py",
+      "input_files": [
+        "bspline_curvature_audit.csv"
+      ],
+      "metrics_represented": "uniform-arc real/generated curvature",
+      "mathematical_validation": "PASS",
+      "anatomical_validation": "NOT_APPLICABLE_OR_PASS",
+      "visual_validation": "PASS \u2014 final DOCX rendered and inspected page by page",
+      "status": "PASS",
+      "notes": "No clinical-validation claim; values are engineering/dataset-anatomical evidence."
+    }
+  ]
+}

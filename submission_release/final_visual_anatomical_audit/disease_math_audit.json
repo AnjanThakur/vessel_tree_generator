@@ -1,0 +1,48 @@
+{
+  "formulae": {
+    "radius_reduction": "1-r_diseased/r_healthy",
+    "area_reduction": "1-(r_diseased/r_healthy)^2"
+  },
+  "rows": [
+    {
+      "case_id": "diffuse_lcx",
+      "maximum_radius_reduction_fraction": 0.44999999999999996,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.6975,
+      "minimum_lumen_radius_mm": 0.5412081723699917,
+      "minimum_lumen_diameter_mm": 1.0824163447399835,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case_id": "focal_lad",
+      "maximum_radius_reduction_fraction": 0.6480048680770767,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.8760994271025638,
+      "minimum_lumen_radius_mm": 0.3782403839287474,
+      "minimum_lumen_diameter_mm": 0.7564807678574949,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case_id": "healthy",
+      "maximum_radius_reduction_fraction": 0.0,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.0,
+      "minimum_lumen_radius_mm": 0.8505906750865518,
+      "minimum_lumen_diameter_mm": 1.7011813501731037,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case_id": "tandem_lad",
+      "maximum_radius_reduction_fraction": 0.5161160935125131,
+      "equivalent_area_reduction_fraction_at_max_radius_reduction": 0.7658563650424091,
+      "minimum_lumen_radius_mm": 0.48678678454529634,
+      "minimum_lumen_diameter_mm": 0.9735735690905927,
+      "maximum_XYZ_change_due_to_disease_mm": 0.0,
+      "saved_reduction_max_error": 0.0,
+      "status": "PASS"
+    }
+  ]
+}

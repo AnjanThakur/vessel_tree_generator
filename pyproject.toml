@@ -18,6 +18,9 @@ dependencies = [
   "python-docx>=1.1,<2",
 ]
 
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
 [project.scripts]
 coronary4d = "vessel_tree_generator.cli:main"
 
