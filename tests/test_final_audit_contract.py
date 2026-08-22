@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 from pathlib import Path
 
@@ -83,3 +84,27 @@ def test_original_ppt_population_counts_and_integrity() -> None:
     assert manifest["pointwise_residual_record_count"] == 77337
     assert manifest["source_geometry_max_coordinate_change_mm"] == 0.0
     assert manifest["source_geometry_max_segment_length_change_mm"] == 0.0
+
+
+def test_mentor_visualization_pack_is_complete_and_readable() -> None:
+    pack = ROOT / "submission_release/mentor_visualization_pack"
+    manifest = json.loads((pack / "VISUALIZATION_PACK_MANIFEST.json").read_text(encoding="utf-8"))
+    assert manifest["status"] == "PASS"
+    assert manifest["static_population_tree_count"] == 52
+    assert manifest["cine_case_count"] == 4
+    assert manifest["stored_frames_per_cine_case"] == 10
+    assert manifest["extension_counts"][".pvd"] == 4
+    assert manifest["extension_counts"][".vtm"] == 93
+    assert manifest["extension_counts"][".vtp"] == 380
+    assert manifest["xml_reference_verification"]["missing_reference_count"] == 0
+    assert manifest["pyvista_readback_verification"]["status"] == "PASS"
+
+
+def test_mentor_visualization_pack_manifest_hashes_match_files() -> None:
+    pack = ROOT / "submission_release/mentor_visualization_pack"
+    manifest = json.loads((pack / "VISUALIZATION_PACK_MANIFEST.json").read_text(encoding="utf-8"))
+    for relative, expected in manifest["files"].items():
+        path = pack / relative
+        assert path.is_file(), relative
+        assert path.stat().st_size == expected["size_bytes"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == expected["sha256"]

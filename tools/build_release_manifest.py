@@ -139,6 +139,18 @@ def main() -> None:
             "integrity_comparison": artifact(
                 RELEASE_DIR / "final_audit" / "protected_integrity_comparison.json"
             ),
+            "design_alignment_report": artifact(
+                RELEASE_DIR / "design_spec_alignment" / "DESIGN_ALIGNMENT_FINAL_REPORT.md"
+            ),
+            "design_requirement_matrix": artifact(
+                RELEASE_DIR / "design_spec_alignment" / "TECHNICAL_DESIGN_REQUIREMENT_MATRIX.md"
+            ),
+            "design_alignment_summary": artifact(
+                RELEASE_DIR / "design_spec_alignment" / "design_alignment_summary.json"
+            ),
+            "mentor_visualization_pack": artifact(
+                RELEASE_DIR / "mentor_visualization_pack" / "VISUALIZATION_PACK_MANIFEST.json"
+            ),
             "presentation": {
                 "status": "deferred_by_user",
                 "path": ppt_path.relative_to(ROOT).as_posix(),

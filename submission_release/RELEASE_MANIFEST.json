@@ -3,10 +3,10 @@
   "release": {
     "name": "4D Coronary LCA Generator",
     "version": "1.0.0",
-    "release_date": "2026-08-22",
-    "created_utc": "2026-08-22T17:43:36.494815+00:00",
+    "release_date": "2026-08-23",
+    "created_utc": "2026-08-22T19:45:36.970979+00:00",
     "branch": "latestt_branchh",
-    "git_head_at_audit": "2f4e7258f077cc4b4d35fbb6292ececa36c47210",
+    "git_head_at_audit": "1db5bf781e8ebb2a8fc0fbb49917aaebc799697a",
     "committed_by_this_audit": false,
     "pushed_by_this_audit": false
   },
@@ -104,7 +104,7 @@
     "status": "PASS",
     "tests": {
       "status": "PASS",
-      "passed": 92,
+      "passed": 103,
       "failed": 0,
       "compileall_pass": true,
       "pip_check_pass": true
@@ -158,8 +158,8 @@
     "project_report": {
       "status": "included",
       "path": "submission_release/FINAL_PROJECT_REPORT.docx",
-      "sha256": "008efc181001aa3b42d52c28d70a869e23e1649fb262e40258c78669aa8a9ddc",
-      "size_bytes": 3546251
+      "sha256": "2623d6fc4f119fc452dba17e9605a5f0fdf56f6c6df84e9b957f2ce0f19e1d9f",
+      "size_bytes": 3969959
     },
     "validation_summary": {
       "status": "included",
@@ -178,6 +178,30 @@
       "path": "submission_release/final_audit/protected_integrity_comparison.json",
       "sha256": "f1e0c734b31633aaa67e15e0f213bbc91234bcf1f2bf2436b7908990ddc4d71d",
       "size_bytes": 178706
+    },
+    "design_alignment_report": {
+      "status": "included",
+      "path": "submission_release/design_spec_alignment/DESIGN_ALIGNMENT_FINAL_REPORT.md",
+      "sha256": "c1b67e383c62d957a8536ba69d9c25adbb8862dfc3e8f3729bf77ca5b000064a",
+      "size_bytes": 3892
+    },
+    "design_requirement_matrix": {
+      "status": "included",
+      "path": "submission_release/design_spec_alignment/TECHNICAL_DESIGN_REQUIREMENT_MATRIX.md",
+      "sha256": "be1663f9a0d498027614a888b9963f1ae02ebdc8934855ab38db4585a4bc766b",
+      "size_bytes": 5499
+    },
+    "design_alignment_summary": {
+      "status": "included",
+      "path": "submission_release/design_spec_alignment/design_alignment_summary.json",
+      "sha256": "e269b94b9d4b51534ec043f0e6c02a815fbbfb6cbeb273ba7f2803b7d6d1fe3f",
+      "size_bytes": 4857
+    },
+    "mentor_visualization_pack": {
+      "status": "included",
+      "path": "submission_release/mentor_visualization_pack/VISUALIZATION_PACK_MANIFEST.json",
+      "sha256": "d8d20ea4d8472df8864d7873c05a00084050187f959c08509acae207bce3766e",
+      "size_bytes": 90380
     },
     "presentation": {
       "status": "deferred_by_user",

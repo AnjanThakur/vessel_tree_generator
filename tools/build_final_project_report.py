@@ -487,6 +487,9 @@ def build() -> Path:
     test_validation = load_json(RELEASE / "final_validation/test_validation.json")
     original_ppt = load_json(RELEASE / "original_ppt_evidence/original_ppt_evidence_summary.json")
     visual_audit = load_json(RELEASE / "final_visual_anatomical_audit/audit_computation_summary.json")
+    design_alignment = load_json(RELEASE / "design_spec_alignment/design_alignment_summary.json")
+    surface_statistics = load_json(RELEASE / "design_spec_alignment/real_surface_behavior_statistics.json")
+    uv_spline_audit = load_json(RELEASE / "design_spec_alignment/uv_spline_equivalence_audit.json")
     with (RELEASE / "final_visual_anatomical_audit/external_anatomical_sanity_check.csv").open(
         newline="", encoding="utf-8"
     ) as handle:
@@ -590,7 +593,7 @@ def build() -> Path:
         "NIfTI label volumes and protected centerlines enter source audit and graph extraction.",
         "Multi-signal daughter assignment identifies LAD and LCX and rejects low-confidence cases.",
         "A common cardiac frame and ellipsoid support surface make cases comparable.",
-        "Fixed branch samples form an 81-dimensional joint LCA vector and a 13-mode PCA model.",
+        "Fixed branch samples form an 81-dimensional joint surface-deviation vector and a 13-mode PCA model.",
         "Generation bootstraps a matched empirical baseline and adds small, joint PCA innovation.",
         "Static acceptance enforces topology, anatomy, range, progression, collision, and scaffold checks.",
         "Radius, disease, motion, and pulsatility produce the phase-corresponded 4D representation.",
@@ -672,7 +675,56 @@ def build() -> Path:
         "RAW 191-case partial-arc ellipse measurements. Full fitted ellipse axes describe incomplete-arc reference fits; they are not direct physical heart diameters or final generator scaffold axes.",
     )
 
+    heading(document, "4.5 Technical Design Specification Alignment", 2, page_break=True)
+    paragraph(
+        document,
+        "The final architecture was traced against the primary technical design. The two measured ellipses provide "
+        "the triaxial heart-scaffold dimensions: the coronary ellipse supplies a and b, while the cardiac-Z-aligned "
+        "axis of the interventricular/LAD ellipse supplies c, with explicit quality handling for underconstrained "
+        "partial arcs. These ellipses are scaffold measurements, not LAD or LCX path molds. Arteries retain their "
+        "measured or generated surface-relative trajectories and are never snapped onto planar ellipse arcs."
+    )
+    table(
+        document,
+        ("Design component", "Alignment", "Evidence / limitation"),
+        (
+            ("Two anatomical planes", "EQUIVALENT", "Measured coronary and LAD references retained; the measured LAD plane differs materially from the simplified cross-product example and is the validated downstream reference."),
+            ("Two ellipses -> ellipsoid", "EXACT", "Per-case a,b,c provenance is machine-traced for all eligible cases."),
+            ("u, v, offset representation", "EQUIVALENT", f"{design_alignment['source_surface_reconstruction']['point_count']:,} eligible source points; maximum round-trip error {design_alignment['source_surface_reconstruction']['maximum_reconstruction_error_mm']:.2e} mm."),
+            ("Joint deviation PCA", "EXACT", "81 surface-relative features: LMCA 5 + LAD 12 + LCX 10, each with tangent-u, tangent-v and normal coefficients; not raw XYZ PCA."),
+            ("B-spline chart", "PARTIAL", f"Protected shape-preserving XYZ spline is re-parameterized into the ellipsoid basis. A literal u/v candidate was evaluated but not promoted: {uv_spline_audit['lad_cases_with_pole_touching_controls']}/52 LAD controls touch a polar singularity and P95 maximum path difference is {uv_spline_audit['P95_candidate_vs_xyz_point_difference_mm']:.2f} mm."),
+            ("Motion", "EQUIVALENT", "Radial contraction, longitudinal shortening and torsion deform the ellipsoid-associated points; nine independent positions plus a closure frame are preserved."),
+            ("RCA", "DELIBERATE DATASET DEVIATION", "Disconnected candidates are not sufficiently reliable annotated RCA identity for population training."),
+            ("Side branches", "NOT IMPLEMENTED", "No population-derived identities were sufficiently validated; random branches are not fabricated."),
+        ),
+        (2450, 1680, 5230),
+        font_size=7.9,
+    )
+    lad_v = surface_statistics["metrics"]["LAD_v_net_rad"]
+    lcx_u = surface_statistics["metrics"]["LCX_u_travel_rad"]
+    paragraph(
+        document,
+        f"The real 52-case surface evidence gives LAD net v progression {lad_v['mean']:.3f} +/- {lad_v['SD']:.3f} rad "
+        f"and LCX total circumferential u travel {lcx_u['mean']:.3f} +/- {lcx_u['SD']:.3f} rad. The accepted generated "
+        f"cohort has {design_alignment['generated_role_consistent_count']}/52 cases satisfying the deliberately strict "
+        "combined surface-role descriptor; the other 12 retain verified eligible real-baseline variation. No PCA, "
+        "frame, spline/reconstruction, or validator drift was found, so the frozen cohort was not regenerated."
+    )
+    add_figure(
+        document,
+        RELEASE / "design_spec_alignment/00_full_surface_design_concept.png",
+        "Technical design alignment: measured planes and ellipse dimensions define the ellipsoid scaffold; LAD and LCX are then represented and assessed by their surface-relative u-v trajectories before 3D reconstruction.",
+        width=6.45,
+    )
+
     heading(document, "5. Statistical shape model and training population", 1, page_break=True)
+    paragraph(
+        document,
+        "The primary 81-dimensional PCA is not raw cardiac XYZ. It is the specification-faithful LCA-only joint "
+        "surface-deviation model: 27 fixed points, each represented by tangent-u, tangent-v, and normal coefficients "
+        "relative to its case-specific ellipsoid. This retains within-vessel and cross-vessel covariance while the "
+        "ellipsoid and named u-v-offset landmarks define the global scaffold and endpoints."
+    )
     table(
         document,
         ("Model item", "Final value"),
@@ -777,7 +829,10 @@ def build() -> Path:
         "points are overwritten with exact controls and the daughter starts are snapped to the LMCA terminal. This is a "
         "real B-spline basis representation, not a polyline. Unconstrained global cubic trials were rejected because they "
         "introduced hooks and violated learned progression/tortuosity limits. The accepted implementation reproduces the "
-        "prior stable path to numerical precision while making the spline basis explicit."
+        "prior stable path to numerical precision while making the spline basis explicit. The protected spline interpolates "
+        "the fixed controls in cardiac XYZ; every dense sample is then re-parameterized and reconstructed in u, v, offset "
+        "and the ellipsoid local basis. It is therefore surface-relative, but only partially aligned with a literal global "
+        "u-v spline because the current LAD chart reaches a polar singularity in 26 of 52 eligible baselines."
     )
     callout(
         document,
@@ -1316,6 +1371,8 @@ def build() -> Path:
             ("outputs/lca_ssm/lca_population_export/", "Fixed-size population arrays locally; tracked summary and QC report."),
             ("submission_release/demo_cases/", "Four complete portable cases with arrays, metadata, VTK, previews, visualizations, and audits."),
             ("submission_release/reports/", "Per-tree quantitative DOCX reports retained as supporting evidence."),
+            ("submission_release/design_spec_alignment/", "Requirement matrix, ellipse-to-ellipsoid provenance, point-level surface trace, real/generated u-v audits, spline-equivalence evaluation, figures, and final alignment report."),
+            ("submission_release/mentor_visualization_pack/", "Self-contained ParaView pack with all 52 static trees, four 10-frame disease/motion cine series, referenced VTK dependencies, presentation assets, checksums, and a viewing guide."),
             ("submission_release/FINAL_PROJECT_REPORT.docx", "Master project report and final document."),
             ("SUBMISSION_GUIDE.md", "Five-minute usage, API, outputs, ParaView, validation, and scope guide."),
         ),

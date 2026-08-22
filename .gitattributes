@@ -1,3 +1,8 @@
 # Generated, hash-locked publication packages must retain their exact bytes.
 outputs/lca_ssm/person1_week1/** binary
 outputs/lca_ssm/person2_population_cohort/** binary
+
+# Keep generated audit and ParaView packages byte-stable so manifest hashes
+# survive checkout on Windows and Unix while their Markdown remains viewable.
+submission_release/design_spec_alignment/** -text whitespace=cr-at-eol
+submission_release/mentor_visualization_pack/** -text whitespace=cr-at-eol
