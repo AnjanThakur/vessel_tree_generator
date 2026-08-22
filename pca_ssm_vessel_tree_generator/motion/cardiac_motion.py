@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Sequence
 from typing import Any
 import numpy as np
 
@@ -38,8 +39,21 @@ def apply_cardiac_motion_to_tree(
     longitudinal_amplitude: float = 0.10,
     torsion_amplitude_deg: float = 10.0,
     peak_phase: float = 0.35,
+    phase_values: Sequence[float] | None = None,
 ) -> dict[str, Any]:
     """Deform reference 3D synthetic coronary tree across num_phases cardiac phases (Design Doc §7.4 & §7.5)."""
+    if phase_values is None:
+        if num_phases < 1:
+            raise ValueError("num_phases must be at least one")
+        phases = np.linspace(0.0, 1.0, num_phases, endpoint=False, dtype=float)
+    else:
+        phases = np.asarray(tuple(phase_values), dtype=float)
+        if phases.ndim != 1 or len(phases) == 0:
+            raise ValueError("phase_values must be a non-empty one-dimensional sequence")
+        if not np.all(np.isfinite(phases)) or np.any(phases < 0.0) or np.any(phases > 1.0):
+            raise ValueError("every cardiac phase must be finite and lie in [0, 1]")
+        num_phases = int(len(phases))
+
     a0 = float(tree_data["ellipsoid_params"]["a_mm"])
     b0 = float(tree_data["ellipsoid_params"]["b_mm"])
     c0 = float(tree_data["ellipsoid_params"]["c_mm"])
@@ -99,7 +113,7 @@ def apply_cardiac_motion_to_tree(
             "deviations": dev_sb,
         })
 
-    phase_values = [float(p) for p in np.linspace(0.0, 1.0, num_phases, endpoint=False)]
+    phase_values = [float(p) for p in phases]
     frames = []
 
     for p_idx, phase in enumerate(phase_values):

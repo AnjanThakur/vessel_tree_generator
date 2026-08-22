@@ -98,7 +98,7 @@ def process_batch6_motion(
     batch5_dir: Path,
     output_dir: Path,
     num_phases: int = 10,
-    radial_amplitude: float = 0.15,
+    radial_amplitude: float = 0.14,
     longitudinal_amplitude: float = 0.10,
     torsion_amplitude_deg: float = 10.0,
     peak_phase: float = 0.35,

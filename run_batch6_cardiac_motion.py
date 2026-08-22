@@ -57,8 +57,8 @@ def parse_args():
     parser.add_argument(
         "--radial-amplitude",
         type=float,
-        default=0.15,
-        help="Radial contraction amplitude fraction at peak systole (default: 0.15)",
+        default=0.14,
+        help="Radial contraction amplitude fraction at peak systole (default: 0.14)",
     )
     parser.add_argument(
         "--longitudinal-amplitude",

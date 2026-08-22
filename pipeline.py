@@ -30,11 +30,11 @@ DEFAULT_EXPORT = LCA_OUTPUT / "lca_population_export"
 def _add_generation_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--stats-dir", type=Path, default=DEFAULT_STATS)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_COHORT)
-    parser.add_argument("--count", type=int, default=25)
+    parser.add_argument("--count", type=int, default=52)
     parser.add_argument("--base-seed", type=int, default=20260822)
     parser.add_argument("--seed-stride", type=int, default=1009)
     parser.add_argument("--max-attempts", type=int, default=250)
-    parser.add_argument("--pca-scale", type=float, default=0.08)
+    parser.add_argument("--pca-scale", type=float, default=0.04)
     parser.add_argument("--clean", action="store_true")
 
 
@@ -62,7 +62,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     motion.add_argument("--input-dir", type=Path, default=DEFAULT_COHORT)
     motion.add_argument("--output-dir", type=Path, default=DEFAULT_MOTION)
     motion.add_argument("--num-phases", type=int, default=10)
-    motion.add_argument("--radial-amplitude", type=float, default=0.15)
+    motion.add_argument("--radial-amplitude", type=float, default=0.14)
     motion.add_argument("--longitudinal-amplitude", type=float, default=0.10)
     motion.add_argument("--torsion-amplitude-deg", type=float, default=10.0)
 
@@ -78,13 +78,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     run_all.add_argument("--cohort-dir", type=Path, default=DEFAULT_COHORT)
     run_all.add_argument("--motion-dir", type=Path, default=DEFAULT_MOTION)
     run_all.add_argument("--export-dir", type=Path, default=DEFAULT_EXPORT)
-    run_all.add_argument("--count", type=int, default=25)
+    run_all.add_argument("--count", type=int, default=52)
     run_all.add_argument("--num-phases", type=int, default=10)
     run_all.add_argument("--num-points", type=int, default=50)
     run_all.add_argument("--base-seed", type=int, default=20260822)
     run_all.add_argument("--seed-stride", type=int, default=1009)
     run_all.add_argument("--max-attempts", type=int, default=250)
-    run_all.add_argument("--pca-scale", type=float, default=0.08)
+    run_all.add_argument("--pca-scale", type=float, default=0.04)
     run_all.add_argument("--clean", action="store_true")
     return parser.parse_args(argv)
 
@@ -180,7 +180,7 @@ def main(argv: list[str] | None = None) -> int:
             input_dir=args.cohort_dir,
             output_dir=args.motion_dir,
             num_phases=args.num_phases,
-            radial_amplitude=0.15,
+            radial_amplitude=0.14,
             longitudinal_amplitude=0.10,
             torsion_amplitude_deg=10.0,
         ))

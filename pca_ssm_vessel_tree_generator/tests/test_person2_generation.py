@@ -256,6 +256,24 @@ class Person2GenerationTests(unittest.TestCase):
             report["errors"],
         )
 
+    def test_validator_rejects_branch_turn_above_learned_real_maximum(self) -> None:
+        tree = TreeAssembler(self.ellipsoid, self.rng, ZeroDeviationSampler()).assemble(self.landmarks)
+        baseline = TreeValidator().validate(tree)
+        measured = baseline["metrics"]["branch_progression"]["LMCA"][
+            "max_resampled_turn_angle_deg"
+        ]
+        thresholds = {
+            "branch_max_resampled_turn_angle_deg": {
+                "lmca": {"max": 0.5 * measured, "p97_5": 0.4 * measured}
+            }
+        }
+        report = TreeValidator(thresholds).validate(tree)
+        self.assertFalse(report["accepted"])
+        self.assertTrue(
+            any("LMCA maximum resampled turn angle" in error for error in report["errors"]),
+            report["errors"],
+        )
+
     def test_validator_rejects_rca_lca_collision(self) -> None:
         landmarks = LandmarkSampler.controlled().sample(self.rng, include_rca=True)
         tree = TreeAssembler(self.ellipsoid, self.rng, ZeroDeviationSampler()).assemble(

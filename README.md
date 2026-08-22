@@ -1,11 +1,53 @@
-# LCA Statistical Vessel Tree Generator
+# Disease-aware 4D Coronary LCA Tree Generator
 
-This repository contains a data-audited left-coronary-artery (LCA) statistical
-shape pipeline. The canonical workflow starts from the protected centerlines
-extracted from the approximately 200 supplied NIfTI label volumes, resolves the
-LMCA daughter identities in a common RAS/cardiac frame, fits an LCA-only shape
-model, generates validated static trees, and can optionally add prototype
-cardiac motion and export fixed-size XYZ-radius arrays.
+This repository is a usable research pipeline for generating a labeled
+`LMCA + LAD + LCX` tree with `(x, y, z, radius)` at each point and across cardiac
+phase. It combines the audited LCA statistical shape model with controlled
+focal/diffuse/tandem stenosis, cardiac motion, reduced compliance at lesions,
+reproducible seeds, validation, NumPy/JSON output, and animated ParaView export.
+
+The primary submission interface is:
+
+```powershell
+.\.venv\Scripts\python.exe -m vessel_tree_generator demo `
+  --output-dir submission_release\demo_cases --clean
+```
+
+For one custom focal case:
+
+```powershell
+.\.venv\Scripts\python.exe -m vessel_tree_generator generate `
+  --output-dir my_case --preset focal --branch LAD `
+  --position 0.45 --length 0.12 --severity 0.65 --clean
+```
+
+Create a complete visual validation pack for that case:
+
+```powershell
+.\.venv\Scripts\python.exe -m vessel_tree_generator visualize `
+  --input-dir my_case --clean --standalone-html
+```
+
+This writes a quantitative dashboard, tortuosity/curvature plot, looping 4D
+cardiac-cycle GIF, metrics JSON, and rotatable interactive HTML with phase
+slider, Play/Pause controls, radius-sized markers, and disease-colored points.
+
+Run the independent anatomy, disease, motion and local/global pulsatility audit:
+
+```powershell
+.\.venv\Scripts\python.exe -m vessel_tree_generator audit `
+  --input-dir submission_release\demo_cases --release
+```
+
+The curated release also includes one rendered-and-checked quantitative DOCX
+report per tree in `submission_release/reports/`.
+
+See [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md) for the API, disease convention,
+output schema, ParaView workflow, validation contract, and honest limitations.
+
+The underlying statistical workflow starts from protected centerlines extracted
+from the approximately 200 supplied NIfTI label volumes, resolves LMCA daughter
+identities in a common RAS/cardiac frame, and fits the LCA-only shape model.
 
 The primary generated topology is **LMCA + LAD + LCX**. RCA is deliberately not
 included because the available disconnected RCA candidates are not resolved
@@ -20,15 +62,18 @@ ground truth.
   and core anatomical checks and enter the PCA.
 - The primary representation has 27 points: LMCA 5, LAD 12, and LCX 10.
 - The PCA matrix is 52 x 81; 13 modes retain 95.55% cumulative variance.
-- The reference run generated 25/25 accepted static trees in 30 attempts.
-- Optional motion generated 25 trees x 10 phases with exact phase-0 identity
+- The final reference run generated 52/52 accepted static trees in 64 attempts,
+  representing every eligible source baseline exactly once.
+- All 50 real-versus-generated population comparisons pass with no descriptive
+  warnings at the validated PCA innovation scale of 0.04.
+- Optional motion generated 52 trees x 10 phases with exact phase-0 identity
   and continuous LMCA-to-daughter junctions.
 
 These are engineering validation results, not claims of clinical validity.
 Motion amplitudes and radius tapers are explicit prototype defaults, not learned
 population parameters.
 
-## Canonical commands
+## Statistical-model maintenance commands
 
 Run commands from the repository root with the project virtual environment:
 
@@ -40,7 +85,7 @@ Run commands from the repository root with the project virtual environment:
 .\.venv\Scripts\python.exe pipeline.py export
 ```
 
-Or run the complete pipeline:
+Or rebuild the complete statistical pipeline:
 
 ```powershell
 .\.venv\Scripts\python.exe pipeline.py run-all --clean
@@ -59,6 +104,11 @@ outputs/lca_ssm/
 |-- lca_population_motion/      # optional 4D prototype motion
 `-- lca_population_export/      # fixed-size static/cine XYZ-radius arrays
 ```
+
+New integrated 4D case exports additionally contain `geometry_cine.npy`,
+`metadata.json`, `graph.json`, `manifest.json`, a QC preview, and `vtk/cine.pvd`.
+The demo command creates healthy, focal, diffuse, and tandem cases on exactly
+the same seeded anatomy for a controlled comparison.
 
 The repository tracks the compact frozen generator package, run summaries, QC
 images, and one complete representative tree. Bulk source data, per-case trial
@@ -82,6 +132,9 @@ noise.
 
 - `pca_ssm_vessel_tree_generator/`: active extraction, alignment,
   surface-relative model, PCA, generation, motion, and export code.
+- `vessel_tree_generator/`: public integrated 4D API, disease/pulsatility,
+  validation/audit, CLI, visualization, and portable export.
+- `examples/`: ready-to-run disease configurations.
 - `tests/`: deterministic staged tests and pipeline integration tests.
 - `lca_vessel_tree_generator/`: earlier LCA topology utilities retained for
   reference and compatibility.

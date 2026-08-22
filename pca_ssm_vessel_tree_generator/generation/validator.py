@@ -266,6 +266,19 @@ def _within_bounds(value: float, bounds: tuple[float, float], *, lower_scale: fl
     return lower - tolerance <= value <= upper + tolerance
 
 
+def _nested_branch_threshold(
+    thresholds: dict[str, Any],
+    group: str,
+    branch: str,
+) -> dict[str, Any] | None:
+    """Return one learned branch threshold entry from the frozen package."""
+    entries = thresholds.get(group)
+    if not isinstance(entries, dict):
+        return None
+    entry = entries.get(branch.lower())
+    return entry if isinstance(entry, dict) else None
+
+
 class TreeValidator:
     """Compatibility validator with structural, anatomical and population QC.
 
@@ -407,12 +420,102 @@ class TreeValidator:
                 elif central and not central[0] <= value <= central[1]:
                     warnings.append(f"{name} length is outside the real central 95% interval")
 
+            # These branch-course limits are learned from the same immutable,
+            # anatomy-gated real scaffold cohort as the size thresholds.  The
+            # observed extrema are hard safety limits; central intervals remain
+            # descriptive warnings so legitimate tail anatomies are retained.
+            for name in branches:
+                branch = name.lower()
+                tortuosity_entry = _nested_branch_threshold(
+                    self.thresholds, "branch_tortuosity", branch
+                )
+                if tortuosity_entry:
+                    value = tortuosities[name]
+                    central = _bounds(tortuosity_entry)
+                    hard = _bounds(tortuosity_entry, hard=True)
+                    if hard and not _within_bounds(value, hard):
+                        errors.append(
+                            f"{name} tortuosity {value:.4f} outside observed real range "
+                            f"[{hard[0]:.4f}, {hard[1]:.4f}]"
+                        )
+                    elif central and not _within_bounds(value, central):
+                        warnings.append(
+                            f"{name} tortuosity is outside the real central 95% interval"
+                        )
+
+                obliquity_entry = _nested_branch_threshold(
+                    self.thresholds, "branch_obliquity_rad", branch
+                )
+                if obliquity_entry and name in obliquities:
+                    value = obliquities[name]
+                    central = _bounds(obliquity_entry)
+                    hard = _bounds(obliquity_entry, hard=True)
+                    if hard and not _within_bounds(value, hard):
+                        errors.append(
+                            f"{name} obliquity {value:.4f} rad outside observed real range "
+                            f"[{hard[0]:.4f}, {hard[1]:.4f}]"
+                        )
+                    elif central and not _within_bounds(value, central):
+                        warnings.append(
+                            f"{name} obliquity is outside the real central 95% interval"
+                        )
+
+                progression = progression_metrics[name]
+                upper_checks = (
+                    (
+                        "branch_backward_progress_ratio",
+                        "backward_progress_ratio",
+                        "backward-progress ratio",
+                    ),
+                    (
+                        "branch_max_resampled_turn_angle_deg",
+                        "max_resampled_turn_angle_deg",
+                        "maximum resampled turn angle",
+                    ),
+                )
+                for group, metric, label in upper_checks:
+                    entry = _nested_branch_threshold(self.thresholds, group, branch)
+                    if not entry:
+                        continue
+                    value = progression[metric]
+                    hard_upper = entry.get("max")
+                    central_upper = entry.get("p97_5")
+                    tolerance = 1.0e-9 * max(1.0, abs(value), abs(float(hard_upper or 0.0)))
+                    if hard_upper is not None and value > float(hard_upper) + tolerance:
+                        errors.append(
+                            f"{name} {label} {value:.4f} exceeds observed real maximum "
+                            f"{float(hard_upper):.4f}"
+                        )
+                    elif central_upper is not None and value > float(central_upper):
+                        warnings.append(
+                            f"{name} {label} is above the real central 95% interval"
+                        )
+
+                terminal_entry = _nested_branch_threshold(
+                    self.thresholds, "branch_terminal_progress_fraction", branch
+                )
+                if terminal_entry:
+                    value = progression["terminal_progress_fraction"]
+                    hard_lower = terminal_entry.get("min")
+                    central_lower = terminal_entry.get("p2_5")
+                    tolerance = 1.0e-9 * max(1.0, abs(value), abs(float(hard_lower or 0.0)))
+                    if hard_lower is not None and value < float(hard_lower) - tolerance:
+                        errors.append(
+                            f"{name} terminal-progress fraction {value:.4f} is below observed "
+                            f"real minimum {float(hard_lower):.4f}"
+                        )
+                    elif central_lower is not None and value < float(central_lower):
+                        warnings.append(
+                            f"{name} terminal-progress fraction is below the real central 95% interval"
+                        )
+
         return {
             "accepted": not errors,
             "validation_level": "structural_only" if self.thresholds is None else "population_thresholds",
             "validation_policy": {
                 "central_95_population_intervals_are_warnings": True,
                 "observed_real_min_max_used_as_hard_population_limits": True,
+                "branch_course_extrema_used_as_hard_population_limits": True,
                 "shared_anatomical_role_gate_is_hard": True,
                 "hard_anatomical_role_checks": sorted(CORE_ANATOMY_CHECKS),
                 "lmca_must_be_shorter_than_both_daughters": True,

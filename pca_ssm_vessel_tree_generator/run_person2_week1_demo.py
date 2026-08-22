@@ -342,8 +342,8 @@ def main() -> None:
         help="Force one anatomy-eligible empirical baseline for deterministic auditing.",
     )
     parser.add_argument(
-        "--pca-scale", type=float, default=0.08,
-        help="Centered PCA innovation scale around an exact empirical baseline (default: 0.08).",
+        "--pca-scale", type=float, default=0.04,
+        help="Validated centered PCA innovation scale around an exact empirical baseline (default: 0.04).",
     )
     args = parser.parse_args()
     manifest = run(args)

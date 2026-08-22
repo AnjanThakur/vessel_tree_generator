@@ -45,8 +45,13 @@ variation around that baseline.
 From the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe pipeline.py generate --count 25 --pca-scale 0.08 --clean
+.\.venv\Scripts\python.exe pipeline.py generate --count 52 --pca-scale 0.04 --clean
 ```
+
+The canonical defaults deliberately cover every one of the 52 eligible
+empirical baselines once. The 0.04 innovation scale was selected by a controlled
+population rerun: it removed the LMCA local-turn mismatch while preserving the
+observed LAD/LCX length and tortuosity distributions.
 
 The canonical output is `outputs/lca_ssm/lca_population_cohort/`. Every accepted
 tree contains XYZ branch arrays, parameters and seed provenance, sampling

@@ -1,7 +1,8 @@
 """Batch 4 PCA / Statistical Shape Model Runner Script.
 
 Executes 126-D joint deviation PCA and population statistics fitting across all 174 Batch-3 accepted patient records.
-Conforms strictly to Part 5 of coronary_tree_generator_design (1).md.
+Originally based on Part 5 of docs/LEGACY_TECHNICAL_DESIGN.md; the active
+validated implementation uses the LCA-only representation documented in README.md.
 """
 
 from __future__ import annotations
