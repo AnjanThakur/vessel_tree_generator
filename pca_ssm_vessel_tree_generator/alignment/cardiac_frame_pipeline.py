@@ -35,11 +35,13 @@ def process_patient_cardiac_frame(
     Returns diagnostic result payload including plane QC, frame parameters, transformed data, and validation.
     """
     if not rca_resolved:
+        reason = f"Skipped: RCA unresolved in Batch 1 ({rca_unresolved_reason})"
         return {
             "patient_id": patient_id,
             "batch2_status": "rca_unresolved",
             "batch2_passed": False,
-            "rejection_reasons": [f"Skipped: RCA unresolved in Batch 1 ({rca_unresolved_reason})"],
+            "rejection_reason": reason,
+            "rejection_reasons": [reason],
         }
 
     rca_pts = centerlines_scanner.get("RCA")

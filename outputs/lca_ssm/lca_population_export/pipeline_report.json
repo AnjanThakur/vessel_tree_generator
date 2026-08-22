@@ -1,0 +1,51 @@
+{
+  "pipeline_title": "LCA Statistical Vessel Tree Generator \u2014 End-to-End Execution Report",
+  "model_scope": "LCA_only",
+  "patient_accounting": {
+    "source_cases_audited": 191,
+    "cardiac_frames_valid": 191,
+    "assignments_confidence_resolved": 181,
+    "statistics_eligible_lca_cases": 52,
+    "unresolved_assignments_used": false,
+    "core_anatomy_gate_pass_count": 65
+  },
+  "statistical_shape_model": {
+    "population_shape_matrix_dimensions": [
+      52,
+      81
+    ],
+    "retained_pca_modes_k": 13,
+    "retained_cumulative_variance_percent": 95.54694673427547,
+    "branch_order": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "branch_counts": {
+      "LMCA": 5,
+      "LAD": 12,
+      "LCX": 10
+    }
+  },
+  "synthetic_generation": {
+    "num_trees_requested": 25,
+    "num_trees_accepted": 25,
+    "total_sampling_attempts": 30,
+    "acceptance_rate_percent": 83.33333333333333,
+    "exact_lca_topology_for_all_trees": true
+  },
+  "cardiac_motion": {
+    "num_4d_trees_processed": 25,
+    "num_phases_per_tree": 10,
+    "total_3d_snapshots_generated": 250,
+    "peak_systole_phase": 0.35,
+    "motion_parameters": {
+      "radial_amplitude": 0.15,
+      "longitudinal_amplitude": 0.1,
+      "torsion_amplitude_deg": 10.0
+    },
+    "motion_parameters_are_design_defaults_not_population_learned": true
+  },
+  "missing_evidence": [],
+  "evidence_complete": true
+}

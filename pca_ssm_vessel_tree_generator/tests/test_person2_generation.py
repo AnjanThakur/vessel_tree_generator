@@ -235,6 +235,27 @@ class Person2GenerationTests(unittest.TestCase):
             report["errors"],
         )
 
+    def test_validator_rejects_lmca_longer_than_a_major_daughter(self) -> None:
+        tree = TreeAssembler(self.ellipsoid, self.rng, ZeroDeviationSampler()).assemble(self.landmarks)
+        bifurcation = tree.branches["LMCA"][-1].copy()
+        daughter_lengths = [
+            float(np.linalg.norm(np.diff(tree.branches[name], axis=0), axis=1).sum())
+            for name in ("LAD", "LCX")
+        ]
+        excessive_length = min(daughter_lengths) + 10.0
+        tree.branches["LMCA"] = np.linspace(
+            bifurcation + np.array([excessive_length, 0.0, 0.0]),
+            bifurcation,
+            len(tree.branches["LMCA"]),
+        )
+
+        report = TreeValidator().validate(tree)
+        self.assertFalse(report["accepted"])
+        self.assertIn(
+            "LMCA is not shorter than both major daughter branches",
+            report["errors"],
+        )
+
     def test_validator_rejects_rca_lca_collision(self) -> None:
         landmarks = LandmarkSampler.controlled().sample(self.rng, include_rca=True)
         tree = TreeAssembler(self.ellipsoid, self.rng, ZeroDeviationSampler()).assemble(

@@ -22,6 +22,8 @@ from generation.validator import (
     validate_synthetic_tree,
 )
 from ssm.shape_model import StatisticalShapeModel, DIMENSION_MAPPING
+from generation.deviation_sampler import DeviationSampler
+from surface_relative.fixed_representation import build_patient_fixed_representation
 
 
 def test_ellipsoid_scaffold_sampling():
@@ -184,3 +186,49 @@ def test_3d_segment_self_intersection_detector():
     }
     has_int_clean, _ = has_self_intersection(vessels_clean, min_dist_threshold_mm=1.0)
     assert has_int_clean is False
+
+
+def test_lca_only_fixed_representation_contract():
+    """The primary model must be complete without an inferred RCA branch."""
+    branches = {
+        "lmca": np.column_stack(
+            [np.linspace(-5.0, 0.0, 7), np.zeros(7), np.linspace(3.0, 0.0, 7)]
+        ),
+        "lad": np.column_stack(
+            [np.linspace(0.0, 12.0, 20), np.zeros(20), np.linspace(0.0, -35.0, 20)]
+        ),
+        "lcx": np.column_stack(
+            [np.linspace(0.0, -24.0, 16), np.linspace(0.0, 12.0, 16), np.linspace(0.0, -5.0, 16)]
+        ),
+    }
+    result = build_patient_fixed_representation(branches, a=40.0, b=35.0, c=50.0)
+
+    assert result["is_lca_complete"] is True
+    assert result["has_rca"] is False
+    assert result["is_complete"] is False
+    assert result["lca_shape_vector"].shape == (81,)
+    assert result["lca_uvo_matrix_27_3"].shape == (27, 3)
+    assert result["shape_vector"] is None
+
+
+def test_lca_pca_artifact_branch_partition():
+    """An 81-D artifact must deserialize into LMCA/LAD/LCX and no RCA."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as directory:
+        artifact = Path(directory) / "lca_pca.npz"
+        np.savez_compressed(
+            artifact,
+            mean_vector=np.zeros(81),
+            components=np.eye(81)[:3],
+            eigenvalues=np.ones(3),
+            branch_order=np.array(["LMCA", "LAD", "LCX"]),
+            branch_counts=np.array([5, 12, 10]),
+        )
+        sampler = DeviationSampler.from_npz(artifact)
+        sample = sampler.sample(np.random.default_rng(12))
+
+    assert list(sample.branches) == ["LMCA", "LAD", "LCX"]
+    assert sample.branches["LMCA"].shape == (5, 3)
+    assert sample.branches["LAD"].shape == (12, 3)
+    assert sample.branches["LCX"].shape == (10, 3)

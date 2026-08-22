@@ -1,0 +1,126 @@
+{
+  "batch": "Batch 6 \u2014 4D Cardiac Phase Motion Deformation",
+  "motion_summary": {
+    "num_trees_processed": 25,
+    "num_phases": 10,
+    "phase_values": [
+      0.0,
+      0.1,
+      0.2,
+      0.30000000000000004,
+      0.4,
+      0.5,
+      0.6000000000000001,
+      0.7000000000000001,
+      0.8,
+      0.9
+    ],
+    "reference_phase": 0.0,
+    "peak_systole_phase": 0.35,
+    "motion_parameters": {
+      "radial_amplitude": 0.15,
+      "longitudinal_amplitude": 0.1,
+      "torsion_amplitude_deg": 10.0
+    },
+    "total_execution_time_seconds": 13.139194011688232,
+    "mean_time_per_4d_tree_seconds": 0.5255677604675293
+  },
+  "phase_metrics": [
+    {
+      "phase_index": 0,
+      "phase": 0.0,
+      "contraction_scale_s": 0.0,
+      "mean_scaffold_a_mm": 54.5288845538917,
+      "mean_scaffold_c_mm": 83.6957888551478,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 124.99575837800013
+    },
+    {
+      "phase_index": 1,
+      "phase": 0.1,
+      "contraction_scale_s": 0.4338837391175582,
+      "mean_scaffold_a_mm": 50.98000510586887,
+      "mean_scaffold_c_mm": 80.06436467346128,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 120.25167272923514
+    },
+    {
+      "phase_index": 2,
+      "phase": 0.2,
+      "contraction_scale_s": 0.7818314824680298,
+      "mean_scaffold_a_mm": 48.13402475667713,
+      "mean_scaffold_c_mm": 77.15218858745266,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 117.15842508139221
+    },
+    {
+      "phase_index": 3,
+      "phase": 0.30000000000000004,
+      "contraction_scale_s": 0.9749279121818236,
+      "mean_scaffold_a_mm": 46.5546248181323,
+      "mean_scaffold_c_mm": 75.5360527864518,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 115.6315590108256
+    },
+    {
+      "phase_index": 4,
+      "phase": 0.4,
+      "contraction_scale_s": 0.992708874098054,
+      "mean_scaffold_a_mm": 46.409188415194215,
+      "mean_scaffold_c_mm": 75.38723362303358,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 115.4960248863842
+    },
+    {
+      "phase_index": 5,
+      "phase": 0.5,
+      "contraction_scale_s": 0.9350162426854148,
+      "mean_scaffold_a_mm": 46.881075640880724,
+      "mean_scaffold_c_mm": 75.87009665275458,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 115.93868953047533
+    },
+    {
+      "phase_index": 6,
+      "phase": 0.6000000000000001,
+      "contraction_scale_s": 0.8229838658936562,
+      "mean_scaffold_a_mm": 47.79742572193711,
+      "mean_scaffold_c_mm": 76.80776046804493,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 116.82399350259382
+    },
+    {
+      "phase_index": 7,
+      "phase": 0.7000000000000001,
+      "contraction_scale_s": 0.6631226582407951,
+      "mean_scaffold_a_mm": 49.1049837224494,
+      "mean_scaffold_c_mm": 78.14573145622921,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 118.15279043502817
+    },
+    {
+      "phase_index": 8,
+      "phase": 0.8,
+      "contraction_scale_s": 0.4647231720437684,
+      "mean_scaffold_a_mm": 50.72775912420775,
+      "mean_scaffold_c_mm": 79.80625160680081,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 119.94933282408147
+    },
+    {
+      "phase_index": 9,
+      "phase": 0.9,
+      "contraction_scale_s": 0.23931566428755763,
+      "mean_scaffold_a_mm": 52.571442119410584,
+      "mean_scaffold_c_mm": 81.69281752435371,
+      "mean_RCA_length_mm": null,
+      "mean_LAD_length_mm": 122.30632325398028
+    }
+  ],
+  "verification": {
+    "overall_pass": true,
+    "bifurcation_snapped_all_phases": true,
+    "self_intersection_free_all_phases": true,
+    "bifurcation_errors": []
+  }
+}

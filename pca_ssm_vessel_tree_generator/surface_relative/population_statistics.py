@@ -1,4 +1,4 @@
-"""Population statistics, circular statistics, 126-D joint deviation PCA, and validation thresholds for Batch 4.
+"""Population statistics and joint fixed-branch deviation PCA.
 
 Implements Part 5 (§5.1 – §5.6) of the Technical Design Document.
 """
@@ -62,7 +62,7 @@ def compute_circular_stats(angles_rad: Iterable[float]) -> dict[str, float]:
 
 
 def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float = 0.95) -> dict[str, Any]:
-    """Fit 126-D joint deviation PCA across complete patient shape vectors.
+    """Fit joint deviation PCA across a fixed branch representation.
 
     Design Doc §5.3.3:
     - Input shape vectors X: (N, 126)
@@ -75,8 +75,11 @@ def fit_deviation_pca(shape_vectors_matrix: np.ndarray, variance_cutoff: float =
     """
     X = np.asarray(shape_vectors_matrix, dtype=float)
     n_samples, n_features = X.shape
-    if n_samples < 2 or n_features != 126:
-        raise ValueError(f"PCA requires at least 2 complete cases and 126 dimensions; got shape {X.shape}")
+    if X.ndim != 2 or n_samples < 2 or n_features < 3 or n_features % 3 != 0:
+        raise ValueError(
+            "PCA requires at least 2 complete cases and a positive multiple-of-3 "
+            f"feature dimension; got shape {X.shape}"
+        )
 
     mean_vector = np.mean(X, axis=0)
     centered = X - mean_vector

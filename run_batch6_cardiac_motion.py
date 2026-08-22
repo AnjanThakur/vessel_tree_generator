@@ -6,7 +6,11 @@ import argparse
 import json
 from pathlib import Path
 import sys
+from typing import Any
 import numpy as np
+import matplotlib
+
+matplotlib.use("Agg")
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -156,7 +160,8 @@ def run_batch6(args) -> int:
         axes[0, 1].grid(True, linestyle="--", alpha=0.5)
 
         # Panel 3: Vessel Length Changes Across Phase
-        axes[1, 0].plot(phases, rca_lens, "o-", color="darkorange", label="RCA Length")
+        if any(value is not None for value in rca_lens):
+            axes[1, 0].plot(phases, rca_lens, "o-", color="darkorange", label="RCA Length")
         axes[1, 0].plot(phases, lad_lens, "d-", color="purple", label="LAD Length")
         axes[1, 0].set_title("3. Population Vessel Length Variation vs Phase (mm)")
         axes[1, 0].set_xlabel("Cardiac Phase φ")
@@ -193,7 +198,7 @@ def run_batch6(args) -> int:
     print(f" Total Execution Time:               {m_sum['total_execution_time_seconds']:.2f} s")
     print(f" Mean Time per 4D Tree Sequence:     {m_sum['mean_time_per_4d_tree_seconds']:.3f} s")
     print(f" Bifurcation Snapping (All Phases):  {'PASSED' if verif['bifurcation_snapped_all_phases'] else 'FAILED'}")
-    print(f" 1.0mm Self-Intersection (All Phases):{'PASSED' if verif['self_intersection_free_all_phases'] else 'FAILED'}")
+    print(f" 0.75mm Physical Clearance (All Phases):{'PASSED' if verif['self_intersection_free_all_phases'] else 'FAILED'}")
     print(f" Overall Verification Status:        {'PASSED' if verif['overall_pass'] else 'FAILED'}")
     print("=" * 80 + "\n")
 

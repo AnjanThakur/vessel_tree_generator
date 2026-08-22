@@ -1,4 +1,9 @@
-"""Fixed-point resampling (LMCA 5, LAD 12, LCX 10, RCA 15 = 42 points) and 126-D shape vector construction."""
+"""Fixed-point surface representations for LCA and optional RCA models.
+
+The primary statistical contract is LCA-only: LMCA 5 + LAD 12 + LCX 10
+points, yielding 81 dimensions.  A legacy 126-D four-vessel vector is still
+created when an independently resolved RCA is available.
+"""
 
 from __future__ import annotations
 
@@ -15,6 +20,10 @@ FIXED_COUNTS = {
 }
 TOTAL_FIXED_POINTS = sum(FIXED_COUNTS.values())  # 42
 TOTAL_SHAPE_DIMENSIONS = TOTAL_FIXED_POINTS * 3  # 126
+LCA_BRANCH_ORDER = ("LMCA", "LAD", "LCX")
+LCA_FIXED_COUNTS = {name: FIXED_COUNTS[name] for name in LCA_BRANCH_ORDER}
+LCA_TOTAL_FIXED_POINTS = sum(LCA_FIXED_COUNTS.values())  # 27
+LCA_TOTAL_SHAPE_DIMENSIONS = LCA_TOTAL_FIXED_POINTS * 3  # 81
 
 
 def resample_centerline_arc_length(points: np.ndarray, num_target_points: int) -> np.ndarray:
@@ -52,20 +61,17 @@ def build_patient_fixed_representation(
     b: float,
     c: float,
 ) -> dict[str, Any]:
-    """Construct fixed surface representation (42 points x 3 (u,v,offset)) and 126-D local deviation shape vector.
+    """Construct the primary LCA and optional legacy four-vessel representations.
 
-    Branch counts:
+    Primary LCA contract:
     - LMCA: 5 points
     - LAD: 12 points
     - LCX: 10 points
-    - RCA: 15 points (if available)
+    - 27 points x 3 local deviations = 81 dimensions
 
-    Design Doc §4.6 & §5.3.2:
-    - RCA: 15 * 3 = 45
-    - LMCA: 5 * 3 = 15
-    - LAD: 12 * 3 = 36
-    - LCX: 10 * 3 = 30
-    Total: 126 dimensions
+    If an independently resolved RCA is supplied, the function also emits the
+    legacy RCA/LMCA/LAD/LCX 42-point, 126-dimensional representation. Missing
+    RCA data never prevents construction of the primary LCA model.
     """
     fixed_data = {}
     deviations_dict = {}
@@ -103,7 +109,19 @@ def build_patient_fixed_representation(
             fixed_data[vessel_name] = None
             deviations_dict[vessel_name] = None
 
-    # Construct 126-D shape vector if complete (RCA, LMCA, LAD, LCX present)
+    # The LCA-only model is the primary contract and must never depend on the
+    # inferred/disconnected RCA candidate.
+    is_lca_complete = all(deviations_dict[v] is not None for v in LCA_BRANCH_ORDER)
+    if is_lca_complete:
+        lca_shape_vector = np.concatenate(
+            [deviations_dict[name].flatten() for name in LCA_BRANCH_ORDER]
+        )
+        lca_uvo_matrix = np.vstack([fixed_data[name]["uvo"] for name in LCA_BRANCH_ORDER])
+    else:
+        lca_shape_vector = None
+        lca_uvo_matrix = None
+
+    # Construct the legacy 126-D shape vector only if all four vessels exist.
     is_complete = all(deviations_dict[v] is not None for v in ["RCA", "LMCA", "LAD", "LCX"])
     if is_complete:
         shape_vector = np.concatenate(
@@ -134,7 +152,12 @@ def build_patient_fixed_representation(
         "fixed_branches": fixed_data,
         "deviations": deviations_dict,
         "is_complete": is_complete,
+        "is_lca_complete": is_lca_complete,
         "has_rca": has_rca,
         "shape_vector": shape_vector,
         "uvo_matrix_42_3": matrix_42_3,
+        "lca_shape_vector": lca_shape_vector,
+        "lca_uvo_matrix_27_3": lca_uvo_matrix,
+        "primary_branch_order": list(LCA_BRANCH_ORDER),
+        "primary_branch_counts": LCA_FIXED_COUNTS.copy(),
     }

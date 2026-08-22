@@ -104,8 +104,15 @@ class DeviationSampler:
             if missing:
                 raise ValueError(f"PCA artifact {path} is missing arrays: {missing}")
             has_training_scores = {"training_scores", "complete_case_ids"}.issubset(data.files)
+            branch_counts = None
+            if {"branch_order", "branch_counts"}.issubset(data.files):
+                branch_counts = {
+                    str(name): int(count)
+                    for name, count in zip(data["branch_order"].astype(str), data["branch_counts"])
+                }
             return cls(
                 data["mean_vector"], data["components"], data["eigenvalues"],
+                branch_counts=branch_counts,
                 include_mean=include_mean, variation_scale=variation_scale,
                 training_scores=data["training_scores"] if has_training_scores else None,
                 case_ids=data["complete_case_ids"] if has_training_scores else None,

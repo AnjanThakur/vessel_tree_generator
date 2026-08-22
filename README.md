@@ -1,103 +1,92 @@
-# Coronary Vessel Tree Generators
+# LCA Statistical Vessel Tree Generator
 
-This repository contains three decoupled subprojects for extracting and generating 3D coronary artery trees and centerlines:
+This repository contains a data-audited left-coronary-artery (LCA) statistical
+shape pipeline. The canonical workflow starts from the protected centerlines
+extracted from the approximately 200 supplied NIfTI label volumes, resolves the
+LMCA daughter identities in a common RAS/cardiac frame, fits an LCA-only shape
+model, generates validated static trees, and can optionally add prototype
+cardiac motion and export fixed-size XYZ-radius arrays.
 
-1. **Left Coronary Artery (LCA) Pipeline**: [lca_vessel_tree_generator](./lca_vessel_tree_generator/)
-2. **Right Coronary Artery (RCA) & Primitive Vessel Pipeline**: [rca_vessel_tree_generator](./rca_vessel_tree_generator/)
-3. **PCA/SSM Landmark Extraction Pipeline**: [pca_ssm_vessel_tree_generator](./pca_ssm_vessel_tree_generator/)
+The primary generated topology is **LMCA + LAD + LCX**. RCA is deliberately not
+included because the available disconnected RCA candidates are not resolved
+ground truth.
 
-The current LCA work is dataset-driven. Patient-derived LCA control trees are stored separately from experimental synthetic sampling outputs.
+## Current verified population
 
-## Directory Overview
+- 200 source label volumes are available locally.
+- 191 cases have protected raw LCA centerline records.
+- 181 daughter assignments pass the multi-signal confidence gate.
+- 52 cases pass assignment, frame, ellipsoid, source-integrity, representation,
+  and core anatomical checks and enter the PCA.
+- The primary representation has 27 points: LMCA 5, LAD 12, and LCX 10.
+- The PCA matrix is 52 x 81; 13 modes retain 95.55% cumulative variance.
+- The reference run generated 25/25 accepted static trees in 30 attempts.
+- Optional motion generated 25 trees x 10 phases with exact phase-0 identity
+  and continuous LMCA-to-daughter junctions.
+
+These are engineering validation results, not claims of clinical validity.
+Motion amplitudes and radius tapers are explicit prototype defaults, not learned
+population parameters.
+
+## Canonical commands
+
+Run commands from the repository root with the project virtual environment:
+
+```powershell
+.\.venv\Scripts\python.exe pipeline.py compute-stats --clean
+.\.venv\Scripts\python.exe pipeline.py generate --clean
+.\.venv\Scripts\python.exe pipeline.py validate --clean
+.\.venv\Scripts\python.exe pipeline.py motion
+.\.venv\Scripts\python.exe pipeline.py export
+```
+
+Or run the complete pipeline:
+
+```powershell
+.\.venv\Scripts\python.exe pipeline.py run-all --clean
+```
+
+Use `.\.venv\Scripts\python.exe pipeline.py --help` for all configurable
+paths and sampling parameters.
+
+## Canonical outputs
 
 ```text
-vessel_tree_generator/
-|-- README.md
-|-- lca_vessel_tree_generator/
-|   |-- README.md
-|   |-- requirements.txt
-|   |-- LCA_topology_generator/
-|   |   |-- patient_preprocessor.py
-|   |   |-- generate_lca_dataset.py
-|   |   |-- generate_lca.py
-|   |   |-- radius_model.py
-|   |   |-- tortuosity.py
-|   |   |-- bspline.py
-|   |   |-- visualize.py
-|   |-- LCA_branch_control_points/
-|   |   |-- generated/
-|   |   |   |-- LCA_tree_ctrl_points.npy
-|   |   |   |-- LCA_tree_mean.npy
-|   |   |   |-- LCA_tree_std.npy
-|   |   |   |-- LMCA_patient_ctrl_points.npy
-|   |   |   |-- LAD_patient_ctrl_points.npy
-|   |   |   |-- LCX_patient_ctrl_points.npy
-|-- rca_vessel_tree_generator/
-|   |-- README.md
-|   |-- requirements.txt
-|   |-- RCA_branch_control_points/
-|   |-- tube_generator.py
-|   |-- tube_functions.py
-|   |-- fwd_projection_functions.py
-|-- pca_ssm_vessel_tree_generator/
-|   |-- README.md
-|   |-- requirements.txt
-|   |-- 01_extract_landmarks.py
-|   |-- 02_landmark_selection.py
-|   |-- build_lca_ssm_population_stats.py
-|   |-- lca_ssm_planes.py
-|   |-- lca_ssm_curve_fitting.py
-|   |-- LCA_SSM_PLAN_AFTER_LANDMARKS.md
-|   |-- centerlines/
-|   |-- nii files/
-|-- outputs/
-|   |-- generated LCA datasets and visualizations
+outputs/lca_ssm/
+|-- raw_cases/                  # immutable extracted source records (local)
+|-- lca_population_model/       # audit, assignments, statistics, frozen PCA
+|-- lca_population_cohort/      # accepted static trees and previews
+|-- lca_population_motion/      # optional 4D prototype motion
+`-- lca_population_export/      # fixed-size static/cine XYZ-radius arrays
 ```
 
-## LCA Workflows
+The repository tracks the compact frozen generator package, run summaries, QC
+images, and one complete representative tree. Bulk source data, per-case trial
+runs, and full generated cohorts remain ignored.
 
-Dataset-derived LCA generation:
+## Validation policy
 
-```bash
-python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca_dataset
-```
+Training eligibility requires a confident multi-signal daughter assignment;
+root radius or a single direction vector is never sufficient. Hard generation
+checks enforce exact LMCA/LAD/LCX topology, an LMCA shorter than both daughters,
+LAD-dominant inferior/apical course, an LCX crown-like lateral course, 3D
+continuity, nonlocal self-clearance, and inter-branch clearance. Central
+population intervals are warnings; observed hard bounds and core anatomy
+violations reject a candidate.
 
-This exports validated patient-derived LMCA/LAD/LCX centerlines, measured tortuosity, static radius taper profiles, simple tube surfaces, MVP connected tight meshes, and visual checks under repository-root `outputs/dataset_lca/`. Radius-enriched LCA arrays use `N x 4` branch format `[x, y, z, radius_mm]`; tube surfaces use `N x circle_points x 3`; tight meshes use `vertices` (`V x 3`) and triangular `faces` (`F x 3`). Radius tapering is distance-based and branch-type-based, with an LMCA cube-law bifurcation relation.
+Full-centerline fit errors remain descriptive because the generated vessel is a
+smooth anatomical scaffold, not a point-by-point reproduction of segmentation
+noise.
 
-Experimental synthetic sampling:
+## Repository layout
 
-```bash
-python -m lca_vessel_tree_generator.LCA_topology_generator.generate_lca
-```
+- `pca_ssm_vessel_tree_generator/`: active extraction, alignment,
+  surface-relative model, PCA, generation, motion, and export code.
+- `tests/`: deterministic staged tests and pipeline integration tests.
+- `lca_vessel_tree_generator/`: earlier LCA topology utilities retained for
+  reference and compatibility.
+- `rca_vessel_tree_generator/`: separate RCA/primitive-vessel utilities; not
+  part of the canonical LCA statistical model.
 
-## PCA/SSM Workflow
-
-Extract skeleton landmarks and paths from the configured NIfTI segmentation:
-
-```bash
-python pca_ssm_vessel_tree_generator/01_extract_landmarks.py
-```
-
-Select the LMCA bifurcation and two dominant downstream branches:
-
-```bash
-python pca_ssm_vessel_tree_generator/02_landmark_selection.py
-```
-
-Both stages open Napari for interactive 3D inspection. See the subproject README for data assumptions and generated files.
-
-Fit post-landmark LCA planes, curves, per-patient parameters, and population statistics from the 200 PCA label volumes and centerline graphs:
-
-```bash
-python pca_ssm_vessel_tree_generator/build_lca_ssm_population_stats.py --clean
-```
-
-This non-interactive stage writes only to `outputs/lca_ssm/`. It reproduces the existing root/bifurcation selection and infers LAD/LCX candidate identities from the cohort's common NIfTI RAS orientation; assignment confidence and warnings are retained for review.
-
-## Requirements Overview
-
-- **LCA**: Requires `numpy`, `matplotlib`, `geomdl`, and `scipy` (for VMTK extraction and validation).
-- **RCA**: Requires `numpy`, `matplotlib`, `scikit-image`, and `geomdl`.
-- **PCA/SSM**: Requires `numpy`, `nibabel`, `napari`, `scikit-image`, `skan`, `scipy`, `matplotlib`, `pandas`, and `networkx`.
-
-Please see the respective subproject `requirements.txt` files for installation details.
+See `pca_ssm_vessel_tree_generator/generation/README.md` for the generation
+contract and artifact details.

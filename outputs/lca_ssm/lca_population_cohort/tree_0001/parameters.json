@@ -1,0 +1,178 @@
+{
+  "seed": 20260822,
+  "generation_mode": "frozen_lca_statistics",
+  "population_derived": true,
+  "ellipsoid": {
+    "a": 52.06008229125159,
+    "b": 35.796009166173704,
+    "c": 62.084193285081284,
+    "sampling_method": "empirical_joint_patient_bootstrap",
+    "source_case_id": "2.label"
+  },
+  "landmarks": {
+    "lca_ostium": {
+      "name": "lca_ostium",
+      "u": 0.0,
+      "v": 1.355015515381139,
+      "offset": -8.581871546365083,
+      "sampling_method": "empirical_joint_case_bootstrap:2.label"
+    },
+    "bifurcation": {
+      "name": "bifurcation",
+      "u": 0.09919017768647409,
+      "v": 1.4273975178258014,
+      "offset": -7.196354031337598,
+      "sampling_method": "empirical_joint_case_bootstrap:2.label"
+    },
+    "lad_endpoint": {
+      "name": "lad_endpoint",
+      "u": 2.1913321819602496,
+      "v": 3.1315926535897933,
+      "offset": 6.497119102497429,
+      "sampling_method": "empirical_joint_case_bootstrap:2.label"
+    },
+    "lcx_endpoint": {
+      "name": "lcx_endpoint",
+      "u": 1.1644887999651115,
+      "v": 1.596368263269192,
+      "offset": 16.169550571896433,
+      "sampling_method": "empirical_joint_case_bootstrap:2.label"
+    }
+  },
+  "generation": {
+    "coordinate_frame": "common cardiac frame",
+    "topology_constraint": "LMCA[-1] == LAD[0] == LCX[0]",
+    "topology_error_before_snap_mm": 0.0,
+    "topology_error_after_snap_mm": 0.0,
+    "deviation_sample": {
+      "pca_applied": true,
+      "pca_mean_included": true,
+      "variation_scale": 0.08,
+      "coefficients": [
+        35.72303260914412,
+        6.840857703939205,
+        -26.37157073202099,
+        17.511850860034865,
+        -0.3545673863079522,
+        7.035137474324643,
+        -9.974333807852881,
+        5.066280377233452,
+        -2.7996615785293555,
+        1.0205438207214126,
+        -7.92415528583497,
+        2.1361894804084267,
+        -5.378355090070294
+      ],
+      "coefficient_standard_norms": [
+        0.6771887385382013,
+        -0.2933948572907164,
+        -0.061262055866116695,
+        1.8419822978012794,
+        0.13544013069816516,
+        1.8070491165464908,
+        -0.8133890029281137,
+        1.1351015251344405,
+        1.54963160578091,
+        0.3249634494262519,
+        1.014663435682464,
+        2.5052577215422813,
+        -0.3573935403226243
+      ],
+      "baseline_case_id": "2.label",
+      "baseline_coefficients": [
+        33.11094062018336,
+        7.547672045857572,
+        -26.26042823837551,
+        14.464470999704243,
+        -0.5506149023030944,
+        4.89000522363963,
+        -9.221788330264662,
+        4.152675212636864,
+        -3.8921497867207018,
+        0.8092711847636644,
+        -8.49555470722708,
+        0.829256623585181,
+        -5.20144750465724
+      ],
+      "innovation_coefficients": [
+        2.612091988960761,
+        -0.706814341918367,
+        -0.11114249364548055,
+        3.0473798603306212,
+        0.1960475159951422,
+        2.1451322506850135,
+        -0.7525454775882195,
+        0.9136051645965882,
+        1.092488208191346,
+        0.21127263595774812,
+        0.5713994213921109,
+        1.3069328568232457,
+        -0.17690758541305418
+      ],
+      "innovation_branch_shapes": {
+        "LMCA": [
+          5,
+          3
+        ],
+        "LAD": [
+          12,
+          3
+        ],
+        "LCX": [
+          10,
+          3
+        ]
+      },
+      "branch_shapes": {
+        "LMCA": [
+          5,
+          3
+        ],
+        "LAD": [
+          12,
+          3
+        ],
+        "LCX": [
+          10,
+          3
+        ]
+      }
+    },
+    "pointwise_independent_noise_added": false,
+    "unlearned_tortuosity_perturbation_applied": false,
+    "effective_tortuosity_strength_rad": {
+      "LMCA": 0.0,
+      "LAD": 0.0,
+      "LCX": 0.0
+    },
+    "PCA_endpoint_trend_removed_to_preserve_landmarks": true,
+    "baseline_geometry_source": "exact_matched_fixed_trajectory_and_local_basis_coefficients",
+    "exact_local_deviations_available": true,
+    "exact_cardiac_controls_available": true,
+    "empirical_trajectory_source_case_id": "2.label",
+    "include_rca": false,
+    "path_config": {
+      "LMCA": {
+        "control_point_count": 4,
+        "sample_count": 60,
+        "tortuosity_strength_rad": 0.008
+      },
+      "LAD": {
+        "control_point_count": 7,
+        "sample_count": 180,
+        "tortuosity_strength_rad": 0.018
+      },
+      "LCX": {
+        "control_point_count": 7,
+        "sample_count": 160,
+        "tortuosity_strength_rad": 0.018
+      },
+      "RCA": {
+        "control_point_count": 8,
+        "sample_count": 190,
+        "tortuosity_strength_rad": 0.018
+      }
+    }
+  },
+  "accepted_generation_attempt": 1
+}

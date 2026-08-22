@@ -25,8 +25,8 @@ from run_person2_week1_demo import run as run_single_tree
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_STATS = REPO_ROOT / "outputs/lca_ssm/person1_week1/generator_statistics"
-DEFAULT_OUTPUT = REPO_ROOT / "outputs/lca_ssm/person2_population_cohort"
+DEFAULT_STATS = REPO_ROOT / "outputs/lca_ssm/lca_population_model/generator_statistics"
+DEFAULT_OUTPUT = REPO_ROOT / "outputs/lca_ssm/lca_population_cohort"
 
 
 def write_json(path: Path, payload: Any) -> None:
@@ -69,8 +69,8 @@ def flatten_tree_record(index: int, tree_directory: Path, seed: int) -> dict[str
         "lad_descending_segment_fraction": direction["LAD_descending_segment_fraction"],
         "topology_lmca_lad_mm": metrics["topology_errors"]["LMCA_to_LAD_mm"],
         "topology_lmca_lcx_mm": metrics["topology_errors"]["LMCA_to_LCX_mm"],
-        "tree_directory": str(tree_directory.resolve()),
-        "vtk_path": str((tree_directory / "vtk/synthetic_tree.vtm").resolve()),
+        "tree_directory": tree_directory.name,
+        "vtk_path": f"{tree_directory.name}/vtk/synthetic_tree.vtm",
     }
     for branch, value in metrics["branch_lengths_mm"].items():
         record[f"{branch.lower()}_length_mm"] = value
@@ -164,7 +164,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     missing = [name for name in required if not (stats / name).is_file()]
     if missing:
-        raise FileNotFoundError(f"incomplete frozen Person 1 package: {missing}")
+        raise FileNotFoundError(f"incomplete frozen LCA statistics package: {missing}")
     if args.count < 1:
         raise ValueError("--count must be positive")
     with (stats / "population_ellipsoid_parameters.csv").open(newline="", encoding="utf-8") as handle:
@@ -176,7 +176,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             key=lambda value: int(value.split(".", 1)[0]),
         )
     if not source_case_ids:
-        raise ValueError("frozen Person 1 package has no anatomy-eligible empirical source cases")
+        raise ValueError("frozen LCA statistics package has no anatomy-eligible empirical source cases")
     if output.exists():
         if not args.clean:
             raise FileExistsError(f"refusing to overwrite {output}; pass --clean")
@@ -213,7 +213,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     manifest = {
         "schema_version": 2,
         "status": "PASS",
-        "generation_mode": "person1_frozen_statistics_case_matched_bootstrap_plus_pca_innovation",
+        "generation_mode": "frozen_lca_statistics_case_matched_bootstrap_plus_pca_innovation",
         "tree_count": len(records),
         "all_trees_accepted": all(row["accepted"] for row in records),
         "include_rca": args.include_rca,
@@ -232,11 +232,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         ),
         "visual_anatomy_preview": "fixed cardiac X-Z front view; apex is negative Z",
         "unresolved_source_assignments_used": False,
-        "frozen_person1_manifest": str(package_manifest.resolve()),
-        "frozen_person1_manifest_sha256": file_sha256(package_manifest),
-        "cohort_metrics": str((output / "cohort_metrics.csv").resolve()),
-        "cohort_vtm": str((output / "synthetic_cohort.vtm").resolve()),
-        "preview_montage": str((output / "cohort_preview_montage.png").resolve()),
+        "generator_statistics_manifest": str(package_manifest.relative_to(REPO_ROOT).as_posix()),
+        "generator_statistics_manifest_sha256": file_sha256(package_manifest),
+        "cohort_metrics": "cohort_metrics.csv",
+        "cohort_vtm": "synthetic_cohort.vtm",
+        "preview_montage": "cohort_preview_montage.png",
     }
     write_json(output / "cohort_manifest.json", manifest)
     (output / "README.md").write_text(

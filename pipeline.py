@@ -1,92 +1,196 @@
-"""Master End-to-End CLI Pipeline for Synthetic Coronary Tree Generator (Design Doc Part 9).
-
-Executes pipeline stages non-invasively by calling existing runner modules.
-"""
+"""Canonical command-line entry point for the LCA statistical generator."""
 
 from __future__ import annotations
 
 import argparse
+from argparse import Namespace
 from pathlib import Path
 import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(PROJECT_ROOT))
-sys.path.insert(0, str(PROJECT_ROOT / "pca_ssm_vessel_tree_generator"))
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "pca_ssm_vessel_tree_generator"))
 
-from run_batch1_extraction import run_batch1, parse_args as parse_args_batch1
-from run_batch2_alignment import run_batch2
-from run_batch3_surface_projection import run_batch3
-from run_batch4_pca_ssm import run_batch4, parse_args as parse_args_batch4
-from run_batch5_synthetic_generation import run_batch5, parse_args as parse_args_batch5
-from run_batch6_cardiac_motion import run_batch6, parse_args as parse_args_batch6
-from run_batch7_output_formatting import run_batch7, parse_args as parse_args_batch7
+from pca_ssm_vessel_tree_generator.run_person1_week1_pipeline import run_pipeline as build_statistics
+from pca_ssm_vessel_tree_generator.run_person2_population_cohort import run as generate_cohort
+from pca_ssm_vessel_tree_generator.validate_person2_population_cohort import run as validate_cohort
+from run_batch6_cardiac_motion import run_batch6
+from run_batch7_output_formatting import run_batch7
 
 
-def parse_args():
-    parser = argparse.ArgumentParser(description="Synthetic Coronary Tree Generator — End-to-End Pipeline")
-    subparsers = parser.add_subparsers(dest="command", help="Pipeline Stage Subcommands")
-
-    # Subcommand: extract (Batch 1)
-    subparsers.add_parser("extract", help="Phase 1: Centerline Extraction (Batch 1)")
-
-    # Subcommand: align (Batch 2)
-    subparsers.add_parser("align", help="Phase 2: Cardiac Frame Alignment (Batch 2)")
-
-    # Subcommand: project (Batch 3)
-    subparsers.add_parser("project", help="Phase 3: Surface Relative Parameterization (Batch 3)")
-
-    # Subcommand: ssm (Batch 4)
-    subparsers.add_parser("ssm", help="Phase 4: Statistical Shape Model (Batch 4)")
-
-    # Subcommand: generate (Batch 5)
-    g_parser = subparsers.add_parser("generate", help="Phase 5: Synthetic Tree Generation (Batch 5)")
-    g_parser.add_argument("--num-trees", type=int, default=50, help="Number of synthetic trees to generate (default: 50)")
-
-    # Subcommand: motion (Batch 6)
-    m_parser = subparsers.add_parser("motion", help="Phase 6: 4D Cardiac Phase Motion (Batch 6)")
-    m_parser.add_argument("--num-phases", type=int, default=10, help="Number of cardiac phases (default: 10)")
-
-    # Subcommand: export (Batch 7)
-    e_parser = subparsers.add_parser("export", help="Phase 7: Standardized Output Formatting & Packaging (Batch 7)")
-    e_parser.add_argument("--num-points", type=int, default=50, help="Number of resampled points per vessel (default: 50)")
-
-    # Subcommand: run-all (End-to-End Pipeline Execution)
-    subparsers.add_parser("run-all", help="Execute complete end-to-end pipeline (Batches 1 through 7)")
-
-    return parser.parse_args()
+LCA_OUTPUT = ROOT / "outputs" / "lca_ssm"
+DEFAULT_POPULATION = LCA_OUTPUT / "lca_population_model"
+DEFAULT_STATS = DEFAULT_POPULATION / "generator_statistics"
+DEFAULT_COHORT = LCA_OUTPUT / "lca_population_cohort"
+DEFAULT_VALIDATION = DEFAULT_COHORT / "population_validation"
+DEFAULT_MOTION = LCA_OUTPUT / "lca_population_motion"
+DEFAULT_EXPORT = LCA_OUTPUT / "lca_population_export"
 
 
-def main():
-    args = parse_args()
+def _add_generation_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--stats-dir", type=Path, default=DEFAULT_STATS)
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_COHORT)
+    parser.add_argument("--count", type=int, default=25)
+    parser.add_argument("--base-seed", type=int, default=20260822)
+    parser.add_argument("--seed-stride", type=int, default=1009)
+    parser.add_argument("--max-attempts", type=int, default=250)
+    parser.add_argument("--pca-scale", type=float, default=0.08)
+    parser.add_argument("--clean", action="store_true")
 
-    if args.command == "extract":
-        print("=== Executing Phase 1: Centerline Extraction (Batch 1) ===")
-        sys.exit(run_batch1(parse_args_batch1([])))
-    elif args.command == "align":
-        print("=== Executing Phase 2: Cardiac Frame Alignment (Batch 2) ===")
-        sys.exit(run_batch2())
-    elif args.command == "project":
-        print("=== Executing Phase 3: Surface Relative Parameterization (Batch 3) ===")
-        sys.exit(run_batch3())
-    elif args.command == "ssm":
-        print("=== Executing Phase 4: Statistical Shape Model (Batch 4) ===")
-        sys.exit(run_batch4(parse_args_batch4([])))
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="LCA statistical vessel-tree pipeline (real cases to 81-D PCA to validated trees)"
+    )
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    stats = commands.add_parser("compute-stats", help="Audit real cases and build the LCA-only model")
+    stats.add_argument("--output-dir", type=Path, default=DEFAULT_POPULATION)
+    stats.add_argument("--smoke-test", action="store_true")
+    stats.add_argument("--clean", action="store_true")
+
+    generate = commands.add_parser("generate", help="Generate an accepted static LCA cohort")
+    _add_generation_arguments(generate)
+
+    validate = commands.add_parser("validate", help="Compare the accepted cohort with eligible real references")
+    validate.add_argument("--population-dir", type=Path, default=DEFAULT_POPULATION)
+    validate.add_argument("--cohort-dir", type=Path, default=DEFAULT_COHORT)
+    validate.add_argument("--output-dir", type=Path, default=DEFAULT_VALIDATION)
+    validate.add_argument("--clean", action="store_true")
+
+    motion = commands.add_parser("motion", help="Apply optional design-default cardiac motion")
+    motion.add_argument("--input-dir", type=Path, default=DEFAULT_COHORT)
+    motion.add_argument("--output-dir", type=Path, default=DEFAULT_MOTION)
+    motion.add_argument("--num-phases", type=int, default=10)
+    motion.add_argument("--radial-amplitude", type=float, default=0.15)
+    motion.add_argument("--longitudinal-amplitude", type=float, default=0.10)
+    motion.add_argument("--torsion-amplitude-deg", type=float, default=10.0)
+
+    export = commands.add_parser("export", help="Package static/cine XYZ-radius arrays")
+    export.add_argument("--input-dir", type=Path, default=DEFAULT_MOTION)
+    export.add_argument("--output-dir", type=Path, default=DEFAULT_EXPORT)
+    export.add_argument("--num-points", type=int, default=50)
+
+    run_all = commands.add_parser(
+        "run-all", help="Run statistics, generation, validation, motion and export"
+    )
+    run_all.add_argument("--population-dir", type=Path, default=DEFAULT_POPULATION)
+    run_all.add_argument("--cohort-dir", type=Path, default=DEFAULT_COHORT)
+    run_all.add_argument("--motion-dir", type=Path, default=DEFAULT_MOTION)
+    run_all.add_argument("--export-dir", type=Path, default=DEFAULT_EXPORT)
+    run_all.add_argument("--count", type=int, default=25)
+    run_all.add_argument("--num-phases", type=int, default=10)
+    run_all.add_argument("--num-points", type=int, default=50)
+    run_all.add_argument("--base-seed", type=int, default=20260822)
+    run_all.add_argument("--seed-stride", type=int, default=1009)
+    run_all.add_argument("--max-attempts", type=int, default=250)
+    run_all.add_argument("--pca-scale", type=float, default=0.08)
+    run_all.add_argument("--clean", action="store_true")
+    return parser.parse_args(argv)
+
+
+def _run_generation(args: argparse.Namespace) -> None:
+    generate_cohort(Namespace(
+        stats_dir=args.stats_dir,
+        output_dir=args.output_dir,
+        count=args.count,
+        base_seed=args.base_seed,
+        seed_stride=args.seed_stride,
+        max_attempts=args.max_attempts,
+        pca_scale=args.pca_scale,
+        include_rca=False,
+        clean=args.clean,
+    ))
+
+
+def _run_motion(args: argparse.Namespace) -> None:
+    status = run_batch6(Namespace(
+        batch5_dir=args.input_dir,
+        output_dir=args.output_dir,
+        num_phases=args.num_phases,
+        radial_amplitude=args.radial_amplitude,
+        longitudinal_amplitude=args.longitudinal_amplitude,
+        torsion_amplitude_deg=args.torsion_amplitude_deg,
+    ))
+    if status:
+        raise RuntimeError("motion validation failed")
+
+
+def _run_validation(args: argparse.Namespace) -> None:
+    result = validate_cohort(Namespace(
+        population_dir=args.population_dir,
+        cohort_dir=args.cohort_dir,
+        output_dir=args.output_dir,
+        clean=args.clean,
+    ))
+    if result["status"] != "PASS":
+        raise RuntimeError("real-versus-generated cohort validation failed")
+
+
+def _run_export(args: argparse.Namespace) -> None:
+    status = run_batch7(Namespace(
+        batch6_dir=args.input_dir,
+        output_dir=args.output_dir,
+        num_points=args.num_points,
+    ))
+    if status:
+        raise RuntimeError("export validation failed")
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    if args.command == "compute-stats":
+        build_statistics(
+            smoke_test=args.smoke_test,
+            output=args.output_dir.resolve(),
+            clean=args.clean,
+        )
     elif args.command == "generate":
-        print("=== Executing Phase 5: Synthetic Tree Generation (Batch 5) ===")
-        sys.exit(run_batch5(parse_args_batch5(["--num-trees", str(args.num_trees)])))
+        _run_generation(args)
+    elif args.command == "validate":
+        _run_validation(args)
     elif args.command == "motion":
-        print("=== Executing Phase 6: 4D Cardiac Phase Motion (Batch 6) ===")
-        sys.exit(run_batch6(parse_args_batch6(["--num-phases", str(args.num_phases)])))
+        _run_motion(args)
     elif args.command == "export":
-        print("=== Executing Phase 7: Standardized Output Formatting & Packaging (Batch 7) ===")
-        sys.exit(run_batch7(parse_args_batch7(["--num-points", str(args.num_points)])))
+        _run_export(args)
     elif args.command == "run-all":
-        print("=== Executing Complete End-to-End Pipeline (Batches 1 through 7) ===")
-        sys.exit(run_batch7(parse_args_batch7([])))
-    else:
-        print("Master Pipeline CLI — Use --help to view available subcommands.")
-        sys.exit(0)
+        build_statistics(
+            smoke_test=False,
+            output=args.population_dir.resolve(),
+            clean=args.clean,
+        )
+        generation_args = Namespace(
+            stats_dir=args.population_dir / "generator_statistics",
+            output_dir=args.cohort_dir,
+            count=args.count,
+            base_seed=args.base_seed,
+            seed_stride=args.seed_stride,
+            max_attempts=args.max_attempts,
+            pca_scale=args.pca_scale,
+            clean=args.clean,
+        )
+        _run_generation(generation_args)
+        _run_validation(Namespace(
+            population_dir=args.population_dir,
+            cohort_dir=args.cohort_dir,
+            output_dir=args.cohort_dir / "population_validation",
+            clean=args.clean,
+        ))
+        _run_motion(Namespace(
+            input_dir=args.cohort_dir,
+            output_dir=args.motion_dir,
+            num_phases=args.num_phases,
+            radial_amplitude=0.15,
+            longitudinal_amplitude=0.10,
+            torsion_amplitude_deg=10.0,
+        ))
+        _run_export(Namespace(
+            input_dir=args.motion_dir,
+            output_dir=args.export_dir,
+            num_points=args.num_points,
+        ))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

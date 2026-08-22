@@ -70,10 +70,12 @@ def get_ordered_tree_branches(
     """
     ordered_branches = []
 
-    # Major vessels (fixed indices 0..3)
+    # Major vessels in deterministic order. Optional RCA is omitted instead
+    # of being represented as a zero-length placeholder branch.
     for vname in ("RCA", "LMCA", "LAD", "LCX"):
-        pts = vessels_3d.get(vname, np.zeros((2, 3), dtype=float))
-        ordered_branches.append((vname, np.asarray(pts, dtype=float)))
+        pts = vessels_3d.get(vname)
+        if pts is not None:
+            ordered_branches.append((vname, np.asarray(pts, dtype=float)))
 
     # Sort side branches deterministically
     parent_order = {"LAD": 0, "LCX": 1, "RCA": 2}

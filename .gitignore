@@ -19,8 +19,36 @@ build/
 dist/
 *.egg-info/
 
-# Generated datasets and visualizations
-/outputs/
+# Generated datasets and visualizations. Keep only the compact, reproducible LCA
+# release evidence listed below; source data, trial runs and bulk cohorts remain
+# local.
+/outputs/*
+!/outputs/lca_ssm/
+/outputs/lca_ssm/*
+!/outputs/lca_ssm/lca_population_model/
+/outputs/lca_ssm/lca_population_model/*
+!/outputs/lca_ssm/lca_population_model/week1_manifest.json
+!/outputs/lca_ssm/lca_population_model/generator_statistics/
+!/outputs/lca_ssm/lca_population_model/generator_statistics/**
+!/outputs/lca_ssm/lca_population_cohort/
+/outputs/lca_ssm/lca_population_cohort/*
+!/outputs/lca_ssm/lca_population_cohort/README.md
+!/outputs/lca_ssm/lca_population_cohort/cohort_manifest.json
+!/outputs/lca_ssm/lca_population_cohort/cohort_metrics.csv
+!/outputs/lca_ssm/lca_population_cohort/cohort_preview_montage.png
+!/outputs/lca_ssm/lca_population_cohort/tree_0001/
+!/outputs/lca_ssm/lca_population_cohort/tree_0001/**
+!/outputs/lca_ssm/lca_population_cohort/population_validation/
+!/outputs/lca_ssm/lca_population_cohort/population_validation/**
+!/outputs/lca_ssm/lca_population_motion/
+/outputs/lca_ssm/lca_population_motion/*
+!/outputs/lca_ssm/lca_population_motion/4d_trees_summary.json
+!/outputs/lca_ssm/lca_population_motion/qc_visualization_4d.png
+!/outputs/lca_ssm/lca_population_export/
+/outputs/lca_ssm/lca_population_export/*
+!/outputs/lca_ssm/lca_population_export/exported_trees_summary.json
+!/outputs/lca_ssm/lca_population_export/pipeline_qc_report.png
+!/outputs/lca_ssm/lca_population_export/pipeline_report.json
 lca_vessel_tree_generator/outputs/
 lca_vessel_tree_generator/processed_dataset/
 rca_vessel_tree_generator/outputs/

@@ -11,6 +11,7 @@ import numpy as np
 from output.save_geometry import (
     construct_geometry_static_array,
     construct_geometry_cine_array,
+    get_ordered_tree_branches,
 )
 from output.save_metadata import (
     build_tree_metadata,
@@ -89,7 +90,14 @@ def process_batch7_output(
             json.dump(jsonable(ell_params), ef, indent=2)
 
         # 5. Save 3D static rendering plot
-        save_tree_visualization(t_dir, geom_static)
+        reference = tree_4d["frames"][0]
+        branch_names = [
+            name
+            for name, _ in get_ordered_tree_branches(
+                reference["vessels_3d"], reference["side_branches"]
+            )
+        ]
+        save_tree_visualization(t_dir, geom_static, branch_names=branch_names)
 
         exported_records.append({
             "tree_id": t_id,
@@ -97,6 +105,7 @@ def process_batch7_output(
             "cine_shape": list(geom_cine.shape),
             "max_identity_error_mm": max_diff,
             "directory": str(t_dir.resolve()),
+            "branch_order": branch_names,
         })
 
     elapsed_time = time.time() - start_time
@@ -118,6 +127,8 @@ def process_batch7_output(
             "num_points_per_vessel": num_points,
             "static_array_shape": list(exported_records[0]["static_shape"]),
             "cine_array_shape": list(exported_records[0]["cine_shape"]),
+            "branch_order": exported_records[0]["branch_order"],
+            "radius_model_provenance": "prototype taper defaults; not population learned",
             "total_execution_time_seconds": elapsed_time,
         },
         "verification": {

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Run Person 2's controlled or population-derived synthetic coronary-tree demo."""
+"""Run a controlled or population-derived synthetic LCA-tree realization."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ from generation.vtk_export import export_tree_vtk
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = REPO_ROOT / "outputs/lca_ssm/person2_week1_demo/tree_0001"
+DEFAULT_OUTPUT = REPO_ROOT / "outputs/lca_ssm/lca_population_demo/tree_0001"
 COLORS = {"LMCA": "#222222", "LAD": "#d62728", "LCX": "#1f77b4", "RCA": "#9467bd"}
 
 
@@ -154,14 +154,14 @@ def build_inputs(args, rng: np.random.Generator):
         ]
         if missing:
             raise FileNotFoundError(
-                "Real-statistics mode requires a complete frozen Person 1 package; missing: "
+                "Real-statistics mode requires a complete frozen LCA package; missing: "
                 + ", ".join(str(path) for path in missing)
             )
         assignment_gate = json.loads(assignment_gate_path.read_text(encoding="utf-8"))
         if assignment_gate.get("unresolved_cases_used_for_statistics"):
-            raise ValueError("Person 1 package contains unresolved daughter assignments")
+            raise ValueError("LCA statistics package contains unresolved daughter assignments")
         if int(assignment_gate.get("statistics_eligible_count", 0)) < 2:
-            raise ValueError("Person 1 package has fewer than two anatomy-eligible resolved cases")
+            raise ValueError("LCA statistics package has fewer than two anatomy-eligible resolved cases")
         parameter_sampler = ParameterSampler.from_person1_output(stats_dir)
         landmark_sampler = LandmarkSampler.from_json(landmark_path)
         deviation_sampler = DeviationSampler.from_npz(
@@ -171,11 +171,11 @@ def build_inputs(args, rng: np.random.Generator):
         )
         trajectory_sampler = TrajectorySampler.from_npz(trajectory_path)
         if not trajectory_sampler.exact_local_deviations_available:
-            raise ValueError("Person 1 package lacks exact local trajectory coefficients")
+            raise ValueError("LCA statistics package lacks exact local trajectory coefficients")
         if not trajectory_sampler.exact_cardiac_points_available:
-            raise ValueError("Person 1 package lacks exact matched cardiac trajectory controls")
+            raise ValueError("LCA statistics package lacks exact matched cardiac trajectory controls")
         validator = TreeValidator.from_person1_output(thresholds_path)
-        mode = "person1_frozen_statistics"
+        mode = "frozen_lca_statistics"
     return parameter_sampler, landmark_sampler, deviation_sampler, trajectory_sampler, validator, mode
 
 
@@ -234,7 +234,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         surface_arrays[f"{name}_local_deviation"] = path.local_deviation
     np.savez_compressed(output / "surface_coordinates.npz", **surface_arrays)
     vtk_paths = export_tree_vtk(tree, output / "vtk")
-    population_derived = mode == "person1_frozen_statistics"
+    population_derived = mode == "frozen_lca_statistics"
     preview(tree, output / "preview.png", population_derived=population_derived)
     preview_multiview(tree, output / "preview_multiview.png", population_derived=population_derived)
     parameters = {
@@ -269,57 +269,60 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "missing_files": missing,
         "topology_exact_by_array_equality": topology_exact,
         "vtk_readback_completed": True,
-        "source_statistics_consumed": mode == "person1_frozen_statistics",
+        "source_statistics_consumed": mode == "frozen_lca_statistics",
         "pca_applied": tree.generation_metadata["deviation_sample"]["pca_applied"],
     }
     overall_pass = validation["accepted"] and not missing and topology_exact
     manifest = {
         "implementation": (
-            "Person 2 population-derived generator integration"
+            "Population-derived LCA statistical generator"
             if population_derived
-            else "Person 2 Week 1 generator architecture and controlled demonstration"
+            else "Controlled LCA generator architecture demonstration"
         ),
         "status": "PASS" if overall_pass else "FAIL",
         "generation_mode": mode,
-        "tree_directory": str(output),
+        "tree_directory": output.name,
         "sampling_attempt_count": len(attempt_records),
         "branch_point_counts": {name: len(points) for name, points in tree.branches.items()},
-        "vtk_files": vtk_paths,
+        "vtk_files": {
+            name: str(Path(path).relative_to(output).as_posix())
+            for name, path in vtk_paths.items()
+        },
         "artifact_validation": artifact_validation,
         "scientific_limitations": [
             (
-                "This is one accepted realization from the frozen Person 1 statistics package; "
+                "This is one accepted realization from the frozen LCA statistics package; "
                 "it is not population-level validation."
                 if population_derived
-                else "The default Week-1 case uses controlled inputs, not learned population distributions."
+                else "The controlled case does not use learned population distributions."
             ),
             (
                 "Centered PCA variation is applied at the requested scale over a matched empirical trajectory."
                 if population_derived
-                else "No PCA variation is added unless a complete frozen Person 1 statistics package is supplied."
+                else "No PCA variation is added unless a complete frozen statistics package is supplied."
             ),
             "No independent point-by-point random noise is used.",
-            "Population-level real-versus-generated validation remains a Week-2 integration task.",
+            "Engineering acceptance does not establish clinical validity.",
         ],
     }
     write_json(output / "week1_demo_manifest.json", manifest)
     mode_description = (
-        "This tree was sampled from the frozen Person 1 ellipsoid, landmark, empirical trajectory, "
+        "This tree was sampled from the frozen LCA ellipsoid, landmark, empirical trajectory, "
         "PCA, and validation package."
         if population_derived
         else "This controlled architecture test is not a population-derived coronary model."
     )
-    readme = f"""# Person 2 synthetic-tree demo
+    readme = f"""# LCA synthetic-tree realization
 
 Open `vtk/synthetic_tree.vtm` in ParaView.
 
 Generation mode: `{mode}`. {mode_description} The generator consumes ellipsoid surface functions, generates smooth B-spline paths, enforces `LMCA[-1] == LAD[0] == LCX[0]`, validates the result, and exports modular VTK.
 
-Validation status: `{manifest['status']}`. Population statistics and PCA are used only when a complete frozen Person 1 package is explicitly supplied.
+Validation status: `{manifest['status']}`. Population statistics and PCA are used only when a complete frozen LCA package is explicitly supplied.
 """
     (output / "README.md").write_text(readme, encoding="utf-8")
     if not overall_pass:
-        raise RuntimeError(f"Week-1 demo validation failed; inspect {output / 'validation.json'}")
+        raise RuntimeError(f"LCA realization validation failed; inspect {output / 'validation.json'}")
     return manifest
 
 

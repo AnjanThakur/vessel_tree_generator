@@ -1,65 +1,74 @@
-# Person 2 generator
+# LCA statistical generation
 
-This package owns the synthetic-generation side of the project. It consumes the Person 1 `surface_relative` API and statistical artifacts without modifying them.
+This package consumes the frozen LCA population artifacts and generates joined
+LMCA/LAD/LCX anatomical scaffolds. It does not require or invent an RCA branch.
 
-Modules:
+## Model contract
 
-- `parameter_sampler.py`: joint empirical ellipsoid sampling with an explicit provisional fallback.
-- `landmark_sampler.py`: circular `u` and bounded `v` landmark sampling.
-- `surface_path_generator.py`: shape-preserving PCHIP paths from exact cardiac controls, projected through Person 1's ellipsoid functions; controlled/manual inputs retain ordinary B-splines.
-- `trajectory_sampler.py`: exact case-matched cardiac controls and their local surface deviations.
-- `deviation_sampler.py`: one joint PCA innovation draw around the matched baseline; no pointwise white noise.
-- `tree_assembler.py`: LMCA/LAD/LCX assembly and exact bifurcation snapping.
-- `validator.py`: exact topology, LAD/LCX anatomy, physical self/inter-branch clearance, progression/loop checks, and Person 1 population limits.
-- `vtk_export.py`: modular VTP files and one ParaView VTM hierarchy.
+The primary local-deviation vector is 81-dimensional:
 
-Run the controlled Week-1 architecture demo from the repository root:
+| Branch | Fixed points | Local values |
+|---|---:|---:|
+| LMCA | 5 | 15 |
+| LAD | 12 | 36 |
+| LCX | 10 | 30 |
+| Total | 27 | 81 |
+
+The frozen package under
+`outputs/lca_ssm/lca_population_model/generator_statistics/` contains the
+assignment gate, eligible ellipsoid and landmark statistics, fixed
+surface-relative controls, PCA arrays, validation thresholds, and a SHA-256
+manifest. Unresolved daughter assignments are never used for fitting or
+sampling.
+
+## Generation design
+
+- `parameter_sampler.py`: jointly samples an empirical eligible ellipsoid row.
+- `trajectory_sampler.py`: loads case-matched cardiac controls and local surface
+  deviations.
+- `deviation_sampler.py`: draws one coordinated PCA innovation; it adds no
+  independent point noise.
+- `surface_path_generator.py`: uses shape-preserving interpolation for empirical
+  controls and evaluates them on the sampled ellipsoid.
+- `tree_assembler.py`: assembles LMCA/LAD/LCX and snaps the shared bifurcation
+  exactly.
+- `validator.py`: performs topology, anatomy, continuity, progression, and
+  physical-clearance checks.
+- `vtk_export.py`: writes branch VTP files and a ParaView VTM hierarchy.
+
+The empirical baseline, ellipsoid parameters, and PCA baseline come from the
+same eligible source case. A low-scale PCA innovation supplies coordinated
+variation around that baseline.
+
+## Run
+
+From the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe pca_ssm_vessel_tree_generator\run_person2_week1_demo.py
+.\.venv\Scripts\python.exe pipeline.py generate --count 25 --pca-scale 0.08 --clean
 ```
 
-The default inputs are deliberately marked as controlled and not population-derived. Real-statistics mode refuses to start unless it receives ellipsoid rows/statistics, landmark statistics, fixed empirical trajectories, PCA arrays, and validation thresholds together.
+The canonical output is `outputs/lca_ssm/lca_population_cohort/`. Every accepted
+tree contains XYZ branch arrays, parameters and seed provenance, sampling
+attempts, quantitative validation, fixed front/multiview previews, and VTK/VTM
+geometry.
 
-After completing the Person 1 pipeline, generate one population-derived realization with:
+## Hard acceptance checks
 
-```powershell
-.\.venv\Scripts\python.exe pca_ssm_vessel_tree_generator\run_person2_week1_demo.py `
-  --stats-dir outputs\lca_ssm\person1_week1\generator_statistics `
-  --output-dir outputs\lca_ssm\person2_real_statistics_demo\tree_0001 `
-  --clean --max-attempts 100
-```
+- exact `LMCA[-1] == LAD[0] == LCX[0]` topology;
+- LMCA is shorter than both major daughter branches;
+- LAD is the dominant inferior/apex-directed branch;
+- LCX remains less inferior and more lateral/crown-like than LAD;
+- LCX cannot behave as the main apex-descending branch;
+- 3D LMCA-to-LAD and LMCA-to-LCX continuity;
+- nonlocal self-clearance, inter-branch clearance, and progression checks;
+- observed hard population bounds.
 
-Real mode jointly matches the ellipsoid, landmarks, and exact fixed cardiac controls from one eligible source case. It applies only low-scale, centered PCA innovation to that shape-preserving baseline, preserves exact LMCA/LAD/LCX topology, and rejects candidates that violate population thresholds, self-clearance, or the shared LAD/LCX anatomy gate. Production mode refuses packages containing unresolved daughter assignments. The output VTM can be opened directly in ParaView.
+Central 95% population intervals produce visible warnings instead of rejecting
+all valid tail anatomy. Full-resolution centerline error is descriptive because
+the output is a smooth scaffold rather than a reproduction of every noisy source
+point.
 
-## Complete population cohort
-
-Generate the final 25-tree primary LCA cohort:
-
-```powershell
-.\.venv\Scripts\python.exe pca_ssm_vessel_tree_generator\run_person2_population_cohort.py `
-  --stats-dir outputs\lca_ssm\person1_week1\generator_statistics `
-  --output-dir outputs\lca_ssm\person2_population_cohort `
-  --count 25 --pca-scale 0.08 --clean --max-attempts 1000
-```
-
-Compare it with the resolved, anatomy-gated real scaffold references:
-
-```powershell
-.\.venv\Scripts\python.exe pca_ssm_vessel_tree_generator\validate_person2_population_cohort.py `
-  --person1-dir outputs\lca_ssm\person1_week1 `
-  --cohort-dir outputs\lca_ssm\person2_population_cohort --clean
-```
-
-`synthetic_cohort.vtm` opens all trees as named ParaView blocks. Every tree directory includes XYZ arrays, surface coordinates, parameters, rejection history, quantitative validation, a fixed cardiac X-Z front view, a fixed three-view anatomy preview, VTP branches, landmarks, ellipsoid, and a tree-level VTM. The source schedule is balanced across every eligible baseline.
-
-## Acceptance policy
-
-- Authoritative branch resolution is a training-data prerequisite; unresolved LAD/LCX assignments never enter statistics or PCA.
-- Topology, LAD-dominant inferior direction, LCX crown behaviour, LMCA-to-daughter continuity, collisions, physical self-clearance, and real-derived loop/progression limits are hard failures.
-- Observed real min/max values are hard population limits.
-- P2.5–P97.5 intervals are warnings rather than simultaneous hard gates, avoiding family-wise rejection of valid real tail anatomy.
-- Empirical baselines interpolate exact matched cardiac controls with PCHIP before projection to surface coordinates, avoiding azimuth interpolation loops at ellipsoid poles.
-- A low-scale coordinated PCA innovation is applied around the exact matched baseline. Independent point noise is never added.
-
-The cohort report keeps descriptive warnings visible. In particular, smooth scaffolds are expected to have lower local turning and tortuosity than noisy full-resolution centerlines; these differences are reported rather than used to falsify individual validity. The final primary cohort intentionally excludes RCA: the available RCA paths are inferred disconnected candidates, so optional RCA support is retained for research/audit use but is not presented as resolved anatomy.
+Optional cardiac motion and radius tapers are prototype design defaults and are
+labelled as such in exported metadata. The results are engineering prototypes,
+not clinically validated geometries.

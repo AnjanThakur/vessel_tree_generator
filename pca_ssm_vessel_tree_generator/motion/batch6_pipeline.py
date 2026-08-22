@@ -9,13 +9,89 @@ from typing import Any
 import numpy as np
 
 try:
-    from generation.validator import validate_synthetic_tree, has_self_intersection
+    from generation.validator import minimum_interbranch_distance, minimum_nonlocal_distance
 except ImportError:
-    from pca_ssm_vessel_tree_generator.generation.validator import validate_synthetic_tree, has_self_intersection
+    from pca_ssm_vessel_tree_generator.generation.validator import (
+        minimum_interbranch_distance,
+        minimum_nonlocal_distance,
+    )
 
 from motion.cardiac_motion import apply_cardiac_motion_to_tree
 
 EPS = 1.0e-12
+
+
+def _load_reference_trees(source_dir: Path) -> list[dict[str, Any]]:
+    """Load either legacy Batch-5 JSON or the validated cohort layout."""
+    legacy = source_dir / "synthetic_trees.json"
+    if legacy.is_file():
+        return json.loads(legacy.read_text(encoding="utf-8"))
+
+    trees: list[dict[str, Any]] = []
+    for tree_dir in sorted(path for path in source_dir.glob("tree_*") if path.is_dir()):
+        parameter_path = tree_dir / "parameters.json"
+        if not parameter_path.is_file():
+            continue
+        parameters = json.loads(parameter_path.read_text(encoding="utf-8"))
+        ellipsoid = parameters["ellipsoid"]
+        vessels = {
+            name: np.load(tree_dir / f"{name}.npy", allow_pickle=False)
+            for name in ("LMCA", "LAD", "LCX", "RCA")
+            if (tree_dir / f"{name}.npy").is_file()
+        }
+        if not {"LMCA", "LAD", "LCX"}.issubset(vessels):
+            raise ValueError(f"{tree_dir} is missing a mandatory LCA branch")
+        trees.append({
+            "tree_id": tree_dir.name,
+            "ellipsoid_params": {
+                "a_mm": float(ellipsoid["a"]),
+                "b_mm": float(ellipsoid["b"]),
+                "c_mm": float(ellipsoid["c"]),
+            },
+            "vessels_3d": vessels,
+            "side_branches": [],
+            "source_metadata": {
+                "seed": parameters.get("seed"),
+                "landmarks": parameters.get("landmarks", {}),
+                "generation": parameters.get("generation", {}),
+                "generation_mode": parameters.get("generation_mode"),
+            },
+        })
+    if not trees:
+        raise FileNotFoundError(
+            f"No synthetic_trees.json or validated tree_* directories found in {source_dir}"
+        )
+    return trees
+
+
+def _frame_collision_free(vessels: dict[str, np.ndarray], tolerance_mm: float = 0.75) -> bool:
+    """Check physical nonlocal clearance without dense-sampling false positives."""
+    if any(
+        np.isfinite(distance := minimum_nonlocal_distance(points)) and distance < tolerance_mm
+        for points in vessels.values()
+    ):
+        return False
+    trims = {name: max(3, int(round(0.08 * len(points)))) for name, points in vessels.items()}
+    pairs = [
+        minimum_interbranch_distance(
+            vessels["LMCA"], vessels["LAD"],
+            trim_first_end=trims["LMCA"], trim_second_start=trims["LAD"],
+        ),
+        minimum_interbranch_distance(
+            vessels["LMCA"], vessels["LCX"],
+            trim_first_end=trims["LMCA"], trim_second_start=trims["LCX"],
+        ),
+        minimum_interbranch_distance(
+            vessels["LAD"], vessels["LCX"],
+            trim_first_start=trims["LAD"], trim_second_start=trims["LCX"],
+        ),
+    ]
+    if "RCA" in vessels:
+        pairs.extend(
+            minimum_interbranch_distance(vessels[name], vessels["RCA"])
+            for name in ("LMCA", "LAD", "LCX")
+        )
+    return all(not np.isfinite(distance) or distance >= tolerance_mm for distance in pairs)
 
 
 def process_batch6_motion(
@@ -28,19 +104,7 @@ def process_batch6_motion(
     peak_phase: float = 0.35,
 ) -> dict[str, Any]:
     """Execute Batch 6 4D cardiac phase motion pipeline across all Batch 5 accepted synthetic trees."""
-    b5_trees_json = batch5_dir / "synthetic_trees.json"
-    thresh_json = batch5_dir.parent / "batch4_pca_ssm" / "validation_thresholds.json"
-
-    if not b5_trees_json.exists():
-        raise FileNotFoundError(f"Missing Batch 5 synthetic trees payload at {b5_trees_json}")
-
-    with open(b5_trees_json, "r", encoding="utf-8") as f:
-        trees_batch5 = json.load(f)
-
-    thresholds = {}
-    if thresh_json.exists():
-        with open(thresh_json, "r", encoding="utf-8") as tf:
-            thresholds = json.load(tf)
+    trees_batch5 = _load_reference_trees(batch5_dir)
 
     n_trees = len(trees_batch5)
     trees_4d = []
@@ -76,8 +140,7 @@ def process_batch6_motion(
                 bifurcation_snapped_all = False
                 bif_errors.append(f"Tree {t_4d['tree_id']} phase {frame['phase']:.2f}: d1={d1:.2e}, d2={d2:.2e}")
 
-            has_self_int, _ = has_self_intersection(v3d, frame["side_branches"], min_dist_threshold_mm=0.0005)
-            if has_self_int:
+            if not _frame_collision_free(v3d, tolerance_mm=0.75):
                 self_intersection_free_all = False
 
     elapsed_time = time.time() - start_time
@@ -87,8 +150,12 @@ def process_batch6_motion(
         p_val = trees_4d[0]["frames"][p_idx]["phase"]
         s_val = trees_4d[0]["frames"][p_idx]["contraction_scale_s"]
 
-        rca_lens = [float(np.sum(np.linalg.norm(np.diff(t["frames"][p_idx]["vessels_3d"]["RCA"], axis=0), axis=1))) for t in trees_4d]
         lad_lens = [float(np.sum(np.linalg.norm(np.diff(t["frames"][p_idx]["vessels_3d"]["LAD"], axis=0), axis=1))) for t in trees_4d]
+        rca_lens = [
+            float(np.sum(np.linalg.norm(np.diff(t["frames"][p_idx]["vessels_3d"]["RCA"], axis=0), axis=1)))
+            for t in trees_4d
+            if "RCA" in t["frames"][p_idx]["vessels_3d"]
+        ]
         a_vals = [t["frames"][p_idx]["ellipsoid_params"]["a_mm"] for t in trees_4d]
         c_vals = [t["frames"][p_idx]["ellipsoid_params"]["c_mm"] for t in trees_4d]
 
@@ -98,7 +165,7 @@ def process_batch6_motion(
             "contraction_scale_s": s_val,
             "mean_scaffold_a_mm": float(np.mean(a_vals)),
             "mean_scaffold_c_mm": float(np.mean(c_vals)),
-            "mean_RCA_length_mm": float(np.mean(rca_lens)),
+            "mean_RCA_length_mm": float(np.mean(rca_lens)) if rca_lens else None,
             "mean_LAD_length_mm": float(np.mean(lad_lens)),
         })
 

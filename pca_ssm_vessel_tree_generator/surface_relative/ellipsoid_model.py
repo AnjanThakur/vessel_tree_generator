@@ -6,7 +6,7 @@ delegating 2D EllipseModel fitting to surface_relative.ellipse_fitting.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 import numpy as np
 
@@ -39,6 +39,9 @@ class PatientEllipsoid:
     quality_flags: list[str]
     exclusion_flags: list[str]
     raw_parameters: dict[str, Any]
+    ellipse_center_separation: float = 0.0
+    c_source: str = "direct_fit"
+    raw_axes: dict[str, float] = field(default_factory=dict)
 
     @property
     def is_valid(self) -> bool:
@@ -202,6 +205,9 @@ def derive_patient_ellipsoid(
             quality_flags=quality_flags,
             exclusion_flags=["missing_or_invalid_ellipse_fields"],
             raw_parameters={},
+            ellipse_center_separation=999.0,
+            c_source="unavailable",
+            raw_axes={},
         )
 
     if not (np.isfinite(crown_a) and crown_a > EPS):
@@ -209,11 +215,34 @@ def derive_patient_ellipsoid(
     if not (np.isfinite(crown_b) and crown_b > EPS):
         exclusion_flags.append("invalid_crown_b")
 
-    aligned_c = max(lad_a, lad_b)
-    c_candidate = aligned_c if (np.isfinite(aligned_c) and 10.0 <= aligned_c <= 200.0) else min(lad_a, lad_b)
+    alignments_available = lad_major_z_alignment is not None and lad_minor_z_alignment is not None
+    if alignments_available and float(lad_major_z_alignment) >= float(lad_minor_z_alignment):
+        aligned_c = lad_a
+        aligned_name = "lad_a_axis_most_aligned_with_cardiac_z"
+    elif alignments_available:
+        aligned_c = lad_b
+        aligned_name = "lad_b_axis_most_aligned_with_cardiac_z"
+    else:
+        aligned_c = max(lad_a, lad_b)
+        aligned_name = "larger_lad_axis_without_orientation_metadata"
+    if np.isfinite(aligned_c) and 10.0 <= aligned_c <= 200.0:
+        c_candidate = aligned_c
+        c_source = aligned_name
+    else:
+        c_candidate = min(lad_a, lad_b)
+        c_source = "smaller_saved_lad_axis_stability_proxy"
+        quality_flags.append("aligned_lad_axis_underconstrained_used_saved_axis_proxy")
 
     if not (np.isfinite(c_candidate) and c_candidate > EPS):
         exclusion_flags.append("invalid_c_axis")
+    if np.isfinite(crown_a) and crown_a > 250.0:
+        exclusion_flags.append("underconstrained_crown_major_axis_gt_250mm")
+    if np.isfinite(crown_a) and np.isfinite(crown_b) and crown_b > EPS and crown_a / crown_b > 4.0:
+        exclusion_flags.append("underconstrained_crown_axis_ratio_gt_4")
+    if np.isfinite(c_candidate) and not 10.0 <= c_candidate <= 220.0:
+        exclusion_flags.append("long_axis_proxy_outside_10_to_220mm")
+    if separation > 150.0:
+        quality_flags.append("large_ellipse_center_separation")
 
     return PatientEllipsoid(
         case_id=case_id,
@@ -227,4 +256,7 @@ def derive_patient_ellipsoid(
         quality_flags=quality_flags,
         exclusion_flags=sorted(set(exclusion_flags)),
         raw_parameters={"crown_a": crown_a, "crown_b": crown_b, "lad_a": lad_a, "lad_b": lad_b},
+        ellipse_center_separation=separation,
+        c_source=c_source,
+        raw_axes={"crown_a": crown_a, "crown_b": crown_b, "lad_a": lad_a, "lad_b": lad_b},
     )

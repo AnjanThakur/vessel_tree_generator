@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Compare a generated coronary cohort with the real Person 1 reference population."""
+"""Compare a generated LCA cohort with the eligible real reference population."""
 
 from __future__ import annotations
 
@@ -29,11 +29,11 @@ from generation.validator import TreeValidator
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PERSON1 = REPO_ROOT / "outputs/lca_ssm/person1_week1"
-DEFAULT_COHORT = REPO_ROOT / "outputs/lca_ssm/person2_population_cohort"
-FIXED_COUNTS = {"LMCA": 5, "LAD": 12, "LCX": 10, "RCA": 15}
-BRANCHES = ("LMCA", "LAD", "LCX", "RCA")
-LANDMARKS = ("lca_ostium", "bifurcation", "lad_endpoint", "lcx_endpoint", "rca_ostium", "rca_endpoint")
+DEFAULT_POPULATION = REPO_ROOT / "outputs/lca_ssm/lca_population_model"
+DEFAULT_COHORT = REPO_ROOT / "outputs/lca_ssm/lca_population_cohort"
+FIXED_COUNTS = {"LMCA": 5, "LAD": 12, "LCX": 10}
+BRANCHES = ("LMCA", "LAD", "LCX")
+LANDMARKS = ("lca_ostium", "bifurcation", "lad_endpoint", "lcx_endpoint")
 
 
 def write_json(path: Path, payload: Any) -> None:
@@ -67,10 +67,10 @@ def numeric_case_key(path: Path) -> tuple[int, str]:
     return (int(token) if token.isdigit() else 10**9, path.name)
 
 
-def load_real_reference(person1: Path) -> tuple[dict[str, np.ndarray], list[dict[str, Any]]]:
+def load_real_reference(population: Path) -> tuple[dict[str, np.ndarray], list[dict[str, Any]]]:
     distributions: dict[str, list[float]] = {}
     real_rows: dict[str, dict[str, Any]] = {}
-    ellipsoid_path = person1 / "population_ellipsoid_parameters.csv"
+    ellipsoid_path = population / "population_ellipsoid_parameters.csv"
     with ellipsoid_path.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             if row["is_valid"].strip().lower() != "true":
@@ -85,7 +85,7 @@ def load_real_reference(person1: Path) -> tuple[dict[str, np.ndarray], list[dict
     # scaffolds of the resolved/anatomy-gated cases.  Raw metrics from all 191
     # source archives cannot be pooled here because most daughter assignments
     # are explicitly unresolved and raw sampling noise is not generator shape.
-    scaffold_path = person1 / "validation_scaffold_case_metrics.csv"
+    scaffold_path = population / "validation_scaffold_case_metrics.csv"
     with scaffold_path.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             case = real_rows.setdefault(row["case_id"], {"case_id": row["case_id"]})
@@ -96,7 +96,7 @@ def load_real_reference(person1: Path) -> tuple[dict[str, np.ndarray], list[dict
                 append(distributions, name, value)
                 case[name] = value
 
-    landmark_path = person1 / "population_landmarks.csv"
+    landmark_path = population / "population_landmarks.csv"
     with landmark_path.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             if row["statistics_eligible"].strip().lower() != "true":
@@ -112,7 +112,7 @@ def load_real_reference(person1: Path) -> tuple[dict[str, np.ndarray], list[dict
                 append(distributions, name, value)
                 case[name] = value
 
-    fixed_path = person1 / "fixed_branch_surface_coordinates.npz"
+    fixed_path = population / "fixed_branch_surface_coordinates.npz"
     with np.load(fixed_path, allow_pickle=False) as data:
         for branch in BRANCHES:
             values = np.asarray(data[f"{branch}_uvo"], dtype=float)
@@ -121,7 +121,7 @@ def load_real_reference(person1: Path) -> tuple[dict[str, np.ndarray], list[dict
             distributions[f"{branch.lower()}_obliquity_rad"] = obliquity.tolist()
             distributions[f"{branch.lower()}_surface_offset_mm"] = values[:, :, 2].reshape(-1).tolist()
 
-    pca_path = person1 / "surface_deviation_pca.npz"
+    pca_path = population / "surface_deviation_pca.npz"
     with np.load(pca_path, allow_pickle=False) as data:
         standardized = np.asarray(data["standardized_training_scores"], dtype=float)
         for mode in range(standardized.shape[1]):
@@ -196,9 +196,9 @@ def load_generated_reference(cohort: Path, pca_path: Path) -> tuple[dict[str, np
     return {name: np.asarray(values, dtype=float) for name, values in distributions.items()}, rows
 
 
-def audit_generator_baselines(person1: Path) -> list[dict[str, Any]]:
-    """Evaluate every frozen baseline both with and without optional RCA."""
-    stats = person1 / "generator_statistics"
+def audit_generator_baselines(population: Path) -> list[dict[str, Any]]:
+    """Evaluate every frozen LCA baseline with zero PCA innovation."""
+    stats = population / "generator_statistics"
     parameter_sampler = ParameterSampler.from_person1_output(stats)
     landmark_sampler = LandmarkSampler.from_json(stats / "landmark_stats.json")
     trajectory_sampler = TrajectorySampler.from_npz(stats / "fixed_branch_surface_coordinates.npz")
@@ -213,29 +213,22 @@ def audit_generator_baselines(person1: Path) -> list[dict[str, Any]]:
             float(source["a"]), float(source["b"]), float(source["c"]),
             "zero_innovation_baseline_audit", case_id,
         )
-        reports = {}
-        for include_rca in (False, True):
-            landmarks = landmark_sampler.sample(
-                np.random.default_rng(1), include_rca=include_rca, source_case_id=case_id
-            )
-            tree = TreeAssembler(
-                ellipsoid,
-                np.random.default_rng(1),
-                deviation_sampler=deviation_sampler,
-                trajectory_sampler=trajectory_sampler,
-            ).assemble(landmarks, include_rca=include_rca)
-            reports[include_rca] = validator.validate(tree)
-        report = reports[False]
-        rca_report = reports[True]
+        landmarks = landmark_sampler.sample(
+            np.random.default_rng(1), include_rca=False, source_case_id=case_id
+        )
+        tree = TreeAssembler(
+            ellipsoid,
+            np.random.default_rng(1),
+            deviation_sampler=deviation_sampler,
+            trajectory_sampler=trajectory_sampler,
+        ).assemble(landmarks, include_rca=False)
+        report = validator.validate(tree)
         rows.append({
             "case_id": case_id,
             "accepted_lca_only": report["accepted"],
-            "accepted_with_rca": rca_report["accepted"],
             "error_count": len(report["errors"]),
-            "rca_error_count": len(rca_report["errors"]),
             "warning_count": len(report["warnings"]),
             "errors": "; ".join(report["errors"]),
-            "rca_errors": "; ".join(rca_report["errors"]),
             "warnings": "; ".join(report["warnings"]),
             **{f"{name.lower()}_length_mm": value for name, value in report["metrics"]["branch_lengths_mm"].items()},
             **{f"{name.lower()}_tortuosity": value for name, value in report["metrics"]["branch_tortuosity"].items()},
@@ -389,7 +382,7 @@ def surface_offset_plot(path: Path, real: dict[str, np.ndarray], generated: dict
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
-    person1 = args.person1_dir.resolve()
+    population = args.population_dir.resolve()
     cohort = args.cohort_dir.resolve()
     output = args.output_dir.resolve() if args.output_dir else cohort / "population_validation"
     if output.exists():
@@ -397,9 +390,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             raise FileExistsError(f"refusing to overwrite {output}; pass --clean")
         shutil.rmtree(output)
     output.mkdir(parents=True)
-    real, real_rows = load_real_reference(person1)
-    generated, generated_rows = load_generated_reference(cohort, person1 / "surface_deviation_pca.npz")
-    baseline_audit = audit_generator_baselines(person1)
+    real, real_rows = load_real_reference(population)
+    generated, generated_rows = load_generated_reference(cohort, population / "surface_deviation_pca.npz")
+    baseline_audit = audit_generator_baselines(population)
     common = sorted(set(real) & set(generated))
     comparisons = [summarize_comparison(name, real[name], generated[name]) for name in common]
     write_csv(output / "real_vs_generated_metrics.csv", comparisons)
@@ -415,15 +408,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     pca = [row for row in comparisons if row["metric"].startswith("pca_mode_")]
     warnings = [row["metric"] for row in comparisons if not row["comparison_pass"]]
     manifest = json.loads((cohort / "cohort_manifest.json").read_text(encoding="utf-8"))
-    assignment_gate = json.loads((person1 / "branch_assignment_gate.json").read_text(encoding="utf-8"))
+    assignment_gate = json.loads((population / "branch_assignment_gate.json").read_text(encoding="utf-8"))
     structural_pass = bool(
         manifest["all_trees_accepted"] and manifest["exact_lca_topology_for_all_trees"]
     )
     eligible_baselines = {
         row["case_id"] for row in baseline_audit if row["accepted_lca_only"]
-    }
-    rca_eligible_baselines = {
-        row["case_id"] for row in baseline_audit if row["accepted_with_rca"]
     }
     represented_baselines = {str(row["source_case_id"]) for row in generated_rows}
     result = {
@@ -441,12 +431,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "rca_decision": "excluded_from_primary_cohort",
         "rca_decision_basis": (
             "The available RCA arrays are documented inferred disconnected candidates rather than resolved RCA "
-            "ground truth, and their preview courses are not consistently stable. RCA remains optional in code "
-            "and is audited separately, but is not published in the primary anatomy-accepted cohort."
+            "ground truth, so RCA is outside this LCA-only model and is not used in the reference comparison."
         ),
         "eligible_zero_innovation_lca_baseline_count": len(eligible_baselines),
         "eligible_zero_innovation_lca_baselines": sorted(eligible_baselines),
-        "eligible_zero_innovation_with_optional_rca_count": len(rca_eligible_baselines),
         "represented_eligible_baseline_count": len(represented_baselines & eligible_baselines),
         "represented_eligible_baseline_fraction": (
             len(represented_baselines & eligible_baselines) / max(len(eligible_baselines), 1)
@@ -460,15 +448,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "all unresolved daughter assignments are excluded rather than used to make generated shapes appear valid."
         ),
         "artifacts": {
-            "metrics_csv": str((output / "real_vs_generated_metrics.csv").resolve()),
-            "real_case_metrics_csv": str((output / "real_reference_case_metrics.csv").resolve()),
-            "generated_case_metrics_csv": str((output / "generated_case_metrics.csv").resolve()),
-            "generator_baseline_eligibility_csv": str((output / "generator_baseline_eligibility.csv").resolve()),
-            "distribution_plot": str((output / "real_vs_generated_distributions.png").resolve()),
-            "landmark_plot": str((output / "landmark_comparison.png").resolve()),
-            "pca_plot": str((output / "pca_score_comparison.png").resolve()),
-            "surface_offset_plot": str((output / "surface_offset_comparison.png").resolve()),
-            "published_artifact_manifest": str((cohort / "published_artifact_manifest.json").resolve()),
+            "metrics_csv": "real_vs_generated_metrics.csv",
+            "real_case_metrics_csv": "real_reference_case_metrics.csv",
+            "generated_case_metrics_csv": "generated_case_metrics.csv",
+            "generator_baseline_eligibility_csv": "generator_baseline_eligibility.csv",
+            "distribution_plot": "real_vs_generated_distributions.png",
+            "landmark_plot": "landmark_comparison.png",
+            "pca_plot": "pca_score_comparison.png",
+            "surface_offset_plot": "surface_offset_comparison.png",
+            "published_artifact_manifest": "../published_artifact_manifest.json",
         },
     }
     write_json(output / "real_vs_generated_validation.json", result)
@@ -481,14 +469,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         f"Status: `{result['status']}`. Compared metrics: {len(comparisons)}; descriptive passes: "
         f"{result['descriptive_distribution_pass_count']}; warnings: {len(warnings)}.\n\n"
         "RCA decision: excluded from the primary cohort because the available RCA paths are inferred disconnected "
-        "candidates rather than resolved ground truth; optional RCA support remains in the code and baseline audit.\n\n"
+        "candidates rather than resolved ground truth.\n\n"
         "## Descriptive warnings\n\n"
         f"{warning_lines}\n",
         encoding="utf-8",
     )
     manifest["population_validation"] = {
         "status": result["status"],
-        "report": str((output / "real_vs_generated_validation.json").resolve()),
+        "report": "population_validation/real_vs_generated_validation.json",
         "descriptive_warning_count": len(warnings),
     }
     write_json(cohort / "cohort_manifest.json", manifest)
@@ -512,7 +500,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--person1-dir", type=Path, default=DEFAULT_PERSON1)
+    parser.add_argument("--population-dir", type=Path, default=DEFAULT_POPULATION)
     parser.add_argument("--cohort-dir", type=Path, default=DEFAULT_COHORT)
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--clean", action="store_true")

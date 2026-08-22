@@ -57,11 +57,26 @@ python -m pip install -r pca_ssm_vessel_tree_generator/requirements.txt
 
 ## Surface-relative statistical generator
 
-The completed Person 1 pipeline audits all 191 protected raw cases, verifies the authoritative daughter-assignment record, and excludes unresolved LAD/LCX identities before fitting generator statistics. The current strict gate contains 14 resolved assignments and 6 cases that also pass the raw-course and shape-preserving scaffold checks. Those 6 cases provide cardiac frames, ellipsoid parameters, exact fixed cardiac controls, local surface deviations, landmark statistics, validation limits, and a joint 126-dimensional PCA with 4 retained modes (96.743% cumulative variance):
+The canonical pipeline audits all 191 protected raw cases and reconstructs each
+candidate assignment from the saved Branch A/Branch B source metadata. It uses
+the recorded multi-signal RAS anatomy score and rejects low-confidence daughter
+identities before statistics are fitted. The verified population contains 181
+confidence-resolved assignments and 52 cases that also pass source integrity,
+frame, ellipsoid, fixed-representation, and core anatomical gates.
+
+The primary model is LCA-only: LMCA 5 + LAD 12 + LCX 10 fixed points, producing
+an 81-dimensional local-deviation vector. The 52 x 81 population matrix retains
+13 PCA modes and 95.55% cumulative variance. The unresolved disconnected RCA
+candidate is excluded rather than represented as ground truth.
+
+Run the public pipeline from the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe pca_ssm_vessel_tree_generator\run_person1_week1_pipeline.py `
-  --full --output-dir outputs\lca_ssm\person1_week1 --clean
+.\.venv\Scripts\python.exe pipeline.py compute-stats --clean
+.\.venv\Scripts\python.exe pipeline.py generate --clean
 ```
 
-The frozen handoff is consumed by `run_person2_population_cohort.py`. The current final run produces 25 accepted LMCA/LAD/LCX trees, fixed front/lateral/crown previews, and a ParaView cohort VTM. Validation compares the generated scaffolds only with the 6 resolved, anatomy-gated reference scaffolds while retaining the full 191-case source audit. RCA generation remains optional in code but is excluded from the primary cohort because the available RCA arrays are inferred disconnected candidates rather than resolved RCA ground truth. See [generation/README.md](./generation/README.md) for commands, validation policy, and limitations.
+The reference generation run produces 25 accepted LMCA/LAD/LCX trees with
+fixed cardiac front/multiview previews, full provenance and validation, and
+ParaView VTP/VTM geometry. See [generation/README.md](./generation/README.md)
+for the data contract, acceptance policy, and limitations.

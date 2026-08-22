@@ -18,6 +18,8 @@ from tests.test_batch5_generation import (
     test_lmca_bifurcation_snapping,
     test_side_branch_random_surface_walk,
     test_3d_segment_self_intersection_detector,
+    test_lca_only_fixed_representation_contract,
+    test_lca_pca_artifact_branch_partition,
 )
 
 TEST_FUNCTIONS = [
@@ -31,6 +33,8 @@ TEST_FUNCTIONS = [
     ("8. LMCA bifurcation snapping LAD[0] == LCX[0] == LMCA[-1]", test_lmca_bifurcation_snapping),
     ("9. Side branch Poisson count and attachment position sampling", test_side_branch_random_surface_walk),
     ("10. 1.0 mm 3D segment-to-segment self-intersection test & rejection flag", test_3d_segment_self_intersection_detector),
+    ("11. Primary 81-D LCA representation does not require RCA", test_lca_only_fixed_representation_contract),
+    ("12. 81-D PCA artifact partitions into LMCA/LAD/LCX", test_lca_pca_artifact_branch_partition),
 ]
 
 def run_all_tests():

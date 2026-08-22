@@ -45,7 +45,6 @@ def apply_cardiac_motion_to_tree(
     c0 = float(tree_data["ellipsoid_params"]["c_mm"])
 
     vessels_3d = tree_data["vessels_3d"]
-    landmarks = tree_data["landmarks"]
     side_branches_ref = tree_data.get("side_branches", [])
 
     # 1. Project reference vessels to parameter space (u_0, v_0) and deviation vectors [dev_x, dev_y, dev_z]
@@ -134,30 +133,9 @@ def apply_cardiac_motion_to_tree(
 
             frame_vessels[vname] = pts_def
 
-        # Apply ostial offset motion (§7.5)
-        for vname, ost_name in [("LMCA", "lca_ostium"), ("RCA", "rca_ostium")]:
-            ost_offset = landmarks[ost_name]["offset"]
-            pts = frame_vessels[vname]
-            n_pts = len(pts)
-            if n_pts >= 2:
-                u0_arr = vessel_param_data[vname]["u"]
-                v0_arr = vessel_param_data[vname]["v"]
-                a_d, b_d, c_d, u_d, v_d = deform_ellipsoid(
-                    a0, b0, c0, u0_arr, v0_arr, phase,
-                    radial_amplitude=radial_amplitude,
-                    longitudinal_amplitude=longitudinal_amplitude,
-                    torsion_amplitude_deg=torsion_amplitude_deg,
-                    peak_phase=peak_phase,
-                )
-
-                t_arr = np.linspace(0.0, 1.0, n_pts)
-                decay_offsets = ost_offset * (1.0 - t_arr) * (1.0 - radial_amplitude * s_val)
-
-                for i in range(n_pts):
-                    normal = ellipsoid_normal(u_d[i], v_d[i], a_d, b_d, c_d)
-                    pts[i] += decay_offsets[i] * normal
-
-                frame_vessels[vname] = pts
+        # Off-surface/ostial displacement is already represented by the local
+        # deviation recovered during projection. Adding it again would
+        # double-count the offset and break exact phase-0 identity.
 
         # Enforce LMCA bifurcation snapping continuity across all phases (§7.5)
         bif_point = frame_vessels["LMCA"][-1].copy()
@@ -217,5 +195,6 @@ def apply_cardiac_motion_to_tree(
             "torsion_amplitude_deg": torsion_amplitude_deg,
             "peak_phase": peak_phase,
         },
+        "source_metadata": tree_data.get("source_metadata", {}),
         "frames": frames,
     }

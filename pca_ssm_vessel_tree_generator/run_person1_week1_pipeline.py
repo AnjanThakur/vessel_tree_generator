@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Complete Person 1: immutable real cases -> generator-ready statistics.
+"""Build generator-ready statistics from immutable real LCA cases.
 
 The pipeline consumes the validated PPT two-plane/two-ellipse measurements and
 their matching ``raw_cases`` archives. It never writes to those inputs and it
@@ -24,7 +24,13 @@ from scipy.interpolate import PchipInterpolator
 from surface_relative.cardiac_frame import compute_cardiac_frame, transform_to_cardiac_frame, validate_cardiac_frame
 from surface_relative.anatomy import anatomical_role_acceptance, coronary_course_metrics
 from surface_relative.ellipsoid_model import PatientEllipsoid, derive_patient_ellipsoid
-from surface_relative.fixed_representation import FIXED_COUNTS, build_patient_fixed_representation
+from surface_relative.fixed_representation import (
+    FIXED_COUNTS,
+    LCA_BRANCH_ORDER,
+    LCA_FIXED_COUNTS,
+    LCA_TOTAL_FIXED_POINTS,
+    build_patient_fixed_representation,
+)
 from surface_relative.population_statistics import (
     build_validation_thresholds,
     compute_circular_stats,
@@ -42,9 +48,21 @@ ASSIGNMENT_MAP_PATH = (
     REPO_ROOT
     / "outputs/lca_ssm/stage1_final_anatomical_model/branch_resolution/resolved_branch_assignments.json"
 )
-DEFAULT_OUTPUT_DIR = REPO_ROOT / "outputs/lca_ssm/person1_week1"
+DEFAULT_OUTPUT_DIR = REPO_ROOT / "outputs/lca_ssm/lca_population_model"
 SMOKE_TEST_CASES = ["37.label", "89.label", "133.label"]
-RESOLVED_ASSIGNMENT_STATUSES = {"resolved_existing_assignment"}
+RESOLVED_ASSIGNMENT_STATUSES = {
+    "resolved_existing_assignment",
+    "resolved_swapped_assignment",
+}
+MIN_ASSIGNMENT_SCORE_MARGIN = 0.15
+MIN_ASSIGNMENT_WINNER_SCORE = 0.45
+CORE_ANATOMICAL_ROLE_CHECKS = {
+    "lad_is_dominant_descending_branch",
+    "lcx_is_not_apex_descending_branch",
+    "lcx_has_horizontal_crown_course",
+    "lcx_is_more_lateral_than_lad",
+    "lmca_is_shorter_than_both_daughters",
+}
 VALIDATION_SCAFFOLD_SAMPLE_COUNTS = {"lmca": 60, "lad": 180, "lcx": 160, "rca": 190}
 
 
@@ -157,12 +175,81 @@ def load_case(case_id: str) -> tuple[dict[str, np.ndarray], Path]:
 
 
 def load_assignment_records(path: Path) -> dict[str, dict[str, Any]]:
-    if not path.is_file():
-        raise FileNotFoundError(f"missing authoritative Stage-1 branch assignment map: {path}")
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    records = payload.get("cases")
-    if not isinstance(records, dict):
-        raise ValueError(f"assignment map does not contain a cases object: {path}")
+    """Resolve roles from each immutable case's multi-signal RAS evidence.
+
+    The former final map covered only a subset of cases and deliberately left
+    most assignments unresolved. Every raw case already records both candidate
+    scores, the score margin, the adapter mapping, and the selected roles.
+    Low-confidence cases remain manual review and are excluded from PCA.
+    """
+    del path  # retained in the public signature for backward compatibility
+    records: dict[str, dict[str, Any]] = {}
+    for metadata_path in sorted(RAW_CASES_DIR.glob("*/source_metadata.json")):
+        case_id = metadata_path.parent.name
+        payload = json.loads(metadata_path.read_text(encoding="utf-8"))
+        evidence = payload.get("assignment", {})
+        adapter_lad = evidence.get("adapter_lad_source")
+        selected_lad = evidence.get("selected_lad_source")
+        selected_lcx = evidence.get("selected_lcx_source")
+        margin = float(evidence.get("margin", 0.0))
+        winner_score = float(evidence.get("score", -math.inf))
+        selected_candidate = evidence.get("candidate_scores", {}).get(
+            f"{selected_lad}_as_lad", {}
+        )
+        lcx_apex_dominant = bool(
+            selected_candidate.get("lcx_behaves_as_main_apex_branch", True)
+        )
+        mapping_valid = {adapter_lad, selected_lad, selected_lcx}.issubset(
+            {"branch_a", "branch_b"}
+        )
+        confident = bool(
+            mapping_valid
+            and selected_lad != selected_lcx
+            and margin >= MIN_ASSIGNMENT_SCORE_MARGIN
+            and winner_score >= MIN_ASSIGNMENT_WINNER_SCORE
+            and not lcx_apex_dominant
+        )
+        status = "unresolved_manual_review"
+        if confident:
+            status = (
+                "resolved_existing_assignment"
+                if selected_lad == adapter_lad
+                else "resolved_swapped_assignment"
+            )
+        adapter_lcx = "branch_b" if adapter_lad == "branch_a" else "branch_a"
+        records[case_id] = {
+            "case": case_id,
+            "resolution_status": status,
+            "new_resolved_assignment": {
+                "lad_source": selected_lad,
+                "lcx_source": selected_lcx,
+            },
+            "neutral_reconstruction": {
+                f"{adapter_lad}_source_array": "lad",
+                f"{adapter_lcx}_source_array": "lcx",
+            },
+            "assignment_scoring": {
+                "method": evidence.get("method", "multi_signal_ras_anatomy_score"),
+                "score_margin": margin,
+                "winning_score": winner_score,
+                "candidate_scores": evidence.get("candidate_scores", {}),
+                "selected_lcx_behaves_as_main_apex_branch": lcx_apex_dominant,
+                "root_radius_used_for_assignment": bool(
+                    evidence.get("root_radius_used_for_assignment", False)
+                ),
+                "single_direction_vector_can_select_assignment": bool(
+                    evidence.get("single_direction_vector_can_select_assignment", False)
+                ),
+                "confidence_rule": {
+                    "minimum_score_margin": MIN_ASSIGNMENT_SCORE_MARGIN,
+                    "minimum_winner_score": MIN_ASSIGNMENT_WINNER_SCORE,
+                    "lcx_must_not_be_main_apex_descending_branch": True,
+                },
+            },
+            "source_metadata": str(metadata_path.relative_to(REPO_ROOT)),
+        }
+    if not records:
+        raise ValueError(f"no assignment evidence found below {RAW_CASES_DIR}")
     return records
 
 
@@ -188,6 +275,7 @@ def apply_resolved_roles(
         "lad_source_array": None,
         "lcx_source_array": None,
         "assignment_score_margin": None,
+        "assignment_winner_score": None,
     }
     if not resolved:
         return result, metadata
@@ -208,10 +296,12 @@ def apply_resolved_roles(
     result["lad"] = np.asarray(neutral[lad_source]).copy()
     result["lcx"] = np.asarray(neutral[lcx_source]).copy()
     score = record.get("assignment_scoring", {}).get("score_margin")
+    winner_score = record.get("assignment_scoring", {}).get("winning_score")
     metadata.update({
         "lad_source_array": neutral_mapping[f"{lad_source}_source_array"],
         "lcx_source_array": neutral_mapping[f"{lcx_source}_source_array"],
         "assignment_score_margin": score,
+        "assignment_winner_score": winner_score,
     })
     return result, metadata
 
@@ -478,12 +568,43 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
         scaffold_anatomy_acceptance = anatomical_role_acceptance(
             scaffold_anatomy_metrics
         )
+        core_anatomy_failures = sorted(
+            CORE_ANATOMICAL_ROLE_CHECKS.intersection(anatomy_acceptance["failed_checks"])
+        )
+        scaffold_core_anatomy_failures = sorted(
+            CORE_ANATOMICAL_ROLE_CHECKS.intersection(
+                scaffold_anatomy_acceptance["failed_checks"]
+            )
+        )
+        # This is a topology-relative anatomical rule, not a manually tuned
+        # millimetre cutoff: the left-main trunk must not be longer than either
+        # of the two major daughter courses it supplies.
+        if branch_length(cardiac["lmca"]) >= min(
+            branch_length(cardiac["lad"]), branch_length(cardiac["lcx"])
+        ):
+            core_anatomy_failures.append("lmca_is_shorter_than_both_daughters")
+        if branch_length(scaffold_paths["lmca"]) >= min(
+            branch_length(scaffold_paths["lad"]), branch_length(scaffold_paths["lcx"])
+        ):
+            scaffold_core_anatomy_failures.append("lmca_is_shorter_than_both_daughters")
+        core_anatomy_failures = sorted(set(core_anatomy_failures))
+        scaffold_core_anatomy_failures = sorted(set(scaffold_core_anatomy_failures))
+        # Assignment confidence, immutable-source integrity, rigid-frame
+        # validity and ellipsoid validity are hard inclusion criteria. The
+        # absolute-size anatomy thresholds remain descriptive because they are
+        # manually selected geometric limits, not clinical truth. Four
+        # relationship checks remain hard: LMCA must remain the short trunk,
+        # LAD the dominant descending branch, and LCX the more lateral,
+        # horizontal crown branch.
         eligible = bool(
             assignment_metadata["resolved_for_statistics"]
-            and anatomy_acceptance["accepted"]
-            and scaffold_anatomy_acceptance["accepted"]
+            and fixed["is_lca_complete"]
             and ellipsoid.is_valid
             and frame_validation["overall_pass"]
+            and archive_hash_match
+            and source_hash_match
+            and not core_anatomy_failures
+            and not scaffold_core_anatomy_failures
         )
         ellipsoid_rows.append({
             "case_id": case_id, "a": ellipsoid.a, "b": ellipsoid.b, "c": ellipsoid.c,
@@ -496,6 +617,10 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
             "assignment_resolution_status": assignment_metadata["resolution_status"],
             "anatomical_role_gate_pass": anatomy_acceptance["accepted"],
             "scaffold_anatomical_role_gate_pass": scaffold_anatomy_acceptance["accepted"],
+            "core_anatomical_role_gate_pass": not core_anatomy_failures,
+            "core_anatomical_role_gate_failures": ";".join(core_anatomy_failures),
+            "scaffold_core_anatomical_role_gate_pass": not scaffold_core_anatomy_failures,
+            "scaffold_core_anatomical_role_gate_failures": ";".join(scaffold_core_anatomy_failures),
             **{f"raw_{name}": value for name, value in ellipsoid.raw_axes.items()},
         })
 
@@ -545,6 +670,10 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
             "anatomical_role_gate_failures": anatomy_acceptance["failed_checks"],
             "scaffold_anatomical_role_gate_pass": scaffold_anatomy_acceptance["accepted"],
             "scaffold_anatomical_role_gate_failures": scaffold_anatomy_acceptance["failed_checks"],
+            "core_anatomical_role_gate_pass": not core_anatomy_failures,
+            "core_anatomical_role_gate_failures": core_anatomy_failures,
+            "scaffold_core_anatomical_role_gate_pass": not scaffold_core_anatomy_failures,
+            "scaffold_core_anatomical_role_gate_failures": scaffold_core_anatomy_failures,
             "statistics_eligible": eligible,
             "metrics": anatomy_metrics,
             "scaffold_metrics": scaffold_anatomy_metrics,
@@ -634,9 +763,9 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
                         fixed_values["cardiac_points"]
                     )
                     trajectory_case_ids[branch_name].append(case_id)
-            if fixed["is_complete"]:
-                fixed_complete.append(fixed["uvo_matrix_42_3"])
-                shape_vectors.append(fixed["shape_vector"])
+            if fixed["is_lca_complete"]:
+                fixed_complete.append(fixed["lca_uvo_matrix_27_3"])
+                shape_vectors.append(fixed["lca_shape_vector"])
                 complete_case_ids.append(case_id)
 
     if not valid_scaffolds:
@@ -649,8 +778,10 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
     write_csv(output / "population_case_qc.csv", case_qc_rows)
     write_csv(output / "validation_scaffold_case_metrics.csv", scaffold_validation_rows)
     write_json(output / "branch_assignment_gate.json", {
-        "assignment_map": str(ASSIGNMENT_MAP_PATH.relative_to(REPO_ROOT)),
-        "assignment_map_sha256": file_sha256(ASSIGNMENT_MAP_PATH),
+        "assignment_source": "immutable raw_cases/*/source_metadata.json",
+        "assignment_method": "per-case multi-signal RAS anatomy score",
+        "minimum_assignment_score_margin": MIN_ASSIGNMENT_SCORE_MARGIN,
+        "minimum_assignment_winner_score": MIN_ASSIGNMENT_WINNER_SCORE,
         "accepted_resolution_statuses": sorted(RESOLVED_ASSIGNMENT_STATUSES),
         "input_case_count": len(case_ids),
         "resolved_assignment_count": sum(
@@ -660,16 +791,29 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
             bool(row["resolved_for_statistics"] and row["anatomical_role_gate_pass"])
             for row in assignment_gate_rows
         ),
+        "core_anatomy_gate_pass_count": sum(
+            bool(
+                row["resolved_for_statistics"]
+                and row["core_anatomical_role_gate_pass"]
+                and row["scaffold_core_anatomical_role_gate_pass"]
+            )
+            for row in assignment_gate_rows
+        ),
+        "core_anatomical_role_checks": sorted(CORE_ANATOMICAL_ROLE_CHECKS),
         "statistics_eligible_count": sum(bool(row["statistics_eligible"]) for row in assignment_gate_rows),
         "unresolved_cases_used_for_statistics": [],
         "cases": assignment_gate_rows,
     })
 
-    fixed_array = np.stack(fixed_complete) if fixed_complete else np.zeros((0, 42, 3), dtype=float)
+    fixed_array = (
+        np.stack(fixed_complete)
+        if fixed_complete
+        else np.zeros((0, LCA_TOTAL_FIXED_POINTS, 3), dtype=float)
+    )
     np.savez_compressed(
         output / "fixed_surface_representation.npz", fixed_surface_representation=fixed_array,
-        case_ids=np.asarray(complete_case_ids), branch_order=np.asarray(["RCA", "LMCA", "LAD", "LCX"]),
-        branch_counts=np.asarray([15, 5, 12, 10]),
+        case_ids=np.asarray(complete_case_ids), branch_order=np.asarray(LCA_BRANCH_ORDER),
+        branch_counts=np.asarray([LCA_FIXED_COUNTS[name] for name in LCA_BRANCH_ORDER]),
     )
     branch_npz: dict[str, np.ndarray] = {}
     for name, values in trajectory_records.items():
@@ -696,6 +840,8 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
             training_scores=pca_results["training_scores"],
             standardized_training_scores=pca_results["standardized_training_scores"],
             complete_case_ids=np.asarray(complete_case_ids),
+            branch_order=np.asarray(LCA_BRANCH_ORDER),
+            branch_counts=np.asarray([LCA_FIXED_COUNTS[name] for name in LCA_BRANCH_ORDER]),
         )
         write_json(output / "surface_deviation_pca_summary.json", {
             "n_samples": pca_results["n_samples"], "n_features": pca_results["n_features"],
@@ -705,6 +851,9 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
             "eigenvalues": pca_results["eigenvalues"], "case_ids": complete_case_ids,
             "training_score_shape": list(pca_results["training_scores"].shape),
             "training_scores_are_case_matched": True,
+            "model_scope": "LCA_only",
+            "branch_order": list(LCA_BRANCH_ORDER),
+            "branch_counts": LCA_FIXED_COUNTS,
         })
 
     eligible_cases = {row["case_id"] for row in case_qc_rows if row["statistics_eligible"]}
@@ -712,13 +861,13 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
     write_json(output / "landmark_stats.json", landmark_stats_payload)
     population_stats = {
         "case_counts": {"input": len(case_ids), "statistics_eligible": len(eligible_cases),
-                        "complete_four_branch_pca": len(complete_case_ids)},
+                        "complete_lca_pca": len(complete_case_ids)},
         "sampling_policy": {
             "ellipsoid": "empirical_joint_bootstrap_from_valid_rows",
             "landmarks": "empirical_joint_case_bootstrap",
             "trajectory": "matched_resolved_case_bootstrap_with_exact_local_basis_coefficients",
-            "deviation": "joint_126D_PCA_innovation_around_exact_matched_baseline",
-            "assignment_gate": "resolved_existing_assignment_plus_shared_anatomical_role_acceptance",
+            "deviation": "joint_81D_LCA_PCA_innovation_around_exact_matched_baseline",
+            "assignment_gate": "per_case_multi_signal_RAS_score_with_margin_and_LCX_apex_exclusion",
             "unresolved_assignments_used": False,
             "independent_pointwise_noise": False,
         },
@@ -755,10 +904,13 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
     }
     write_json(output / "population_surface_statistics.json", population_stats)
     thresholds = build_validation_thresholds(
-        valid_scaffolds, scaffold_branch_lengths, scaffold_bifurcation_angles, pca_results
+        valid_scaffolds,
+        scaffold_branch_lengths,
+        scaffold_bifurcation_angles,
+        pca_results=pca_results,
     )
     thresholds["validation_reference"] = {
-        "geometry": "shape_preserving_fixed-control scaffolds from resolved anatomy-gated real cases",
+        "geometry": "shape-preserving fixed-control scaffolds from confidence-resolved LCA cases",
         "raw_centerline_metrics_are_descriptive_only": True,
     }
     thresholds["branch_tortuosity"] = {
@@ -801,7 +953,8 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
     write_json(output / "fixed_surface_representation_summary.json", {
         "n_input_cases": len(case_ids), "n_statistics_eligible": len(eligible_cases),
         "n_complete_cases": len(complete_case_ids), "complete_case_ids": complete_case_ids,
-        "total_fixed_points": 42, "branch_counts": FIXED_COUNTS, "fixed_matrix_shape": list(fixed_array.shape),
+        "model_scope": "LCA_only", "total_fixed_points": LCA_TOTAL_FIXED_POINTS,
+        "branch_counts": LCA_FIXED_COUNTS, "fixed_matrix_shape": list(fixed_array.shape),
     })
     package_files = [
         "population_surface_statistics.json", "population_ellipsoid_parameters.csv", "landmark_stats.json",
@@ -810,7 +963,11 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
         "branch_assignment_gate.json", "validation_scaffold_case_metrics.csv",
     ]
     package_manifest = freeze_generator_package(output, package_files, {
-        "schema_version": 2, "source_population_case_count": len(case_ids),
+        "schema_version": 3, "model_scope": "LCA_only",
+        "shape_vector_dimensions": 3 * LCA_TOTAL_FIXED_POINTS,
+        "branch_order": list(LCA_BRANCH_ORDER),
+        "branch_counts": LCA_FIXED_COUNTS,
+        "source_population_case_count": len(case_ids),
         "statistics_eligible_case_count": len(eligible_cases), "pca_case_count": len(complete_case_ids),
         "resolved_assignment_count": sum(
             bool(row["resolved_for_statistics"]) for row in assignment_gate_rows
@@ -822,9 +979,9 @@ def run_pipeline(*, smoke_test: bool, output: Path, clean: bool) -> dict[str, An
     integrity = {"unchanged": protected_before == protected_after, "before": protected_before, "after": protected_after}
     write_json(output / "protected_source_integrity.json", integrity)
     if not integrity["unchanged"]:
-        raise RuntimeError("protected PPT or raw-case input hashes changed during Person 1 pipeline")
+        raise RuntimeError("protected PPT or raw-case input hashes changed during statistics build")
     manifest = {
-        "implementation": "Person 1 complete real-data to generator-ready statistical handoff",
+        "implementation": "Complete real-LCA-data to frozen generator-statistics build",
         "created_utc": datetime.now(timezone.utc).isoformat(), "smoke_test": smoke_test, "status": "PASS",
         "input_case_count": len(case_ids),
         "frame_pass_count": sum(bool(row["overall_pass"]) for row in frame_validation_rows),

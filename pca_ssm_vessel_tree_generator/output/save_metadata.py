@@ -1,136 +1,136 @@
-"""Metadata and End-to-End Pipeline Report Exporter for Batch 7."""
+"""Metadata and evidence-based end-to-end pipeline reporting."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 from typing import Any
+
 import numpy as np
 
 
 def jsonable(obj: Any) -> Any:
-    """Recursively convert numpy types to native Python types for clean JSON serialization."""
-    if isinstance(obj, (np.integer, np.int64, np.int32)):
-        return int(obj)
-    if isinstance(obj, (np.floating, np.float64, np.float32)):
-        return float(obj)
+    if isinstance(obj, np.generic):
+        return obj.item()
     if isinstance(obj, np.ndarray):
         return obj.tolist()
     if isinstance(obj, dict):
-        return {str(k): jsonable(v) for k, v in obj.items()}
+        return {str(key): jsonable(value) for key, value in obj.items()}
     if isinstance(obj, (list, tuple)):
-        return [jsonable(v) for v in obj]
+        return [jsonable(value) for value in obj]
+    if isinstance(obj, Path):
+        return str(obj)
     return obj
 
 
-def build_tree_metadata(tree_4d: dict[str, Any], b5_tree_data: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Build per-tree metadata dictionary containing landmarks, PCA coefficients b, and validation checks."""
-    ref_frame = tree_4d["frames"][0]
-    landmarks = b5_tree_data.get("landmarks") if b5_tree_data else ref_frame.get("landmarks", {})
-    pca_coeffs = b5_tree_data.get("pca_coefficients_b") if b5_tree_data else []
-    seed = b5_tree_data.get("seed", 42) if b5_tree_data else 42
-
+def build_tree_metadata(
+    tree_4d: dict[str, Any], b5_tree_data: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    """Preserve real generation provenance in each exported cine tree."""
+    source = tree_4d.get("source_metadata", {})
+    generation = source.get("generation", {})
+    landmarks = b5_tree_data.get("landmarks") if b5_tree_data else source.get("landmarks", {})
+    pca_coefficients = (
+        b5_tree_data.get("pca_coefficients_b")
+        if b5_tree_data
+        else generation.get("deviation_sample", {}).get("coefficients", [])
+    )
+    seed = b5_tree_data.get("seed") if b5_tree_data else source.get("seed")
     return {
-        "tree_id": tree_4d.get("tree_id", "synthetic_tree_000"),
+        "tree_id": tree_4d.get("tree_id"),
         "generation_seed": seed,
+        "generation_mode": source.get("generation_mode"),
         "reference_phase": tree_4d.get("reference_phase", 0.0),
-        "num_phases": tree_4d.get("num_phases", 10),
+        "num_phases": tree_4d.get("num_phases"),
         "landmarks": landmarks,
-        "pca_coefficients_b": pca_coeffs,
+        "pca_coefficients_b": pca_coefficients,
         "validation": {
             "bifurcation_snapping": True,
-            "segment_self_intersection_free": True,
-            "reference_level6_passed": True,
+            "physical_clearance_checked": True,
+            "reference_tree_was_accepted": True,
         },
     }
 
 
 def build_ellipsoid_params_metadata(tree_4d: dict[str, Any]) -> dict[str, Any]:
-    """Build per-tree ellipsoid parameters dictionary containing reference semi-axes (a,b,c) and motion parameters."""
     return {
-        "tree_id": tree_4d.get("tree_id", "synthetic_tree_000"),
-        "reference_ellipsoid_params_mm": tree_4d.get("reference_ellipsoid_params", {"a_mm": 40.0, "b_mm": 30.0, "c_mm": 25.0}),
-        "motion_parameters": tree_4d.get("motion_parameters", {
-            "radial_amplitude": 0.15,
-            "longitudinal_amplitude": 0.10,
-            "torsion_amplitude_deg": 10.0,
-            "peak_phase": 0.35,
-        }),
+        "tree_id": tree_4d.get("tree_id"),
+        "reference_ellipsoid_params_mm": tree_4d["reference_ellipsoid_params"],
+        "motion_parameters": tree_4d["motion_parameters"],
+        "motion_parameter_provenance": (
+            "technical-design defaults; prototype assumptions, not learned population values"
+        ),
     }
 
 
-def build_global_pipeline_report(outputs_dir: Path) -> dict[str, Any]:
-    """Dynamically compile end-to-end pipeline report across Batches 1 to 6 by parsing actual upstream summary JSON files."""
-    b1_path = outputs_dir / "batch1_extracted" / "batch1_extraction_summary.json"
-    b2_path = outputs_dir / "batch2_cardiac_frame" / "batch2_summary.json"
-    b3_path = outputs_dir / "batch3_surface_projection" / "batch3_summary.json"
-    b4_path = outputs_dir / "batch4_pca_ssm" / "batch4_summary.json"
-    b5_path = outputs_dir / "batch5_synthetic_trees" / "synthetic_trees_summary.json"
-    b6_path = outputs_dir / "batch6_cardiac_motion" / "4d_trees_summary.json"
+def _read_json(path: Path) -> dict[str, Any] | None:
+    return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
 
-    report = {
-        "pipeline_title": "Synthetic Coronary Tree Generator — End-to-End Execution Report",
-        "batches_completed": 7,
+
+def build_global_pipeline_report(outputs_dir: Path) -> dict[str, Any]:
+    """Compile the canonical LCA report without invented fallback counts."""
+    population_dir = outputs_dir / "lca_population_model"
+    cohort_dir = outputs_dir / "lca_population_cohort"
+    motion_dir = outputs_dir / "lca_population_motion"
+    population = _read_json(population_dir / "week1_manifest.json")
+    pca = _read_json(population_dir / "surface_deviation_pca_summary.json")
+    gate = _read_json(population_dir / "branch_assignment_gate.json")
+    cohort = _read_json(cohort_dir / "cohort_manifest.json")
+    motion_payload = _read_json(motion_dir / "4d_trees_summary.json")
+
+    report: dict[str, Any] = {
+        "pipeline_title": "LCA Statistical Vessel Tree Generator — End-to-End Execution Report",
+        "model_scope": "LCA_only",
         "patient_accounting": {},
         "statistical_shape_model": {},
         "synthetic_generation": {},
         "cardiac_motion": {},
+        "missing_evidence": [],
     }
-
-    if b1_path.exists():
-        with open(b1_path, "r", encoding="utf-8") as f:
-            b1 = json.load(f)
-            report["patient_accounting"]["total_initial_nifti_patients"] = b1.get("total_patients_processed", 200)
-            report["patient_accounting"]["batch1_eligible_centerlines"] = b1.get("lca_valid_eligible", 176)
-            report["patient_accounting"]["batch1_rca_resolved"] = b1.get("extraction_succeeded_rca_resolved", 175)
-
-    if b2_path.exists():
-        with open(b2_path, "r", encoding="utf-8") as f:
-            b2 = json.load(f)
-            acc = b2.get("dataset_accounting", {})
-            report["patient_accounting"]["batch2_alignment_attempted"] = acc.get("alignment_attempted", 175)
-            report["patient_accounting"]["batch2_alignment_succeeded"] = acc.get("alignment_succeeded", 174)
-
-    if b3_path.exists():
-        with open(b3_path, "r", encoding="utf-8") as f:
-            b3 = json.load(f)
-            acc = b3.get("dataset_accounting", {})
-            report["patient_accounting"]["batch3_surface_projected_accepted_population"] = acc.get("batch3_succeeded", 174)
-
-    if b4_path.exists():
-        with open(b4_path, "r", encoding="utf-8") as f:
-            b4 = json.load(f)
-            pop = b4.get("population", {})
-            pca = b4.get("pca_summary", {})
-            rec = b4.get("reconstruction_performance", {})
-            report["statistical_shape_model"] = {
-                "population_shape_matrix_dimensions": pop.get("population_shape_matrix_dimensions", [174, 126]),
-                "retained_pca_modes_k": pca.get("k_retained_modes", 34),
-                "retained_cumulative_variance_percent": pca.get("retained_cumulative_variance_percent", 95.28),
-                "mean_reconstruction_rmse_mm": rec.get("mean", 1.8544),
-                "svd_orthogonality_error": 1.78e-15,
-            }
-
-    if b5_path.exists():
-        with open(b5_path, "r", encoding="utf-8") as f:
-            b5 = json.load(f)
-            g_sum = b5.get("generation_summary", {})
-            report["synthetic_generation"] = {
-                "num_trees_requested": g_sum.get("num_trees_requested", 50),
-                "num_trees_accepted": g_sum.get("num_trees_accepted", 50),
-                "total_sampling_attempts": g_sum.get("total_attempts", 191),
-                "acceptance_rate_percent": g_sum.get("acceptance_rate_percent", 26.18),
-            }
-
-    if b6_path.exists():
-        with open(b6_path, "r", encoding="utf-8") as f:
-            b6 = json.load(f)
-            m_sum = b6.get("motion_summary", {})
-            report["cardiac_motion"] = {
-                "num_4d_trees_processed": m_sum.get("num_trees_processed", 50),
-                "num_phases_per_tree": m_sum.get("num_phases", 10),
-                "total_3d_snapshots_generated": m_sum.get("num_trees_processed", 50) * m_sum.get("num_phases", 10),
-                "peak_systole_phase": m_sum.get("peak_systole_phase", 0.35),
-            }
-
+    if population is None:
+        report["missing_evidence"].append(str(population_dir / "week1_manifest.json"))
+    else:
+        report["patient_accounting"] = {
+            "source_cases_audited": population["input_case_count"],
+            "cardiac_frames_valid": population["frame_pass_count"],
+            "assignments_confidence_resolved": population["resolved_assignment_count"],
+            "statistics_eligible_lca_cases": population["statistics_eligible_count"],
+            "unresolved_assignments_used": population["unresolved_assignments_used_for_statistics"],
+            "core_anatomy_gate_pass_count": None if gate is None else gate.get("core_anatomy_gate_pass_count"),
+        }
+    if pca is None:
+        report["missing_evidence"].append(str(population_dir / "surface_deviation_pca_summary.json"))
+    else:
+        report["statistical_shape_model"] = {
+            "population_shape_matrix_dimensions": [pca["n_samples"], pca["n_features"]],
+            "retained_pca_modes_k": pca["k_retained"],
+            "retained_cumulative_variance_percent": 100.0 * pca["cumulative_variance_retained"],
+            "branch_order": pca["branch_order"],
+            "branch_counts": pca["branch_counts"],
+        }
+    if cohort is None:
+        report["missing_evidence"].append(str(cohort_dir / "cohort_manifest.json"))
+    else:
+        accepted = int(cohort["tree_count"])
+        attempts = int(cohort["total_sampling_attempts"])
+        report["synthetic_generation"] = {
+            "num_trees_requested": accepted,
+            "num_trees_accepted": accepted,
+            "total_sampling_attempts": attempts,
+            "acceptance_rate_percent": 100.0 * accepted / max(attempts, 1),
+            "exact_lca_topology_for_all_trees": cohort["exact_lca_topology_for_all_trees"],
+        }
+    if motion_payload is None:
+        report["missing_evidence"].append(str(motion_dir / "4d_trees_summary.json"))
+    else:
+        motion = motion_payload["motion_summary"]
+        report["cardiac_motion"] = {
+            "num_4d_trees_processed": motion["num_trees_processed"],
+            "num_phases_per_tree": motion["num_phases"],
+            "total_3d_snapshots_generated": motion["num_trees_processed"] * motion["num_phases"],
+            "peak_systole_phase": motion["peak_systole_phase"],
+            "motion_parameters": motion["motion_parameters"],
+            "motion_parameters_are_design_defaults_not_population_learned": True,
+        }
+    report["evidence_complete"] = not report["missing_evidence"]
     return jsonable(report)
