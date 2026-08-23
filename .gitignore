@@ -74,3 +74,7 @@ pca_ssm_vessel_tree_generator/prototype_1_label_heart_scaffold.py
 # Local DOCX render/contact-sheet QA intermediates. The verified DOCX and
 # evidence outputs remain versioned under submission_release/.
 submission_release/final_visual_anatomical_audit/report_render*/
+
+# Local research archive. Comparison generators moved here are intentionally
+# excluded from the production package and normal test/import paths.
+research_experiments/
