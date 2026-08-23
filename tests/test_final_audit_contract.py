@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pyvista as pv
 from scipy.interpolate import PchipInterpolator
 
 
@@ -74,37 +75,37 @@ def test_frozen_pca_is_independently_reproducible() -> None:
         assert min(abs(float(np.dot(vt[index], stored["components"][index]))) for index in range(13)) > 0.999999999
 
 
-def test_original_ppt_population_counts_and_integrity() -> None:
-    ppt = ROOT / "outputs/lca_ssm/ppt_priority_completion"
-    manifest = json.loads((ppt / "run_manifest.json").read_text(encoding="utf-8"))
-    assert manifest["nifti_discovered_count"] == 200
-    assert manifest["statistics_eligible_count"] == 191
-    assert manifest["two_plane_fit_count"] == 191
-    assert manifest["two_ellipse_fit_count"] == 191
-    assert manifest["pointwise_residual_record_count"] == 77337
-    assert manifest["source_geometry_max_coordinate_change_mm"] == 0.0
-    assert manifest["source_geometry_max_segment_length_change_mm"] == 0.0
-
-
-def test_mentor_visualization_pack_is_complete_and_readable() -> None:
-    pack = ROOT / "submission_release/mentor_visualization_pack"
-    manifest = json.loads((pack / "VISUALIZATION_PACK_MANIFEST.json").read_text(encoding="utf-8"))
-    assert manifest["status"] == "PASS"
-    assert manifest["static_population_tree_count"] == 52
-    assert manifest["cine_case_count"] == 4
-    assert manifest["stored_frames_per_cine_case"] == 10
-    assert manifest["extension_counts"][".pvd"] == 4
-    assert manifest["extension_counts"][".vtm"] == 93
-    assert manifest["extension_counts"][".vtp"] == 380
-    assert manifest["xml_reference_verification"]["missing_reference_count"] == 0
-    assert manifest["pyvista_readback_verification"]["status"] == "PASS"
-
-
-def test_mentor_visualization_pack_manifest_hashes_match_files() -> None:
-    pack = ROOT / "submission_release/mentor_visualization_pack"
-    manifest = json.loads((pack / "VISUALIZATION_PACK_MANIFEST.json").read_text(encoding="utf-8"))
+def test_frozen_statistics_manifest_hashes_match_files() -> None:
+    statistics = ROOT / "outputs/lca_ssm/lca_population_model/generator_statistics"
+    manifest = json.loads(
+        (statistics / "generator_statistics_manifest.json").read_text(encoding="utf-8")
+    )
+    assert manifest["model_scope"] == "LCA_only"
+    assert manifest["pca_case_count"] == 52
+    assert manifest["shape_vector_dimensions"] == 81
+    assert manifest["source_geometry_modified"] is False
     for relative, expected in manifest["files"].items():
-        path = pack / relative
+        path = statistics / relative
         assert path.is_file(), relative
-        assert path.stat().st_size == expected["size_bytes"]
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == expected["sha256"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
+
+
+def test_final_52_tree_presentation_is_complete_and_readable() -> None:
+    pack = ROOT / "submission_release/final_presentation_52"
+    manifest = json.loads((pack / "ALL_52_PRESENTATION_MANIFEST.json").read_text(encoding="utf-8"))
+    assert manifest["status"] == "PASS"
+    assert manifest["tree_count_verified"] == manifest["tree_count_expected"] == 52
+    assert manifest["entry_file_count_per_tree"] == 7
+    assert manifest["total_cine_frames"] == 520
+    assert manifest["source_integrity"]["canonical_cohort_unchanged"] is True
+    assert manifest["source_integrity"]["production_export_unchanged"] is True
+    assert manifest["maximum_errors"]["mesh_source_xyz_change_mm"] == 0.0
+    tree = pack / "tree_0015"
+    for relative in manifest["entry_file_names"]:
+        assert (tree / relative).is_file(), relative
+    mesh = pv.read(tree / "diseased_mesh_with_centerlines.vtm")
+    assert list(mesh.keys()) == [
+        "LMCA_MESH", "LAD_MESH", "LCX_MESH",
+        "LMCA_CENTERLINE", "LAD_CENTERLINE", "LCX_CENTERLINE",
+    ]
+    assert max(mesh["LAD_MESH"].point_data["disease_reduction_fraction"]) > 0.60

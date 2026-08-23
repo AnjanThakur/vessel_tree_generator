@@ -28,7 +28,6 @@ coronary4d = "vessel_tree_generator.cli:main"
 where = ["."]
 include = [
   "vessel_tree_generator*",
-  "lca_vessel_tree_generator*",
   "pca_ssm_vessel_tree_generator*",
 ]
 namespaces = true

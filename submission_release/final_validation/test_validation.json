@@ -1,10 +1,10 @@
 {
-  "created_utc": "2026-08-23T14:46:30.882287+00:00",
+  "created_utc": "2026-08-23T17:37:13.776343+00:00",
   "status": "PASS",
-  "pytest_passed": 73,
+  "pytest_passed": 72,
   "person2_unittest_passed": 21,
   "design_alignment_unittest_passed": 9,
-  "total_tests_passed": 103,
+  "total_tests_passed": 102,
   "tests_failed": 0,
   "compileall_pass": true,
   "pip_check_pass": true,
@@ -17,7 +17,7 @@
         "-q"
       ],
       "exit_code": 0,
-      "output": "........................................................................ [ 98%]\n.                                                                        [100%]\n73 passed in 15.80s"
+      "output": "........................................................................ [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\_pytest\\cacheprovider.py:469\n  C:\\Internship\\vessel_tree_generator\\.venv\\Lib\\site-packages\\_pytest\\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\\Internship\\vessel_tree_generator\\.pytest_cache\\v\\cache\\nodeids: [WinError 5] Access is denied: 'C:\\\\Internship\\\\vessel_tree_generator\\\\.pytest_cache\\\\v\\\\cache'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n72 passed, 1 warning in 18.04s"
     },
     "person2_unittest": {
       "command": [
@@ -28,7 +28,7 @@
         "-q"
       ],
       "exit_code": 0,
-      "output": "----------------------------------------------------------------------\nRan 21 tests in 0.772s\n\nOK"
+      "output": "----------------------------------------------------------------------\nRan 21 tests in 0.801s\n\nOK"
     },
     "design_alignment_unittest": {
       "command": [
@@ -39,7 +39,7 @@
         "-q"
       ],
       "exit_code": 0,
-      "output": "----------------------------------------------------------------------\nRan 9 tests in 0.164s\n\nOK"
+      "output": "----------------------------------------------------------------------\nRan 9 tests in 0.177s\n\nOK"
     },
     "compileall": {
       "command": [
@@ -49,8 +49,6 @@
         "-q",
         "vessel_tree_generator",
         "pca_ssm_vessel_tree_generator",
-        "lca_vessel_tree_generator",
-        "rca_vessel_tree_generator",
         "tests",
         "tools"
       ],

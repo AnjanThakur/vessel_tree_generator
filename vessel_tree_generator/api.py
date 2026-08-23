@@ -12,7 +12,7 @@ from typing import Any, Sequence
 
 import numpy as np
 
-from lca_vessel_tree_generator.LCA_topology_generator.radius_model import (
+from .radius import (
     build_lca_radius_tree,
     validate_lca_radius_tree,
 )

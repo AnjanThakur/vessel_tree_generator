@@ -6,7 +6,7 @@ from typing import Any, Iterable
 
 import numpy as np
 
-from lca_vessel_tree_generator.LCA_topology_generator.disease_model import (
+from ._disease_model import (
     DEFAULT_DISEASE_SETTINGS,
     apply_disease_to_lca_tree,
     validate_disease_config,

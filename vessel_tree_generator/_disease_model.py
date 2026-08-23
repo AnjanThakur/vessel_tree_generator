@@ -2,7 +2,7 @@ import copy
 
 import numpy as np
 
-from .radius_model import arc_length_fraction
+from .radius import arc_length_fraction
 
 
 BRANCH_NAMES = ("LMCA", "LAD", "LCX")

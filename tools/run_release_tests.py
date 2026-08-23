@@ -32,7 +32,7 @@ def execute(arguments: list[str], *, pythonpath: str | None = None) -> dict[str,
 
 
 def run() -> dict[str, object]:
-    python = str(ROOT / ".venv/Scripts/python.exe")
+    python = sys.executable
     pytest = execute([python, "-m", "pytest", "-q"], pythonpath="pca_ssm_vessel_tree_generator")
     person2 = execute(
         [python, "-m", "unittest", "pca_ssm_vessel_tree_generator.tests.test_person2_generation", "-q"],
@@ -44,8 +44,7 @@ def run() -> dict[str, object]:
     )
     compileall = execute([
         python, "-m", "compileall", "-q", "vessel_tree_generator",
-        "pca_ssm_vessel_tree_generator", "lca_vessel_tree_generator",
-        "rca_vessel_tree_generator", "tests", "tools",
+        "pca_ssm_vessel_tree_generator", "tests", "tools",
     ])
     pip_check = execute([python, "-m", "pip", "check"])
     pytest_match = re.search(r"(\d+) passed", str(pytest["output"]))

@@ -1,14 +1,15 @@
 # Final codebase cleanup audit
 
-## Classification
+## Final-deliverable classification
 
 | Class | Files / areas | Decision |
 |---|---|---|
 | FINAL_PRODUCTION_REQUIRED | `vessel_tree_generator/`, production generation/surface/PCA/motion modules, frozen statistics, accepted cohort | Retained |
-| SHARED_UTILITY_REQUIRED | ellipse measurement, cardiac-frame, surface projection, VTK export, validation utilities | Retained because production/evidence imports use them |
-| DOCUMENTATION_ONLY / MEASUREMENT EVIDENCE | tracked 191-case two-plane/two-ellipse tables, residuals, figures and integrity records | Retained as source/statistical evidence, not a competing generator |
-| EXPERIMENT_ONLY | `ppt_exact_generator.py`, refinement module, two runners and two test files | Removed from production/import/test paths and placed in an ignored local research archive |
-| GENERATED_EXPERIMENT_ARTIFACT | `submission_release/ppt_exact_generator*` | Removed from canonical release and placed in the same ignored local research archive |
+| SHARED_UTILITY_REQUIRED | cardiac-frame, surface projection, B-spline, VTK export and validation utilities | Retained because production imports use them |
+| FROZEN_RUNTIME_DATA | compact 52-case generator statistics | Retained and SHA-256 verified |
+| PRESENTATION_REQUIRED | canonical presentation, all-52 mesh/4D package, presentation center | Retained |
+| HISTORICAL_BULK | intermediate Stage-1, person-1/person-2 and PPT-priority output trees | Excluded from final branch; retained on `latestt_branchh` at `7b21ce4` |
+| EXCLUDED_SCOPE | disconnected RCA and obsolete LCA prototype shells | Excluded after required radius/disease/mesh modules were consolidated into the public package |
 
 ## Production result
 
@@ -17,6 +18,7 @@
 - Protected raw archives: 191/191 hash matches.
 - Source-coordinate change: 0.0 mm.
 - Source segment-length change: 0.0 mm.
-- Regression families: 73 main production, 21 focused generation, 9 design-alignment; 103 total, 0 failed.
+- Regression families: 72 main production, 21 focused generation, 9 design-alignment; 102 total, 0 failed.
 - Final code path: `vessel_tree_generator.CoronaryTreeGenerator` / `python -m vessel_tree_generator`.
-- `FINAL_PROJECT_REPORT.docx` and presentation slides were intentionally left unchanged at the user's request.
+- Final presentation payload: 52/52 trees, seven entry files per tree and 520 closed-cycle frames.
+- Historical paths and recovery instructions are listed in `docs/ARCHIVE.md`.

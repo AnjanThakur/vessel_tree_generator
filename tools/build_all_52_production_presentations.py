@@ -19,10 +19,8 @@ from typing import Any
 import numpy as np
 import pyvista as pv
 
-from lca_vessel_tree_generator.LCA_topology_generator.tube_surface import (
-    centerline_radius_to_surface,
-)
 from vessel_tree_generator.disease import apply_disease_config, stenosis_config
+from vessel_tree_generator.mesh import centerline_radius_to_surface
 from vessel_tree_generator.pulsatility import phase_radius
 
 

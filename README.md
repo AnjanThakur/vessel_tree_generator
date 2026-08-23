@@ -13,6 +13,21 @@ The primary submission interface is:
   --output-dir submission_release\demo_cases --clean
 ```
 
+## Installation and verification
+
+Python 3.10 or newer is required.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+Linux/macOS users should replace `.\.venv\Scripts\python.exe` with
+`.venv/bin/python`. The generator works from a clean clone because its compact
+frozen statistics package is versioned with the code.
+
 For one custom focal case:
 
 ```powershell
@@ -140,16 +155,22 @@ noise.
 
 ## Repository layout
 
+- `vessel_tree_generator/`: supported API/CLI, radius, disease, mesh,
+  pulsatility, validation, audit, visualization and portable export.
 - `pca_ssm_vessel_tree_generator/`: active extraction, alignment,
   surface-relative model, PCA, generation, motion, and export code.
-- `vessel_tree_generator/`: public integrated 4D API, disease/pulsatility,
-  validation/audit, CLI, visualization, and portable export.
 - `examples/`: ready-to-run disease configurations.
 - `tests/`: deterministic staged tests and pipeline integration tests.
-- `lca_vessel_tree_generator/`: earlier LCA topology utilities retained for
-  reference and compatibility.
-- `rca_vessel_tree_generator/`: separate RCA/primitive-vessel utilities; not
-  part of the canonical LCA statistical model.
+- `outputs/lca_ssm/lca_population_model/generator_statistics/`: compact,
+  hash-locked model data required by the runtime generator.
+- `submission_release/final_presentation_52/`: verified static, mesh and 4D
+  ParaView entries for all 52 accepted production trees.
+- `docs/ARCHITECTURE.md`: production data flow and integrity boundaries.
+- `docs/ARCHIVE.md`: exact historical paths retained on the pre-cleanup branch.
 
 See `pca_ssm_vessel_tree_generator/generation/README.md` for the generation
 contract and artifact details.
+
+Historical trials and excluded RCA utilities are preserved on
+`latestt_branchh` at commit `7b21ce4`; they are not required to run the final
+LCA system.
