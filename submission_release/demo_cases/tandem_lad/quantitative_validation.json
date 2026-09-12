@@ -1,0 +1,336 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "tandem_lad",
+  "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+  "overall_status": "PASS",
+  "engineering_validation_pass": true,
+  "major_vessel_LCA_anatomical_plausibility_pass": true,
+  "clinical_validation": false,
+  "anatomical_completeness": {
+    "complete_coronary_tree": false,
+    "included": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "not_included": [
+      "RCA",
+      "diagonal branches",
+      "obtuse marginal branches",
+      "septal branches",
+      "PDA/PL branches"
+    ],
+    "statement": "This is a major-vessel LCA scaffold, not a complete human coronary tree."
+  },
+  "warnings": [],
+  "geometry": {
+    "LMCA": {
+      "point_count": 50,
+      "length_mm": 6.672470712577375,
+      "chord_mm": 6.4530945562425055,
+      "distance_metric_arc_over_chord": 1.033995496954659,
+      "total_turning_angle_deg": 100.89099392972761,
+      "maximum_local_turn_deg": 5.424194487278736,
+      "proximal_diameter_mm": 4.0,
+      "midpoint_diameter_mm": 3.567031764195507,
+      "distal_diameter_mm": 3.1548342668761284,
+      "inferior_displacement_mm": 3.960000223924936,
+      "terminal_xy_displacement_mm": 5.0951768937222495,
+      "plane": {
+        "normal": [
+          0.9779853998701021,
+          0.09504249451403002,
+          0.1857726618140225
+        ],
+        "rms_residual_mm": 0.08651826699441695,
+        "maximum_residual_mm": 0.15803395243045476
+      }
+    },
+    "LAD": {
+      "point_count": 50,
+      "length_mm": 121.0644167265167,
+      "chord_mm": 95.0026496116163,
+      "distance_metric_arc_over_chord": 1.2743267395324702,
+      "total_turning_angle_deg": 295.7057587285735,
+      "maximum_local_turn_deg": 19.465711803679767,
+      "proximal_diameter_mm": 2.6,
+      "midpoint_diameter_mm": 2.0940271219429505,
+      "distal_diameter_mm": 1.7011813501731037,
+      "inferior_displacement_mm": 57.70076658255373,
+      "terminal_xy_displacement_mm": 75.47267696996833,
+      "plane": {
+        "normal": [
+          0.1945779658039199,
+          0.9390796665465688,
+          -0.2833174811097853
+        ],
+        "rms_residual_mm": 2.3272340130329074,
+        "maximum_residual_mm": 5.074896623434744
+      }
+    },
+    "LCX": {
+      "point_count": 50,
+      "length_mm": 81.63866754892676,
+      "chord_mm": 66.40202712331306,
+      "distance_metric_arc_over_chord": 1.2294604710985437,
+      "total_turning_angle_deg": 284.18124016669714,
+      "maximum_local_turn_deg": 21.005068291699057,
+      "proximal_diameter_mm": 2.4,
+      "midpoint_diameter_mm": 2.074168671748978,
+      "distal_diameter_mm": 1.8030641248651436,
+      "inferior_displacement_mm": 14.105587019844643,
+      "terminal_xy_displacement_mm": 64.88652880922815,
+      "plane": {
+        "normal": [
+          0.411503427729402,
+          0.37951160988726784,
+          -0.8286349418940331
+        ],
+        "rms_residual_mm": 2.3483313106434966,
+        "maximum_residual_mm": 5.200230758262417
+      }
+    },
+    "angles_deg": {
+      "LMCA_to_LAD": 55.01577729796199,
+      "LMCA_to_LCX": 73.2499121613302,
+      "LAD_to_LCX": 97.86439071734516
+    },
+    "LAD_LCX_plane_acute_angle_deg": 47.83809437557151,
+    "minimum_unintended_segment_distance": {
+      "distance_mm": 0.27197294302263453,
+      "segments": [
+        "LMCA",
+        10,
+        "LMCA",
+        13
+      ]
+    }
+  },
+  "anatomical_roles": {
+    "checks": {
+      "LAD_more_inferior_than_LCX": true,
+      "LAD_is_longer_than_LCX": true,
+      "LAD_initial_course_is_inferior": true,
+      "LCX_initial_course_is_horizontal": true,
+      "LCX_more_circumferential_by_terminal_fraction": true,
+      "source_assignment_gate_accepted": true
+    },
+    "source_metrics": {
+      "LAD_length_mm": 121.19672098233872,
+      "LCX_length_mm": 81.70892231890409,
+      "LAD_minus_LCX_length_mm": 39.48779866343463,
+      "LAD_inferior_displacement_mm": 57.70076658255373,
+      "LCX_inferior_displacement_mm": 14.105587019844643,
+      "LAD_minus_LCX_inferior_displacement_mm": 43.59517956270909,
+      "LCX_to_LAD_inferior_displacement_ratio": 0.24446099861885673,
+      "LAD_inferior_displacement_to_length_ratio": 0.47609181267339834,
+      "LCX_inferior_span_to_length_ratio": 0.2083299808500657,
+      "LAD_descending_segment_fraction": 0.810126582278481,
+      "LAD_horizontal_path_fraction": 0.6719136740741465,
+      "LCX_horizontal_path_fraction": 0.8709197124160379,
+      "LAD_terminal_lateral_fraction": 0.622728703864575,
+      "LCX_terminal_lateral_fraction": 0.7941180346985934,
+      "LAD_terminal_lateral_displacement_mm": 75.47267696996833,
+      "LCX_terminal_lateral_displacement_mm": 64.88652880922815,
+      "LCX_to_LAD_lateral_displacement_ratio": 0.8597353560818763,
+      "LAD_initial_inferior_direction_fraction": 0.9763316444437514,
+      "LCX_initial_horizontal_direction_fraction": 0.9354330816827378
+    }
+  },
+  "disease": {
+    "LMCA": {
+      "maximum_radius_and_diameter_reduction_fraction": 0.0,
+      "maximum_equivalent_circular_area_reduction_fraction": 0.0,
+      "minimum_lumen_diameter_mm": 3.1548342668761284,
+      "affected_export_point_count": 0,
+      "affected_component_count": 0,
+      "affected_normalized_arc_range": null,
+      "centerline_change_caused_by_disease_mm": 0.0
+    },
+    "LAD": {
+      "maximum_radius_and_diameter_reduction_fraction": 0.5161160935125131,
+      "maximum_equivalent_circular_area_reduction_fraction": 0.7658563650424091,
+      "minimum_lumen_diameter_mm": 0.9735735690905927,
+      "affected_export_point_count": 8,
+      "affected_component_count": 2,
+      "affected_normalized_arc_range": [
+        0.24510316722374564,
+        0.6941850768319217
+      ],
+      "centerline_change_caused_by_disease_mm": 0.0
+    },
+    "LCX": {
+      "maximum_radius_and_diameter_reduction_fraction": 0.0,
+      "maximum_equivalent_circular_area_reduction_fraction": 0.0,
+      "minimum_lumen_diameter_mm": 1.8030641248651436,
+      "affected_export_point_count": 0,
+      "affected_component_count": 0,
+      "affected_normalized_arc_range": null,
+      "centerline_change_caused_by_disease_mm": 0.0
+    }
+  },
+  "motion": {
+    "frame_count": 10,
+    "peak_sample_index": 5,
+    "peak_sample_phase": 0.5555555555555556,
+    "maximum_global_displacement_mm": 7.810356360512908,
+    "mean_global_displacement_at_peak_mm": 6.061646579756192,
+    "cycle_closing_error_mm": 0.0,
+    "branches": {
+      "LMCA": {
+        "maximum_displacement_mm": 7.588242504392251,
+        "mean_displacement_at_peak_mm": 6.5487430582004516,
+        "terminal_displacement_at_peak_mm": 6.6954470657462
+      },
+      "LAD": {
+        "maximum_displacement_mm": 7.588242504392251,
+        "mean_displacement_at_peak_mm": 5.286735636028862,
+        "terminal_displacement_at_peak_mm": 4.624480245370435
+      },
+      "LCX": {
+        "maximum_displacement_mm": 7.810356360512908,
+        "mean_displacement_at_peak_mm": 6.3494610450392654,
+        "terminal_displacement_at_peak_mm": 5.180156336000543
+      }
+    }
+  },
+  "pulsatility": {
+    "peak_sample_index": 5,
+    "peak_sample_phase": 0.5555555555555556,
+    "global_maximum_absolute_radius_change_fraction": 0.029797150732258526,
+    "global_mean_absolute_radius_change_at_peak_fraction": 0.029294809215332288,
+    "peak_change_sign": "expansion",
+    "branches": {
+      "LMCA": {
+        "maximum_absolute_change_fraction": 0.029797150732258526,
+        "mean_absolute_change_fraction": 0.029797150732258318,
+        "maximum_nonlesion_change_fraction": 0.029797150732258526,
+        "change_at_maximum_lesion_fraction": null,
+        "lesion_to_nonlesion_amplitude_ratio": null
+      },
+      "LAD": {
+        "maximum_absolute_change_fraction": 0.029797150732258526,
+        "mean_absolute_change_fraction": 0.028290126181480274,
+        "maximum_nonlesion_change_fraction": 0.029797150732258526,
+        "change_at_maximum_lesion_fraction": 0.01165960672094335,
+        "lesion_to_nonlesion_amplitude_ratio": 0.39129938381392315
+      },
+      "LCX": {
+        "maximum_absolute_change_fraction": 0.029797150732258526,
+        "mean_absolute_change_fraction": 0.029797150732258294,
+        "maximum_nonlesion_change_fraction": 0.029797150732258526,
+        "change_at_maximum_lesion_fraction": null,
+        "lesion_to_nonlesion_amplitude_ratio": null
+      }
+    }
+  },
+  "topology": {
+    "maximum_bifurcation_error_all_phases_mm": 0.0,
+    "exact_shared_bifurcation": true
+  },
+  "external_reference_context": {
+    "checks": {
+      "LMCA_length_in_6_to_13_5_mm_cadaver_range": true,
+      "LAD_LCX_angle_in_MDCT_mean_plus_minus_2SD": true,
+      "proximal_LMCA_diameter_in_Paul_mean_plus_minus_2SD": true,
+      "proximal_LAD_diameter_in_Paul_mean_plus_minus_2SD": true,
+      "proximal_LCX_diameter_in_Paul_mean_plus_minus_2SD": true,
+      "maximum_motion_within_3_to_8_mm_average_context": true,
+      "healthy_radius_pulsatility_consistent_with_rough_3_percent_diameter_change": true
+    },
+    "interpretation": "Reference ranges are descriptive cross-study sanity checks, not clinical acceptance limits.",
+    "primary_references": [
+      {
+        "topic": "human LCA length and diameter morphometry",
+        "citation": "Manpoong et al., Detailed Morphometric Analysis on Left Coronary Artery in the Population of North-East India, 2023",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37829965/",
+        "observations": {
+          "sample_size": 100,
+          "LMCA_length_mm": "9.13 +/- 3.23",
+          "LMCA_diameter_mm": "4.38 +/- 0.58",
+          "LAD_length_mm": "109.46 +/- 14.49",
+          "LCX_length_mm": "66.27 +/- 11.56"
+        }
+      },
+      {
+        "topic": "left-main bifurcation anatomy",
+        "citation": "Lujinovic et al., Morphometric analysis of clinically significant parameters of the main trunk of the left coronary artery, 2023",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36944018/",
+        "observations": {
+          "sample_size": 29,
+          "LMCA_length_mm": "median 9.0; range 6.0-13.5",
+          "LAD_LCX_angle_deg": "median 89.0; interquartile range 74.5-93.0",
+          "LMCA_LAD_angle_deg": "30.83 +/- 9.23"
+        }
+      },
+      {
+        "topic": "3D coronary bifurcation angles",
+        "citation": "Pflederer et al., Measurement of coronary artery bifurcation angles by multidetector computed tomography, 2006",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17035869/",
+        "observations": {
+          "sample_size": 100,
+          "LAD_LCX_angle_deg": "80 +/- 27"
+        }
+      },
+      {
+        "topic": "normal coronary diameters",
+        "citation": "Paul et al., A milestone in prediction of the coronary artery dimensions, 2019",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31779861/",
+        "observations": {
+          "sample_size": 925,
+          "LMCA_diameter_mm": "4.18 +/- 0.65",
+          "LAD_diameter_mm": "3.22 +/- 0.63",
+          "LCX_diameter_mm": "3.07 +/- 0.65"
+        }
+      },
+      {
+        "topic": "coronary displacement over the cardiac cycle",
+        "citation": "Tan et al., Estimation of the displacement of cardiac substructures and the motion of the coronary arteries using ECG gating, 2013",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24098082/",
+        "observations": {
+          "coronary_AP_displacement_mm": "2.8-5.9 average",
+          "coronary_LR_displacement_mm": "3.5-6.6 average",
+          "coronary_SI_displacement_mm": "3.8-5.3 average",
+          "summary": "most average 3D displacements were 3-8 mm"
+        }
+      },
+      {
+        "topic": "normal and plaque-segment cyclic lumen-area change",
+        "citation": "Ge et al., Intravascular ultrasound imaging of angiographically normal coronary arteries, 1994",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8043342/",
+        "observations": {
+          "normal_area_change": "LMCA 10.2%, proximal LAD 8.3%, mid LAD 9.8%",
+          "plaque_segment_area_change": "5.8%",
+          "timing_note": "maximum lumen area occurred in early diastole in this cohort"
+        }
+      },
+      {
+        "topic": "coronary distensibility and plaque",
+        "citation": "Nakatani et al., Assessment of coronary artery distensibility by intravascular ultrasound, 1995",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7796499/",
+        "observations": {
+          "mean_systolic_lumen_area_mm2": "12.6 +/- 5.0",
+          "mean_diastolic_lumen_area_mm2": "11.6 +/- 4.6",
+          "interpretation": "atherosclerotic change was associated with impaired distensibility"
+        }
+      },
+      {
+        "topic": "reduced diameter pulsatility in CAD",
+        "citation": "Numao et al., Pulsatile diameter change of coronary artery lumen estimated by IVUS, 1997",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9253689/",
+        "observations": {
+          "control_mean_diameter_change_mm": "0.13 +/- 0.12",
+          "control_end_diastolic_diameter_mm": "4.52 +/- 0.51",
+          "CAD_mean_diameter_change_mm": "0.05 +/- 0.18",
+          "CAD_end_diastolic_diameter_mm": "4.53 +/- 0.69"
+        }
+      }
+    ]
+  },
+  "interpretation_limits": [
+    "The statistical anatomy is population-derived only for LMCA/LAD/LCX.",
+    "The radii, disease profiles, motion amplitudes and compliance factor are mechanistic research settings, not patient-estimated parameters.",
+    "The cyclic radius model is scalar and cannot represent anisodiametric wall motion.",
+    "No flow, pressure, myocardium, vessel wall, side branches or patient outcome is simulated."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "implementation": "Population-derived LCA statistical generator",
+  "status": "PASS",
+  "generation_mode": "frozen_lca_statistics",
+  "tree_directory": "tree_0001",
+  "sampling_attempt_count": 3,
+  "branch_point_counts": {
+    "LMCA": 60,
+    "LAD": 180,
+    "LCX": 160
+  },
+  "vtk_files": {
+    "SYNTHETIC_ELLIPSOID": "vtk/synthetic_ellipsoid.vtp",
+    "SYNTHETIC_LMCA": "vtk/LMCA.vtp",
+    "SYNTHETIC_LAD": "vtk/LAD.vtp",
+    "SYNTHETIC_LCX": "vtk/LCX.vtp",
+    "SYNTHETIC_LANDMARKS": "vtk/landmarks.vtp",
+    "SYNTHETIC_TREE_VTM": "vtk/synthetic_tree.vtm"
+  },
+  "artifact_validation": {
+    "expected_files_present": true,
+    "missing_files": [],
+    "topology_exact_by_array_equality": true,
+    "vtk_readback_completed": true,
+    "source_statistics_consumed": true,
+    "pca_applied": true
+  },
+  "scientific_limitations": [
+    "This is one accepted realization from the frozen LCA statistics package; it is not population-level validation.",
+    "Centered PCA variation is applied at the requested scale over a matched empirical trajectory.",
+    "No independent point-by-point random noise is used.",
+    "Engineering acceptance does not establish clinical validity."
+  ]
+}

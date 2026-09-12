@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Coronary4D Presentation & Verification Center</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="pulse">C4D</span><div><strong>Coronary4D</strong><small>Presentation Center</small></div></div>
+    <nav id="nav">
+      <button data-tab="overview" class="active">01 Project overview</button>
+      <button data-tab="cohort">02 Dataset & cohort</button>
+      <button data-tab="anatomy">03 Anatomical model</button>
+      <button data-tab="ssm">04 Statistical shape model</button>
+      <button data-tab="generation">05 Synthetic generation</button>
+      <button data-tab="disease">06 Disease model</button>
+      <button data-tab="motion">07 4D cardiac motion</button>
+      <button data-tab="pulsatility">08 Pulsatility & compliance</button>
+      <button data-tab="output">09 Output format</button>
+      <button data-tab="vtk">10 VTK / ParaView</button>
+      <button data-tab="validation">11 Quantitative validation</button>
+      <button data-tab="novelty">12 Novelty & holdout</button>
+      <button data-tab="qa">13 Reproducibility / tests</button>
+      <button data-tab="limitations">14 Limitations</button>
+      <button data-tab="live">15 Live demo</button>
+    </nav>
+    <div class="sidebar-foot"><span class="badge red">NOT CLINICALLY VALIDATED</span><small id="release-version">Loading evidence…</small></div>
+  </aside>
+
+  <main>
+    <header class="topbar"><div><span class="eyebrow">INDEPENDENTLY VERIFIABLE RESEARCH SOFTWARE</span><h1 id="page-title">Project overview</h1></div><button class="verify-primary" onclick="runVerification('fast')">Run release verification</button></header>
+    <div id="loading" class="notice">Reading verified release evidence…</div>
+
+    <section id="overview" class="tab active">
+      <div class="hero">
+        <div><span class="badge learned">POPULATION-DERIVED LCA</span><h2>Coronary4D</h2><p class="hero-line">Population-Derived Disease-Aware 4D LCA Generator</p><p>Time-corresponded LMCA-LAD-LCX anatomy with controlled disease, cardiac deformation, cyclic radii, and verified scientific export.</p></div>
+        <div class="status-stack"><div class="status pass">ENGINEERING RELEASE<br><strong id="release-status">—</strong></div><div class="status caution">CLINICAL VALIDATION<br><strong>NOT CLAIMED</strong></div></div>
+      </div>
+      <div class="pipeline" aria-label="Project pipeline">
+        <span class="measured-bg">REAL DATA<br><b id="metric-source">—</b> labels</span><i>→</i><span>centerlines<br>assignment</span><i>→</i><span>2 planes<br>2 ellipses</span><i>→</i><span>cardiac frame<br>surface coordinates</span><i>→</i><span class="learned-bg">27 points<br>81-D PCA</span><i>→</i><span class="generated-bg">B-spline<br>LCA tree</span><i>→</i><span class="param-bg">disease<br>motion + radius</span><i>→</i><span>XYZ-radius<br>VTK + arrays</span><i>→</i><span class="pass-bg">VALIDATION</span>
+      </div>
+      <div class="metric-row"><article><b id="overview-eligible">—</b><span>eligible source anatomies</span></article><article><b id="overview-generated">—</b><span>accepted generated trees</span></article><article><b id="overview-snapshots">—</b><span>validated 4D snapshots</span></article><article><b id="overview-tests">—</b><span>regression checks passed</span></article></div>
+      <div class="explain-grid"><article><h3>What it is</h3><p>A reproducible research generator for the major-vessel left coronary artery: LMCA bifurcating into LAD and LCX.</p></article><article><h3>Why we need it</h3><p>Controlled synthetic populations allow anatomy, disease, and motion to be varied independently while preserving a documented output contract.</p></article><article><h3>How it works</h3><p>Measured geometry creates a confidence-gated statistical model; learned anatomy is sampled and then parametric radii, disease, motion, and pulsatility are added.</p></article></div>
+      <details class="notes"><summary>What I should say</summary><p>“Coronary4D is a population-derived major-vessel LCA generator. It learns coordinated LMCA-LAD-LCX shape variation from a strictly eligible cohort, then adds controlled disease and cardiac motion. This is a validated engineering system, not a clinically validated patient predictor.”</p></details>
+    </section>
+
+    <section id="cohort" class="tab">
+      <div class="section-intro"><span class="badge measured">MEASURED</span><h2>Confidence before cohort size</h2><p>Every number below is loaded from the final audit.</p></div>
+      <div class="funnel"><div><b id="f-source">—</b><span>source NIfTI labels</span></div><i>→</i><div><b id="f-extracted">—</b><span>extracted LCA</span></div><i>→</i><div><b id="f-resolved">—</b><span>resolved LAD/LCX</span></div><i>→</i><div><b id="f-anatomy">—</b><span>anatomy pass</span></div><i>→</i><div class="final"><b id="f-eligible">—</b><span>PCA eligible</span></div></div>
+      <div class="split"><img src="figures/01_cohort_funnel.png" alt="Verified cohort funnel"><div><h3>Exclusion reasons</h3><table id="exclusion-table"><thead><tr><th>Exclusive final reason</th><th>Cases</th></tr></thead><tbody></tbody></table><p class="callout">We did not use all 200 simply to maximize N. Uncertain branch identities and unsuitable anatomical representations were excluded before PCA.</p></div></div>
+      <div class="explain-grid"><article><h3>What / why</h3><p>The cohort funnel separates discovered labels from cases safe for population statistics. Strict gates reduce contamination.</p></article><article><h3>How implemented</h3><p>Extraction, daughter-assignment confidence, source/scaffold anatomy, ellipsoid quality, integrity, and fixed-representation checks are audited independently.</p></article><article><h3>Numerical proof</h3><p><b id="cohort-proof">—</b></p></article></div>
+      <details class="notes"><summary>What I should say</summary><p>“We started with 200 CT label volumes. 191 produced usable protected LCA records. LAD and LCX identity was confidently resolved in 181. After anatomical and representation checks, 52 cases formed the statistical cohort. Synthetic samples do not increase this independent patient count.”</p></details>
+    </section>
+
+    <section id="anatomy" class="tab">
+      <div class="section-intro"><span class="badge measured">MEASURED</span><h2>Real centerlines → two SVD planes → two actual ellipses</h2><p>The ellipse is reference geometry. The real artery is not replaced or bent to match it.</p></div>
+      <div class="split"><img src="figures/02_ppt_two_plane_two_ellipse_summary.png" alt="Two-plane two-ellipse audit summary"><img src="figures/anatomical_two_plane_model.png" alt="Source arteries, planes, ellipses and residuals"></div>
+      <div class="concept-row"><article><h3>SVD plane</h3><p>Answers: “What is the best 3-D plane for these points?”</p></article><article><h3>Ellipse inside plane</h3><p>Answers: “What are the semi-axes a, b, tilt, angular extent, and residuals?”</p></article><article><h3>Pointwise evidence</h3><p>Landmark theta and residual connectors quantify where each measured artery lies relative to its reference ellipse.</p></article></div>
+      <div class="metric-row"><article><b id="coord-change">—</b><span>maximum source coordinate change</span></article><article><b id="segment-change">—</b><span>maximum segment-length change</span></article><article><b id="residual-count">—</b><span>pointwise residual records</span></article></div>
+      <div class="callout"><b>Real artery ≠ ellipse.</b> The crown/coronary plane and LAD/interventricular plane establish an anatomical scaffold while protected source coordinates remain unchanged.</div>
+      <details class="notes"><summary>What I should say</summary><p>“SVD finds the best-fitting 3D anatomical plane. Ellipse fitting then measures size, tilt, angular course, and residuals within that plane. The ellipse is a compact scaffold, not a replacement centerline: the maximum source coordinate and segment-length change are both zero.”</p></details>
+    </section>
+
+    <section id="ssm" class="tab">
+      <div class="section-intro"><span class="badge learned">LEARNED</span><h2>Joint 27-point statistical representation</h2></div>
+      <div class="math-flow"><div><b>LMCA</b><strong>5</strong></div><span>+</span><div><b>LAD</b><strong>12</strong></div><span>+</span><div><b>LCX</b><strong>10</strong></div><span>=</span><div><b>anatomical points</b><strong>27</strong></div><span>× XYZ =</span><div class="accent"><b>shape vector</b><strong>81-D</strong></div></div>
+      <div class="split"><img src="figures/03_pca_variance.png" alt="Cumulative PCA variance"><div><div class="metric-row compact"><article><b id="pca-cases">—</b><span>eligible shapes</span></article><article><b id="pca-modes">—</b><span>retained modes</span></article><article><b id="pca-var">—</b><span>retained variance</span></article></div><h3>What PCA does</h3><p>PCA compresses coordinated anatomical variation. Whole branch patterns vary together instead of moving individual points independently.</p><h3>Scope boundary</h3><p>The learned distribution represents only the 52 eligible major-vessel LCA anatomies. It is not claimed to represent all coronary patients.</p></div></div>
+      <img class="wide-figure" src="figures/07_landmark_distributions.png" alt="Landmark distribution validation">
+      <details class="notes"><summary>What I should say</summary><p>“Every eligible LCA tree is converted to the same 27 corresponding anatomical points. Each point has X, Y and Z, so every patient becomes an 81-value vector. PCA learns how these values vary together. Thirteen modes retain approximately 95.55 percent of variation in the eligible cohort.”</p></details>
+    </section>
+
+    <section id="generation" class="tab">
+      <div class="section-intro"><span class="badge generated">GENERATED</span><h2>Sample, smooth, join, validate</h2></div>
+      <div class="pipeline large"><span>matched statistical<br>anatomy</span><i>→</i><span>PCA<br>innovation</span><i>→</i><span>LMCA/LAD/LCX<br>control samples</span><i>→</i><span>composite cubic<br>B-spline</span><i>→</i><span>exact shared<br>bifurcation</span><i>→</i><span>anatomy<br>gates</span></div>
+      <div class="split"><img src="figures/11_static_population_montage.png" alt="Accepted generated population montage"><div><h3>Real B-spline evidence</h3><code>LMCA[-1] = LAD[0] = LCX[0]</code><p>The accepted centerline uses explicit cubic B-spline basis evaluation, exact terminals, and exact daughter joins. Unconstrained global cubic trials were rejected when they produced hooks or invalid turns.</p><div class="metric-card"><b id="bspline-delta">—</b><span>maximum numerical difference from the previously accepted stable path</span></div></div></div>
+      <h3>Safe live generation</h3>
+      <div class="controls"><label>Seed<input id="gen-seed" type="number" value="20260822"></label><label>PCA scale<input id="gen-scale" type="number" min="0" max="0.2" step="0.01" value="0.04"></label><label>Disease mode<select id="gen-mode"><option>healthy</option><option>focal</option><option>diffuse</option><option>tandem</option></select></label><label>Branch<select id="gen-branch"><option>LAD</option><option>LCX</option><option>LMCA</option></select></label><label>Position<input id="gen-position" type="number" min="0.05" max="0.95" step="0.05" value="0.45"></label><label>Length<input id="gen-length" type="number" min="0.02" max="0.8" step="0.02" value="0.12"></label><label>Severity<input id="gen-severity" type="number" min="0" max="0.9" step="0.05" value="0.65"></label><label>Heart rate<input id="gen-heart" type="number" min="35" max="180" value="60"></label></div>
+      <button id="generate-button" class="action" onclick="generateCase()">Generate demo case</button><div id="generation-result" class="result-panel">Runtime output is created only under <code>presentation_center/runtime_demo/</code>.</div>
+      <details class="notes"><summary>What I should say</summary><p>“Generation starts from a matched eligible baseline and a conservative joint PCA innovation. A genuine composite cubic B-spline produces continuous branches while preserving endpoints. Every candidate must pass topology, course, turn, range, collision, and scaffold gates.”</p></details>
+    </section>
+
+    <section id="disease" class="tab">
+      <div class="section-intro"><span class="badge parametric">PARAMETRIC</span><h2>Controlled radius-only disease</h2></div>
+      <img class="wide-figure" src="figures/disease_mode_comparison.png" alt="Healthy, focal LAD, diffuse LCX and tandem LAD on identical anatomy">
+      <div class="four"><article><h3>Healthy</h3><p>Reference taper and pulsatility without stenosis.</p></article><article><h3>Focal LAD</h3><p>Localized smooth radius reduction.</p></article><article><h3>Diffuse LCX</h3><p>Longer stenotic region with smooth transitions.</p></article><article><h3>Tandem LAD</h3><p>Multiple separated focal lesions.</p></article></div>
+      <img class="wide-figure" src="figures/12_disease_comparison.png" alt="Quantitative disease profiles">
+      <div class="status pass inline">MAX HEALTHY-vs-DISEASE XYZ DIFFERENCE <strong>0.0 mm</strong></div>
+      <div class="explain-grid"><article><h3>Why</h3><p>Separating geometry from radius lets anatomy and disease severity be controlled independently.</p></article><article><h3>How</h3><p>Smooth focal, diffuse, or tandem profiles scale radius while leaving all XYZ centerline points unchanged.</p></article><article><h3>Boundary</h3><p>This is a simplified axisymmetric stenosis model, not plaque composition or hemodynamics.</p></article></div>
+      <details class="notes"><summary>What I should say</summary><p>“All four release cases use identical anatomy. Only the radius field changes. Focal is localized, diffuse is longer with smooth transitions, and tandem uses separated focal lesions. The maximum healthy-versus-disease XYZ difference is exactly zero.”</p></details>
+    </section>
+
+    <section id="motion" class="tab">
+      <div class="section-intro"><span class="badge parametric">PARAMETRIC</span><h2>Non-rigid 4D cardiac motion with correspondence</h2></div>
+      <div class="split"><img src="figures/focal_lad_cardiac_cycle.gif" alt="Closed cardiac-cycle animation"><img src="figures/13_motion_qc.png" alt="Motion validation chart"></div>
+      <div class="motion-equation"><b>radial contraction</b><span>+</span><b>longitudinal shortening</b><span>+</span><b>base-to-apex torsion</b></div>
+      <div class="metric-row"><article><b id="max-displacement">—</b><span>maximum demonstrated displacement</span></article><article><b>10</b><span>stored frames</span></article><article><b>9 + closure</b><span>independent positions + repeated phase 1</span></article><article><b>≈ 0</b><span>junction error across phases</span></article></div>
+      <h3>Interactive phase scrubber</h3><div class="scrubber"><div class="canvas-wrap"><canvas id="tree-canvas" width="900" height="500"></canvas><div class="legend"><span class="lmca">LMCA</span><span class="lad">LAD</span><span class="lcx">LCX</span></div></div><div class="scrub-controls"><button onclick="previousPhase()">Previous</button><button id="play-button" onclick="togglePlay()">Play</button><button onclick="nextPhase()">Next</button><input id="phase-slider" type="range" min="0" max="9" value="0" oninput="loadPhase(this.value)"><strong id="phase-label">Phase 0 / 9</strong></div></div>
+      <details class="notes"><summary>What I should say</summary><p>“We do not move artery points randomly. Geometry is represented relative to a deforming support surface. Radial contraction, longitudinal shortening, and torsion produce non-rigid motion while every phase retains the same point ordering and exact bifurcation.”</p></details>
+    </section>
+
+    <section id="pulsatility" class="tab">
+      <div class="section-intro"><span class="badge parametric">PARAMETRIC</span><h2>Cyclic lumen radius and reduced lesion compliance</h2></div>
+      <div class="split"><img src="figures/14_pulsatility_qc.png" alt="Healthy and lesion pulsatility validation"><div class="metric-list"><div><b id="healthy-pulse">—</b><span>healthy global radius change</span></div><div><b id="focal-pulse">—</b><span>focal LAD lesion</span></div><div><b id="diffuse-pulse">—</b><span>diffuse LCX lesion</span></div><div><b id="tandem-pulse">—</b><span>tandem LAD lesion</span></div></div></div>
+      <div class="status caution inline">PARAMETRIC COMPLIANCE MODEL <strong>NOT FSI</strong></div>
+      <div class="explain-grid"><article><h3>What</h3><p>Healthy radius changes cyclically. Stenotic regions are assigned a lower cyclic response.</p></article><article><h3>Why</h3><p>The visual and tensor output must distinguish global vessel pulsatility from local lesion compliance.</p></article><article><h3>Proof</h3><p>Final release audits calculate local radius-change fractions and lesion-to-healthy ratios directly from the 4D arrays.</p></article></div>
+      <details class="notes"><summary>What I should say</summary><p>“Healthy epicardial radius changes by about three percent in the demonstration. Lesion regions respond less, around 35 to 39 percent of the healthy amplitude. This is a scalar parametric compliance model, not fluid-structure interaction.”</p></details>
+    </section>
+
+    <section id="output" class="tab">
+      <div class="section-intro"><span class="badge generated">GENERATED OUTPUT</span><h2>Tree(t) = (x(t), y(t), z(t), r(t))</h2></div>
+      <div class="tensor"><div class="bracket">[</div><div><b>phase</b><span>10</span></div><div><b>branch</b><span>3</span></div><div><b>point</b><span>50</span></div><div><b>coordinate</b><span>4</span></div><div class="bracket">]</div></div>
+      <p class="center">Coordinate order: <code>[x_mm, y_mm, z_mm, radius_mm]</code> · Branch order: <code>[LMCA, LAD, LCX]</code></p>
+      <div class="split"><div><h3>Actual focal-LAD shapes</h3><div id="output-shapes" class="metric-card">Loading…</div><h3>Temporal contract</h3><p>Every phase contains corresponding points in the same order. Phase zero is the fixed static reference within numerical export tolerance, and phase one repeats closure.</p></div><div><h3>File guide</h3><div id="file-accordion" class="file-list"></div></div></div>
+      <details class="notes"><summary>What I should say</summary><p>“The main tensor is indexed by phase, branch, point, and coordinate. Each coordinate stores X, Y, Z, and radius in millimetres. That means the complete output is not only moving geometry; it is a time-varying XYZ-radius coronary tree.”</p></details>
+    </section>
+
+    <section id="vtk" class="tab">
+      <div class="section-intro"><span class="badge generated">GENERATED OUTPUT</span><h2>ParaView-ready time series</h2></div>
+      <div class="split"><img src="figures/15_vtk_export_qc.png" alt="VTK export readback validation"><div><div class="vtk-flow"><b>cine.pvd</b><span>↓</span><b>VTM per phase</b><span>↓</span><b>LMCA / LAD / LCX VTP blocks</b></div><ol><li>Open <code>cine.pvd</code> in ParaView.</li><li>Click <b>Apply</b>.</li><li>Use Tube representation if desired.</li><li>Color by <code>radius_mm</code>.</li><li>Press Play.</li><li>Color by <code>disease_reduction_fraction</code> to reveal stenosis.</li></ol><div class="status pass inline">VTK READBACK <strong id="vtk-status">—</strong></div><p><code id="pvd-path">Loading path…</code></p></div></div>
+      <details class="notes"><summary>What I should say</summary><p>“The PVD file is the single ParaView entry point. It references one VTM multiblock tree per phase, and each VTM contains LMCA, LAD, and LCX VTP blocks with radius and disease arrays. Readback was independently verified.”</p></details>
+    </section>
+
+    <section id="validation" class="tab">
+      <div class="section-intro"><span class="badge learned">QUANTITATIVE EVIDENCE</span><h2>Engineering acceptance dashboard</h2></div>
+      <div class="metric-row"><article><b id="v-generated">—</b><span>generated trees accepted</span></article><article><b id="v-attempts">—</b><span>generation attempts</span></article><article><b id="v-comparisons">—</b><span>population comparisons passed</span></article><article><b id="v-warnings">—</b><span>warnings</span></article><article><b id="v-tests">—</b><span>tests passed</span></article><article><b id="v-integrity">—</b><span>protected evidence unchanged</span></article></div>
+      <div class="gallery"><img src="figures/04_real_vs_generated_lengths.png" alt="Real versus generated branch lengths"><img src="figures/05_real_vs_generated_angles.png" alt="Real versus generated bifurcation angles"><img src="figures/06_real_vs_generated_tortuosity.png" alt="Real versus generated tortuosity"><img src="figures/08_scaffold_distributions.png" alt="Scaffold parameter distributions"></div>
+      <p class="callout">Matching distributions means the generated population reproduces important characteristics of the eligible cohort under the audited comparisons. It does not establish clinical validity.</p>
+      <details class="notes"><summary>What I should say</summary><p>“All 52 requested canonical trees were accepted after 64 candidate attempts. Fifty real-versus-generated comparisons passed with zero warnings. We compare lengths, angles, tortuosity, scaffold parameters, landmarks, and PCA scores—not only visual appearance.”</p></details>
+    </section>
+
+    <section id="novelty" class="tab">
+      <div class="section-intro"><span class="badge generated">GENERATED</span><h2>Not copies—and not external validation</h2></div>
+      <div class="metric-row"><article><b id="exact-dupes">—</b><span>exact training duplicates</span></article><article><b id="near-dupes">—</b><span>near duplicates under 0.1 mm</span></article><article><b id="baseline-rms">—</b><span>mean RMS change from baseline</span></article><article><b id="holdout-accept">—</b><span>holdout accepted</span></article><article><b id="holdout-leakage">—</b><span>source / baseline leakage</span></article></div>
+      <div class="split"><img src="figures/09_generation_novelty.png" alt="Generation novelty distances"><img src="figures/10_holdout_results.png" alt="Internal holdout results"></div>
+      <div class="status caution inline">78.85% IS AN ANATOMICAL GENERATION ACCEPTANCE RATE <strong>NOT CLASSIFICATION ACCURACY</strong></div>
+      <div class="explain-grid"><article><h3>Novelty proof</h3><p>Nearest-training distance, baseline-to-generated RMS, PCA displacement, and multiple variants quantify non-identity.</p></article><article><h3>Holdout design</h3><p>Five source-grouped folds block both held-out source and its baseline from model access.</p></article><article><h3>Boundary</h3><p>This is internal representation stability. It is not an external institution cohort.</p></article></div>
+      <details class="notes"><summary>What I should say</summary><p>“No canonical output is an exact or sub-0.1-millimetre training duplicate. The source-grouped holdout accepted 41 of 52 first draws with zero source or baseline leakage. That 78.85 percent is anatomical generation acceptance, not classification accuracy.”</p></details>
+    </section>
+
+    <section id="qa" class="tab">
+      <div class="section-intro"><span class="badge learned">REPRODUCIBLE QA</span><h2>Read-only verification on demand</h2></div>
+      <div class="repro"><div>same seed + same configuration</div><span>→</span><strong>same output</strong><div>different seed</div><span>→</span><strong>different valid sample</strong></div>
+      <div class="metric-row"><article><b id="qa-tests">—</b><span>tests passed</span></article><article><b id="qa-failed">—</b><span>failed</span></article><article><b id="qa-compile">—</b><span>compileall</span></article><article><b id="qa-pip">—</b><span>dependency check</span></article><article><b id="qa-vtk">—</b><span>VTK readback</span></article><article><b id="qa-hash">—</b><span>SHA-256 integrity</span></article></div>
+      <div class="verify-actions"><button class="action" onclick="runVerification('fast')">Run release verification</button><button class="action secondary" onclick="runVerification('full')">Run full verification</button></div><div id="verification-result" class="result-panel">Verification is read-only. Failures are reported and never silently repaired.</div>
+      <details><summary>Hash details</summary><p>Open <code>submission_release/RELEASE_MANIFEST.json</code> and <code>final_audit/protected_integrity_comparison.json</code>. The main screen deliberately avoids dumping long hash lists.</p></details>
+      <details class="notes"><summary>What I should say</summary><p>“The release can verify itself. The fast mode parses manifests, checks frozen statistics hashes, verifies demo checksums, topology, phase-zero identity, PVD availability, and metric consistency. Full mode adds source, model, disease, motion, VTK, novelty, holdout, and regression checks without repairing evidence.”</p></details>
+    </section>
+
+    <section id="limitations" class="tab">
+      <div class="section-intro"><span class="badge red">NOT CLINICALLY VALIDATED</span><h2>Scientific scope and limitations</h2></div>
+      <div class="scope-card"><strong>FINAL POPULATION-DERIVED RELEASE</strong><span>Major-vessel LCA only</span><code>LMCA → LAD + LCX</code></div>
+      <div class="limitations-grid"><div><b>No population-derived RCA</b><span>Available components were not trusted annotated RCA ground truth.</span></div><div><b>No side branches</b><span>No diagonal, septal, obtuse marginal, or trusted small-vessel topology.</span></div><div><b>52 effective anatomies</b><span>Strict eligibility creates selection bias; synthetic derivatives do not raise independent N.</span></div><div><b>Internal holdout only</b><span>No external institution cohort or reader study.</span></div><div><b>Linear PCA</b><span>May not capture nonlinear or multimodal anatomical variation.</span></div><div><b>Parametric physiology</b><span>Radius, taper, disease, motion, pulsatility, and compliance are engineering models.</span></div><div><b>Simplified stenosis</b><span>Axisymmetric lumen narrowing, not plaque or vessel-wall morphology.</span></div><div><b>No hemodynamics or myocardium</b><span>No CFD, FSI, perfusion, wall mechanics, or clinical prediction.</span></div></div>
+      <p class="callout">The original charter included RCA. Scientific review found that available RCA candidates could not be treated as reliable annotated ground truth, so the validated population claim was deliberately restricted to LMCA-LAD-LCX.</p>
+      <details class="notes"><summary>What I should say</summary><p>“Excluding RCA is not hiding a failed feature. It prevents unsupported data from becoming a population claim. The release is intentionally limited to major-vessel LCA, has 52 effective source anatomies, uses linear PCA and parametric physiology, and has no external or clinical validation.”</p></details>
+    </section>
+
+    <section id="live" class="tab presenter-mode">
+      <div class="section-intro"><h2>Presenter mode</h2><p>Projector-friendly shortcuts to the complete story.</p></div>
+      <div class="presenter-buttons"><button onclick="showTab('overview')">1 Show project pipeline</button><button onclick="showTab('cohort')">2 Show real-data funnel</button><button onclick="showTab('ssm')">3 Show statistical model</button><button onclick="showTab('generation')">4 Generate new tree</button><button onclick="showTab('disease')">5 Apply focal stenosis</button><button onclick="showTab('motion')">6 Show 4D motion</button><button onclick="showTab('pulsatility')">7 Show pulsatility</button><button onclick="showTab('vtk')">8 Show VTK export</button><button onclick="showTab('validation')">9 Show real vs generated</button><button onclick="showTab('qa')">10 Show final validation</button></div>
+      <div class="split"><div><h3>Presentation material</h3><ul><li><a href="PRESENTATION_SCRIPT.md">10–15 minute script</a></li><li><a href="FIVE_MINUTE_DEMO.md">Five-minute demo</a></li><li><a href="POSSIBLE_VIVA_QUESTIONS.md">Possible viva questions</a></li><li><a href="CORONARY4D_PRESENTATION_CHEAT_SHEET.pdf">One-page cheat sheet</a></li><li><a href="PARAVIEW_DEMO_GUIDE.md">ParaView guide</a></li><li><a href="PROJECT_VERIFICATION_GUIDE.md">Independent verification guide</a></li></ul></div><div><h3>Offline fallback</h3><p>If the app cannot start, open <a href="offline/index.html">offline/index.html</a>. It includes the key results, figures, animation, scripts, and ParaView instructions.</p><h3>Possible questions</h3><p>The viva guide contains more than 40 short evidence-based answers covering cohort selection, SVD, PCA, B-splines, disease, motion, output, validation, RCA, and limitations.</p></div></div>
+      <details class="notes" open><summary>What I should say</summary><p>“This final screen is my presentation controller. Every earlier result is linked to verified evidence. I can generate a fresh case into an isolated runtime folder, scrub a cardiac cycle, open the VTK workflow, or run release verification without altering the frozen population model.”</p></details>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

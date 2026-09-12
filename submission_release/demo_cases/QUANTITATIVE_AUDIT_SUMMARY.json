@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "case_count": 4,
+  "shared_major_vessel_anatomy": true,
+  "cases": {
+    "healthy": {
+      "case_id": "healthy_reference",
+      "status": "PASS",
+      "engineering_validation_pass": true,
+      "major_vessel_LCA_anatomical_plausibility_pass": true,
+      "warnings": []
+    },
+    "focal_lad": {
+      "case_id": "focal_lad",
+      "status": "PASS",
+      "engineering_validation_pass": true,
+      "major_vessel_LCA_anatomical_plausibility_pass": true,
+      "warnings": []
+    },
+    "diffuse_lcx": {
+      "case_id": "diffuse_lcx",
+      "status": "PASS",
+      "engineering_validation_pass": true,
+      "major_vessel_LCA_anatomical_plausibility_pass": true,
+      "warnings": []
+    },
+    "tandem_lad": {
+      "case_id": "tandem_lad",
+      "status": "PASS",
+      "engineering_validation_pass": true,
+      "major_vessel_LCA_anatomical_plausibility_pass": true,
+      "warnings": []
+    }
+  }
+}

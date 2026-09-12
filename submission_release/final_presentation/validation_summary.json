@@ -1,0 +1,940 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-08-23T14:45:39.592145+00:00",
+  "status": "PASS",
+  "scope": "surface-relative production generator only; LCA-only research/engineering prototype",
+  "checks": {
+    "cohort": "PASS",
+    "tree_0015_warning_free": "PASS",
+    "static_copy": "PASS",
+    "production_cine": "PASS",
+    "previews": "PASS",
+    "integrity": "PASS"
+  },
+  "cohort_verification": {
+    "status": "PASS",
+    "expected": 52,
+    "readable": 52,
+    "topology_valid": 52,
+    "production_anatomy_valid": 52,
+    "full_descriptive_anatomy_valid": 35,
+    "anatomy_interpretation": "52/52 pass the production coordinate/topology gate; 35/52 also pass every stricter absolute descriptive rule",
+    "rows": [
+      {
+        "tree_id": "tree_0001",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0002",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 5,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0003",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0004",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 7,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0005",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0006",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 3,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0007",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0008",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0009",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0010",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0011",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0012",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0013",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0014",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0015",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0016",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0017",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0018",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 3,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0019",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 4,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0020",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0021",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0022",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0023",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0024",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0025",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0026",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0027",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0028",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0029",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0030",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0031",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0032",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0033",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 3,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0034",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0035",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0036",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 11,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0037",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0038",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 4,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0039",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0040",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 5,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0041",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0042",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 4,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0043",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0044",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0045",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0046",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0047",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0048",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0049",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 0,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0050",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 1,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0051",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 2,
+        "full_descriptive_anatomy_pass": true,
+        "errors": []
+      },
+      {
+        "tree_id": "tree_0052",
+        "status": "PASS",
+        "maximum_topology_error_mm": 0.0,
+        "warning_count": 4,
+        "full_descriptive_anatomy_pass": false,
+        "errors": []
+      }
+    ]
+  },
+  "canonical_tree_metrics": {
+    "tree_id": "tree_0015",
+    "source_case_id": "58.label",
+    "branch_lengths_mm": {
+      "LMCA": 6.616934198114688,
+      "LAD": 135.790806681079,
+      "LCX": 65.22572581062772
+    },
+    "LAD_LCX_angle_deg": 60.54402061538845,
+    "LAD_inferior_displacement_mm": 54.64145653272379,
+    "LCX_inferior_displacement_mm": 24.4300175586084,
+    "LCX_lateral_circumferential_displacement_mm": 46.27177405413948,
+    "branch_tortuosity_arc_over_chord": {
+      "LMCA": 1.0482898230414055,
+      "LAD": 1.5855636892063794,
+      "LCX": 1.2465505796350984
+    },
+    "branch_obliquity_rad": {
+      "LMCA": 0.22541394194886405,
+      "LAD": -3.7991601949877167,
+      "LCX": 1.0953132314306306
+    },
+    "branch_obliquity_deg": {
+      "LMCA": 12.915267517076852,
+      "LAD": -217.67584486689506,
+      "LCX": 62.75682540581112
+    },
+    "minimum_nonlocal_clearance_mm": {
+      "LMCA": 2.820674127219465,
+      "LAD": 13.329517734595136,
+      "LCX": 6.045530507134397
+    },
+    "minimum_interbranch_clearance_mm": {
+      "LMCA_to_LAD_mm": 10.162722011947332,
+      "LMCA_to_LCX_mm": 5.498176413967837,
+      "LAD_to_LCX_mm": 9.01302447326463
+    },
+    "backward_progression_ratio": {
+      "LMCA": -0.0,
+      "LAD": 0.04362972416095995,
+      "LCX": -0.0
+    },
+    "warnings": [],
+    "warning_count": 0,
+    "production_anatomy_gate": {
+      "accepted": true,
+      "checks": {
+        "lad_has_minimum_inferior_reach": true,
+        "lad_is_dominant_descending_branch": true,
+        "lcx_is_not_apex_descending_branch": true,
+        "lad_has_longitudinal_course": true,
+        "lad_descent_is_sustained": true,
+        "lcx_has_horizontal_crown_course": true,
+        "lcx_inferior_span_is_limited": true,
+        "lcx_is_more_lateral_than_lad": true,
+        "lcx_has_substantial_absolute_lateral_reach": true
+      },
+      "failed_checks": [],
+      "policy": {
+        "coordinate_frame": "common cardiac frame; negative Z is apex-directed",
+        "criterion_type": "repository geometric anatomy QC; not a clinical threshold",
+        "unresolved_assignments_may_train": false
+      }
+    }
+  },
+  "static_vtk_verification": {
+    "status": "PASS",
+    "maximum_static_copy_coordinate_error_mm": 0.0,
+    "static_block_names": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "scaffold_block_names": [
+      "ELLIPSOID_SCAFFOLD",
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "point_arrays": {
+      "LMCA": [
+        "point_index",
+        "normalized_arc_position",
+        "surface_u_rad",
+        "surface_v_rad",
+        "surface_normal_offset_mm",
+        "deviation_tangent_u_mm",
+        "deviation_tangent_v_mm",
+        "deviation_normal_mm"
+      ],
+      "LAD": [
+        "point_index",
+        "normalized_arc_position",
+        "surface_u_rad",
+        "surface_v_rad",
+        "surface_normal_offset_mm",
+        "deviation_tangent_u_mm",
+        "deviation_tangent_v_mm",
+        "deviation_normal_mm"
+      ],
+      "LCX": [
+        "point_index",
+        "normalized_arc_position",
+        "surface_u_rad",
+        "surface_v_rad",
+        "surface_normal_offset_mm",
+        "deviation_tangent_u_mm",
+        "deviation_tangent_v_mm",
+        "deviation_normal_mm"
+      ]
+    }
+  },
+  "production_4d_verification": {
+    "status": "PASS",
+    "phase_files_expected": 10,
+    "phase_files_read": 10,
+    "branch_names": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "maximum_cycle_closure_error_mm": 0.0,
+    "production_4d_validation": {
+      "is_valid": true,
+      "errors": [],
+      "warnings": [],
+      "checks": {
+        "mandatory_lca_branches_present": true,
+        "exact_shared_bifurcation_all_phases": true,
+        "phase_zero_matches_static_reference": true,
+        "all_radii_positive_and_finite": true,
+        "temporal_point_correspondence_preserved": true,
+        "requested_full_cycle_closes_exactly": true,
+        "disease_validation_pass": true
+      },
+      "metrics": {
+        "frame_count": 10,
+        "phase_zero_identity_error_mm": 1.7763568394002505e-14,
+        "maximum_reference_displacement_mm": 9.46074414321345,
+        "maximum_consecutive_phase_displacement_mm": 4.60367082250935,
+        "maximum_cycle_closing_displacement_mm": 0.0,
+        "maximum_radius_variation_fraction": 0.029797150732258304,
+        "maximum_topology_error_mm": 0.0
+      },
+      "validation_scope": "engineering topology, numerical, temporal-correspondence, disease, and radius checks; not clinical validation"
+    },
+    "errors": []
+  },
+  "production_export_manifest": {
+    "status": "PASS",
+    "case_id": "tree_0015_production_healthy",
+    "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+    "frame_count": 10,
+    "points_per_branch": 80,
+    "geometry_shape": [
+      10,
+      3,
+      80,
+      4
+    ],
+    "validation_passed": true,
+    "fixed_size_export_validation": {
+      "is_valid": true,
+      "temporal_correspondence_parameter": "static-reference normalized arc length reused at every phase",
+      "all_values_finite": true,
+      "all_radii_positive": true,
+      "maximum_topology_error_mm": 0.0,
+      "maximum_radius_variation_fraction": 0.029797150732258526,
+      "configured_radius_variation_fraction": 0.03
+    },
+    "vtk_readback_passed": true,
+    "portable_relative_paths": true,
+    "open_in_paraview": "vtk/cine.pvd",
+    "sha256": {
+      "coronary_tree_4d.npz": "6ce78194fb2136bd878171665b7e717d0440043908a7fc6ba2436e73e96be93e",
+      "geometry_cine.npy": "2141c4737d06c62937ebe97e51e9c57afc041bf098a1acd6147d56f26b54c946",
+      "metadata.json": "25651c5729d565dae88578c2faf7d4094dc858e29d8bd2e7ff7d0be88e12daaa",
+      "graph.json": "41c2058149961e15d75f1539dff0ce5a5daba923fda7a91121e46a2691b273b0",
+      "preview.png": "105888272989cc3745de96479a3044646830279bad2471043860426820a3a0a1",
+      "vtk/cine.pvd": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+    }
+  },
+  "preview_verification": {
+    "status": "PASS",
+    "files": [
+      "front.png",
+      "top.png",
+      "side.png",
+      "perspective.png"
+    ]
+  },
+  "source_and_model_integrity": {
+    "status": "PASS",
+    "protected_raw_archives_verified": 191,
+    "protected_raw_archives_expected": 191,
+    "measurement_evidence_files_verified": 5,
+    "measurement_evidence_files_expected": 5,
+    "maximum_source_coordinate_change_mm": 0.0,
+    "maximum_source_segment_length_change_mm": 0.0,
+    "canonical_cohort_unchanged": true,
+    "canonical_cohort_before": {
+      "file_count": 900,
+      "aggregate_sha256": "4244dc2b9281c64ac9915def175699f8d8327b5aabdb998c07ed6da1aeb55037"
+    },
+    "canonical_cohort_after": {
+      "file_count": 900,
+      "aggregate_sha256": "4244dc2b9281c64ac9915def175699f8d8327b5aabdb998c07ed6da1aeb55037"
+    },
+    "frozen_statistics_unchanged": true,
+    "frozen_statistics_before": {
+      "file_count": 10,
+      "aggregate_sha256": "57a3d7512d1ded9ec1b06d53e15fa80f26745251cd48f9ae04a5e14ac18fa49d"
+    },
+    "frozen_statistics_after": {
+      "file_count": 10,
+      "aggregate_sha256": "57a3d7512d1ded9ec1b06d53e15fa80f26745251cd48f9ae04a5e14ac18fa49d"
+    },
+    "frozen_statistics_manifest_verification": {
+      "status": "PASS",
+      "manifest_sha256": "b041a82e852296dab87084f87993bc927ecf655ad18f45cc4b802fb865af04b6",
+      "shape_vector_dimensions": 81,
+      "pca_case_count": 52,
+      "files_verified": 9,
+      "files": [
+        {
+          "file": "population_surface_statistics.json",
+          "expected_sha256": "69c649fafc430c5474946dc03739af214d3903be839615615ce89bf41db8d4fe",
+          "actual_sha256": "69c649fafc430c5474946dc03739af214d3903be839615615ce89bf41db8d4fe",
+          "pass": true
+        },
+        {
+          "file": "population_ellipsoid_parameters.csv",
+          "expected_sha256": "ec77430ff3bebd9f86a8f578f7221b094d7b1684b999b2920749eee5d79e4015",
+          "actual_sha256": "ec77430ff3bebd9f86a8f578f7221b094d7b1684b999b2920749eee5d79e4015",
+          "pass": true
+        },
+        {
+          "file": "landmark_stats.json",
+          "expected_sha256": "2fb812407fb707f49ff1c250c07db9a96ab65bd207cad17c49bb6c07184ecb6f",
+          "actual_sha256": "2fb812407fb707f49ff1c250c07db9a96ab65bd207cad17c49bb6c07184ecb6f",
+          "pass": true
+        },
+        {
+          "file": "surface_deviation_pca.npz",
+          "expected_sha256": "9dae30b3960f620a2708654228de6d7445f1dd75a31bd13533362541b668d3aa",
+          "actual_sha256": "9dae30b3960f620a2708654228de6d7445f1dd75a31bd13533362541b668d3aa",
+          "pass": true
+        },
+        {
+          "file": "surface_deviation_pca_summary.json",
+          "expected_sha256": "c6fffc739a186ec2fb7b727ddac48cf37abd8a2d6aa7739bba49ab82e434912b",
+          "actual_sha256": "c6fffc739a186ec2fb7b727ddac48cf37abd8a2d6aa7739bba49ab82e434912b",
+          "pass": true
+        },
+        {
+          "file": "population_validation_thresholds.json",
+          "expected_sha256": "fb63892811a1d6011e6984070bddff37794ac9d9d6519ce21bb059346de0ad02",
+          "actual_sha256": "fb63892811a1d6011e6984070bddff37794ac9d9d6519ce21bb059346de0ad02",
+          "pass": true
+        },
+        {
+          "file": "fixed_branch_surface_coordinates.npz",
+          "expected_sha256": "614d9c7c74746cc1f16dd260d576798fdb222cdc3f54d652abf669e838d496b4",
+          "actual_sha256": "614d9c7c74746cc1f16dd260d576798fdb222cdc3f54d652abf669e838d496b4",
+          "pass": true
+        },
+        {
+          "file": "branch_assignment_gate.json",
+          "expected_sha256": "fd9326c274ccc5da9fa80d0d4b988139c7e5595d9454c1020e5b4b7faefa0492",
+          "actual_sha256": "fd9326c274ccc5da9fa80d0d4b988139c7e5595d9454c1020e5b4b7faefa0492",
+          "pass": true
+        },
+        {
+          "file": "validation_scaffold_case_metrics.csv",
+          "expected_sha256": "37d89a6d60aa73c4114852a64c5062c70a0336a93bf31f48d4a0be946eec8d86",
+          "actual_sha256": "37d89a6d60aa73c4114852a64c5062c70a0336a93bf31f48d4a0be946eec8d86",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "files": {
+    "ANATOMY_INTERPRETATION.md": {
+      "size_bytes": 900,
+      "sha256": "194611e7566ae4f9f1caaff928bae85559490b5d7ca9a78d517cefbe7043b1ea"
+    },
+    "cine.pvd": {
+      "size_bytes": 971,
+      "sha256": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+    },
+    "final_static_tree.vtm": {
+      "size_bytes": 364,
+      "sha256": "e0eddd837f33db9f01cefcbb9f5eefc135db6977cb380c8686f6c86a20da19d7"
+    },
+    "final_tree_with_scaffold.vtm": {
+      "size_bytes": 456,
+      "sha256": "e7e8b758aa3f985e9f51de325aa7b702b56a53cd80d0bde87b0cfabbf4d13ca6"
+    },
+    "front.png": {
+      "size_bytes": 89032,
+      "sha256": "c86ffdebcc2c5f908baa01fdc677e373de401a5dd899de0db82bd25e60590d2d"
+    },
+    "metadata.json": {
+      "size_bytes": 25459,
+      "sha256": "0f02f47ac5547eb7a7c305ec5b84b2c53f14c0d976152814cd45c55af08eeecc"
+    },
+    "perspective.png": {
+      "size_bytes": 239460,
+      "sha256": "fcf299dfc4a2dada61d6412cd5c0525aedba6a6353920b0b605f961621f45043"
+    },
+    "phase_000/tree/tree_0.vtp": {
+      "size_bytes": 7735,
+      "sha256": "7e9a05a77453298f44715efa18dd1fda9bacf68c01dae9fcde5ceb370ff2b954"
+    },
+    "phase_000/tree/tree_1.vtp": {
+      "size_bytes": 7788,
+      "sha256": "e4bd97ea8e2766d39fdb6e565b552a31bd13882a4716878962ec13e20fb5e536"
+    },
+    "phase_000/tree/tree_2.vtp": {
+      "size_bytes": 7755,
+      "sha256": "914482191dd9fb4082dff426d33eb8801f1fc1dbef575e8ebeea445586077523"
+    },
+    "phase_000/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_001/tree/tree_0.vtp": {
+      "size_bytes": 7846,
+      "sha256": "5ab7ab90027b95c63d47a4506e586d952a32ef79d71c053579550020db525c7f"
+    },
+    "phase_001/tree/tree_1.vtp": {
+      "size_bytes": 7888,
+      "sha256": "557f06fdadb981000b2b3000ae74dd824bc517b7b0cbe90d35b99de24d27d6bc"
+    },
+    "phase_001/tree/tree_2.vtp": {
+      "size_bytes": 7840,
+      "sha256": "8e807f986a8e4a0db1254e5edaf9d3d44a0792e10f22a7d2e78747487a355637"
+    },
+    "phase_001/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_002/tree/tree_0.vtp": {
+      "size_bytes": 7832,
+      "sha256": "594025559a1953483c0b9183bbe966461960aa32b1d0227f2d3e7667ff11315f"
+    },
+    "phase_002/tree/tree_1.vtp": {
+      "size_bytes": 7880,
+      "sha256": "075d12b73e83c1868eb059cd3faf644853c65031884b29b6b974dd1e5aa02f04"
+    },
+    "phase_002/tree/tree_2.vtp": {
+      "size_bytes": 7839,
+      "sha256": "2ec690861702d41d1c15c452c725ed7e10959b6f6327de47b8777d178c083630"
+    },
+    "phase_002/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_003/tree/tree_0.vtp": {
+      "size_bytes": 7839,
+      "sha256": "f5ab83947e5c1a6ad9420d67b3c6a869ef326b7807b49fea213d0d5e5a3713b6"
+    },
+    "phase_003/tree/tree_1.vtp": {
+      "size_bytes": 7862,
+      "sha256": "51ac11c571b7657abf473a4d5c5628b2ca3ca676b500cd1c42129d0c4246933b"
+    },
+    "phase_003/tree/tree_2.vtp": {
+      "size_bytes": 7842,
+      "sha256": "ef0ce2c62abfe86cb6185a0c50bfe4896a9c0fda969f24401f7ff10d9ed57c5d"
+    },
+    "phase_003/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_004/tree/tree_0.vtp": {
+      "size_bytes": 7842,
+      "sha256": "2552ea6a88ef0047caaf15c732fe88072953fad37aa63eaa79f521f8c827aa74"
+    },
+    "phase_004/tree/tree_1.vtp": {
+      "size_bytes": 7882,
+      "sha256": "e847049a32fd6d7bd34227e0256068b8cfca5733ed19aa52adb6f021dbaf16ea"
+    },
+    "phase_004/tree/tree_2.vtp": {
+      "size_bytes": 7853,
+      "sha256": "34b2e59c83d6caa3f66b62cd79060f4c8d16069199c284af784d773294ad31a8"
+    },
+    "phase_004/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_005/tree/tree_0.vtp": {
+      "size_bytes": 7822,
+      "sha256": "f70455229025256ce2f7a5e17d394a417bce9d0b11033e132e796264ce453476"
+    },
+    "phase_005/tree/tree_1.vtp": {
+      "size_bytes": 7875,
+      "sha256": "ce30253ec61dcc6419b96b1c42f15bf7932a4d4dd3f0951351284ca2ec0cd53d"
+    },
+    "phase_005/tree/tree_2.vtp": {
+      "size_bytes": 7857,
+      "sha256": "fd38025e5dfbe651d627d26e5a3f3f6c6d6a815a9bef9a5eb3c325cc60b3cf77"
+    },
+    "phase_005/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_006/tree/tree_0.vtp": {
+      "size_bytes": 7816,
+      "sha256": "d0f49bf2a2684bb045ab518ab3fb62e2c5fe33365c09b228872e0516c45e6b69"
+    },
+    "phase_006/tree/tree_1.vtp": {
+      "size_bytes": 7874,
+      "sha256": "35f3243ee9b39bbd25913ff6190addce5657e278a7ddeda88d5136c86c71a227"
+    },
+    "phase_006/tree/tree_2.vtp": {
+      "size_bytes": 7827,
+      "sha256": "10ad8cb05b4a010cfcb5a00a62c61a51b1aa58708aee47bc23106ca261a46da3"
+    },
+    "phase_006/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_007/tree/tree_0.vtp": {
+      "size_bytes": 7853,
+      "sha256": "c56062ac9a75cdd6f47311c485a43156b54184f0ba4fa9f2cc1bcb6e9ddc4f0e"
+    },
+    "phase_007/tree/tree_1.vtp": {
+      "size_bytes": 7879,
+      "sha256": "86ea4ea35650ab4550fecfe46cd08641ac7136b8e6c555b19b18fb711256db9b"
+    },
+    "phase_007/tree/tree_2.vtp": {
+      "size_bytes": 7839,
+      "sha256": "02f25f69b1ea317323c9bd150e6a28836bee3a60116b410d3b4d87c83b3d6c6a"
+    },
+    "phase_007/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_008/tree/tree_0.vtp": {
+      "size_bytes": 7847,
+      "sha256": "7f319ef574eebad1d636bde43a667f8e0135941b9b7f3ac37158384f6466df18"
+    },
+    "phase_008/tree/tree_1.vtp": {
+      "size_bytes": 7879,
+      "sha256": "4c0fde9c968c919b0f037fdfdb6567de079d755e4f5df8222c7b37a5b8837087"
+    },
+    "phase_008/tree/tree_2.vtp": {
+      "size_bytes": 7855,
+      "sha256": "096bc9688714e1c31dbb8f86a4a5aaef8f4ca50f48d78534062a8ace2dd8d774"
+    },
+    "phase_008/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "phase_009/tree/tree_0.vtp": {
+      "size_bytes": 7743,
+      "sha256": "aa76ea56de6189a6d22ac8610c38545168cf59d289a742a435dec9ecf171b672"
+    },
+    "phase_009/tree/tree_1.vtp": {
+      "size_bytes": 7796,
+      "sha256": "7537d9e5861adddb01a8713346fed66cd40f58485367b3bb0bec03b5b5446f75"
+    },
+    "phase_009/tree/tree_2.vtp": {
+      "size_bytes": 7763,
+      "sha256": "efa7d26f5dec7bf2d5b438634d3f7bc1c31036aed89e2785173ac7694f1d7799"
+    },
+    "phase_009/tree.vtm": {
+      "size_bytes": 396,
+      "sha256": "600ac699fd88667f85cff3ecfbad627a374820a033533621ef478054167595a6"
+    },
+    "README.md": {
+      "size_bytes": 830,
+      "sha256": "8bbebbfa7b1969d13b1bd6eca10255dc0f07d4ddf70566faa38181e426d5ce21"
+    },
+    "scaffold/ELLIPSOID_SCAFFOLD.vtp": {
+      "size_bytes": 94792,
+      "sha256": "536eb3455515c26e1ae7db3d0fdf415e338ad209ebea7543817e0b4fbd8fe53c"
+    },
+    "side.png": {
+      "size_bytes": 84623,
+      "sha256": "033281672645d7011792f61f87807f0c806c745d06ccdc0e185b13f57f62fa93"
+    },
+    "static/LAD.vtp": {
+      "size_bytes": 22841,
+      "sha256": "e9b6482eb9fc74c18a0745393966dad02360d02cb19f8b6b08516c4155bbd925"
+    },
+    "static/LCX.vtp": {
+      "size_bytes": 21493,
+      "sha256": "27294d4a7008f87eaac9caa0140d700ecfecdf66bb3fc74563aaf0d41326bfc0"
+    },
+    "static/LMCA.vtp": {
+      "size_bytes": 10796,
+      "sha256": "b260007a051a3c023ec380bad0b55a47e70e2e1ac3b1cd00267a1b18d42d0df2"
+    },
+    "top.png": {
+      "size_bytes": 82363,
+      "sha256": "383c4d359e46b3120c9589a6f1bb4875168288a788589313100c5ba430dc8347"
+    }
+  }
+}

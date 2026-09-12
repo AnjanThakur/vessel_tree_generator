@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="SYNTHETIC_ELLIPSOID" file="synthetic_ellipsoid.vtp" />
+    <DataSet index="1" name="SYNTHETIC_LMCA" file="LMCA.vtp" />
+    <DataSet index="2" name="SYNTHETIC_LAD" file="LAD.vtp" />
+    <DataSet index="3" name="SYNTHETIC_LCX" file="LCX.vtp" />
+    <DataSet index="4" name="SYNTHETIC_LANDMARKS" file="landmarks.vtp" />
+  </vtkMultiBlockDataSet>
+</VTKFile>

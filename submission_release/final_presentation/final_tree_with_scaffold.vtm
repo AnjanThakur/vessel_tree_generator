@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="ELLIPSOID_SCAFFOLD" file="scaffold/ELLIPSOID_SCAFFOLD.vtp" />
+    <DataSet index="1" name="LMCA" file="static/LMCA.vtp" />
+    <DataSet index="2" name="LAD" file="static/LAD.vtp" />
+    <DataSet index="3" name="LCX" file="static/LCX.vtp" />
+  </vtkMultiBlockDataSet>
+</VTKFile>

@@ -1,0 +1,148 @@
+{
+  "batch": "Batch 7 \u2014 Standardized Output Formatting and Packaging",
+  "output_summary": {
+    "num_trees_exported": 52,
+    "num_points_per_vessel": 50,
+    "static_array_shape": [
+      3,
+      50,
+      4
+    ],
+    "cine_array_shape": [
+      10,
+      3,
+      50,
+      4
+    ],
+    "branch_order": [
+      "LMCA",
+      "LAD",
+      "LCX"
+    ],
+    "radius_model_provenance": "prototype taper defaults; not population learned",
+    "total_execution_time_seconds": 26.81906819343567
+  },
+  "verification": {
+    "overall_pass": true,
+    "geometry_static_equals_geometry_cine0": true,
+    "max_identity_error_mm": 0.0
+  },
+  "pipeline_report": {
+    "pipeline_title": "LCA Statistical Vessel Tree Generator \u2014 End-to-End Execution Report",
+    "model_scope": "LCA_only",
+    "patient_accounting": {
+      "source_label_inventory_count": 200,
+      "source_cases_audited": 191,
+      "cardiac_frames_valid": 191,
+      "assignments_confidence_resolved": 181,
+      "statistics_eligible_lca_cases": 52,
+      "unresolved_assignments_used": false,
+      "core_anatomy_gate_pass_count": 65
+    },
+    "statistical_shape_model": {
+      "population_shape_matrix_dimensions": [
+        52,
+        81
+      ],
+      "retained_pca_modes_k": 13,
+      "retained_cumulative_variance_percent": 95.54694673427547,
+      "explained_variance_ratio": [
+        0.42470032421919207,
+        0.16566502283856172,
+        0.09395118275474267,
+        0.07812812368132786,
+        0.05980714515605214,
+        0.040224749020897274,
+        0.024433969094619583,
+        0.01849152760577353,
+        0.014187363554732602,
+        0.012065423830487105,
+        0.00905233639131045,
+        0.007768315343505561,
+        0.0069939838515521244,
+        0.006416247108053273,
+        0.005726111292578334,
+        0.005107199561319729,
+        0.004084725830769867,
+        0.0035093469092922452,
+        0.00320210096592553,
+        0.002636360744476666,
+        0.0024396560151659598,
+        0.0018118622669555798,
+        0.0014808267171416247,
+        0.0013723717113023953,
+        0.0010392032123326073,
+        0.0009244764149242288,
+        0.0007400655750411299,
+        0.0006993969045526019,
+        0.0005610168122888995,
+        0.00047935151957563646,
+        0.00044934906689699883,
+        0.0003531464051370688,
+        0.0002637923481411036,
+        0.0002460261278552495,
+        0.00019717658953463332,
+        0.00016793619160304535,
+        0.00012198948106289571,
+        0.00011022826346896435,
+        8.625168595349302e-05,
+        6.357827950846075e-05,
+        5.967757305860075e-05,
+        4.392206663637635e-05,
+        3.8305669861696954e-05,
+        2.499723138869099e-05,
+        1.916875969785544e-05,
+        1.5356400604463986e-05,
+        1.4269822475128038e-05,
+        1.126327221770426e-05,
+        7.80029785255423e-06,
+        3.988105879989051e-06,
+        1.9894567140185666e-06,
+        4.400953486501153e-33
+      ],
+      "branch_order": [
+        "LMCA",
+        "LAD",
+        "LCX"
+      ],
+      "branch_counts": {
+        "LMCA": 5,
+        "LAD": 12,
+        "LCX": 10
+      }
+    },
+    "synthetic_generation": {
+      "num_trees_requested": 52,
+      "num_trees_accepted": 52,
+      "total_sampling_attempts": 64,
+      "acceptance_rate_percent": 81.25,
+      "exact_lca_topology_for_all_trees": true
+    },
+    "cardiac_motion": {
+      "num_4d_trees_processed": 52,
+      "num_phases_per_tree": 10,
+      "total_3d_snapshots_generated": 520,
+      "peak_systole_phase": 0.35,
+      "phase_values": [
+        0.0,
+        0.1111111111111111,
+        0.2222222222222222,
+        0.3333333333333333,
+        0.4444444444444444,
+        0.5555555555555556,
+        0.6666666666666666,
+        0.7777777777777777,
+        0.8888888888888888,
+        1.0
+      ],
+      "motion_parameters": {
+        "radial_amplitude": 0.14,
+        "longitudinal_amplitude": 0.1,
+        "torsion_amplitude_deg": 10.0
+      },
+      "motion_parameters_are_design_defaults_not_population_learned": true
+    },
+    "missing_evidence": [],
+    "evidence_complete": true
+  }
+}

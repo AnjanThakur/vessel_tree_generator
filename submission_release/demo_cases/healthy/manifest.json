@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "case_id": "healthy_reference",
+  "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+  "frame_count": 10,
+  "points_per_branch": 50,
+  "geometry_shape": [
+    10,
+    3,
+    50,
+    4
+  ],
+  "validation_passed": true,
+  "fixed_size_export_validation": {
+    "is_valid": true,
+    "temporal_correspondence_parameter": "static-reference normalized arc length reused at every phase",
+    "all_values_finite": true,
+    "all_radii_positive": true,
+    "maximum_topology_error_mm": 0.0,
+    "maximum_radius_variation_fraction": 0.029797150732258526,
+    "configured_radius_variation_fraction": 0.03
+  },
+  "vtk_readback_passed": true,
+  "portable_relative_paths": true,
+  "open_in_paraview": "vtk/cine.pvd",
+  "sha256": {
+    "coronary_tree_4d.npz": "c5bc05ff6b4a90f8cd99ef25c4a9c263b01b15e5456884245a9d4a96e9db679f",
+    "geometry_cine.npy": "8515990d041cad31ac79631590d6e496f2a226355a91feb2f69497ed2cd3bdbf",
+    "metadata.json": "5f51c812143bedaa1da62e3450987cd1be0219f370a0877bf6eb4bb02e71f19e",
+    "graph.json": "751a0bbacee24bf1aa50ee569f1cf2989381ba780203bc8259aed6b4956ee697",
+    "preview.png": "28796584344b71648503cdec086cf0830e260268bce813641c2a29d67188950a",
+    "vtk/cine.pvd": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+  }
+}

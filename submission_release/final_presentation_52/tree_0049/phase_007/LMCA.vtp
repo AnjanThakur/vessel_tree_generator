@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<VTKFile type="PolyData" version="0.1" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <PolyData>
+    <FieldData>
+      <DataArray type="Int32" Name="branch_id" NumberOfTuples="1" format="binary" RangeMin="1" RangeMax="1">
+        AQAAAACAAAAEAAAADAAAAA==eF5jZGBgAAAACAAC
+      </DataArray>
+      <Array type="String" Name="case_id" NumberOfTuples="1" format="binary">
+        AQAAAACAAAAKAAAAEgAAAA==eF4rKUpNjTcwMLFkAAATdwLd
+      </Array>
+      <DataArray type="Float64" Name="phase" NumberOfTuples="1" format="binary" RangeMin="0.7777777777777777" RangeMax="0.7777777777777777">
+        AQAAAACAAAAIAAAAEAAAAA==eF6z6Hts0ff4hT0AEwQEeg==
+      </DataArray>
+    </FieldData>
+    <Piece NumberOfPoints="50" NumberOfVerts="50" NumberOfLines="1" NumberOfStrips="0" NumberOfPolys="0">
+      <PointData Scalars="radius_mm">
+        <DataArray type="Float64" Name="radius_mm" format="binary" RangeMin="2.0459626665871387" RangeMax="2.0459626665871387">
+          AQAAAACAAACQAQAAFQAAAA==eF4zWbhujWIcg4PJKD0oaAAt15J9
+        </DataArray>
+        <DataArray type="Float64" Name="normalized_arc_length" format="binary" RangeMin="0" RangeMax="1">
+          AQAAAACAAACQAQAA9gAAAA==eF5jYIAAS1b95Q+eTrGH0Evsr7Uf+3UhYj2Uv8UezJXfBRXfbz9JxROIDkHlj9g/eCqyZ07Tcai6U/Z6y0EiZ6Dqz9vbmYBZUH2X7MHKp1+G6r9i3/t14UagGqg51+0hym9Azbtlf3tbLghBzb1j3zQ9+EMR1z2o+fftRUHGBT+A2vPAPmMNP9DIh1D7HtmDpT88gtr72J4fbOETqP1P7JNrQTqeQt3xzB5i3TOoe57bc8X5HTyt+QLqrhf2sSBuxUuo+17ZbwRb/Arqztf2YGNF3kDd+8Y+Ql7qtXPyW6i739mDnbfxHdT97+0hsfDBHgBHdNRg
+        </DataArray>
+        <DataArray type="Float64" Name="disease_reduction_fraction" format="binary" RangeMin="0" RangeMax="0">
+          AQAAAACAAACQAQAADgAAAA==eF5jYBgFgwkAAAGQAAE=
+        </DataArray>
+      </PointData>
+      <CellData>
+      </CellData>
+      <Points>
+        <DataArray type="Float64" Name="Points" NumberOfComponents="3" format="binary" RangeMin="43.089445147613645" RangeMax="48.77120194244003">
+          AQAAAACAAACwBAAArQQAAA==eF4Nzo071AcAB3Ahr5c7552cl/Nyaa5YVMf6faPf77fs2Sl1zqySp9DaLT1MirIKLbE83k+oJ3q4aSilJnV3tZGuF1oyJ/UYmWxFjuTlsH3+go98MM21VULi6qVx84HGCaInu+s894g5/DgrYuhEEpnKwaDmjo+EdYAk8j3PHBbnY1uSUkh0jxWHHnwzRxy3euJtomaBz9teRJ8k0WApO6PWLhI8+Q/bErNYsAoK3644QyLn/sN3Gwx0IdGMaH0FLDSs2TLbXUBicsz5l3xTfcS1MpaWdDPRms9uPFRB4hv6ZNAFMwOM6dvQceuZ8HX5t7C4hoSD5y11DNMIC+LBbc/KzZBnX1QZ2EgirJrTWb3MBGU1nlPDOmYI6RWniu+QSFFWzxYbMzD729aZ/JhluBi1+7m6nYS4o+pQtJ4Zktw/cW5VMeB0nXv5dheJjqKhCes5Jjp2SdVJqxmw+JDdO9f//yf2Y2jvNAvC6iTVaKkpcjV/+QSMkqhinr7upzFHoGC2R8YwxeEQQeojLQmO09k9ucNsuEScnivMMEH0qQKTKAaFEunGyWS1Bfi+TIsgHRNEZqVYXFlOISmzJzqn3RJZ247ZIc0Yo8kztoneFAq7Y161NFlhBCUrnmmNcPBUNWfHBgoyi7A8u0prVFr2sSJSjKCzy+AyP5TCVPrw+vSzNpCwbghFHwxxxa1hsS6Kwp/eSySdqbYou2d2Z4vEEOdWDq4qiqdQxojXebnfDjemxb+WvzTAZKdZUEYaBfe6lgOyHfbgund/+44ywDLeg8bgHApeLI3dia0OqDeO/zqtZimOthVPZEkp5H7mXfJg83KMf/5xbmRBH88EdsaZVRT6F61GFzc5okETVVK/RR/tbPM0aR2F4fUnbAY2cmAfuO6S9Xk9BKve/jF6gwKX7fKqgnDCw3If0u5vXdz8wnWvUkHB9lq8t5LjjACPJ0ZHebp4HnRxLb+dguLLTll6hTM+zZDfPbV3CczVV8rEnRTaGyc2v3BwQYBllG9CqQ4CzjUoI3soLFn1QnW61AVd/gPfPcpZJGibeqGon0LH49DyEGtXTN39sWCsa55oWbjP3/+GAvPmWMTVPFckxw752RpqCYHUz+7Wewqk6QvV96Zc+GgScje5zhKlvLpbe2co1AgUHWvSuVg9JN8V7zZNsO/XarN1aVQdnKpNmubirnMIf95kiojoEcn7GDTGa6+Z7pS4QUXJmYmTE0Sul3hlqw2Nn2Uc0YlXbiCH5S4VT8eJc8HNb+tcaTT1TbgYCN3hmBy577j9GFE/fzsw35tGtk+bVKfFHay+ygcz2/8hRL1OBQnraOhfH9bEu3vAXSTSU4QPEQ0hcTWhwTQE16LVop880HkGcZXcfkKY5xTuJaTh3+Rfc1bjgfSn7LT2w88J2XiYRu8rGi2FQgZH5InwNdonVfm/E/xMt/cv99AonPX39GvyREThynuvawsUqpzdyuYDNEYz5w172TysVQZWFDioFHon34xLj9Bonil5yD7AQ+k6+bsFL7ViY62GfyyDhtLxWORQGw+cxfKdPW0DitR554B9uTRiXz9eLXZcgbAEvwsdtiOK/wDI4BZk
+          <InformationKey name="L2_NORM_RANGE" location="vtkDataArray" length="2">
+            <Value index="0">
+              43.089445148
+            </Value>
+            <Value index="1">
+              48.771201942
+            </Value>
+          </InformationKey>
+        </DataArray>
+      </Points>
+      <Verts>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="49">
+          AQAAAACAAACQAQAAXQAAAA==eF4txdcCgQAAAMDMyGggsikr+/9/zoO7lwuCv4abbrntjrsO3XPfkQceeuSxYydOnXniqWfOPffChZdeee2Nt95574OPLl355LMvvvrm2nc//PTLb3/89Q+MdgTK
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1" RangeMax="50">
+          AQAAAACAAACQAQAAXQAAAA==eF4txUUCggAAADDEwAQMsAvs1v8/joPbZbXgL3TdDTfdcuS2O+66574Hjp049dAjjz1x5txTzzz3wkuvvPbGW++8d+HSBx998tkXX33z3Q8//fLbH3/9cwW0TgT8
+        </DataArray>
+      </Verts>
+      <Lines>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="49">
+          AQAAAACAAACQAQAAXQAAAA==eF4txdcCgQAAAMDMyGggsikr+/9/zoO7lwuCv4abbrntjrsO3XPfkQceeuSxYydOnXniqWfOPffChZdeee2Nt95574OPLl355LMvvvrm2nc//PTLb3/89Q+MdgTK
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="50" RangeMax="50">
+          AQAAAACAAAAIAAAACwAAAA==eF4zYoAAAAGYADM=
+        </DataArray>
+      </Lines>
+      <Strips>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Strips>
+      <Polys>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Polys>
+    </Piece>
+  </PolyData>
+</VTKFile>

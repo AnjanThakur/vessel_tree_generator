@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<VTKFile type="vtkMultiBlockDataSet" version="1.0" byte_order="LittleEndian">
+  <vtkMultiBlockDataSet>
+    <DataSet index="0" name="LMCA_MESH" file="mesh/diseased/LMCA_MESH.vtp" />
+    <DataSet index="1" name="LAD_MESH" file="mesh/diseased/LAD_MESH.vtp" />
+    <DataSet index="2" name="LCX_MESH" file="mesh/diseased/LCX_MESH.vtp" />
+    <DataSet index="3" name="LMCA_CENTERLINE" file="mesh_centerlines/diseased/LMCA_CENTERLINE.vtp" />
+    <DataSet index="4" name="LAD_CENTERLINE" file="mesh_centerlines/diseased/LAD_CENTERLINE.vtp" />
+    <DataSet index="5" name="LCX_CENTERLINE" file="mesh_centerlines/diseased/LCX_CENTERLINE.vtp" />
+  </vtkMultiBlockDataSet>
+</VTKFile>

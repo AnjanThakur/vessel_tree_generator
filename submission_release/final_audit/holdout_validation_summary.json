@@ -1,0 +1,22 @@
+{
+  "validation_type": "internal source-grouped 5-fold fixed-representation holdout; not external validation",
+  "fold_count": 5,
+  "training_case_counts": [
+    41,
+    42
+  ],
+  "holdout_case_counts": [
+    10,
+    11
+  ],
+  "total_holdout_predictions": 52,
+  "source_leakage_count": 0,
+  "baseline_leakage_count": 0,
+  "generated_anatomy_acceptance_count": 41,
+  "generated_anatomy_acceptance_rate": 0.7884615384615384,
+  "median_holdout_reconstruction_rms_local": 2.556727799153246,
+  "median_nearest_train_rms_coordinate_mm": 0.29721918123299806,
+  "median_nearest_holdout_rms_coordinate_mm": 8.963024569708656,
+  "pass": true,
+  "limitation": "This tests internal representation stability and leakage control. It is not an external clinical cohort and does not remove selection bias in the 52 eligible cases."
+}

@@ -1,0 +1,143 @@
+{
+  "status": "PASS",
+  "shared_anatomy_seed": 20260822,
+  "purpose": "controlled comparison of healthy, focal, diffuse, and tandem disease on one anatomy",
+  "cases": {
+    "healthy": {
+      "status": "PASS",
+      "case_id": "healthy_reference",
+      "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+      "frame_count": 10,
+      "points_per_branch": 50,
+      "geometry_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "validation_passed": true,
+      "fixed_size_export_validation": {
+        "is_valid": true,
+        "temporal_correspondence_parameter": "static-reference normalized arc length reused at every phase",
+        "all_values_finite": true,
+        "all_radii_positive": true,
+        "maximum_topology_error_mm": 0.0,
+        "maximum_radius_variation_fraction": 0.029797150732258526,
+        "configured_radius_variation_fraction": 0.03
+      },
+      "vtk_readback_passed": true,
+      "portable_relative_paths": true,
+      "open_in_paraview": "vtk/cine.pvd",
+      "sha256": {
+        "coronary_tree_4d.npz": "c5bc05ff6b4a90f8cd99ef25c4a9c263b01b15e5456884245a9d4a96e9db679f",
+        "geometry_cine.npy": "8515990d041cad31ac79631590d6e496f2a226355a91feb2f69497ed2cd3bdbf",
+        "metadata.json": "5f51c812143bedaa1da62e3450987cd1be0219f370a0877bf6eb4bb02e71f19e",
+        "graph.json": "751a0bbacee24bf1aa50ee569f1cf2989381ba780203bc8259aed6b4956ee697",
+        "preview.png": "28796584344b71648503cdec086cf0830e260268bce813641c2a29d67188950a",
+        "vtk/cine.pvd": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+      }
+    },
+    "focal_lad": {
+      "status": "PASS",
+      "case_id": "focal_lad",
+      "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+      "frame_count": 10,
+      "points_per_branch": 50,
+      "geometry_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "validation_passed": true,
+      "fixed_size_export_validation": {
+        "is_valid": true,
+        "temporal_correspondence_parameter": "static-reference normalized arc length reused at every phase",
+        "all_values_finite": true,
+        "all_radii_positive": true,
+        "maximum_topology_error_mm": 0.0,
+        "maximum_radius_variation_fraction": 0.029797150732258526,
+        "configured_radius_variation_fraction": 0.03
+      },
+      "vtk_readback_passed": true,
+      "portable_relative_paths": true,
+      "open_in_paraview": "vtk/cine.pvd",
+      "sha256": {
+        "coronary_tree_4d.npz": "9ce27dacbb909f81fd5dd534c781b18923a4b0ad7a76b12cb3539b35380777e0",
+        "geometry_cine.npy": "582ff1616b44486f1aad5fdb4cacf2bdacac896255a295d71dee3fe193512f1a",
+        "metadata.json": "3d1afa8153b2e5040fce78a1bd502545102a5063102fde998bc553eafadb6bb7",
+        "graph.json": "fbe7373d33e014f13a37bf4dba0faf08ecf71cc6a82d88b2979886e35a9b5b8b",
+        "preview.png": "17c6d24a8dc19c1ace50d90e5dfbc9e02fb68a22821cec30d5c0a1911afea3d3",
+        "vtk/cine.pvd": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+      }
+    },
+    "diffuse_lcx": {
+      "status": "PASS",
+      "case_id": "diffuse_lcx",
+      "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+      "frame_count": 10,
+      "points_per_branch": 50,
+      "geometry_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "validation_passed": true,
+      "fixed_size_export_validation": {
+        "is_valid": true,
+        "temporal_correspondence_parameter": "static-reference normalized arc length reused at every phase",
+        "all_values_finite": true,
+        "all_radii_positive": true,
+        "maximum_topology_error_mm": 0.0,
+        "maximum_radius_variation_fraction": 0.029797150732258526,
+        "configured_radius_variation_fraction": 0.03
+      },
+      "vtk_readback_passed": true,
+      "portable_relative_paths": true,
+      "open_in_paraview": "vtk/cine.pvd",
+      "sha256": {
+        "coronary_tree_4d.npz": "b9d8daf266414c46c07bdf82b016167608d9f4d1349118e7c2a2cd0907716b1b",
+        "geometry_cine.npy": "4757d316adb327c49dbe8c7c87b212ec9e8bb40e9edc00824a50066db5c3ff73",
+        "metadata.json": "f83963efd898adc7b8de778e2671316a9111df8d4aecde4711d665007dac5148",
+        "graph.json": "2a29785b861e821e376fc3f0830a7a38ef643ae7425a07896e7917ac463c80db",
+        "preview.png": "ebed569853b40d863f7063db1c667733f5a3d482c79403cc9ce7baf83ece22b5",
+        "vtk/cine.pvd": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+      }
+    },
+    "tandem_lad": {
+      "status": "PASS",
+      "case_id": "tandem_lad",
+      "model_scope": "population-derived LCA (LMCA, LAD, LCX); RCA not included",
+      "frame_count": 10,
+      "points_per_branch": 50,
+      "geometry_shape": [
+        10,
+        3,
+        50,
+        4
+      ],
+      "validation_passed": true,
+      "fixed_size_export_validation": {
+        "is_valid": true,
+        "temporal_correspondence_parameter": "static-reference normalized arc length reused at every phase",
+        "all_values_finite": true,
+        "all_radii_positive": true,
+        "maximum_topology_error_mm": 0.0,
+        "maximum_radius_variation_fraction": 0.029797150732258526,
+        "configured_radius_variation_fraction": 0.03
+      },
+      "vtk_readback_passed": true,
+      "portable_relative_paths": true,
+      "open_in_paraview": "vtk/cine.pvd",
+      "sha256": {
+        "coronary_tree_4d.npz": "f574524e99c48bc7a8424a138679e65bae3747e78ed001a67a42b1bb4bec4cd1",
+        "geometry_cine.npy": "2de2dd6cdd6c08f35649ab7dea21a779c1b511c509474f88f662d4f548bce89f",
+        "metadata.json": "72e9e5fd97910416c575720dbf02d7dc135cd858504419759590ccd98977ceeb",
+        "graph.json": "6a63d6026c3280541ca0ada229b39f23acd0905f68ab0a628945e2f736644baf",
+        "preview.png": "dbb780885c7f7daa91268005d8611e6a167f5d497f66022c4039ac48d5f0ad34",
+        "vtk/cine.pvd": "6b50ed40a0aa12afdde2c6ad10d1be20e3c5b0595c957586311eedb2e137f234"
+      }
+    }
+  }
+}

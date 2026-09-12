@@ -1,0 +1,17 @@
+{
+  "algorithm_claim": "angular/radial ellipsoid parameterization with full local-basis reconstruction; not Euclidean nearest-point projection",
+  "record_count": 156690,
+  "reconstruction_error_mm": {
+    "n": 156690,
+    "mean": 6.167806124400144e-15,
+    "sd": 1.5698881079781572e-14,
+    "median": 3.580361673049448e-15,
+    "iqr": 6.385265362744618e-15,
+    "p5": 0.0,
+    "p95": 1.5888218580782548e-14,
+    "min": 0.0,
+    "max": 2.1700912329287863e-12
+  },
+  "pass_threshold_mm": 1e-08,
+  "pass": true
+}
