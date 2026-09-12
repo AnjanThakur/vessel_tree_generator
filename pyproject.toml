@@ -11,6 +11,7 @@ requires-python = ">=3.10"
 dependencies = [
   "numpy>=2.0,<3",
   "scipy>=1.13,<2",
+  "scikit-image>=0.24,<1",
   "matplotlib>=3.8,<4",
   "pyvista>=0.43,<1",
   "plotly>=5.18,<7",

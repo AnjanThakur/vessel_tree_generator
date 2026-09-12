@@ -111,7 +111,7 @@ The production representation uses fixed branch samples in a common LMCA-based c
 | Area | Technology | Role |
 |---|---|---|
 | Language and packaging | Python 3.10+, setuptools | Runtime, CLI, installable API |
-| Numerical computing | NumPy, SciPy | PCA reconstruction, geometry, interpolation, metrics |
+| Numerical computing | NumPy, SciPy, scikit-image | PCA reconstruction, geometry, interpolation, ellipse fitting, metrics |
 | 3D and mesh processing | PyVista, VTK | Centerlines, tapered surfaces, VTP/VTM/PVD export and readback |
 | Scientific plotting | Matplotlib | Static QC, anatomy, motion, and population figures |
 | Interactive visualization | Plotly | Rotatable browser-based 3D review |
