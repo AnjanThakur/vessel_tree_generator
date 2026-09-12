@@ -78,13 +78,13 @@ submission_release/final_visual_anatomical_audit/report_render*/
 # Local research archive. Comparison generators moved here are intentionally
 # excluded from the production package and normal test/import paths.
 research_experiments/
+/_local_archive/
 
 # Historical material intentionally excluded from the final-deliverable branch.
 # It remains recoverable from branch latestt_branchh at commit 7b21ce4.
 /lca_vessel_tree_generator/
 /rca_vessel_tree_generator/
 /docs/LEGACY_TECHNICAL_DESIGN.md
-/submission_release/design_spec_alignment/
 /submission_release/final_visual_anatomical_audit/
 /submission_release/mentor_visualization_pack/
 /submission_release/original_ppt_evidence/

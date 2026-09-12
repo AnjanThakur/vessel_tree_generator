@@ -8,6 +8,7 @@
 | SHARED_UTILITY_REQUIRED | cardiac-frame, surface projection, B-spline, VTK export and validation utilities | Retained because production imports use them |
 | FROZEN_RUNTIME_DATA | compact 52-case generator statistics | Retained and SHA-256 verified |
 | PRESENTATION_REQUIRED | canonical presentation, all-52 mesh/4D package, presentation center | Retained |
+| DESIGN_VERIFICATION | pointwise surface/design-alignment evidence | Retained because nine independent contract tests consume it |
 | HISTORICAL_BULK | intermediate Stage-1, person-1/person-2 and PPT-priority output trees | Excluded from final branch; retained on `latestt_branchh` at `7b21ce4` |
 | EXCLUDED_SCOPE | disconnected RCA and obsolete LCA prototype shells | Excluded after required radius/disease/mesh modules were consolidated into the public package |
 

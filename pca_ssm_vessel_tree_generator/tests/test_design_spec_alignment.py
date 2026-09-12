@@ -32,6 +32,7 @@ from surface_relative.surface_projection import (  # noqa: E402
 
 
 MODEL = PROJECT_ROOT / "outputs/lca_ssm/lca_population_model"
+STATISTICS = MODEL / "generator_statistics"
 COHORT = PROJECT_ROOT / "outputs/lca_ssm/lca_population_cohort"
 AUDIT = PROJECT_ROOT / "submission_release/design_spec_alignment"
 
@@ -90,14 +91,14 @@ class DesignSpecificationAlignmentTests(unittest.TestCase):
             self.assertGreater(min(float(row[name]) for name in ("final_ellipsoid_a", "final_ellipsoid_b", "final_ellipsoid_c")), 0.0)
 
     def test_lmca_lad_lcx_correspondence_and_deviation_pca_dimensions(self) -> None:
-        with np.load(MODEL / "fixed_branch_surface_coordinates.npz", allow_pickle=False) as archive:
+        with np.load(STATISTICS / "fixed_branch_surface_coordinates.npz", allow_pickle=False) as archive:
             case_ids = [archive[f"{branch}_case_ids"].astype(str) for branch in ("LMCA", "LAD", "LCX")]
             np.testing.assert_array_equal(case_ids[0], case_ids[1])
             np.testing.assert_array_equal(case_ids[0], case_ids[2])
             self.assertEqual(archive["LMCA_local_deviation"].shape, (52, 5, 3))
             self.assertEqual(archive["LAD_local_deviation"].shape, (52, 12, 3))
             self.assertEqual(archive["LCX_local_deviation"].shape, (52, 10, 3))
-        with np.load(MODEL / "generator_statistics/surface_deviation_pca.npz", allow_pickle=False) as pca:
+        with np.load(STATISTICS / "surface_deviation_pca.npz", allow_pickle=False) as pca:
             self.assertEqual(pca["mean_vector"].shape, (81,))
             self.assertEqual(pca["components"].shape[1], 81)
 
@@ -129,9 +130,9 @@ class DesignSpecificationAlignmentTests(unittest.TestCase):
         self.assertEqual(result["source_coordinate_change_mm"], 0.0)
         self.assertEqual(result["source_segment_length_change_mm"], 0.0)
         self.assertTrue(result["protected_source_hash_verification"])
-        manifest = json.loads((MODEL / "generator_statistics/generator_statistics_manifest.json").read_text(encoding="utf-8"))
+        manifest = json.loads((STATISTICS / "generator_statistics_manifest.json").read_text(encoding="utf-8"))
         for name, expected in manifest["files"].items():
-            self.assertEqual(sha256(MODEL / "generator_statistics" / name), expected)
+            self.assertEqual(sha256(STATISTICS / name), expected)
 
     def test_surface_relative_tree_remains_motion_compatible(self) -> None:
         directory = COHORT / "tree_0001"

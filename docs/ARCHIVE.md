@@ -17,7 +17,6 @@ was discarded: the complete pre-cleanup state is preserved on
 
 ## Superseded release copies
 
-- `submission_release/design_spec_alignment/`
 - `submission_release/final_visual_anatomical_audit/`
 - `submission_release/mentor_visualization_pack/`
 - `submission_release/original_ppt_evidence/`
@@ -27,11 +26,19 @@ Their final conclusions remain represented by the compact frozen statistics,
 final audit, final validation, presentation center, project report and the
 verified all-52 presentation package.
 
+`submission_release/design_spec_alignment/` remains in the deliverable because
+its CSV/JSON evidence is consumed by the nine independent design-alignment
+contract tests.
+
 ## Excluded code
 
 - The disconnected RCA prototype is not part of the validated LCA model.
 - Required radius, disease and tube-mesh functions were consolidated into
   `vessel_tree_generator` before the legacy LCA shell was archived.
+- One-off audit/report/presentation builders whose large source evidence was
+  archived were moved to `_local_archive/tools/legacy/`. The supported tools
+  directory retains release tests, per-case report generation and all-52
+  presentation generation.
 
 To inspect any historical path without changing the final branch:
 
