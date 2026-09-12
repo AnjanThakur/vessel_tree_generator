@@ -1,0 +1,87 @@
+{
+  "schema_version": 2,
+  "release": {
+    "name": "4D Coronary LCA Generator",
+    "version": "1.0.0",
+    "release_date": "2026-08-23",
+    "branch": "final-deliverable",
+    "archive_branch": "latestt_branchh",
+    "archive_commit": "7b21ce4",
+    "status": "PASS",
+    "clinical_validation": false
+  },
+  "scope": {
+    "anatomy": "population-derived LCA major-vessel tree: LMCA, LAD, LCX",
+    "source_labels_discovered": 200,
+    "protected_lca_records": 191,
+    "resolved_daughter_assignments": 181,
+    "statistics_eligible_anatomies": 52,
+    "pca_dimensions": 81,
+    "retained_modes": 13,
+    "retained_variance_fraction": 0.9554694673427548,
+    "generated_population_size": 52,
+    "stored_motion_frames_per_tree": 10,
+    "independent_positions_per_closed_cycle": 9
+  },
+  "verification": {
+    "status": "PASS",
+    "main_pytest_passed": 72,
+    "focused_generation_tests_passed": 21,
+    "design_alignment_tests_passed": 9,
+    "total_tests_passed": 102,
+    "tests_failed": 0,
+    "compileall_pass": true,
+    "pip_check_pass": true,
+    "presentation_trees_verified": 52,
+    "presentation_cine_frames": 520,
+    "source_geometry_change_mm": 0.0,
+    "frozen_statistics_unchanged": true
+  },
+  "required_runtime": {
+    "python_packages": ["vessel_tree_generator", "pca_ssm_vessel_tree_generator"],
+    "frozen_statistics": "outputs/lca_ssm/lca_population_model/generator_statistics",
+    "entry_point": "python -m vessel_tree_generator"
+  },
+  "curated_artifacts": {
+    "canonical_presentation": "submission_release/final_presentation",
+    "all_52_presentation": "submission_release/final_presentation_52",
+    "presentation_center": "submission_release/presentation_center",
+    "design_alignment_evidence": "submission_release/design_spec_alignment",
+    "final_audit": "submission_release/final_audit",
+    "final_validation": "submission_release/final_validation",
+    "project_report": "submission_release/FINAL_PROJECT_REPORT.docx"
+  },
+  "artifact_hashes": {
+    "outputs/lca_ssm/lca_population_model/generator_statistics/generator_statistics_manifest.json": {
+      "size_bytes": 1581,
+      "sha256": "b041a82e852296dab87084f87993bc927ecf655ad18f45cc4b802fb865af04b6"
+    },
+    "submission_release/final_presentation_52/ALL_52_PRESENTATION_MANIFEST.json": {
+      "size_bytes": 383446,
+      "sha256": "e44e19193eef063984f2d38d17f8b2da1f46f412f11cb23ee8b083c0e55c3481"
+    },
+    "submission_release/final_presentation/validation_summary.json": {
+      "size_bytes": 30805,
+      "sha256": "4be8a8a8ffd16e5ec300c9fc730e6ea5eabee59f6c85214ce4068816a9db7a49"
+    },
+    "submission_release/final_validation/test_validation.json": {
+      "size_bytes": 2682,
+      "sha256": "1b2a31c6edbb81ac888eda24f0e528ef5ff0213094b9b4ea4e6a82b7465106c3"
+    },
+    "submission_release/VALIDATION_SUMMARY.json": {
+      "size_bytes": 4909,
+      "sha256": "ae8e7368d6f06d36b1259169ca034412e9876e491388bb486de217fc737e8067"
+    },
+    "submission_release/FINAL_PROJECT_REPORT.docx": {
+      "size_bytes": 3969959,
+      "sha256": "2623d6fc4f119fc452dba17e9605a5f0fdf56f6c6df84e9b957f2ce0f19e1d9f"
+    }
+  },
+  "limitations": [
+    "Research and engineering prototype; not clinically validated.",
+    "LCA-only; RCA and side branches are excluded.",
+    "Fifty-two eligible source anatomies; synthetic derivatives are not new patients.",
+    "Radius, disease, motion, pulsatility and compliance are parametric.",
+    "No hemodynamics, vessel-wall mechanics, perfusion or patient-specific prediction."
+  ]
+}

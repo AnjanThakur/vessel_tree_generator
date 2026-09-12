@@ -1,5 +1,91 @@
+# Python bytecode and environments
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
 .env
+
+# Local agent metadata
+.agents/
+.codex/
+
+# Python tool caches and build artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Generated datasets and visualizations. Keep only the compact, reproducible LCA
+# release evidence listed below; source data, trial runs and bulk cohorts remain
+# local.
+/outputs/*
+!/outputs/lca_ssm/
+/outputs/lca_ssm/*
+!/outputs/lca_ssm/lca_population_model/
+/outputs/lca_ssm/lca_population_model/*
+!/outputs/lca_ssm/lca_population_model/week1_manifest.json
+!/outputs/lca_ssm/lca_population_model/generator_statistics/
+!/outputs/lca_ssm/lca_population_model/generator_statistics/**
+!/outputs/lca_ssm/lca_population_cohort/
+/outputs/lca_ssm/lca_population_cohort/*
+!/outputs/lca_ssm/lca_population_cohort/README.md
+!/outputs/lca_ssm/lca_population_cohort/cohort_manifest.json
+!/outputs/lca_ssm/lca_population_cohort/cohort_metrics.csv
+!/outputs/lca_ssm/lca_population_cohort/cohort_preview_montage.png
+!/outputs/lca_ssm/lca_population_cohort/tree_0001/
+!/outputs/lca_ssm/lca_population_cohort/tree_0001/**
+!/outputs/lca_ssm/lca_population_cohort/population_validation/
+!/outputs/lca_ssm/lca_population_cohort/population_validation/**
+!/outputs/lca_ssm/lca_population_motion/
+/outputs/lca_ssm/lca_population_motion/*
+!/outputs/lca_ssm/lca_population_motion/4d_trees_summary.json
+!/outputs/lca_ssm/lca_population_motion/qc_visualization_4d.png
+!/outputs/lca_ssm/lca_population_export/
+/outputs/lca_ssm/lca_population_export/*
+!/outputs/lca_ssm/lca_population_export/exported_trees_summary.json
+!/outputs/lca_ssm/lca_population_export/pipeline_qc_report.png
+!/outputs/lca_ssm/lca_population_export/pipeline_report.json
+lca_vessel_tree_generator/outputs/
+lca_vessel_tree_generator/processed_dataset/
+rca_vessel_tree_generator/outputs/
+
+# Local LCA datasets and generated control points
+lca_vessel_tree_generator/LCA_branch_control_points/generated/
+lca_vessel_tree_generator/LCA_branch_control_points/vmtk_generated/
+lca_vessel_tree_generator/lca_raw_branches/
+lca_vessel_tree_generator/processed_vmtk_dataset/
+
+# Local PCA/SSM source data and extraction intermediates
+pca_ssm_vessel_tree_generator/nii files/
+pca_ssm_vessel_tree_generator/centerlines/
+pca_ssm_vessel_tree_generator/*.npy
+pca_ssm_vessel_tree_generator/*.npz
+pca_ssm_vessel_tree_generator/summary.csv
+
+# Superseded prototype/evidence scripts
+pca_ssm_vessel_tree_generator/create_corrected_two_plane_evidence.py
+pca_ssm_vessel_tree_generator/create_presentation_evidence.py
+pca_ssm_vessel_tree_generator/prototype_1_label_heart_scaffold.py
+
+# Local DOCX render/contact-sheet QA intermediates. The verified DOCX and
+# evidence outputs remain versioned under submission_release/.
+submission_release/final_visual_anatomical_audit/report_render*/
+
+# Local research archive. Comparison generators moved here are intentionally
+# excluded from the production package and normal test/import paths.
+research_experiments/
+/_local_archive/
+
+# Historical material intentionally excluded from the final-deliverable branch.
+# It remains recoverable from branch latestt_branchh at commit 7b21ce4.
+/lca_vessel_tree_generator/
+/rca_vessel_tree_generator/
+/docs/LEGACY_TECHNICAL_DESIGN.md
+/submission_release/final_visual_anatomical_audit/
+/submission_release/mentor_visualization_pack/
+/submission_release/original_ppt_evidence/
+/submission_release/demo_cases/*/visualizations/interactive_tree.html

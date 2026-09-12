@@ -1,0 +1,14 @@
+{
+  "status": "EVALUATED_NOT_PROMOTED",
+  "case_count": 52,
+  "branch_path_count": 156,
+  "lad_cases_with_pole_touching_controls": 26,
+  "maximum_candidate_vs_xyz_point_difference_mm": 27.657598509161293,
+  "P95_candidate_vs_xyz_point_difference_mm": 5.373893421515371,
+  "maximum_absolute_relative_length_change": 0.7071047161138068,
+  "P95_absolute_relative_length_change": 0.05609230701376695,
+  "maximum_endpoint_error_mm": 2.842170943040401e-14,
+  "maximum_bifurcation_error_mm": 0.0,
+  "role_consistent_case_count": 38,
+  "decision": "Do not replace the protected production path: literal global u/v interpolation is chart-sensitive at LAD pole controls and is not numerically equivalent to the validated shape-preserving XYZ spline. The protected path remains surface-relative because every dense XYZ sample is re-parameterized and reconstructed in the ellipsoid local basis before output."
+}
